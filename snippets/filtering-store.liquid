@@ -1,0 +1,148 @@
+{% comment %}
+  Render filtering in collections
+  Usage:
+  {% render 'filters' %}
+{% endcomment %}
+
+<div class="filter-wrapper__container">
+
+  <form class="filter-form">
+
+    <div class="filter-name">
+      <div>
+        <span>{{ 'products.facets.filter_by_label' | t }}</span>
+      </div>
+    </div>
+
+    <!-- Filter: element filter active for the collections -->
+    {%- for filter in collection.filters -%}
+
+      <!-- That element open the list -->
+      <details class="filter-group">
+
+        <!-- Name of the filter element -->
+        <summary class="filter-group-summary">
+          
+          <div class="filter-group-summary__label">
+              <!-- Render the title of the filter -->
+              <span>{{ filter.label | append: ': ' }}</span>
+              
+              {% if filter.type == "price_range" %}
+                {% if filter.min_value.value != nil or filter.max_value.value != nil %}
+                  <span class="active-filters__remove-filter">
+                    {% assign min_value = filter.min_value.value | default: 0 %}
+                    {% assign max_value = filter.max_value.value | default: filter.range_max %}
+                    {{ min_value | money }} - {{ max_value | money }}
+                  </span>
+                {% else %}
+                  <span>-</span>
+                {% endif %}
+              {% elsif filter.type == "list" or 'boolean' %}
+                {% if filter.active_values == blank %}
+                  <span>-</span>
+                {% endif %}
+                
+                {% for filter_value in filter.active_values %}
+                  <span class="active-filters__remove-filter">
+                    {{ filter_value.label }}
+                  </span>
+                {% endfor %}
+              {% endif %}
+          </div>
+        </summary>
+
+        <!-- Content element in the  -->
+        <div class="filter-group-display display{{ forloop.index }}">
+          
+          <!-- Header of the object -->
+          <div class="filter-group-display__header">
+              <a 
+                href="{{ filter.url_to_remove }}" 
+                class="filter-group-display__header-reset"
+               >
+                {{ 'products.facets.clear_all' | t }}
+              </a>
+          </div>
+          
+          <!-- Determine the filter type, list, boolean, anymore -->
+          {%- case filter.type -%}
+            {%- when 'boolean' or 'list' -%}
+              <ul class="filter-group-display__list">
+                {%- for filter_value in filter.values -%}
+                  <li class="filter-group-display__list-item">
+                    <input type="radio"
+                      name="{{ filter_value.param_name }}"
+                      value="{{ filter_value.value }}"
+                      id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                      {% if filter_value.active -%}
+                        checked
+                      {%- endif %}
+                      {% if filter_value.count == 0 and filter_value.active == false -%}
+                        disabled
+                      {%- endif %}
+                    >
+                    <label 
+                      for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                      class="filter-group-display__list-item--element"
+                     >
+                     {{ filter_value.label }}
+                    </label>
+                   
+                  </li>
+                {%- endfor -%}
+              </ul>
+
+              <div class="filter-group-display__submit">
+                <input type="submit" value="{{ 'products.facets.apply' | t }}">
+              </div>
+            
+            <!-- Determine the filter type price-->
+            {%- when 'price_range' -%}
+              <div class="filter-group-display__price-range ">
+                <div class="filter-group-display__price-range--element price-after">
+                  <span>{{ cart.currency.symbol }}</span>
+
+                  <input name="{{ filter.min_value.param_name }}"
+                    id="Filter-{{ filter.min_value.param_name }}"
+                    {% if filter.min_value.value -%}
+                      value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                    {%- endif %}
+                    type="number"
+                    placeholder="0"
+                    min="0"
+                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                  >
+                </div>
+
+                <label 
+                  for="" 
+                  class="filter-group-display__price-range--reach"
+                 >
+                  {{ 'products.facets.to' | t }}
+                </label>
+
+                <div class="filter-group-display__price-range--element">
+                  <span>{{ cart.currency.symbol }}</span>
+
+                  <input name="{{ filter.max_value.param_name }}"
+                    id="Filter-{{ filter.max_value.param_name }}"
+                    {% if filter.max_value.value -%}
+                      value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                    {%- endif %}
+                    type="number"
+                    placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                    min="0"
+                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                  >
+                </div>
+              </div>
+
+              <div class="filter-group-display__submit">
+                <input type="submit" value="{{ 'products.facets.apply' | t }}">
+              </div>
+          {%- endcase -%}
+        </div>
+      </details>
+    {%- endfor -%}
+  </form>
+</div>
