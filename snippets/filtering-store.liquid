@@ -1,60 +1,34 @@
 {% comment %}
   Render filtering in collections
+
   Usage:
-  {% render 'filters' %}
+  {% render 'filtering-store' %}
 {% endcomment %}
 
 <div class="filter-wrapper__container">
 
   <form class="filter-form">
 
-    <div class="filter-name">
-      <div>
-        <span>{{ 'products.facets.filter_by_label' | t }}</span>
-      </div>
+    <div class="filter-form_name">
+      <span>{{ 'products.facets.filter_by_label' | t }}</span>
     </div>
 
-    <!-- Filter: element filter active for the collections -->
+    {% comment %} Filter: element filter active for the collections {% endcomment %}
     {%- for filter in collection.filters -%}
-
-      <!-- That element open the list -->
+      {% comment %} That element open the list {% endcomment %}
       <details class="filter-group">
 
-        <!-- Name of the filter element -->
+        {% comment %} Name of the filter element {% endcomment %}
         <summary class="filter-group-summary">
-          
           <div class="filter-group-summary__label">
-              <!-- Render the title of the filter -->
-              <span>{{ filter.label | append: ': ' }}</span>
-              
-              {% if filter.type == "price_range" %}
-                {% if filter.min_value.value != nil or filter.max_value.value != nil %}
-                  <span class="active-filters__remove-filter">
-                    {% assign min_value = filter.min_value.value | default: 0 %}
-                    {% assign max_value = filter.max_value.value | default: filter.range_max %}
-                    {{ min_value | money }} - {{ max_value | money }}
-                  </span>
-                {% else %}
-                  <span>-</span>
-                {% endif %}
-              {% elsif filter.type == "list" or 'boolean' %}
-                {% if filter.active_values == blank %}
-                  <span>-</span>
-                {% endif %}
-                
-                {% for filter_value in filter.active_values %}
-                  <span class="active-filters__remove-filter">
-                    {{ filter_value.label }}
-                  </span>
-                {% endfor %}
-              {% endif %}
+            <span>{{ filter.label }}</span>
           </div>
         </summary>
 
-        <!-- Content element in the  -->
+        {% comment %} Content element in the  {% endcomment %}
         <div class="filter-group-display display{{ forloop.index }}">
           
-          <!-- Header of the object -->
+          {% comment %} Header of the object {% endcomment %}
           <div class="filter-group-display__header">
               <a 
                 href="{{ filter.url_to_remove }}" 
@@ -64,8 +38,9 @@
               </a>
           </div>
           
-          <!-- Determine the filter type, list, boolean, anymore -->
+          {% comment %} Determine the filter type, list, boolean, anymore {% endcomment %}
           {%- case filter.type -%}
+          
             {%- when 'boolean' or 'list' -%}
               <ul class="filter-group-display__list">
                 {%- for filter_value in filter.values -%}
@@ -84,19 +59,15 @@
                     <label 
                       for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
                       class="filter-group-display__list-item--element"
-                     >
-                     {{ filter_value.label }}
+                      >
+                      {{ filter_value.label }}
                     </label>
-                   
+                    
                   </li>
                 {%- endfor -%}
               </ul>
-
-              <div class="filter-group-display__submit">
-                <input type="submit" value="{{ 'products.facets.apply' | t }}">
-              </div>
-            
-            <!-- Determine the filter type price-->
+              
+            {% comment %} Determine the filter type price{% endcomment %}
             {%- when 'price_range' -%}
               <div class="filter-group-display__price-range ">
                 <div class="filter-group-display__price-range--element price-after">
@@ -117,7 +88,7 @@
                 <label 
                   for="" 
                   class="filter-group-display__price-range--reach"
-                 >
+                  >
                   {{ 'products.facets.to' | t }}
                 </label>
 
@@ -137,12 +108,14 @@
                 </div>
               </div>
 
-              <div class="filter-group-display__submit">
-                <input type="submit" value="{{ 'products.facets.apply' | t }}">
-              </div>
           {%- endcase -%}
         </div>
       </details>
     {%- endfor -%}
+
+    <div class="filter-form_submit">
+      <input type="submit" value="{{ 'products.facets.apply' | t }}">
+    </div>
+
   </form>
 </div>
