@@ -5,39 +5,34 @@
   {% render 'filtering-store' %}
 {% endcomment %}
 
-<div class="filter-wrapper__container">
+<div
+  class="filter"
+  data-active="false"
+  id="filter"
+>
 
   <form class="filter-form">
 
     <div class="filter-form_name">
       <span>{{ 'products.facets.filter_by_label' | t }}</span>
+      {% render 'icon-close' %}
     </div>
 
-    {% comment %} Filter: element filter active for the collections {% endcomment %}
-    {%- for filter in collection.filters -%}
-      {% comment %} That element open the list {% endcomment %}
-      <details class="filter-group">
+    {% capture accordions %}
+      {% for filter in collection.filters %}
+        
+        {% assign active = 'false' %}
+        {% if forloop.first %}
+          {% assign active = 'true' %}
+        {% endif %}
 
-        {% comment %} Name of the filter element {% endcomment %}
-        <summary class="filter-group-summary">
-          <div class="filter-group-summary__label">
-            <span>{{ filter.label }}</span>
-          </div>
-        </summary>
+        {% capture items_filter %}
+          <a 
+            href="{{ filter.url_to_remove }}"
+          >
+            {{ 'products.facets.clear_all' | t }}
+          </a>
 
-        {% comment %} Content element in the  {% endcomment %}
-        <div class="filter-group-display display{{ forloop.index }}">
-          
-          {% comment %} Header of the object {% endcomment %}
-          <div class="filter-group-display__header">
-              <a 
-                href="{{ filter.url_to_remove }}" 
-                class="filter-group-display__header-reset"
-               >
-                {{ 'products.facets.clear_all' | t }}
-              </a>
-          </div>
-          
           {% comment %} Determine the filter type, list, boolean, anymore {% endcomment %}
           {%- case filter.type -%}
           
@@ -109,12 +104,30 @@
               </div>
 
           {%- endcase -%}
-        </div>
-      </details>
-    {%- endfor -%}
+        {% endcapture %}
+
+
+        {% render 'accordion-item',
+          title: filter.label,
+          content: items_filter,
+          active: active
+        %}
+      {% endfor %}
+    {% endcapture %}
+
+    {% render 'accordions',
+      accordions: accordions,
+      toggle: true,
+      class: 'filter-group'
+    %}
 
     <div class="filter-form_submit">
-      <input type="submit" value="{{ 'products.facets.apply' | t }}">
+      <button
+        type="submit"
+        class="btn-2 btn_w-100"
+      >
+        {{ 'products.facets.apply' | t }}
+      </button>
     </div>
 
   </form>

@@ -1,0 +1,43 @@
+.filter {
+  right: 0;
+  top: 0;
+  width: 320px;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  background: #FFF;
+  box-shadow: 1px 3px 15px rgba(0, 0, 0, 0.131);
+  display: none;
+
+  &[data-active="true"] {
+    display: flex;
+  }
+
+  .accordions {
+    .accordion-item {
+      &__content {
+        ul {
+          list-style: none;
+        }
+      }
+
+    }
+  }
+
+  &-form {
+    width: 100%;
+    padding: 0 15px;
+
+    &_name {
+      padding: 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+}
