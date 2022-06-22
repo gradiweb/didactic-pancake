@@ -27,48 +27,43 @@
         {% endif %}
 
         {% capture items_filter %}
-          <a 
-            href="{{ filter.url_to_remove }}"
-          >
-            {{ 'products.facets.clear_all' | t }}
-          </a>
-
           {% comment %} Determine the filter type, list, boolean, anymore {% endcomment %}
           {%- case filter.type -%}
           
             {%- when 'boolean' or 'list' -%}
-              <ul class="filter-group-display__list">
+              <ul>
                 {%- for filter_value in filter.values -%}
-                  <li class="filter-group-display__list-item">
-                    <input type="radio"
-                      name="{{ filter_value.param_name }}"
-                      value="{{ filter_value.value }}"
-                      id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
-                      {% if filter_value.active -%}
-                        checked
-                      {%- endif %}
-                      {% if filter_value.count == 0 and filter_value.active == false -%}
-                        disabled
-                      {%- endif %}
-                    >
-                    <label 
-                      for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
-                      class="filter-group-display__list-item--element"
+                  <li>
+                    <div>
+                      <input type="checkbox"
+                        name="{{ filter_value.param_name }}"
+                        value="{{ filter_value.value }}"
+                        id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                        {% if filter_value.active -%}
+                          checked
+                        {%- endif %}
+                        {% if filter_value.count == 0 and filter_value.active == false -%}
+                          disabled
+                        {%- endif %}
                       >
-                      {{ filter_value.label }}
-                    </label>
-                    
+                      <label 
+                        for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                      >
+                        {{ filter_value.label }}
+                      </label>
+                    </div>
+                    <span>{{ filter_value.count }}</span>
                   </li>
                 {%- endfor -%}
               </ul>
               
             {% comment %} Determine the filter type price{% endcomment %}
             {%- when 'price_range' -%}
-              <div class="filter-group-display__price-range ">
-                <div class="filter-group-display__price-range--element price-after">
+              <div class="range">
+                <div class="range-element price-after">
                   <span>{{ cart.currency.symbol }}</span>
-
-                  <input name="{{ filter.min_value.param_name }}"
+                  <input
+                    name="{{ filter.min_value.param_name }}"
                     id="Filter-{{ filter.min_value.param_name }}"
                     {% if filter.min_value.value -%}
                       value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
@@ -80,17 +75,12 @@
                   >
                 </div>
 
-                <label 
-                  for="" 
-                  class="filter-group-display__price-range--reach"
-                  >
-                  {{ 'products.facets.to' | t }}
-                </label>
+                <label>-</label>
 
-                <div class="filter-group-display__price-range--element">
+                <div class="range-element">
                   <span>{{ cart.currency.symbol }}</span>
-
-                  <input name="{{ filter.max_value.param_name }}"
+                  <input
+                    name="{{ filter.max_value.param_name }}"
                     id="Filter-{{ filter.max_value.param_name }}"
                     {% if filter.max_value.value -%}
                       value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
@@ -104,6 +94,10 @@
               </div>
 
           {%- endcase -%}
+
+          <a href="{{ filter.url_to_remove }}">
+            {{ 'products.facets.clear_all' | t }}
+          </a>
         {% endcapture %}
 
 
