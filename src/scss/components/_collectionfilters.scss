@@ -19,5 +19,10 @@
         width: 20px;
       }
     }
+
+    & > div > select {
+      padding: 10px 5px;
+      margin-right: 15px;
+    }
   }
 }
