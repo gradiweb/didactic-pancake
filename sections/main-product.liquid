@@ -24,10 +24,9 @@
     name="available" 
     value="{{ available }}"
   >
-
-  <p>
-    {{ product.description }}
-  </p>
+  {% render 'description'
+    description: product.description
+  %}
   <form 
     data-product="{{ product.id }}" 
     action="/cart/add"
@@ -45,12 +44,29 @@
     %}
 
   </form>
+  {% render 'text-with-icon'
+    icon: section.settings.block_icon
+    description: section.settings.block_text,
+    resolution: '50x50';
+  %}
 </div>
 
 {% schema %}
   {
     "name": "Product page",
     "class": "main-product wrapper product-js",
-    "tag": "section"
+    "tag": "section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "block_icon",
+        "label": "Icon"
+      },
+      {
+        "type": "richtext",
+        "id": "block_text",
+        "label": "Text"
+      }
+    ]
   }
 {% endschema %}

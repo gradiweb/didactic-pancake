@@ -1,0 +1,28 @@
+{% comment %}
+  Text with icon
+
+  Accepts:
+ - description: {HTML} Content text
+ - icon: {object} image
+ -resolution: string
+
+  Usage:
+  {% 
+    text: Product.description,
+    icon: block.settings.heading,
+  %}
+
+{% endcomment %}
+
+<div class="text--with--icon">
+  {%- if icon != blank -%}
+    <div class="icon">
+      <img src="{{icon  | img_url: resolution }}">
+    </div>
+  {%- endif -%}
+  {%- if description != blank -%}
+    {% render 'description'
+      description: description
+    %}
+  {%- endif -%}
+</div>
