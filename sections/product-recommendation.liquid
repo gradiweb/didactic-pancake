@@ -1,0 +1,34 @@
+<div id="product-recommendations">
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    
+    {%- if section.settings.recommendation_title != blank -%}
+      <h2>
+        {{ section.settings.recommendation_title }}
+      </h2>
+    {%- endif -%}
+
+    <div class="grid recommendation__collection">
+      {% for product in recommendations.products %}
+        {% render 'product-card'
+          product: product,
+        %}
+      {% endfor %}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Upsell API",
+    "tag": "section",
+    "class": "recommendation wrapper",
+    "settings": [
+      {
+        "type": "text",
+        "id": "recommendation_title",
+        "default": "You may also like",
+        "label": "Title"
+      }
+    ]
+  }
+{% endschema %}

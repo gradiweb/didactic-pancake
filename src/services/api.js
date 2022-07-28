@@ -109,6 +109,17 @@ class API {
     }
   }
 
+  async recommendationByApi(productId, sectionId) {
+    try {
+      const {
+        data: html
+      } = await axios.get(`${routes.recommendation}?product_id=${productId}&limit=4&section_id=${sectionId}`);
+      return html;
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+    }
+  }
+
   /**
    * Render HTML with given variant
    * @param {String} base - URL for the API call
