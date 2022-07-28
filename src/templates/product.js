@@ -1,6 +1,6 @@
 import "../scss/product.scss";
 import { mountSlider } from "../components/product-slider";
 import { $Q } from "../utils/query-selector";
-import '../components/recomendaciones-api'
+import '../components/upsell-api'
 
 mountSlider($Q('.swiper.main-product__slider-principal'));

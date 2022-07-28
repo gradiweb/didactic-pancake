@@ -4,7 +4,7 @@
       "type": "main-product"
     },
     "upsell": {
-      "type": "product-recomendation"
+      "type": "product-recommendation"
     }
   },
   "order": [
