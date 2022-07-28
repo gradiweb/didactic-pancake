@@ -2,9 +2,13 @@
   "sections": {
     "main": {
       "type": "main-product"
+    },
+    "upsell": {
+      "type": "product-recomendation"
     }
   },
   "order": [
-    "main"
+    "main",
+    "upsell"
   ]
 }
