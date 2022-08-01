@@ -1,0 +1,165 @@
+{% if section.settings.main_image_aligment == 'left' %}
+  {% assign main_image_aligment = 'masonry-v1__image--main-left' %}
+{% else %}
+  {% assign main_image_aligment = 'masonry-v1__image--main-right' %}
+{% endif %}
+
+{% if section.settings.images_show_label == 'hover' %}
+  {% assign hover_label = 'masonry-v1__image-label--hover' %}
+{% else %}
+  {% assign hover_label = '' %}
+{% endif %}
+
+{% if section.settings.image_1 and section.settings.image_2 and section.settings.image_3 %}
+  <div class="masonry-v1__image {{ main_image_aligment }}">
+    <a 
+      class="masonry-v1__image-link" 
+      href="{{ section.settings.image_1_url }}"
+    >
+      {% render "render-image"
+        class: "masonry-v1__image-background",
+        img: section.settings.image_1,
+        alt: section.settings.image_1.alt,
+        size: "600",
+        width: "medium"
+      %}
+      <div class="masonry-v1__image-label {{ hover_label }}">
+        {{ section.settings.image_1_label }}
+      </div>
+    </a>
+  </div>
+
+  <div class="masonry-v1__image">
+    <a 
+      class="masonry-v1__image-link" 
+      href="{{ section.settings.image_2_url }}"
+    >
+      {% render "render-image"
+        class: "masonry-v1__image-background",
+        img: section.settings.image_2,
+        alt: section.settings.image_2.alt,
+        size: "600",
+        width: "medium"
+      %}
+
+      <div class="masonry-v1__image-label {{ hover_label }}">
+        {{ section.settings.image_2_label }}
+      </div>
+    </a>
+  </div>
+
+  <div class="masonry-v1__image">
+    <a 
+      class="masonry-v1__image-link"
+      href="{{ section.settings.image_3_url }}"
+    >
+      {% render "render-image"
+        class: "masonry-v1__image-background",
+        img: section.settings.image_3,
+        alt: section.settings.image_3.alt,
+        size: "600",
+        width: "medium"
+      %}
+
+      <div class="masonry-v1__image-label {{ hover_label }}">
+        {{ section.settings.image_3_label }}
+      </div>
+    </a>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Masonry V1",
+    "class": "masonry-v1",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "radio",
+        "id": "main_image_aligment",
+        "label": "Main Image Aligment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "radio",
+        "id": "images_show_label",
+        "label": "Show Images Labels",
+        "options": [
+          {
+            "value": "hover",
+            "label": "Hover"
+          },
+          {
+            "value": "fixed",
+            "label": "Fixed"
+          }
+        ],
+        "default": "hover"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_1",
+        "label": "Main Image"
+      },
+      {
+        "type": "text",
+        "id": "image_1_label",
+        "label": "Main Image Label",
+        "default": "In egestas eget ipsum semper varius."
+      },
+      {
+        "type": "url",
+        "id": "image_1_url",
+        "label": "Main Image Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "image_2_label",
+        "label": "Image 2 Label",
+        "default": "Cras dignissim viverra lobortis."
+      },
+      {
+        "type": "url",
+        "id": "image_2_url",
+        "label": "Image 2 Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "image_3_label",
+        "label": "Image 3 Label",
+        "default": "Nulla vitae purus et nibh laoreet consequat."
+      },
+      {
+        "type": "url",
+        "id": "image_3_url",
+        "label": "Image 3 Link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Masonry V1",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
