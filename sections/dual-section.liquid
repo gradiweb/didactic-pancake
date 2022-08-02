@@ -1,0 +1,132 @@
+<div class="container-dual__section {% if section.settings.position_image == 'left' %}position__image-left{% else %}position__image-right{% endif %}">
+  <div class="container__media">
+    {% if section.settings.image_background_desk != blank  %}
+    <picture>
+      {% if section.settings.image_background_mobile != blank %}
+        <source
+          media="(max-width:767px)"
+          srcSet={{ section.settings.image_background_mobile | img_url }}
+        />
+      {% endif %}
+      <img
+        src={{ section.settings.image_background_desk  | img_url }}
+        height="100%"
+        width="100%"
+        alt="Picture"
+      />
+    </picture>
+  {% else  section.settings.video_external != blank %}
+    {% if section.settings.video_external.type == "youtube"%}
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{section.settings.video_external.id}}">
+      </iframe>
+    {% endif %}
+    {% if section.settings.video_external.type == "vimeo" %}
+      <iframe width="100%" height="100%" src="{{section.settings.video_external | escape }}">
+      </iframe>
+    {% endif %}
+  {% endif %}
+  </div>
+  <div class="container__description">
+    {%- comment -%}
+
+    {% if section.settings.dual_section_title != blank  %}
+      <h2>{{ section.settings.dual_section_title }}</h2>
+    {% endif %}
+    {%- endcomment -%}
+
+    {% for block in section.blocks %}
+      {% if block.settings.dual_section_subtitle != blank  %}
+        <h3>{{ block.settings.dual_section_subtitle }}</h3>
+      {% endif %}
+      {% if block.settings.dual_section_description != blank  %}
+        {{ block.settings.dual_section_description }}
+      {% endif %}
+    {% endfor %}
+    {%- comment -%}
+
+    {% render 'link'
+      url:  section.settings.dual_section_linkCTA
+      content: section.settings.dual_section_titleCTA 
+    %}
+    {%- endcomment -%}
+
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Dual section",
+    "class": "dual--section wrapper",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "dual_section_title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "dual_section_titleCTA",
+        "label": "Title CTA"
+      },
+      {
+        "type": "url",
+        "id": "dual_section_linkCTA",
+        "label": "Link CTA"
+      },
+      {
+        "type": "select",
+        "id": "position_image",
+        "label": "Position image",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_background_desk",
+        "label": "Image Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_background_mobile",
+        "label": "Image Mobile"
+      },
+      {
+        "type": "video_url",
+        "id": "video_external",
+        "label": "Video external",
+        "accept": [
+          "youtube",
+          "vimeo"
+        ]
+      }
+    ],
+    "max_blocks": 3,
+    "blocks": [
+       {
+         "name": "Slide",
+         "type": "slide",
+         "settings": [
+            {
+              "type": "richtext",
+              "id": "dual_section_subtitle",
+              "label": "Subtitle"
+            },
+            {
+              "type": "richtext",
+              "id": "dual_section_description",
+              "label": "Description"
+            }
+         ]
+       }
+    ]
+  }
+{% endschema %}
