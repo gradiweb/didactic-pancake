@@ -2,9 +2,13 @@
   "sections": {
     "main": {
       "type": "main-product"
+    },
+    "multi-icon": {
+      "type": "multi-icon-row"
     }
   },
   "order": [
+    "multi-icon",
     "main"
   ]
 }

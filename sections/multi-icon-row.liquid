@@ -1,0 +1,70 @@
+<div class="row__icons">
+  {% if section.settings.row_icon_title != blank %}
+    <h2>{{ section.settings.row_icon_title }}</h2>
+  {% endif %}
+  <div class="element__icon {% if section.settings.position_icons == 'left' %}position__left{% else %}position__top{% endif %}">
+    {% for block in section.blocks %}
+      {% if block.settings.row_icon_subtitle != blank  %}
+        <h3>{{ block.settings.row_icon_subtitle }}</h3>
+      {% endif %}
+      {% if block.settings.row_icon_description != blank  %}
+        {{ block.settings.row_icon_description }}
+      {% endif %}
+  {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Row icons",
+    "class": "row__icons wrapper",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "row_icon_title",
+        "label": "Title"
+      },
+      {
+        "type": "select",
+        "id": "position_icons",
+        "label": "Position icons",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "top",
+            "label": "Top"
+          }
+        ],
+        "default": "left"
+      }
+    ],
+    "max_blocks": 4,
+    "blocks": [
+      {
+        "name": "List items",
+        "type": "slide",
+        "settings": [
+          {
+            "type": "text",
+            "id": "row_icon_subtitle",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "row_icon_description",
+            "label": "Description"
+          },
+          {
+            "type": "image_picker",
+            "id": "row_icon_image",
+            "label": "Image Mobile"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
