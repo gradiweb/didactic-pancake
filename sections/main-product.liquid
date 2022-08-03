@@ -44,8 +44,9 @@
     %}
 
   </form>
+  {%- assign iconSVG = section.settings.block_icon | append: '.svg' | file_url -%}
   {% render 'text-with-icon'
-    icon: section.settings.block_icon,
+    icon: iconSVG,
     description: section.settings.block_text
   %}
 </div>
@@ -57,7 +58,7 @@
     "tag": "section",
     "settings": [
       {
-        "type": "image_picker",
+        "type": "text",
         "id": "block_icon",
         "label": "Icon"
       },
