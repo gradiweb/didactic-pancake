@@ -1,0 +1,52 @@
+{% comment %}
+  This render a flex block
+  
+  Accepts:
+    - width: {Number} Width Block to flex-basis (Required)
+    - image: {Object} Object image to header image
+    - title: {String} Header title
+    - content: {String} HTML of RichText to content
+    - cta_text: {String} Call to action text in bottom of block
+    - cta_url: {String} Call to action URL
+
+  Usage:
+  {% render 'flex-block' 
+    width: block.settings.width,
+    image: block.settings.image,
+    title: block.settings.title,
+    content: block.settings.content,
+    cta_text: block.settings.cta_text,
+    cta_url: block.settings.cta_url
+  %}
+{% endcomment %}
+
+<div class="flex-block__wrapper flex-block__wrapper--{{ width }}">
+  {% if image %}
+    {% render "render-image"
+      class: "flex-block__image",
+      img: image,
+      size: "220 300 400 500",
+      alt: image.alt,
+      width: "300",
+      height: "auto"
+    %}
+  {% endif %}
+
+  {% if title != blank %}
+    <h3 class="flex-block__title">
+      {{ title }}
+    </h3>
+  {% endif %}
+
+  <div class="flex-block__content">
+    {{ content }}
+  </div>
+
+  {% if cta_text != blank and cta_url != blank %}
+    {% render 'link'
+      class: "btn-1",
+      url: cta_url,
+      content: cta_text
+    %}
+  {% endif %}
+</div>
