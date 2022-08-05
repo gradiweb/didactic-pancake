@@ -1,0 +1,15 @@
+{% comment %}
+  Renders a stars ratings
+
+  Accepts:
+  - points: {Number} Number in range 1 - 5 to display ratings
+
+  Usage:
+  {% render "ratings" points: 5 %}
+{% endcomment %}
+{% assign ratings_width = points | times: 20 %}
+
+<div class="ratings">
+  <div class="ratings__empty-stars"></div>
+  <div class="ratings__full-stars" style="width:{{ ratings_width }}%"></div>
+</div>

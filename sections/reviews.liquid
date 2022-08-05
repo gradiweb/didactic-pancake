@@ -15,11 +15,7 @@
   {% endif %}
 
   <div class="reviews__header-ratings-wrapper">
-    {% assign general_ratings_width = section.settings.ratings | times: 20 %}
-    <div class="ratings">
-      <div class="empty-stars"></div>
-      <div class="full-stars" style="width:{{ general_ratings_width }}%"></div>
-    </div>
+    {% render 'ratings' points: section.settings.ratings %}
 
     <div class="reviews__header-ratings-count">
       {{ section.settings.count }}
@@ -41,10 +37,7 @@
 
       <div class="swiper-slide reviews__single">
 
-        <div class="ratings">
-          <div class="empty-stars"></div>
-          <div class="full-stars" style="width:{{ rating_width }}%"></div>
-        </div>
+        {% render 'ratings' points: block.settings.points %}
 
         <h4 class="reviews__single-author">
           {{ block.settings.author }}
