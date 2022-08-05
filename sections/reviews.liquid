@@ -5,7 +5,7 @@
 
   {% if section.settings.icon %}
     {% render "render-image"
-      class: "reviews__icon",
+      class: "reviews__header-icon",
       img: section.settings.icon,
       size: "220 300",
       alt: section.settings.icon.alt,
@@ -33,10 +33,7 @@
   <div class="swiper-wrapper">
 
     {% for block in section.blocks %}
-      {% assign rating_width = block.settings.points | times: 20 %}
-
       <div class="swiper-slide reviews__single">
-
         {% render 'ratings' points: block.settings.points %}
 
         <h4 class="reviews__single-author">
@@ -46,9 +43,7 @@
         <p class="reviews__single-description">
           {{ block.settings.description }}
         </p>
-
       </div>
-
     {% endfor %}
 
   </div>
