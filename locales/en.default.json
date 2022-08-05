@@ -47,7 +47,8 @@
       "copy_to_clipboard": "Copy link",
       "share_url": "Link",
       "success_message": "Link copied to clipboard"
-    }
+    },
+    "reviews": "Reviews"
   },
   "newsletter": {
     "label": "Email",

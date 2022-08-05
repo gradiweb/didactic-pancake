@@ -47,7 +47,8 @@
       "share_url": "Lien",
       "success_message": "Lien copié dans le presse-papiers",
       "close": "Fermer le partage"
-    }
+    },
+    "reviews": "Reviews"
   },
   "newsletter": {
     "label": "E-mail",
