@@ -1,8 +1,9 @@
+@use "../abstracts/variables";
+
 .ratings {
   position: relative;
   vertical-align: middle;
   display: inline-block;
-  color: #b1b1b1;
   overflow: hidden;
 
   &__full-stars{
@@ -11,28 +12,28 @@
     top: 0;
     white-space: nowrap;
     overflow: hidden;
-    color: #00602C;
+    color: variables.$color-text;
   }
 
   &__empty-stars:before, &__full-stars:before {
     content: "\2605\2605\2605\2605\2605";
-    font-size: 14pt;
+    font-size: 1rem;
   }
   
   &__empty-stars:before {
-    -webkit-text-stroke: 1px #00602C;
-    color: #fff;
+    -webkit-text-stroke: 1px variables.$color-title;
+    color: transparent;
   }
   
   &__full-stars:before {
-    -webkit-text-stroke: 1px #00602C;
+    -webkit-text-stroke: 1px variables.$color-text;
   }
   
   /* Webkit-text-stroke is not supported on firefox or IE */
   /* Firefox */
   @-moz-document url-prefix() {
     &__full-stars {
-      color: #00602C;
+      color: variables.$color-text;
     }
   }
 
