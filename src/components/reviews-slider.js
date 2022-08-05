@@ -1,16 +1,13 @@
 import { Navigation, Pagination, Swiper } from "swiper";
 
 export function initReviewsSlider (main) {
-  const swiper = new Swiper('.swiper', {
+  const swiper = new Swiper('.reviews__slides', {
     modules: [Navigation,Pagination],
 
     // Optional parameters
     direction: 'horizontal',
-    loop: true,
     slidesPerView: 1,
     spaceBetween: 30,
-    autoHeight: true,
-    centeredSlides: true,
 
     breakpoints: {
       // when window width is >= 480px
