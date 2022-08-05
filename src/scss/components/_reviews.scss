@@ -1,0 +1,64 @@
+.reviews {
+  margin: 1rem 0;
+
+  &__title {
+    margin-bottom: 0;
+  }
+
+  &__author {
+    margin-bottom: 0.5rem;
+  }
+
+  &__header {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    &-ratings-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.ratings {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  color: #b1b1b1;
+  overflow: hidden;
+}
+
+.full-stars{
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #00602C;
+}
+
+.empty-stars:before,
+.full-stars:before {
+  content: "\2605\2605\2605\2605\2605";
+  font-size: 14pt;
+}
+
+.empty-stars:before {
+  -webkit-text-stroke: 1px #00602C;
+  color: #fff;
+}
+
+.full-stars:before {
+  -webkit-text-stroke: 1px #00602C;
+}
+
+/* Webkit-text-stroke is not supported on firefox or IE */
+/* Firefox */
+@-moz-document url-prefix() {
+  .full-stars{
+    color: #00602C;
+  }
+}
