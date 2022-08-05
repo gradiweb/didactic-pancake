@@ -39,31 +39,31 @@
     {% for block in section.blocks %}
       {% assign rating_width = block.settings.points | times: 20 %}
 
-      <div class="swiper-slide">
+      <div class="swiper-slide reviews__single">
+
         <div class="ratings">
           <div class="empty-stars"></div>
           <div class="full-stars" style="width:{{ rating_width }}%"></div>
         </div>
-        <h4 class="reviews__author">
+
+        <h4 class="reviews__single-author">
           {{ block.settings.author }}
         </h4>
-        <p class="reviews__description">
+
+        <p class="reviews__single-description">
           {{ block.settings.description }}
         </p>
+
       </div>
 
     {% endfor %}
 
   </div>
-  <!-- If we need pagination -->
-  <div class="swiper-pagination"></div>
+  <div class="pagination"></div>
 
-  <!-- If we need navigation buttons -->
-  <div class="reviews__button-prev"><</div>
-  <div class="reviews__button-next">></div>
+  <div class="swiper-button swiper-button--prev"><</div>
+  <div class="swiper-button swiper-button--next">></div>
 
-  <!-- If we need scrollbar -->
-  <div class="swiper-scrollbar"></div>
 </div>
 
 {% schema %}

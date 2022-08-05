@@ -1,45 +1,38 @@
-import Swiper from "swiper";
+import { Navigation, Pagination, Swiper } from "swiper";
 
 export function initReviewsSlider (main) {
   const swiper = new Swiper('.swiper', {
+    modules: [Navigation,Pagination],
+
     // Optional parameters
     direction: 'horizontal',
     loop: true,
-    slidesPerView: 3,
-    spaceBetween: 10,
+    slidesPerView: 1,
+    spaceBetween: 30,
+    autoHeight: true,
+    centeredSlides: true,
 
     breakpoints: {
-      // when window width is >= 320px
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 10
-      },
       // when window width is >= 480px
       480: {
         slidesPerView: 2,
-        spaceBetween: 10
+        spaceBetween: 30
       },
       // when window width is >= 640px
-      640: {
+      768: {
         slidesPerView: 3,
-        spaceBetween: 10
+        spaceBetween: 40
       }
     },
   
-    // If we need pagination
     pagination: {
-      el: '.swiper-pagination',
+      el: '.pagination',
     },
   
-    // Navigation arrows
     navigation: {
-      nextEl: '.reviews__button-next',
-      prevEl: '.reviews__button-prev',
-    },
-  
-    // And if we need scrollbar
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
+      nextEl: '.swiper-button--next',
+      prevEl: '.swiper-button--prev',
+    }
+
   });
 };
