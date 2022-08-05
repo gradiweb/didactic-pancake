@@ -23,12 +23,12 @@ export function initReviewsSlider (main) {
     },
   
     pagination: {
-      el: '.pagination',
+      el: '.reviews__slides-pagination',
     },
   
     navigation: {
-      nextEl: '.swiper-button--next',
-      prevEl: '.swiper-button--prev',
+      nextEl: '.reviews__slides-button--next',
+      prevEl: '.reviews__slides-button--prev',
     }
 
   });
