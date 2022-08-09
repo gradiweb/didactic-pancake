@@ -1,0 +1,101 @@
+{% comment %}
+  Basic structure for receiving and rendering markdown
+
+  Accepts:
+  - markdown: {String} information
+  - class: {String} Class for the markdown block
+
+  Usage:
+  {% render 'markdown'
+    class: 'explample',
+    markdown: data,
+    isTextarea: true,
+  %}
+{% endcomment %}
+
+{% assign break = "\" %}
+{% assign dataMarkdown = markdown | replace: '\u003c', '<' | replace: '\n\u003c', '<' | replace: '\u003e', '>' | strip_html  %}
+{% assign dataMarkdown = dataMarkdown | split: break %}
+{% assign isList = false %}
+
+<div class="lgmarkdown--main {{ class }}">
+  {% for line in dataMarkdown %}
+     {% assign dataLine = line | escape | strip %}
+
+     {% if dataLine contains "######" %}
+        <h6 class="markdown--h6">{{ dataLine | remove: "######" }}</h6>
+     {% elsif dataLine contains "#####" %}
+        <h5 class="markdown--h5">{{ dataLine | remove: "#####" }}</h5>
+     {% elsif dataLine contains "####" %}
+        <h4 class="markdown--h4">{{ dataLine | remove: "####" }}</h4>
+     {% elsif dataLine contains "###" %}
+        <h3 class="markdown--h3">{{ dataLine | remove: "###" }}</h3>
+     {% elsif dataLine contains "##" %}
+        <h2 class="markdown--h2">{{ dataLine | remove: "##" }}</h2>
+     {% elsif dataLine contains "#" %}
+        <h1 class="markdown--h1">{{ dataLine | remove: "#" }}</h1>
+     {% elsif dataLine contains "```" %}
+        {% assign code = line | escape %}
+        <code>{{ code | remove: "```php" | remove: "```html" | remove: "```javascript" "```bash" | remove: "```" }}</code>
+     {% elsif dataLine contains "![" %}
+        {% assign imageData = dataLine | split: "](" %}
+        {% if imageData.size == 2 %}
+          {% assign image = imageData[1] | replace: '&quot;', '"' %}
+          {% assign clearImage = image | split: '"' %}
+          {% assign src =  clearImage[0] %}
+          <img src="{{ src | | remove: ')' }}"
+            {% if imageData[0] != blank %} alt="{{ imageData[0] | remove: '![' }}" {% endif %}
+            {% if clearImage[1] %}title="{{ clearImage[1] }}"{% endif %}>
+        {% endif %}
+     {% elsif dataLine contains "[" %}
+        {% assign link = dataLine | split: "](" %}
+        <a href="{{ link[1] | remove: ")" }}" target="_blank" title="{{ link[0] | remove: "[" }}">{{ link[0] | remove: "[" }}</a>
+     {% elsif dataLine contains "**" %}
+     {% assign lineStrong = dataLine | split: "**" %}
+        <p class="markdown--strong">
+          {% for linebold in lineStrong %}
+            {% if forloop.index == 1 %}
+              {% assign lineInit = linebold %}
+            {% endif %}
+            {% if lineInit == blank %}
+              {%- comment -%} Linear starts with bold {%- endcomment -%}
+              {% assign residue = forloop.index | modulo: 2 %}
+
+              {% if residue == 1 %}
+                {{ linebold }}
+              {% else %}
+                <strong>{{ linebold }}</strong>
+              {% endif %}
+            {% else %}
+              {%- comment -%} Linear does not start with bold {%- endcomment -%}
+              {% assign residue = forloop.index | modulo: 2 %}
+              {% if residue == 1 %}
+                {{ linebold }}
+              {% else %}
+                <strong>{{ linebold }}</strong>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </p>
+      {% elsif dataLine | slice: 0, 1 == "-" %}
+        {%- if isList == false -%}
+          <ul class="markdown--list">
+        {%- endif -%}
+
+        {% assign futureDate = dataMarkdown[forloop.index] %}
+        {%- if futureDate | slice: 0, 1 == "-" -%}
+          {% assign isList = true %}
+        {% else %}
+          {% assign isList = false %}
+        {%- endif -%}
+          <li>{{ dataLine | remove: '-' }}</li>
+
+        {%- if futureDate | slice: 0, 1 !== "-" -%}
+          </ul>
+        {%- endif -%}
+
+      {% else %}
+        <p class="markdown--p">{{ dataLine | remove: "##" }}</p>
+      {% endif %}
+   {% endfor %}
+</div>
