@@ -47,8 +47,7 @@
       "share_url": "Lien",
       "success_message": "Lien copié dans le presse-papiers",
       "close": "Fermer le partage"
-    },
-    "reviews": "Reviews"
+    }
   },
   "newsletter": {
     "label": "E-mail",
@@ -72,7 +71,8 @@
     "of": "sur",
     "skip_to_product_info": "Passer aux informations produits",
     "total_reviews": "total des critiques",
-    "star_reviews_info": "{{ rating_value }} sur {{ rating_max }} étoiles"
+    "star_reviews_info": "{{ rating_value }} sur {{ rating_max }} étoiles",
+    "reviews_average": "({{ count }}+critiques)"
   },
   "blogs": {
     "article": {

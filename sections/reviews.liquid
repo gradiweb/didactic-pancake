@@ -1,7 +1,9 @@
 <div class="reviews__header">
-  <h3 class="reviews__title">
-    {{ section.settings.title }}
-  </h3>
+  {% if section.settings.title %}
+    <h2 class="reviews__title">
+      {{ section.settings.title }}
+    </h2>  
+  {% endif %}
 
   {% if section.settings.icon %}
     {% render "render-image"
@@ -14,129 +16,148 @@
     %}
   {% endif %}
 
-  <div class="reviews__header-ratings-wrapper">
-    {% render 'ratings' points: section.settings.ratings %}
+  {% if section.settings.count != blank %}
+    <div class="reviews__header-ratings-wrapper">
+      {% render 'ratings'
+        points: section.settings.ratings
+      %}
 
-    <div class="reviews__header-ratings-count">
-      ({{ section.settings.count }}+ {{ 'general.reviews' | t }} )
-    </div>
-  </div>
-
-  {% render 'link'
-    class: "reviews__header-ratings-link",
-    url: section.settings.cta_url,
-    content: section.settings.cta_text
-  %}
-</div>
-
-<div class="swiper reviews__slides">
-  <div class="swiper-wrapper">
-
-    {% for block in section.blocks %}
-      <div class="swiper-slide reviews__single">
-        {% render 'ratings' points: block.settings.points %}
-
-        <h4 class="reviews__single-author">
-          {{ block.settings.author }}
-        </h4>
-
-        <p class="reviews__single-description">
-          {{ block.settings.description }}
-        </p>
+      <div class="reviews__header-ratings-count">
+        {{ 'accessibility.reviews_average' 
+          | t: count: section.settings.count
+        }}
       </div>
-    {% endfor %}
+    </div>
+  {% endif %}
 
-  </div>
-  <div class="reviews__slides-pagination"></div>
-
-  <div class="reviews__slides-button reviews__slides-button--prev"><</div>
-  <div class="reviews__slides-button reviews__slides-button--next">></div>
-
+  {% if section.settings.cta_url != blank and section.settings.cta_text != blank %}
+    {% render 'link'
+      class: "reviews__header-ratings-link",
+      url: section.settings.cta_url,
+      content: section.settings.cta_text
+    %}  
+  {% endif %}
 </div>
+
+{% capture review %}
+  {% for block in section.blocks %}
+    <div class="swiper-slide reviews__single">
+      {% render 'ratings' points: block.settings.points %}
+
+      <h4 class="reviews__single-author">
+        {{ block.settings.author }}
+      </h4>
+
+      <p class="reviews__single-description">
+        {{ block.settings.description }}
+      </p>
+    </div>
+  {% endfor %}
+{% endcapture %}
+
+{% render 'slider',
+  wrapper: 'string query'
+  content: review,
+  arrows: true
+%}
 
 {% schema %}
-{
-  "name": "Reviews",
-  "class": "reviews wrapper",
-  "tag": "section",
-  "settings": [
-    {
-      "type": "range",
-      "id": "ratings",
-      "min": 1,
-      "max": 5,
-      "step": 1,
-      "label": "General Points Rating",
-      "default": 5
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Quisque vestibulum sapien vel metus"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon",
-      "label": "Main Review Icon"
-    },
-    {
-      "type": "number",
-      "id": "count",
-      "label": "Number of reviews",
-      "default": 123
-    },
-    {
-      "type": "text",
-      "id": "cta_text",
-      "label": "CTA Text",
-      "default": "See more reviews"
-    },
-    {
-      "type": "url",
-      "id": "cta_url",
-      "label": "CTA Link"
-    },
-    {
-      "type": "text",
-      "id": "cta_icon",
-      "label": "CTA Icon",
-      "info": "CTA SVG Icon name in files without extension (Only SVG)"
-    }
-  ],
-  "blocks": [    
-    {
-      "type": "review",
-      "name": "Review Block",
-      "settings": [
-        {
-          "type": "range",
-          "id": "points",
-          "min": 1,
-          "max": 5,
-          "step": 1,
-          "label": "Points Rating",
-          "default": 5
-        },
-        {
-          "type": "text",
-          "id": "author",
-          "label": "Author",
-          "default": "Anonymous"
-        },
-        {
-          "type": "text",
-          "id": "description",
-          "label": "Description",
-          "default": "Pellentesque tellus ante, posuere sed diam vel, mattis cursus diam."
-        }
-      ]
-    }
-  ],
-  "presets": [
-     {
-       "name": "Reviews Section"
-     }
-  ]
-}
+  {
+    "name": "Reviews",
+    "class": "reviews wrapper",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "range",
+        "id": "ratings",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "label": "General Points Rating",
+        "default": 5
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Quisque vestibulum sapien vel metus"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "Main Review Icon"
+      },
+      {
+        "type": "number",
+        "id": "count",
+        "label": "Number of reviews",
+        "default": 123
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text",
+        "default": "See more reviews"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA Link"
+      },
+      {
+        "type": "text",
+        "id": "cta_icon",
+        "label": "CTA Icon",
+        "info": "CTA SVG Icon name in files without extension (Only SVG)"
+      }
+    ],
+    "blocks": [    
+      {
+        "type": "review",
+        "name": "Review Block",
+        "settings": [
+          {
+            "type": "range",
+            "id": "points",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "label": "Points Rating",
+            "default": 5
+          },
+          {
+            "type": "text",
+            "id": "author",
+            "label": "Author",
+            "default": "Anonymous"
+          },
+          {
+            "type": "text",
+            "id": "description",
+            "label": "Description",
+            "default": "Pellentesque tellus ante, posuere sed diam vel, mattis cursus diam."
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Reviews Section",
+        "blocks": [
+          {
+            "type": "review"
+          },
+          {
+            "type": "review"
+          },
+          {
+            "type": "review"
+          },
+          {
+            "type": "review"
+          }
+        ]
+      }
+    ]
+  }
 {% endschema %}
