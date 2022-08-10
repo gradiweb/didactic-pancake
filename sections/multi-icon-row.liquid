@@ -1,33 +1,45 @@
-<div class="row__icons">
-  {% if section.settings.row_icon_title != blank %}
-    <h2>{{ section.settings.row_icon_title }}</h2>
-  {% endif %}
-  <div class="elements__icons">
-    {% for block in section.blocks %}
-      <div class="element__icon {% if section.settings.position_icons == 'left' %}position__left{% else %}position__top{% endif %}">
-        {%- if block.settings.row_icon_image != blank -%}
-        {% assign url = block.settings.row_icon_image  | img_url %}
-          {% render "render-image"
-            class: "class_image",
-            img_src: url,
-            alt: block.settings.row_icon_image.alt,
-            width: "80",
-            height: "80"
-          %}
-        {%- endif -%}
-        {% if block.settings.row_icon_subtitle != blank or  block.settings.row_icon_description != blank%}
-          <div class="element__icon--description">
-            {% if block.settings.row_icon_subtitle != blank  %}
-              <h3>{{ block.settings.row_icon_subtitle }}</h3>
-            {% endif %}
-            {% if block.settings.row_icon_description != blank  %}
-              {{ block.settings.row_icon_description }}
-            {% endif %}
-          </div>
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
+{% liquid
+  assign position_icons = 'left'
+  assign slider_mobile = true
+%}
+
+{% if section.settings.row_icon_title != blank %}
+  <h2>
+    {{ section.settings.row_icon_title }}
+  </h2>
+{% endif %}
+
+<div class="flex elements__icons {% if slider_mobile %}slider_mobile{% endif %}">
+  {% for block in section.blocks %}
+    <div
+      class="element__icon {% if position_icons == 'left' %}position__left{% else %}position__top{% endif %}"
+    >
+      {% if block.settings.row_icon_image != blank %}
+        {% assign url = block.settings.row_icon_image  | img_url: '200x' %}
+        {% render "render-image"
+          class: "class_image",
+          img_src: url,
+          alt: block.settings.row_icon_image.alt,
+          width: "80",
+          height: "80"
+        %}
+      {% endif %}
+
+      {% if block.settings.heading != blank or block.settings.row_icon_description != blank %}
+        <div class="element__icon--description">
+          {% if block.settings.heading != blank %}
+            <h3>
+              {{ block.settings.heading }}
+            </h3>
+          {% endif %}
+
+          {% if block.settings.row_icon_description != blank %}
+            {{ block.settings.row_icon_description }}
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
 </div>
 
 {% schema %}
@@ -62,22 +74,43 @@
     "blocks": [
       {
         "name": "List items",
-        "type": "slide",
+        "type": "icon",
         "settings": [
           {
             "type": "text",
-            "id": "row_icon_subtitle",
-            "label": "Title"
+            "id": "heading",
+            "label": "Title",
+            "default": "Icon"
           },
           {
-            "type": "richtext",
+            "type": "text",
             "id": "row_icon_description",
-            "label": "Description"
+            "label": "Description",
+            "default": "Lorem ipsum letto"
           },
           {
             "type": "image_picker",
             "id": "row_icon_image",
             "label": "Image Mobile"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Row icons",
+        "blocks": [
+          {
+            "type": "icon"
+          },
+          {
+            "type": "icon"
+          },
+          {
+            "type": "icon"
+          },
+          {
+            "type": "icon"
           }
         ]
       }
