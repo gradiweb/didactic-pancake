@@ -1,3 +1,12 @@
+{%- comment -%}
+  If you want to get different UI from our customization code.
+  You could change this properties:
+
+  - position_icons: Text orientation -> left | top
+  - slider_mobile: Mobile slider UI -> true | false
+
+{%- endcomment -%}
+
 {% liquid
   assign position_icons = 'left'
   assign slider_mobile = true
@@ -15,11 +24,11 @@
       class="element__icon {% if position_icons == 'left' %}position__left{% else %}position__top{% endif %}"
     >
       {% if block.settings.row_icon_image != blank %}
-        {% assign url = block.settings.row_icon_image  | img_url: '200x' %}
+        {% assign url = block.settings.row_icon_image | append: '.svg' | file_url %}
         {% render "render-image"
           class: "class_image",
           img_src: url,
-          alt: block.settings.row_icon_image.alt,
+          alt: block.settings.row_icon_image,
           width: "80",
           height: "80"
         %}
@@ -89,9 +98,10 @@
             "default": "Lorem ipsum letto"
           },
           {
-            "type": "image_picker",
+            "type": "text",
             "id": "row_icon_image",
-            "label": "Image Mobile"
+            "label": "Image Mobile",
+            "default": "icon"
           }
         ]
       }
