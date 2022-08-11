@@ -9,305 +9,160 @@
 
   Usage:
   {% render 'markdown'
-    class: 'explample',
+    class: 'example',
     markdown: data,
   %}
 {% endcomment %}
 
 {% assign break = "\" %}
 {% assign dataMarkdown = markdown | replace: '\u003c', '<' | replace: '\n\u003c', '<'
-| replace: '\u003e', '>' | replace: '&gt;', '>'  %}
+  | replace: '\u003e', '>' | replace: '&gt;', '>'  %}
 {% assign dataMarkdown = dataMarkdown | split: break %}
 {% assign isSubitem = false %}
 
 <div class="lgmarkdown--main {{ class }}">
   {% for line in dataMarkdown %}
-     {% assign dataLine = line | escape | replace: '&gt;', '>'| strip_html | strip %}
-     {% assign dataLineStart = dataLine | slice: 0, 1 %}
+    {%- comment -%}Clear some information strings{%- endcomment -%}
+    {% assign dataLine = line | escape | replace: '&gt;', '>'| strip_html | strip %}
+    {%- comment -%}Identify the beginning of each line{%- endcomment -%}
+    {% assign dataLineStart = dataLine | slice: 0, 1 %}
 
-     {% if dataLine contains "######" and dataLineStart == '#' %}
-        <h6 class="markdown--h6">{{ dataLine | remove: "######" }}</h6>
-     {% elsif dataLine contains "#####"  and dataLineStart == '#' %}
-        <h5 class="markdown--h5">{{ dataLine | remove: "#####" }}</h5>
-     {% elsif dataLine contains "####"  and dataLineStart == '#' %}
-        <h4 class="markdown--h4">{{ dataLine | remove: "####" }}</h4>
-     {% elsif dataLine contains "###" and dataLineStart == '#' %}
-        <h3 class="markdown--h3">{{ dataLine | remove: "###" }}</h3>
-     {% elsif dataLine contains "##"  and dataLineStart == '#' %}
-        <h2 class="markdown--h2">{{ dataLine | remove: "##" }}</h2>
-     {% elsif dataLine contains "#" and dataLineStart == '#' %}
-        <h1 class="markdown--h1">{{ dataLine | remove: "#" }}</h1>
-     {% elsif dataLine contains "```" and dataLineStart == '`' %}
-        {% assign code = line | escape %}
-        <p class="markdown--code">
-          <code>
-            {{ code | remove: "```php" | remove: "```html" | remove: "```javascript" | "```bash" | remove: "```" | newline_to_br }}
-          </code>
+    {%- comment -%}Render header information{%- endcomment -%}
+    {% if dataLine contains "######" and dataLineStart == '#' %}
+      <h6 class="markdown--h6">{{ dataLine | remove: "######" }}</h6>
+    {% elsif dataLine contains "#####"  and dataLineStart == '#' %}
+      <h5 class="markdown--h5">{{ dataLine | remove: "#####" }}</h5>
+    {% elsif dataLine contains "####"  and dataLineStart == '#' %}
+      <h4 class="markdown--h4">{{ dataLine | remove: "####" }}</h4>
+    {% elsif dataLine contains "###" and dataLineStart == '#' %}
+      <h3 class="markdown--h3">{{ dataLine | remove: "###" }}</h3>
+    {% elsif dataLine contains "##"  and dataLineStart == '#' %}
+      <h2 class="markdown--h2">{{ dataLine | remove: "##" }}</h2>
+    {% elsif dataLine contains "#" and dataLineStart == '#' %}
+      <h1 class="markdown--h1">{{ dataLine | remove: "#" }}</h1>
+
+    {%- comment -%}Render code information as a block{%- endcomment -%}
+    {% elsif dataLine contains "```" and dataLineStart == '`' %}
+      {% assign code = line | escape %}
+      <p class="markdown--code">
+        <code>
+          {{ code | remove: "```php" | remove: "```html" | remove: "```javascript" | "```bash" | remove: "```" | newline_to_br }}
+        </code>
+      </p>
+
+    {%- comment -%}Render image information{%- endcomment -%}
+    {% elsif dataLine contains "![" and dataLineStart == '!' %}
+      {% assign imageData = dataLine | split: "](" %}
+      {% if imageData.size == 2 %}
+        {% assign image = imageData[1] | replace: '&quot;', '"' %}
+        {% assign clearImage = image | split: '"' %}
+        {% assign src =  clearImage[0] %}
+        <p class="markdown--image">
+          <img src="{{ src | | remove: ')' }}"
+            {% if imageData[0] != blank %} alt="{{ imageData[0] | remove: '![' }}" {% endif %}
+            {% if clearImage[1] %}title="{{ clearImage[1] }}"{% endif %}>
         </p>
-     {% elsif dataLine contains "![" and dataLineStart == '!' %}
-        {% assign imageData = dataLine | split: "](" %}
-        {% if imageData.size == 2 %}
-          {% assign image = imageData[1] | replace: '&quot;', '"' %}
-          {% assign clearImage = image | split: '"' %}
-          {% assign src =  clearImage[0] %}
-          <p class="markdown--image">
-            <img src="{{ src | | remove: ')' }}"
-              {% if imageData[0] != blank %} alt="{{ imageData[0] | remove: '![' }}" {% endif %}
-              {% if clearImage[1] %}title="{{ clearImage[1] }}"{% endif %}>
-          </p>
-        {% endif %}
-      {% elsif dataLine contains "[" and dataLineStart == '[' %}
-        {% assign link = dataLine | split: "](" %}
-        <p class="markdown--link">
-          <a href="{{ link[1] | remove: ")" }}"
-            target="_blank" title="{{ link[0] | remove: "[" }}">
-            {{ link[0] | remove: "[" }}
-          </a>
-        </p>
-        {% elsif dataLineStart == ">" %}
-        {% assign blockData = dataLine | remove: ">" %}
-        {% assign blockData = blockData | split: "`" %}
+      {% endif %}
 
-        {% capture strDataBlock %}
-          {% if blockData.size > 1 %}
-            {% for linep in blockData %}
-              {% if forloop.index == 1 %}
-                {% assign lineInit = linep %}
-              {% endif %}
-              {% if lineInit == blank %}
-                {%- comment -%} Linear starts with line code {%- endcomment -%}
-                {% assign residue = forloop.index | modulo: 2 %}
+    {%- comment -%}Render link information{%- endcomment -%}
+    {% elsif dataLine contains "[" and dataLineStart == '[' %}
+      {% assign link = dataLine | split: "](" %}
+      <p class="markdown--link">
+        <a href="{{ link[1] | remove: ")" }}"
+          target="_blank" title="{{ link[0] | remove: "[" }}">
+          {{ link[0] | remove: "[" }}
+        </a>
+      </p>
 
-                {% if residue == 1 %}
-                  {{ linep }}
-                {% else %}
-                  <code>{{ linep }}</code>
-                {% endif %}
+    {%- comment -%}Render comment information{%- endcomment -%}
+    {% elsif dataLineStart == ">" %}
+      {% assign blockData = dataLine | remove: ">" %}
+      {% assign blockData = blockData | split: "`" %}
+
+      {% capture strDataBlock %}
+        {% render 'markdown-line-code' lineCode: blockData %}
+      {% endcapture %}
+
+      {% assign lineStrong = strDataBlock | split: "**" %}
+      {% capture strDataBlock %}
+        {% render 'markdown-bold' lineStrong: lineStrong %}
+      {% endcapture %}
+
+      <blockquote class="markdown--quote">
+        {{ strDataBlock }}
+      </blockquote>
+
+    {%- comment -%}Render list information{%- endcomment -%}
+    {% elsif dataLineStart == "-" %}
+      {% capture strDataBlock %}
+        <ul class="markdown--list">
+          {% assign dataList = dataLine | split: "-"  %}
+          {% for item in dataList %}
+            {%- if item != blank -%}
+              {% if item contains "__ " %}
+                {% assign futureData = dataList[forloop.index] | strip %}
+                {% assign hasItemFuture = futureData | slice: 0, 2 %}
+                {% if isSubitem == false %}
+                  <ul class="markdown--sub-item">
+                {%- endif -%}
+                {% assign isSubitem = true %}
+                  <li>{{ item | remove: "__" }}</li>
+                {% unless  hasItemFuture contains "__" %}
+                    </ul>
+                  {% assign isSubitem = false %}
+                {%- endunless  -%}
               {% else %}
-                {%- comment -%} Linear does not start with linde code {%- endcomment -%}
-                {% assign residue = forloop.index | modulo: 2 %}
-                {% if residue == 1 %}
-                  {{ linep }}
-                {% else %}
-                  <code>{{ linep }}</code>
-                {% endif %}
+                <li>{{ item }}</li>
               {% endif %}
-            {% endfor %}
-          {% else %}
-            {{ dataLine }}
-          {% endif %}
-        {% endcapture %}
-
-        {% assign lineStrong = strDataBlock | split: "**" %}
-        {% capture strDataBlock %}
-          {% for linebold in lineStrong %}
-            {% if forloop.index == 1 %}
-              {% assign lineInit = linebold %}
-            {% endif %}
-            {% if lineInit == blank %}
-              {%- comment -%} Linear starts with bold {%- endcomment -%}
-              {% assign residue = forloop.index | modulo: 2 %}
-
-              {% if residue == 1 %}
-                {{ linebold }}
-              {% else %}
-                <strong>{{ linebold }}</strong>
-              {% endif %}
-            {% else %}
-              {%- comment -%} Linear does not start with bold {%- endcomment -%}
-              {% assign residue = forloop.index | modulo: 2 %}
-              {% if residue == 1 %}
-                {{ linebold }}
-              {% else %}
-                <strong>{{ linebold }}</strong>
-              {% endif %}
-            {% endif %}
+            {%- endif -%}
           {% endfor %}
-        {% endcapture %}
+        </ul>
+      {% endcapture %}
 
-        <blockquote class="markdown--quote">
-          {{ strDataBlock }}
-        </blockquote>
-        {% elsif dataLineStart == "-" %}
-        {% capture strDataBlock %}
-          <ul class="markdown--list">
-            {% assign dataList = dataLine | split: "-"  %}
-            {% for item in dataList %}
-              {%- if item != blank -%}
-                {% if item contains "__ " %}
-                  {% assign futureData = dataList[forloop.index] | strip %}
-                  {% assign hasItemFuture = futureData | slice: 0, 2 %}
-                  {% if isSubitem == false %}
-                      <ul class="markdown--sub-item">
-                  {%- endif -%}
-                  {% assign isSubitem = true %}
-                      <li>{{ item | remove: "__" }}</li>
-                  {% unless  hasItemFuture contains "__" %}
-                      </ul>
-                    {% assign isSubitem = false %}
-                  {%- endunless  -%}
-                {% else %}
-                  <li>{{ item }}</li>
-                {% endif %}
-              {%- endif -%}
-            {% endfor %}
-          </ul>
-        {% endcapture %}
+      {%- comment -%}Render information in bold text{%- endcomment -%}
+      {% assign lineStrong = strDataBlock | split: "**" %}
+      {% capture strDataString %}
+        {% render 'markdown-bold' lineStrong: lineStrong %}
+      {% endcapture %}
 
-        {% assign lineStrong = strDataBlock | split: "**" %}
-        {% capture strDataString %}
-          {% for linebold in lineStrong %}
-            {% if forloop.index == 1 %}
-              {% assign lineInit = linebold %}
-            {% endif %}
-            {% if lineInit == blank %}
-              {%- comment -%} Linear starts with bold {%- endcomment -%}
-              {% assign residue = forloop.index | modulo: 2 %}
+      {%- comment -%}Render code information inline{%- endcomment -%}
+      {% assign blockData = strDataString | split: "`" %}
+      {% capture strDataString %}
+        {% render 'markdown-line-code' lineCode: blockData %}
+      {% endcapture %}
 
-              {% if residue == 1 %}
-                {{ linebold }}
-              {% else %}
-                <strong>{{ linebold }}</strong>
-              {% endif %}
-            {% else %}
-              {%- comment -%} Linear does not start with bold {%- endcomment -%}
-              {% assign residue = forloop.index | modulo: 2 %}
-              {% if residue == 1 %}
-                {{ linebold }}
-              {% else %}
-                <strong>{{ linebold }}</strong>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        {% endcapture %}
+      {{ strDataString }}
 
-        {% assign blockData = strDataString | split: "`" %}
-        {% capture strDataString %}
-          {% if blockData.size > 1 %}
-            {% for linep in blockData %}
-              {% if forloop.index == 1 %}
-                {% assign lineInit = linep %}
-              {% endif %}
-              {% if lineInit == blank %}
-                {%- comment -%} Linear starts with line code {%- endcomment -%}
-                {% assign residue = forloop.index | modulo: 2 %}
+    {%- comment -%}Render information in bold{%- endcomment -%}
+    {% elsif dataLine contains "**" %}
+      {% assign lineStrong = dataLine | remove: ">" %}
+      {% assign lineStrong = lineStrong | split: "**" %}
 
-                {% if residue == 1 %}
-                  {{ linep }}
-                {% else %}
-                  <code>{{ linep }}</code>
-                {% endif %}
-              {% else %}
-                {%- comment -%} Linear does not start with linde code {%- endcomment -%}
-                {% assign residue = forloop.index | modulo: 2 %}
-                {% if residue == 1 %}
-                  {{ linep }}
-                {% else %}
-                  <code>{{ linep }}</code>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            {{ strDataString }}
-          {% endif %}
-        {% endcapture %}
+      {% capture strDataString %}
+        {% render 'markdown-bold' lineStrong: lineStrong %}
+      {% endcapture %}
 
+      {% assign blockData = strDataString | split: "`" %}
+      {% capture strDataString %}
+        {% render 'markdown-line-code' lineCode: blockData %}
+      {% endcapture %}
+
+      <p class="markdown--strong">
         {{ strDataString }}
-      {% elsif dataLine contains "**" %}
-        {% assign lineStrong = dataLine | remove: ">" %}
-        {% assign lineStrong = lineStrong | split: "**" %}
+      </p>
 
-        {% capture strDataString %}
-          {% for linebold in lineStrong %}
-            {% if forloop.index == 1 %}
-              {% assign lineInit = linebold %}
-            {% endif %}
-            {% if lineInit == blank %}
-              {%- comment -%} Linear starts with bold {%- endcomment -%}
-              {% assign residue = forloop.index | modulo: 2 %}
+    {%- comment -%}If no pattern is found, take the information as a paragraph{%- endcomment -%}
+    {% else %}
 
-              {% if residue == 1 %}
-                {{ linebold }}
-              {% else %}
-                <strong>{{ linebold }}</strong>
-              {% endif %}
-            {% else %}
-              {%- comment -%} Linear does not start with bold {%- endcomment -%}
-              {% assign residue = forloop.index | modulo: 2 %}
-              {% if residue == 1 %}
-                {{ linebold }}
-              {% else %}
-                <strong>{{ linebold }}</strong>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        {% endcapture %}
-
-        {% assign blockData = strDataString | split: "`" %}
-        {% capture strDataString %}
-          {% if blockData.size > 1 %}
-            {% for linep in blockData %}
-              {% if forloop.index == 1 %}
-                {% assign lineInit = linep %}
-              {% endif %}
-              {% if lineInit == blank %}
-                {%- comment -%} Linear starts with line code {%- endcomment -%}
-                {% assign residue = forloop.index | modulo: 2 %}
-
-                {% if residue == 1 %}
-                  {{ linep }}
-                {% else %}
-                  <code>{{ linep }}</code>
-                {% endif %}
-              {% else %}
-                {%- comment -%} Linear does not start with linde code {%- endcomment -%}
-                {% assign residue = forloop.index | modulo: 2 %}
-                {% if residue == 1 %}
-                  {{ linep }}
-                {% else %}
-                  <code>{{ linep }}</code>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            {{ strDataString }}
-          {% endif %}
-        {% endcapture %}
-
-        <p class="markdown--strong">
-          {{ strDataString }}
+      {%- comment -%}Validate if the paragraph has any inline code{%- endcomment -%}
+      {% assign paragraph = dataLine | split: "`"  %}
+      {% if paragraph.size > 1 %}
+        <p class="markdown--p-code">
+          {% render 'markdown-line-code' lineCode: paragraph %}
         </p>
       {% else %}
-        {% assign paragraph = dataLine | split: "`"  %}
-        {% if paragraph.size > 1 %}
-          <p class="markdown--p-code">
-            {% for linep in paragraph %}
-              {% if forloop.index == 1 %}
-                {% assign lineInit = linep %}
-              {% endif %}
-              {% if lineInit == blank %}
-                {%- comment -%} Linear starts with line code {%- endcomment -%}
-                {% assign residue = forloop.index | modulo: 2 %}
-
-                {% if residue == 1 %}
-                  {{ linep }}
-                {% else %}
-                  <code>{{ linep }}</code>
-                {% endif %}
-              {% else %}
-                {%- comment -%} Linear does not start with linde code {%- endcomment -%}
-                {% assign residue = forloop.index | modulo: 2 %}
-                {% if residue == 1 %}
-                  {{ linep }}
-                {% else %}
-                  <code>{{ linep }}</code>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-          </p>
-        {% else %}
-          <p class="markdown--p">{{ dataLine }}</p>
-        {% endif %}
+        <p class="markdown--p">{{ dataLine }}</p>
       {% endif %}
-   {% endfor %}
+    {% endif %}
+  {% endfor %}
 </div>
