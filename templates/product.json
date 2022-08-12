@@ -2,13 +2,9 @@
   "sections": {
     "main": {
       "type": "main-product"
-    },
-    "dual": {
-      "type": "dual-section"
     }
   },
   "order": [
-    "dual",
     "main"
   ]
 }
