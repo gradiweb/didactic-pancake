@@ -2,64 +2,92 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-    .container__media,
-    .container__description {
-      width: 100%;
-      align-self: center;
-    }
-    .container__media{
-      height: 0;
+
+  .container__media,
+  .container__description {
+    width: 100%;
+    align-self: center;
+  }
+
+  .container__media{
+    height: 0;
+    overflow: hidden;
+    padding-top: 75%;
+    background: white;
+    position: relative;
+
+    iframe, img {
       overflow: hidden;
-      padding-top: 75%;
-      background: white;
-      position: relative;
-      iframe, img {
-        overflow: hidden;
-        height: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+      height: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .container__description {
+    
+    div {
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      
+      & > h2 {
+        & + p {
+          font-weight: 600;
+
+          & + p {
+            margin: 20px 0;
+
+            & > strong {
+              font-weight: 600;
+            }
+          }
+        }
+      }
+
+      & > a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
       }
     }
-    .container__description {
-      h2, p {
-        width: 90%;
-      }
-      h3{
-        margin: 10px 0;
-      }
-      div {
-        padding: 20px 0;
-      }
-    }
+  }
 }
 
 @media (min-width: 768px) {
   .position__image-left {
     flex-direction: row;
+    
     .container__description {
       div {
         margin: 10px 0px 10px 20px;
       }
     }
   }
+
   .position__image-right{
     flex-direction: row-reverse;
+    
     .container__description {
       div {
         margin: 10px 20px 10px 0;
       }
     }
   }
+
   .container__dual-section {
+
     .container__media,
     .container__description {
       width: 50%;
       align-self: center;
     }
+
     .container__media{
       padding-top: 31.57894736%;
     }

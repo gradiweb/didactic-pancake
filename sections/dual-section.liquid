@@ -6,7 +6,7 @@
 >
   <div class="container__media">
     {% if section.settings.image_brackground != blank  %}
-    <picture>
+      <picture>
         {% assign url = section.settings.image_brackground  | img_url: '500x' %}
         {% render "render-image"
           class: "class_image",
@@ -16,30 +16,33 @@
           width: "100%",
           height: "100%"
         %}
-    </picture>
+      </picture>
     {% endif %}
   </div>
+
   <div class="container__description">
     <div>
       {% if section.settings.dual_section_title != blank  %}
         <h2>{{ section.settings.dual_section_title }}</h2>
       {% endif %}
       {% if section.settings.dual_section_subtitle != blank  %}
-        <h3>{{ section.settings.dual_section_subtitle }}</h3>
+        {{ section.settings.dual_section_subtitle }}
       {% endif %}
       {% if section.settings.dual_section_description != blank  %}
         {{ section.settings.dual_section_description }}
       {% endif %}
+
       {% if section.settings.dual_section_linkCTA != blank and section.settings.dual_section_titleCTA != blank %}   
         {% render 'link'
-          class: "btn-2 btn_w-100",
-          url:  section.settings.dual_section_linkCTA
+          class: "btn-2",
+          url:  section.settings.dual_section_linkCTA,
           content: section.settings.dual_section_titleCTA 
         %}
       {% endif %}
     </div>
   </div>
 </div>
+
 {% schema %}
   {
     "name": "Dual section",
@@ -49,12 +52,14 @@
       {
         "type": "text",
         "id": "dual_section_title",
-        "label": "Title"
+        "label": "Title",
+        "default": "Deafult title"
       },
       {
         "type": "text",
         "id": "dual_section_titleCTA",
-        "label": "Title CTA"
+        "label": "Title CTA",
+        "default": "Go to checkout"
       },
       {
         "type": "url",
@@ -85,12 +90,14 @@
       {
         "type": "richtext",
         "id": "dual_section_subtitle",
-        "label": "Subtitle"
+        "label": "Subtitle",
+        "default": "<p>lorem ipsum<\/p>"
       },
       {
         "type": "richtext",
         "id": "dual_section_description",
-        "label": "Description"
+        "label": "Description",
+        "default": "<p><strong>Lorem ipsum dolor sit amet <\/strong><em>consectetur adipiscing<\/em> <a href=\"\/collections\/all\" title=\"All\">elit<\/a><\/p>"
       }
     ],
     "presets": [
