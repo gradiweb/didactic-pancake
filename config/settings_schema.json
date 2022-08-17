@@ -88,7 +88,7 @@
       {
         "type": "color",
         "id": "colors_btn_bg_2",
-        "default": "#737373",
+        "default": "#000000",
         "label": "Background 2"
       },
       {
@@ -173,18 +173,21 @@
         "type": "text",
         "id": "social_twitter_link",
         "label": "t:settings_schema.social-media.settings.social_twitter_link.label",
+        "default": "t:settings_schema.social-media.settings.social_twitter_link.info",
         "info": "t:settings_schema.social-media.settings.social_twitter_link.info"
       },
       {
         "type": "text",
         "id": "social_facebook_link",
         "label": "t:settings_schema.social-media.settings.social_facebook_link.label",
+        "default": "t:settings_schema.social-media.settings.social_facebook_link.info",
         "info": "t:settings_schema.social-media.settings.social_facebook_link.info"
       },
       {
         "type": "text",
         "id": "social_pinterest_link",
         "label": "t:settings_schema.social-media.settings.social_pinterest_link.label",
+        "default": "t:settings_schema.social-media.settings.social_pinterest_link.info",
         "info": "t:settings_schema.social-media.settings.social_pinterest_link.info"
       },
       {
@@ -233,6 +236,18 @@
         "id": "favicon",
         "label": "t:settings_schema.favicon.settings.favicon.label",
         "info": "t:settings_schema.favicon.settings.favicon.info"
+      }
+    ]
+  },
+  {
+    "name": "Variants color",
+    "settings": [
+      {
+        "type": "text",
+        "id": "variants_color",
+        "label": "Variants color",
+        "info": "Allow render the color variable",
+        "default": "Color"
       }
     ]
   }
