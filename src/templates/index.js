@@ -2,6 +2,8 @@ import "swiper/css";
 import "../scss/main.scss";
 import "../utils/hello";
 import "../components/slider-swiper";
+import "../components/filters-range";
+
 import { variantOnChange } from "../components/variants-product";
 import { openAccordion } from "../utils/accordion";
 import { openDropDown } from "../components/header";
