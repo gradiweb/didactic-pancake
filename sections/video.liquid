@@ -1,0 +1,66 @@
+{% render "render-image"
+  class: "video__background",
+  img: section.settings.thumbnail,
+  size: "300 400 500 600",
+  alt: section.settings.thumbnail.alt,
+  width: "600",
+  height: "400"
+%}
+
+<div class="video__content">
+  {% render 'icon-play' %}
+
+  <h2 class="video__content-title">
+    {{ section.settings.title }}
+  </h2>
+  {% render 'link'
+    class: "btn-1 video__content-link",
+    url: section.settings.url,
+    content: section.settings.cta_text
+    target: "_blank"
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "Video",
+  "class": "video wrapper",
+  "tag": "section",
+  "blocks": [],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "thumbnail",
+      "label": "Video Thumbnail"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title of video",
+      "default": "Suspendisse faucibus nisl nec velit semper varius."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "CTA Default Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
