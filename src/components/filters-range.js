@@ -1,6 +1,9 @@
-  const rangein = document.querySelectorAll(".range-in input");
-  const pricein = document.querySelectorAll(".price-in input");
-  const progress = document.querySelector('.slider-filter .pro');
+import { $Q, $Qll } from "../utils/query-selector"
+
+export function rangeFilters() {
+  const rangein = $Qll(".range-in input");
+  const pricein = $Qll(".price-in input");
+  const progress = $Q('.slider-filter .pro');
   let priceGap = 0;
 
   rangein.forEach(input =>{
@@ -21,3 +24,4 @@
          }
       });
   });
+}

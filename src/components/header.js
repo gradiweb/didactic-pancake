@@ -45,7 +45,7 @@ function eventDropDown(
  * @param {HTMLElement} element - Node to change data active
  */
 function dropDownAction(element) {
-  element.dataset.active != 'true' 
+  element.dataset.active != 'true'
     && closeAll('.nav-item-js', $Q('#nav-list-js'));
 
   dataToggle(element);
