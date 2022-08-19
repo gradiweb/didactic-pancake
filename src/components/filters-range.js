@@ -1,5 +1,11 @@
 import { $Q, $Qll } from "../utils/query-selector"
-
+/**
+ *
+ * we control the price range filter in order to avoid that the minimum
+ * value is greater than the highest value and that the highest
+ * value is not less than the lowest value
+ *
+ */
 export function rangeFilters() {
   const rangein = $Qll(".range-in input");
   const pricein = $Qll(".price-in input");
