@@ -1,66 +1,86 @@
-{% render "render-image"
-  class: "video__background",
-  img: section.settings.thumbnail,
-  size: "300 400 500 600",
-  alt: section.settings.thumbnail.alt,
-  width: "600",
-  height: "400"
+{% assign img_src = section.settings.background | img_url: '1440x' %}
+{% assign img_src_2 = section.settings.background | img_url: '400x' %}
+{% style %}
+  .instalation-video__media {
+    background-image: url({{ img_src }})
+  }
+{% endstyle %}
+<div class="instalation-video" id="js-instalation-video-parent" >
+  <div class="instalation-video__media">
+    <div class="button-play instalation-video__button">
+      <button id="play-button" class="js-method js-play-button" data-method="play">
+        {% render 'icon-media-video' %}
+      </button>
+      {% if section.settings.title != blank %}
+        <h2>{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.link != blank and section.settings.link_text  != blank %}
+        {% render 'link'
+          url:  section.settings.link,
+          content: section.settings.link_text,
+          class: 'btn-1'
+        %}
+      {% endif %}
+    </div>
+  </div>
+{% render 'video-popup'
+  video_src: section.settings.id_bg_video,
+  img_src: img_src_2,
+  title: section.settings.title,
+  link: section.settings.link,
+  link_text: section.settings.link_text
 %}
-
-<div class="video__content">
-  {% render 'icon-play' %}
-
-  <h2 class="video__content-title">
-    {{ section.settings.title }}
-  </h2>
-  {% render 'link'
-    class: "btn-1 video__content-link",
-    url: section.settings.url,
-    content: section.settings.cta_text
-    target: "_blank"
-  %}
 </div>
 
 {% schema %}
 {
-  "name": "Video",
-  "class": "video wrapper",
+  "name": "Video Section",
   "tag": "section",
-  "blocks": [],
+  "class": "section wrapper",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "thumbnail",
-      "label": "Video Thumbnail"
+      "type": "header",
+      "content": "Settings"
     },
     {
-      "type": "url",
-      "id": "video_url",
-      "label": "Video URL"
+      "type": "header",
+      "content": "Media settings"
     },
     {
       "type": "text",
       "id": "title",
-      "label": "Title of video",
-      "default": "Suspendisse faucibus nisl nec velit semper varius."
+      "label": "Title",
+      "default": "Video Section"
     },
     {
       "type": "text",
-      "id": "cta_text",
-      "label": "CTA Text",
-      "default": "CTA Default Text"
+      "id": "id_bg_video",
+      "label": "Video URL",
+      "info": "copy here the video source. https://youtube.com/watch?v=ID_VIDEO",
+      "default": "https://www.youtube.com/watch?v=xcJtL7QggTI"
     },
     {
-      "type": "url",
-      "id": "cta_link",
-      "label": "CTA Link"
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background image for video"
+    },
+    {
+     "type": "url",
+     "id": "link",
+     "label": "CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "CTA Text",
+      "info": "Text for CTA",
+      "default": "Call To Action"
     }
   ],
   "presets": [
-    {
-      "name": "Video",
-      "blocks": []
-    }
-  ]
+     {
+       "name": "Video section"
+     }
+   ]
 }
 {% endschema %}
