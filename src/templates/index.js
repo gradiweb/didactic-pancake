@@ -13,4 +13,4 @@ variantOnChange(".variants");
 openAccordion();
 openDropDown();
 toggleDataActive("#burger-nav-js", "#nav-list-js");
-rangeFilters()
+rangeFilters();
