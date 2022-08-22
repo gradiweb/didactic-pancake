@@ -12,6 +12,10 @@ export function rangeFilters() {
   const progress = $Q('.slider-filter .pro');
   let priceGap = 0;
   rangein.forEach(input =>{
+    if (pricein[0].value){
+      progress.style.left = (pricein[0].value / rangein[0].max) * 100 + "%";
+      progress.style.right = 100 - (pricein[1].value / rangein[1].max) * 100 + "%";
+    }
       input.addEventListener("input", e =>{
           let minVal = rangein[0].value,
           maxVal = rangein[1].value;
