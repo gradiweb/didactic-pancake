@@ -11,7 +11,6 @@ export function rangeFilters() {
   const pricein = $Qll(".price-in input");
   const progress = $Q('.slider-filter .pro');
   let priceGap = 0;
-
   rangein.forEach(input =>{
       input.addEventListener("input", e =>{
           let minVal = rangein[0].value,
