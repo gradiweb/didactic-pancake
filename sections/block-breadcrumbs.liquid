@@ -1,0 +1,75 @@
+{% if section.settings.show_breadcrumbs == true %}
+  <nav 
+      class="breadcrumbs" 
+      role="navigation" 
+      aria-label="breadcrumbs"
+    >
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          {% render 'link'
+            url: "/",
+            content: "Home"
+            target: "_blank"
+          %}
+          <span> / </span>
+        </li>
+
+        {% if template contains 'product' %}
+          {%- if product.collections -%}
+            {% if section.settings.collection_handle != blank %}
+              {% for collection in product.collections %}
+                {% assign collection = null %}
+                {% if collection.handle == section.settings.collection_handle %}
+                  {% assign collection = collection %}
+                {% endif %}
+              {% endfor %}
+              {% if collection == blank %}
+               {% assign collection = product.collections | first %}
+              {% endif %}
+            {% else %}
+              {% assign collection = product.collections | first %}
+            {% endif %}
+              {% if collection != blank %}
+                <li class="breadcrumbs__item">
+                  {% render 'link'
+                    url: collection.url,
+                    content: collection.title
+                    target: "_blank"
+                  %}
+                    <span> / </span>
+                </li>
+              {% endif %}
+          {%- endif -%}
+
+          <li class="breadcrumbs__item" aria-current="page">
+            {{ product.title }}
+          </li>
+        {% elsif template contains 'collection' %}
+          <li class="breadcrumbs__item" aria-current="page">
+            {{ collection.title }}
+          </li>
+        {% endif %}
+      </ol>
+  </nav>
+{% endif %} 
+
+{% schema %}
+  {
+    "name": "Breadcrumbs",
+    "class": "container__breadcrumbs wrapper",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_breadcrumbs",
+        "label": "Show breadcrumbs",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "collection_handle",
+        "label": "Collection handle"
+      }
+    ]
+  }
+{% endschema %}
