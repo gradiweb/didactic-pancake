@@ -2,7 +2,6 @@ import "swiper/css";
 import "../scss/main.scss";
 import "../utils/hello";
 import "../components/slider-swiper";
-import { rangeFilters } from "../components/filters-range";
 
 import { variantOnChange } from "../components/variants-product";
 import { openAccordion } from "../utils/accordion";
@@ -13,4 +12,3 @@ variantOnChange(".variants");
 openAccordion();
 openDropDown();
 toggleDataActive("#burger-nav-js", "#nav-list-js");
-rangeFilters();
