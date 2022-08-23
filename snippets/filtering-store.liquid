@@ -20,7 +20,7 @@
 
     {% capture accordions %}
       {% for filter in collection.filters %}
-        
+
         {% assign active = 'false' %}
         {% if forloop.first %}
           {% assign active = 'true' %}
@@ -29,7 +29,7 @@
         {% capture items_filter %}
           {% comment %} Determine the filter type, list, boolean, anymore {% endcomment %}
           {%- case filter.type -%}
-          
+
             {%- when 'boolean' or 'list' -%}
               <ul>
                 {%- for filter_value in filter.values -%}
@@ -46,7 +46,7 @@
                           disabled
                         {%- endif %}
                       >
-                      <label 
+                      <label
                         for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
                       >
                         {{ filter_value.label }}
@@ -56,43 +56,88 @@
                   </li>
                 {%- endfor -%}
               </ul>
-              
+
             {% comment %} Determine the filter type price{% endcomment %}
             {%- when 'price_range' -%}
-              <div class="range">
-                <div class="range-element price-after">
-                  <span>{{ cart.currency.symbol }}</span>
-                  <input
-                    name="{{ filter.min_value.param_name }}"
-                    id="Filter-{{ filter.min_value.param_name }}"
-                    {% if filter.min_value.value -%}
-                      value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
-                    {%- endif %}
-                    type="number"
-                    placeholder="0"
-                    min="0"
-                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                  >
-                </div>
+           <div class="ranges">
+            <span class="range1">
 
-                <label>-</label>
-
-                <div class="range-element">
-                  <span>{{ cart.currency.symbol }}</span>
-                  <input
-                    name="{{ filter.max_value.param_name }}"
-                    id="Filter-{{ filter.max_value.param_name }}"
-                    {% if filter.max_value.value -%}
-                      value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
-                    {%- endif %}
-                    type="number"
-                    placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                    min="0"
-                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                  >
-                </div>
+              <div>
+                <span>{{ cart.currency.symbol }}</span>
+                {% if  filter.range_min > 0 %}
+                {{ filter.range_min | money_without_currency | replace: ',', '' }}
+                {% else %}
+                  0.00
+                {% endif %}
+              </div>
+            </span>
+            <span class="range2">
+              <div>
+                <span>{{ cart.currency.symbol }}</span>
+                {{ filter.range_max | money_without_currency | replace: ',', '' }}
+              </div>
+            </span>
+           </div>
+            <div class="wrapper-filter">
+              <div class="slider-filter">
+                <div class="pro"></div>
+              </div>
+              <div class="range-in">
+                <input
+                type="range"
+                class="range-min"
+                min="0"
+                max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                {% if filter.min_value.value -%}
+                  value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                {%- else %}
+                value="0"
+                {%- endif %}>
+                <input
+                type="range"
+                class="range-max"
+                min="0"
+                max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                {% if filter.max_value.value -%}
+                    value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                {%- else %}
+                    value="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                {%- endif %}>
               </div>
 
+              <div class="price-in">
+                  <div class="field">
+                      <span>{{ cart.currency.symbol }}</span>
+                      <input
+                      class="in-max"
+                      name="{{ filter.min_value.param_name }}"
+                      id="Filter-{{ filter.min_value.param_name }}"
+                      {% if filter.min_value.value -%}
+                        value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                      {%- endif %}
+                      type="number"
+                      placeholder="0"
+                      min="0"
+                      max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      >
+                  </div>
+                  <!-- <span class="separator">-</span> -->
+                  <div class="field">
+                    <span>{{ cart.currency.symbol }}</span>
+                      <input class="in-min"
+                      name="{{ filter.max_value.param_name }}"
+                      id="Filter-{{ filter.max_value.param_name }}"
+                      {% if filter.max_value.value -%}
+                        value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                      {%- endif %}
+                      type="number"
+                      placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      min="0"
+                      max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      >
+                  </div>
+              </div>
+          </div>
           {%- endcase -%}
 
           <a href="{{ filter.url_to_remove }}">

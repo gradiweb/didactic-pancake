@@ -1,14 +1,28 @@
 <div class="wrapper">
   <div class="flex collection-filters_controls">
-    <span>
-      {{ 'sections.collection_template.count_products'
-        | t: count: collection.products_count 
-      }}
-    </span>
-
     <button id="filter-open" class="flex">
       {% render 'icon-filter' %}
     </button>
+    
+    <div>
+      <select id="sort-by">
+        {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+        {% for option in collection.sort_options %}
+          <option
+            value="{{ option.value }}"
+            {% if option.value == sort_by %} selected="selected"{% endif %}
+          >
+            {{ option.name }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <span>
+        {{ 'sections.collection_template.count_products'
+          | t: count: collection.products_count 
+        }}
+      </span>
+    </div>
   </div>
 </div>
 

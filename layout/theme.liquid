@@ -22,11 +22,11 @@
         href="{{ 'fonts.css' | asset_url }}"
       >
     </noscript>
-    
+
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
-        type="image/png" 
+        type="image/png"
         href="{{ settings.favicon | img_url: '32x32' }}"
       >
     {%- endif -%}
@@ -40,6 +40,13 @@
       <link
         rel="stylesheet"
         href="{{ 'product.css' | asset_url }}"
+      >
+    {%- endif -%}
+
+    {%- if request.page_type == 'collection' -%}
+      <link
+        rel="stylesheet"
+        href="{{ 'collection.css' | asset_url }}"
       >
     {%- endif -%}
 
@@ -67,7 +74,7 @@
   </head>
 
   <body class="gradient">
-    
+
     <main id="MainContent" role="main" tabindex="-1">
       {% section 'header' %}
       {{ content_for_layout }}
@@ -106,20 +113,20 @@
       }
     </script>
 
-    <script 
+    <script
       src="{{ 'theme.js' | asset_url }}"
       defer="defer"
     ></script>
 
     {%- if request.page_type == 'product' -%}
-      <script 
+      <script
         src="{{ 'product.js' | asset_url }}"
         defer="defer"
       ></script>
     {%- endif -%}
 
     {%- if request.page_type == 'collection' -%}
-      <script 
+      <script
         src="{{ 'collection.js' | asset_url }}"
         defer="defer"
       ></script>
