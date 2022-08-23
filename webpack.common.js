@@ -7,7 +7,8 @@ const JS_DIR = path.resolve(__dirname, './src');
 const entry = {
   theme: './src/templates/index.js',
   product: './src/templates/product.js',
-  password: './src/templates/password.js'
+  password: './src/templates/password.js',
+  video: './src/templates/video.js'
 }
 
 const output = {
@@ -35,6 +36,9 @@ module.exports = {
   },
 
   optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
     minimize: true,
     minimizer: [
       new TerserPlugin(),

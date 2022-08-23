@@ -1,6 +1,12 @@
-import { $Q, $Qll } from "../utils/query-selector"
-import videojs from 'video.js'
+import { $Q, $Qll } 
+    from "../utils/query-selector"
+
+import videojs 
+    from 'video.js'
+
 import 'videojs-youtube'
+
+import '@devmobiliza/videojs-vimeo/dist/videojs-vimeo.esm'
 
 export function openPopUpVideo() {
     const videoSection = $Qll('.instalation-video')

@@ -1,18 +1,39 @@
+<link
+  rel="stylesheet"
+  href="{{ 'video.css' | asset_url }}"
+>
+<link
+  rel="stylesheet"
+  href="/node_modules/video.js/dist/video-js.min.css"
+>
 {% assign img_src = section.settings.background | img_url: '1440x' %}
 {% assign img_src_2 = section.settings.background | img_url: '400x' %}
 {% style %}
   .instalation-video__media {
-    background-image: url({{ img_src }})
+    background-image: url({{ img_src }});
   }
 {% endstyle %}
-<div class="instalation-video" id="js-instalation-video-parent" >
-  <div class="instalation-video__media">
-    <div class="button-play instalation-video__button">
-      <button id="play-button" class="js-method js-play-button" data-method="play">
+<div 
+  class="instalation-video" 
+  id="js-instalation-video-parent" 
+>
+  <div 
+    class="instalation-video__media"
+  >
+    <div 
+      class="button-play instalation-video__button"
+    >
+      <button 
+        id="play-button" 
+        class="js-method js-play-button" 
+        data-method="play"
+      >
         {% render 'icon-media-video' %}
       </button>
       {% if section.settings.title != blank %}
-        <h2>{{ section.settings.title }}</h2>
+        <h2>
+          {{ section.settings.title }}
+        </h2>
       {% endif %}
       {% if section.settings.link != blank and section.settings.link_text  != blank %}
         {% render 'link'
@@ -31,7 +52,6 @@
   link_text: section.settings.link_text
 %}
 </div>
-
 {% schema %}
 {
   "name": "Video Section",
