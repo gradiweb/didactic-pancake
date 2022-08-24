@@ -46,7 +46,7 @@
       {% assign code = line | escape %}
       <p class="markdown--code">
         <code>
-          {{ code | remove: "```php" | remove: "```html" | remove: "```javascript" | "```bash" | remove: "```" | newline_to_br }}
+          {{ code | remove: "```php" | remove: "```html" | remove: "```javascript" | remove: "```bash" | remove: "```" | newline_to_br }}
         </code>
       </p>
 
@@ -58,7 +58,7 @@
         {% assign clearImage = image | split: '"' %}
         {% assign src =  clearImage[0] %}
         <p class="markdown--image">
-          <img src="{{ src | | remove: ')' }}"
+          <img src="{{ src | remove: ')' }}"
             {% if imageData[0] != blank %} alt="{{ imageData[0] | remove: '![' }}" {% endif %}
             {% if clearImage[1] %}title="{{ clearImage[1] }}"{% endif %}>
         </p>

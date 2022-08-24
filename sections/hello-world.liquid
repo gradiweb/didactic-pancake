@@ -7,7 +7,9 @@
     {% render 'heading' content: welcome %}
     {{ settings.colors_bg_1 }}
   </section>
-
+    {% render 'markdown'
+      markdown: {{ page.metafields.custom.markdown }}
+    %}
   <section class="wrapper">
     <h2 class="h1">Design System</h2>
     <p class="h2">
