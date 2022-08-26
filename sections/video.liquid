@@ -6,6 +6,11 @@
   rel="stylesheet"
   href="/node_modules/video.js/dist/video-js.min.css"
 >
+<script 
+  src="{{ 'video.js' | asset_url }}"
+  defer="defer"
+></script>
+
 {% assign img_src = section.settings.background | img_url: '1440x' %}
 {% assign img_src_2 = section.settings.background | img_url: '400x' %}
 {% style %}

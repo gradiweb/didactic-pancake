@@ -1,6 +1,4 @@
 import "../scss/video.scss";
-
-import { openPopUpVideo } 
-    from "../components/popupvideo";
+import { openPopUpVideo } from "../components/popupvideo";
 
 openPopUpVideo();
