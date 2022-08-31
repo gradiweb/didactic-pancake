@@ -11,3 +11,4 @@ variantOnChange(".variants");
 openAccordion();
 openDropDown();
 toggleDataActive("#burger-nav-js", "#nav-list-js");
+toggleDataActive("#play-button-js", "#modal-video-js", { overlay: true });
