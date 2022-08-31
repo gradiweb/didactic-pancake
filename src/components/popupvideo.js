@@ -6,6 +6,9 @@ import 'videojs-youtube';
 
 import '@devmobiliza/videojs-vimeo/dist/videojs-vimeo.esm';
 
+/**
+ * Open / close video popup
+ */
 export function openPopUpVideo() {
   const videoSection = $Qll('.instalation-video');
 
@@ -14,12 +17,15 @@ export function openPopUpVideo() {
   })
 }
 
+/**
+ * Handler for popup actions
+ * @param {HTMLElement} element 
+ */
 function popUpHandler(element) {
-
-  const playBtn  = element.querySelector('#play-button');
-  const popUp    = element.querySelector('.instalation-video__popup');
-  const overlay  = element.querySelector('.instalation-video__overlay');
-  const closeBtn = element.querySelector('.instalation-video__popup--close');
+  const playBtn  = $Q('#play-button', element);
+  const popUp    = $Q('.instalation-video__popup', element);
+  const overlay  = $Q('.instalation-video__overlay', element);
+  const closeBtn = $Q('.instalation-video__popup--close', element);
 
   let player =  videojs('my-video', {
     autoplay: false,
