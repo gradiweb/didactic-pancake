@@ -1,50 +1,56 @@
+{% comment %}
+  Render breadcrumb
+  Only used in collection and product template
+
+  Usage:
+  {% render 'breadcrumbs' %}
+
+{% endcomment %}
+
 <nav 
   class="breadcrumbs" 
   role="navigation" 
   aria-label="breadcrumbs"
->
+ >
   <ol class="breadcrumbs__list">
     <li class="breadcrumbs__item">
-      {% render 'link'
-        url: "/",
-        content: "Home"
-        target: "_blank"
-      %}
-      <span> / </span>
+      <a 
+        class="breadcrumbs__link" 
+        href="/"
+        title="{{ 'accessibility.home' | t }}"
+       >
+       {{ 'accessibility.home' | t }}
+      </a>
     </li>
 
     {% if template contains 'product' %}
+    
       {%- if product.collections -%}
-        {% if section.settings.collection_handle != blank %}
-          {% for collection in product.collections %}
-            {% assign collection = null %}
-            {% if collection.handle == section.settings.collection_handle %}
-              {% assign collection = collection %}
-            {% endif %}
-          {% endfor %}
-          {% if collection == blank %}
-            {% assign collection = product.collections | first %}
-          {% endif %}
-        {% else %}
-          {% assign collection = product.collections | first %}
-        {% endif %}
-          {% if collection != blank %}
-            <li class="breadcrumbs__item">
-              {% render 'link'
-                url: collection.url,
-                content: collection.title
-                target: "_blank"
-              %}
-                <span> / </span>
-            </li>
-          {% endif %}
+        {% assign collection = product.collections | first %}
+
+        <li class="breadcrumbs__item">
+          <a 
+            class="breadcrumbs__link breadcrumbs__collection" 
+            href="{{ collection.url }}"
+            title="{{ collection.title }}"
+          >
+            {{ collection.title }}
+          </a>
+        </li>
       {%- endif -%}
 
-      <li class="breadcrumbs__item" aria-current="page">
+      <li
+        class="breadcrumbs__item"
+        aria-current="page"
+      >
         {{ product.title }}
       </li>
+
     {% elsif template contains 'collection' %}
-      <li class="breadcrumbs__item" aria-current="page">
+      <li
+        class="breadcrumbs__item"
+        aria-current="page"
+      >
         {{ collection.title }}
       </li>
     {% endif %}

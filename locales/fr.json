@@ -71,7 +71,8 @@
     "of": "sur",
     "skip_to_product_info": "Passer aux informations produits",
     "total_reviews": "total des critiques",
-    "star_reviews_info": "{{ rating_value }} sur {{ rating_max }} étoiles"
+    "star_reviews_info": "{{ rating_value }} sur {{ rating_max }} étoiles",
+    "home": "Page d'accueil"
   },
   "blogs": {
     "article": {
