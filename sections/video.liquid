@@ -1,6 +1,7 @@
 <div class="wrapper video__background">
-  <button 
-    id="play-button-js" 
+  <button
+    data-section="{{ section.id }}"
+    id="play-button-{{ section.id }}-js" 
     class="video__button"
   >
     {% render 'icon-play' %}

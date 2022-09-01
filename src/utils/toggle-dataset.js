@@ -1,9 +1,10 @@
+import { resetVideo } from "../components/video-frame";
 import { $Q } from "./query-selector"
 
 /**
  * To validate state in dataset node
  */
- const isActive = ({ active }) => active === "true";
+export const isActive = ({ active }) => active === "true";
 
 /**
  * Data Active toggle
@@ -12,38 +13,17 @@ import { $Q } from "./query-selector"
  * @param {String} node - ID modal
  * @param {Object} config - Object with overlay, closeSelector
  */
-export const toggleDataActive = (control, node, config = {}) => {
-  const { overlay, closeSelector } = config;
+ export const toggleDataActive = (control, node, config = {}) => {
+  const { overlay, closeSelector, video } = config;
 
-  $Q(control).addEventListener("click", function () {
-    dataToggle($Q(node), overlay);
-  });
+  $Q(control).addEventListener("click", () => dataToggle($Q(node), overlay, video));
 
-  closeSelector && $Q(closeSelector).addEventListener(
-    "click",
-    function () {
-      dataToggle($Q(node), overlay);
-    }
-  );
-}
-
-/**
-* Data Toggle
-*
-* @param {HTMLElement} node - Node to manipulate
-* @param {Boolean} overlay - if used to a overlay
-*/
-export function dataToggle (node, overlay) {
-  const { dataset, id } = node;
-  const active = isActive(dataset);
-
-  if (active) {
-    dataset.active = "false";
-  } else {
-    dataset.active = "true";
+  if (closeSelector) {
+    $Q(closeSelector).addEventListener(
+      "click",
+      () => dataToggle($Q(node), overlay),
+    )
   }
-
-  overlay && overlayActions(id, active, node);
 }
 
 /**
@@ -52,7 +32,7 @@ export function dataToggle (node, overlay) {
  * @param {Boolean} active - If modal active
  * @param {HTMLElement} node - Node to manipulate
  */
-const overlayActions = (id, active, node) => {
+ const overlayActions = (id, node, { active, video }) => {
   const idOverlay = `overlay--${id}`;
   const parent = node.parentNode;
 
@@ -63,10 +43,33 @@ const overlayActions = (id, active, node) => {
     overlay.classList.add("overlay");
 
     parent.insertBefore(overlay, node);
-    toggleDataActive("#" + idOverlay, "#" + id, { overlay: true });
+    toggleDataActive(`#${idOverlay}`, `#${id}`, { overlay: true, video });
   } else {
-    parent.removeChild($Q("#" + idOverlay));
+    parent.removeChild($Q(`#${idOverlay}`));
+
+    if (video) {
+      resetVideo(node);
+    }
   }
 }
 
+/**
+* Data Toggle
+*
+* @param {HTMLElement} node - Node to manipulate
+* @param {Boolean} overlay - if used to a overlay
+*/
+export function dataToggle(node, overlay, video) {
+  const { dataset, id } = node;
+  const active = isActive(dataset);
 
+  if (active) {
+    dataset.active = "false";
+  } else {
+    dataset.active = "true";
+  }
+
+  if (overlay) {
+    overlayActions(id, node, { active, video })
+  }
+}
