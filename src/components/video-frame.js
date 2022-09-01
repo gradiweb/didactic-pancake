@@ -1,6 +1,10 @@
 import { $Q, $Qll } from '../utils/query-selector';
 import { dataToggle } from '../utils/toggle-dataset';
 
+/**
+ * Reset re-render DOM
+ * @param {HTMLElement} modal - node content video frame
+ */
 export function resetVideo(modal) {
   const wrapper = modal;
   wrapper.innerHTML = $Q('.video__modal-wrapper', modal).outerHTML;
@@ -18,6 +22,9 @@ export const activeVideoFrame = (control, node) => {
   });
 };
 
+/**
+ * Init video section by id
+ */
 (function initVideoFrame() {
   $Qll('.video__button').forEach((button) => {
     const { dataset: { section } } = button;
