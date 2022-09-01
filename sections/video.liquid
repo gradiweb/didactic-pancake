@@ -1,4 +1,4 @@
-<div class="wrapper video__background">
+<div class="wrapper video__background video__background--{{ section.id }}">
   <button
     data-section="{{ section.id }}"
     id="play-button-{{ section.id }}-js" 
@@ -27,7 +27,7 @@
 {% assign img_src = section.settings.background | img_url: '1440x' %}
 
 {% style %}
-  .video__background {
+  .video__background--{{ section.id }} {
     background-image: url({{ img_src }});
   }
 {% endstyle %}
