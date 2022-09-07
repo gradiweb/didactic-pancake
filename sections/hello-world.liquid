@@ -9,7 +9,8 @@
   </section>
   {% assign markdown = page.metafields.custom.markdown %}
   {% render 'markdown'
-    markdown: markdown
+    markdown: markdown,
+    class: 'wrapper'
   %}
   <section class="wrapper">
     <h2 class="h1">Design System</h2>
