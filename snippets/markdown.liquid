@@ -20,7 +20,7 @@
 {% assign dataMarkdown = dataMarkdown | split: break %}
 {% assign isSubitem = false %}
 
-<div class="lgmarkdown--main {{ class }}">
+<div class="markdown {{ class }}">
   {% for line in dataMarkdown %}
     {%- comment -%}Clear some information strings{%- endcomment -%}
     {% assign dataLine = line | escape | replace: '&gt;', '>'| strip_html | strip %}
@@ -161,8 +161,14 @@
           {% render 'markdown-line-code' lineCode: paragraph %}
         </p>
       {% else %}
-        <p class="markdown--p">{{ dataLine }}</p>
+
+        {% if dataLine == "" %}
+          <br>
+        {% else %}
+          <p class="markdown--p">{{ dataLine }}</p>
+        {% endif %}
       {% endif %}
+
     {% endif %}
   {% endfor %}
 </div>
