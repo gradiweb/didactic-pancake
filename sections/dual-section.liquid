@@ -4,8 +4,11 @@
     position__image-right
   {%- endif -%}"
 >
-  <div class="container__media">
-    {% if section.settings.image_brackground != blank  %}
+  <div class="container__media" {% if section.settings.image_brackground == blank and section.settings.color_brackground != blank %}
+    style="background: {{ section.settings.color_brackground }} !important;"
+  {%- endif -%}
+  >
+    {% if section.settings.image_brackground != blank %}
       <picture>
         {% assign url = section.settings.image_brackground  | img_url: '500x' %}
         {% render "render-image"
@@ -23,7 +26,13 @@
   <div class="container__description">
     <div>
       {% if section.settings.dual_section_title != blank  %}
-        <h2>{{ section.settings.dual_section_title }}</h2>
+        {% if section.settings.dual_section_title_size == "h2" %}
+          <h2>{{ section.settings.dual_section_title }}</h2>
+        {% elsif section.settings.dual_section_title_size == "h3" %}
+          <h3>{{ section.settings.dual_section_title }}</h3>
+        {% else  %}
+          <h4>{{ section.settings.dual_section_title }}</h4>
+        {% endif %}
       {% endif %}
       {% if section.settings.dual_section_subtitle != blank  %}
         {{ section.settings.dual_section_subtitle }}
@@ -56,6 +65,26 @@
         "default": "Deafult title"
       },
       {
+        "type": "select",
+        "id": "dual_section_title_size",
+        "label": "Title Size",
+        "options": [
+          {
+            "value": "h2",
+            "label": "H2"
+          },
+          {
+            "value": "h3",
+            "label": "H3"
+          },
+          {
+            "value": "h4",
+            "label": "H4"
+          }
+        ],
+        "default": "h2"
+      },
+      {
         "type": "text",
         "id": "dual_section_titleCTA",
         "label": "Title CTA",
@@ -86,6 +115,12 @@
         "type": "image_picker",
         "id": "image_brackground",
         "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "color_brackground",
+        "label": "Background Color",
+        "default": "#FFFFFF"
       },
       {
         "type": "richtext",
