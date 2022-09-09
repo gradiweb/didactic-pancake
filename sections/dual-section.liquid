@@ -8,7 +8,7 @@
     style="background: {{ section.settings.color_brackground }} !important;"
   {%- endif -%}
   >
-    {% if section.settings.image_brackground != blank %}
+    {% if section.settings.image_brackground != blank and section.settings.video_url == blank or section.settings.image_brackground != blank and section.settings.video_url_embed == blank %}
       <picture>
         {% assign url = section.settings.image_brackground  | img_url: '500x' %}
         {% render "render-image"
@@ -20,6 +20,15 @@
           height: "100%"
         %}
       </picture>
+    {% endif %}
+    {% if section.settings.video_url != blank or section.settings.video_url_embed != blank %}
+      {% render 'video-media',
+        video_url: section.settings.video_url,
+        video_url_embed: section.settings.video_url_embed,
+        poster: section.settings.video_background,
+        iframe_class: 'dual-section__iframe',
+        video_class: 'dual-section__video'
+      %}
     {% endif %}
   </div>
 
@@ -133,6 +142,25 @@
         "id": "dual_section_description",
         "label": "Description",
         "default": "<p><strong>Lorem ipsum dolor sit amet <\/strong><em>consectetur adipiscing<\/em> <a href=\"\/collections\/all\" title=\"All\">elit<\/a><\/p>"
+      },
+      {
+        "type": "video_url",
+        "id": "video_url_embed",
+        "label": "Embed Video url",
+        "accept": [
+          "youtube",
+          "vimeo"
+        ]
+      },
+      {
+        "type": "url",
+        "id": "video_url",
+        "label": "HTML Video url"
+      },
+      {
+        "type": "image_picker",
+        "id": "video_brackground",
+        "label": "Video Background"
       }
     ],
     "presets": [
