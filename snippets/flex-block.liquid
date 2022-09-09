@@ -34,9 +34,15 @@
   {% endif %}
 
   {% if title != blank %}
-    <h3 class="flex-block__title">
-      {{ title }}
-    </h3>
+
+    {% if title_size == "h2" %}
+      <h2>{{ title }}</h2>
+    {% elsif title_size == "h3" %}
+      <h3>{{ title }}</h3>
+    {% else  %}
+      <h4>{{ title }}</h4>
+    {% endif %}
+
   {% endif %}
 
   <div class="flex-block__content">
