@@ -7,6 +7,7 @@
     width: block.settings.width,
     image: block.settings.image,
     title: block.settings.title,
+    title_size: block.settings.title_size,
     content: block.settings.content,
     cta_text: block.settings.cta_text,
     cta_url: block.settings.cta_url
@@ -34,6 +35,26 @@
           "id": "title",
           "default": "Suspendisse tristique lectus non turpis pellentesque",
           "label": "Title"
+        },
+        {
+          "type": "select",
+          "id": "title_size",
+          "label": "Title Size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            }
+          ],
+          "default": "h2"
         },
         {
           "type": "richtext",
