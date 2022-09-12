@@ -5,7 +5,7 @@
 }
 
 .filter {
-  right: 0;
+  right: -400px;
   top: 0;
   width: 350px;
   height: 100%;
@@ -13,14 +13,15 @@
   z-index: 1;
   background: #FFF;
   box-shadow: 1px 3px 15px rgba(0, 0, 0, 0.131);
-  display: none;
+  display: flex;
+  transition: right .3s;
 
   @media screen and (max-width: 351px) {
     width: 100%;
   }
 
   &[data-active="true"] {
-    display: flex;
+    right: 0;
   }
 
   .accordions {

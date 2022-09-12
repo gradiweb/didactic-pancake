@@ -1,0 +1,127 @@
+@use '../abstracts/variables';
+
+.filter-group-display {
+    &__list {
+        list-style: none;
+        padding-left: 1px;
+
+        li:not(li:last-of-type) {
+            padding-bottom: .5rem;
+        }
+
+        li {
+            margin-bottom: 15px;  
+
+            input[type="checkbox"] {
+
+                &:checked + label {
+                    font-weight: 700;
+                    text-decoration: underline;
+                }
+
+                &:disabled + label {
+                    display: none;
+                }
+            }
+
+            .checkbox__custom {
+                background-color: variables.$color-white;
+                border-radius: 2px;
+                content: "";
+                cursor: pointer;
+                height: 14px;
+                margin-right: .5rem;
+                outline: 1px solid #ddd;
+                width: 14px;
+            }
+
+            .checkbox__input {
+                position: absolute;
+                height: 1px;
+                margin-right: .5rem;
+                width: 1px;
+                opacity: 0;
+                display: block;
+                
+                &:checked+.checkbox__custom {
+                    outline: 1px solid variables.$color-black;
+                    background-color: #009ae2;
+                
+                    &::after {
+                    font-size: 12px;
+                    color: variables.$color-white;
+                    content: 'L';
+                    transform: rotateZ(45deg) rotateY(180deg) translate(1px, -1.5px);
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    }
+                }
+            }
+            
+            & > span {
+                color: #b1b1b1;
+                font-size: 14px
+            }
+        }
+
+        &-item {
+            label {
+                align-items: center;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+
+            input {
+                margin-right: .5rem;
+            }
+        }
+
+        &.color {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+
+            li:not(li:last-of-type) {
+                padding-right: calc(.5rem + 4px );
+            }
+
+            input[type="checkbox"] {
+                display: none;
+
+                & + span {
+                    align-items: center;
+                    border: 1px solid transparent;
+                    border-radius: 100%;
+                    box-sizing: content-box;
+                    cursor: pointer;
+                    display: block;
+                    display: flex;
+                    flex-direction: row;
+                    font-size: 0;
+                    height: 32px;
+                    justify-content: center;
+                    transition: all .3s;
+                    width: 32px;
+
+                    & > span {
+                        height: 24px;
+                        width: 24px;
+                        border-radius: 100%;
+                    }
+                }
+
+                &[value="White"] + span > span  {
+                    border: 1px solid variables.$color-black;
+                }
+
+                &:checked + span {
+                    border: 1px solid variables.$color-black;
+                }
+            }
+        }
+    }
+}
