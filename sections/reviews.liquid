@@ -44,6 +44,10 @@
     <div class="swiper-slide reviews__single">
       {% render 'ratings' points: block.settings.points %}
 
+      <h3 class="reviews__single-title">
+        {{ block.settings.title }}
+      </h3>
+
       <h4 class="reviews__single-author">
         {{ block.settings.author }}
       </h4>
@@ -127,15 +131,20 @@
           },
           {
             "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
             "id": "author",
             "label": "Author",
             "default": "Anonymous"
           },
           {
-            "type": "text",
+            "type": "richtext",
             "id": "description",
             "label": "Description",
-            "default": "Pellentesque tellus ante, posuere sed diam vel, mattis cursus diam."
+            "default": "<p>Pellentesque tellus ante, posuere sed diam vel, mattis cursus diam.</p>"
           }
         ]
       }
