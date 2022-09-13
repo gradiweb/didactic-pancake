@@ -26,8 +26,8 @@ export function rangeFilters() {
                   rangein[1].value = minVal + priceGap;
              }
          } else{
-              pricein[0].value = minVal;
-              pricein[1].value = maxVal;
+              pricein[0].value = parseFloat(minVal).toFixed(2);
+              pricein[1].value = parseFloat(maxVal).toFixed(2);
               progress.style.left = (minVal / rangein[0].max) * 100 + "%";
               progress.style.right = 100 - (maxVal / rangein[1].max) * 100 + "%";
          }
