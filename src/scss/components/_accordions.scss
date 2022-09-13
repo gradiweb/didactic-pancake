@@ -8,8 +8,10 @@
   cursor: pointer;
 
   &__content {
-    display: none;
     margin-top: 15px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
   }
 
   &__button {
@@ -27,7 +29,8 @@
 
     &[data-active="true"] {
       & ~ div.accordion-item__content {
-        display: block;
+        max-height: 500px;
+        transition: max-height 0.25s ease-in;
       }
 
       svg {

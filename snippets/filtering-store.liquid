@@ -31,28 +31,38 @@
           {%- case filter.type -%}
 
             {%- when 'boolean' or 'list' -%}
-              <ul>
+              <ul class="filter-group-display__list {% if filter.param_name == 'filter.v.option.color' %}color{% endif %}">
                 {%- for filter_value in filter.values -%}
-                  <li>
-                    <div>
+                  <li class="filter-group-display__list-item">
+                    <label
+                      for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                      {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                    >
                       <input type="checkbox"
                         name="{{ filter_value.param_name }}"
                         value="{{ filter_value.value }}"
-                        id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
-                        {% if filter_value.active -%}
-                          checked
-                        {%- endif %}
-                        {% if filter_value.count == 0 and filter_value.active == false -%}
-                          disabled
-                        {%- endif %}
+                        id="Filter-{{ filter.param_name }}-{{ forloop.index }}",
+                        class="{% if filter.param_name != 'filter.v.option.color' %}checkbox__input{% endif %}"
+                        {% if filter_value.active -%}checked{%- endif %}
+                        {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                        test="{{filter_value.active}}"
+                        test2="{{filter_value.count}}"
                       >
-                      <label
-                        for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
-                      >
-                        {{ filter_value.label }}
-                      </label>
-                    </div>
-                    <span>{{ filter_value.count }}</span>
+    
+                      {% if filter.param_name != 'filter.v.option.color' %}
+                        <span class="checkbox__custom"></span>
+                      {% endif %}
+    
+                      <span>
+                        <span
+                          {% if filter.param_name == 'filter.v.option.color' %}
+                          style="background-color: {{ filter_value.label }};"
+                          {% endif %}
+                        >
+                          {{ filter_value.label }}
+                        </span>
+                      </span>
+                    </label>
                   </li>
                 {%- endfor -%}
               </ul>
