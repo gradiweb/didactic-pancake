@@ -31,20 +31,35 @@
           {%- case filter.type -%}
 
             {%- when 'boolean' or 'list' -%}
-              <ul class="filter-group-display__list {% if filter.param_name == 'filter.v.option.color' %}color{% endif %}">
+              <ul 
+                class="filter-group-display__list 
+                {% if filter.param_name == 'filter.v.option.color' %}
+                  color
+                {% endif %}"
+              >
                 {%- for filter_value in filter.values -%}
                   <li class="filter-group-display__list-item">
                     <label
+                      class="label-check"
                       for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
-                      {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                      {% if filter_value.count == 0 and filter_value.active == false -%}
+                        disabled
+                        data-disable="true"
+                      {%- endif %}
                     >
                       <input type="checkbox"
                         name="{{ filter_value.param_name }}"
                         value="{{ filter_value.value }}"
                         id="Filter-{{ filter.param_name }}-{{ forloop.index }}",
-                        class="{% if filter.param_name != 'filter.v.option.color' %}checkbox__input{% endif %}"
-                        {% if filter_value.active -%}checked{%- endif %}
-                        {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                        class="input-check{% if filter.param_name != 'filter.v.option.color' %}
+                          checkbox__input
+                        {% endif %}"
+                        {% if filter_value.active -%}
+                          checked
+                        {%- endif %}
+                        {% if filter_value.count == 0 and filter_value.active == false -%}
+                          disabled
+                        {%- endif %}
                         test="{{filter_value.active}}"
                         test2="{{filter_value.count}}"
                       >

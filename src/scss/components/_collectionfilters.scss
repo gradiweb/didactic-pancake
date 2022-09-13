@@ -32,6 +32,27 @@
   border-radius: 10px;
   padding: 20px 20px 40px 20px;
 }
+
+.label-check{
+  position: relative;
+}
+
+.color {
+  .label-check[data-disable="true"] {
+    >span::before {
+      content: " ";
+      transform: rotate(45deg);
+      position: absolute;
+      left: 16px;
+      top: 6px;
+      width: 2px;
+      height: 69%;
+      background: #995555;
+    }   
+  }
+}
+
+
 .price-in {
   .field{
     height: 45px;
