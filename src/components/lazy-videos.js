@@ -1,5 +1,8 @@
 import { $Q, $Qll } from "../utils/query-selector";
 
+/**
+ * Delay video loading when inside the viewport
+ */
 export const lazyVideo = () => {
   let lazyVideos = [].slice.call($Qll("video.lazy"));
 
