@@ -1,4 +1,4 @@
-{% comment %}
+|{% comment %}
   Video playback from different sources (Youtube, Vimeo, HTML5)
 
   Accepts:
@@ -18,7 +18,12 @@
   %}
 {% endcomment %}
 
+
 {% if video_url != blank and video_url_embed == blank %}
+
+{% assign video_mp4 = video_url | append: '.mp4' | file_url  %}
+{% assign video_web = video_url | append: '.webm' | file_url  %}
+
   <div class={{ video_class }}>
     <video 
       class="lazy" 
@@ -30,11 +35,12 @@
       height="auto" 
       poster={{ poster | img_url: '1440x' }}
     >
-      <source data-src={{ video_url }} type="video/webm">
-      <source data-src={{ video_url }} type="video/mp4">
+      <source data-src={{ video_mp4 }} type="video/webm">
+      <source data-src={{ video_web }} type="video/mp4">
     </video>
   </div>
 {% endif %}
+
 {% if video_url_embed != blank %}
   <div class={{ iframe_class }}>
     {%- if video_url_embed.type == 'youtube' -%}
