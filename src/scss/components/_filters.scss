@@ -2,15 +2,15 @@
 
 .filter-group-display {
   &__list {
-    list-style: none;
     padding-left: 1px;
+    list-style: none;
 
     li:not(li:last-of-type) {
       padding-bottom: .5rem;
     }
 
     li {
-      margin-bottom: 15px;  
+      margin-bottom: 15px;
 
       input[type="checkbox"] {
 
@@ -25,36 +25,36 @@
       }
 
       .checkbox__custom {
+        width: 14px;
+        height: 14px;
+        margin-right: .5rem;
         background-color: variables.$color-white;
         border-radius: 2px;
         content: "";
         cursor: pointer;
-        height: 14px;
-        margin-right: .5rem;
         outline: 1px solid #ddd;
-        width: 14px;
       }
 
       .checkbox__input {
         position: absolute;
+        display: block;
+        width: 1px;
         height: 1px;
         margin-right: .5rem;
-        width: 1px;
         opacity: 0;
-        display: block;
         
         &:checked+.checkbox__custom {
-          outline: 1px solid variables.$color-black;
           background-color: #009ae2;
+          outline: 1px solid variables.$color-black;
       
           &::after {
-            font-size: 12px;
-            color: variables.$color-white;
-            content: 'L';
-            transform: rotateZ(45deg) rotateY(180deg) translate(1px, -1.5px);
             display: flex;
             flex-direction: row;
             justify-content: center;
+            color: variables.$color-white;
+            content: 'L';
+            font-size: 12px;
+            transform: rotateZ(45deg) rotateY(180deg) translate(1px, -1.5px);
           }
         }
       }
@@ -67,9 +67,9 @@
 
     &-item {
       label {
-        align-items: center;
         display: flex;
         flex-direction: row;
+        align-items: center;
         justify-content: flex-start;
       }
 
@@ -79,10 +79,11 @@
     }
 
     &.color {
-      align-items: center;
       display: flex;
       flex-direction: row;
+      /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
       flex-wrap: wrap;
+      align-items: center;
       justify-content: flex-start;
 
       li:not(li:last-of-type) {
@@ -93,28 +94,28 @@
         display: none;
 
         & + span {
-          align-items: center;
-          border: 1px solid transparent;
-          border-radius: 100%;
-          box-sizing: content-box;
-          cursor: pointer;
           display: block;
           display: flex;
-          flex-direction: row;
-          font-size: 0;
-          height: 32px;
-          justify-content: center;
-          transition: all .3s;
           width: 32px;
+          height: 32px;
+          box-sizing: content-box;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid transparent;
+          border-radius: 100%;
+          cursor: pointer;
+          font-size: 0;
+          transition: all .3s;
 
           & > span {
-            height: 24px;
             width: 24px;
+            height: 24px;
             border-radius: 100%;
           }
         }
 
-        &[value="White"] + span > span  {
+        &[value="White"] + span > span {
           border: 1px solid variables.$color-black;
         }
 

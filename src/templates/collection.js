@@ -9,16 +9,16 @@ toggleDataActive(
   '#filter-open',
   '#filter',
   {
-    overlay: true
-  }
+    overlay: true,
+  },
 )
 
 toggleDataActive(
-  '.filter-form_name svg',
+  '.filter-form__name svg',
   '#filter',
   {
-    overlay: true
-  }
+    overlay: true,
+  },
 )
 
 rangeFilters();

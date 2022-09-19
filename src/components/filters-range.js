@@ -10,26 +10,26 @@ export function rangeFilters() {
   const rangein = $Qll(".range-in input");
   const pricein = $Qll(".price-in input");
   const progress = $Q('.slider-filter .pro');
-  let priceGap = 0;
-  rangein.forEach(input =>{
-    if (pricein[0].value){
-      progress.style.left = (pricein[0].value / rangein[0].max) * 100 + "%";
-      progress.style.right = 100 - (pricein[1].value / rangein[1].max) * 100 + "%";
+  const priceGap = 0;
+  rangein.forEach((input) => {
+    if (pricein[0].value) {
+      progress.style.left = `${(pricein[0].value / rangein[0].max) * 100 }%`;
+      progress.style.right = `${100 - (pricein[1].value / rangein[1].max) * 100 }%`;
     }
-      input.addEventListener("input", e =>{
-          let minVal = rangein[0].value,
+      input.addEventListener("input", (e) => {
+          const minVal = rangein[0].value,
           maxVal = rangein[1].value;
-         if(maxVal - minVal < priceGap){
-             if(e.target.className === "range-min"){
+         if (maxVal - minVal < priceGap) {
+             if (e.target.className === "range-min") {
                   rangein[0].value = maxVal - priceGap;
-             }else{
+             } else {
                   rangein[1].value = minVal + priceGap;
              }
-         } else{
+         } else {
               pricein[0].value = parseFloat(minVal).toFixed(2);
               pricein[1].value = parseFloat(maxVal).toFixed(2);
-              progress.style.left = (minVal / rangein[0].max) * 100 + "%";
-              progress.style.right = 100 - (maxVal / rangein[1].max) * 100 + "%";
+              progress.style.left = `${(minVal / rangein[0].max) * 100 }%`;
+              progress.style.right = `${100 - (maxVal / rangein[1].max) * 100 }%`;
          }
       });
   });

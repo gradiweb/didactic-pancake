@@ -1,5 +1,6 @@
 import { $Q } from "../utils/query-selector";
 
+// eslint-disable-next-line no-undef
 Shopify.queryParams = {};
 
 /**
@@ -9,25 +10,32 @@ export const defultSortBy = () => {
   $Q('#sort-by')
   .addEventListener(
     'change',
-    function({ target }) {
+    ({ target }) => {
+      /* eslint-disable no-undef */
       Shopify.queryParams.sort_by = target.value;
       location.search = new URLSearchParams(Shopify.queryParams).toString();
+      /* eslint-enable no-undef */
   });
 }
 
 /**
  * Preserve existing query parameters
  */
-(function() {
+// eslint-disable-next-line func-names
+(function () {
+  /* eslint-disable no-undef */
   if (location.search.length) {
-    let params = location.search.substring(1).split('&');
-  
-    for (var i = 0; i < params.length; i++) {
-      let keyValue = params[i].split('=');
-  
+    const params = location.search.substring(1).split('&');
+
+    for (let i = 0; i < params.length; i++) {
+      const keyValue = params[i].split('=');
+
       if (keyValue.length) {
-        Shopify.queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1]);
+        Shopify.queryParams[
+          decodeURIComponent(keyValue[0])
+        ] = decodeURIComponent(keyValue[1]);
       }
     }
   }
-})();
+  /* eslint-enable no-undef */
+}());
