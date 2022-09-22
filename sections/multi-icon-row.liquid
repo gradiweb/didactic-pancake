@@ -8,13 +8,13 @@
 {%- endcomment -%}
 
 {% liquid
-  assign position_icons = 'left'
+  assign position_icons = 'top'
   assign slider_mobile = true
 %}
 
-{% if section.settings.row_icon_title != blank %}
+{% if section.settings.heading != blank %}
   <h2>
-    {{ section.settings.row_icon_title }}
+    {{ section.settings.heading }}
   </h2>
 {% endif %}
 
@@ -59,24 +59,8 @@
     "settings": [
       {
         "type": "text",
-        "id": "row_icon_title",
+        "id": "heading",
         "label": "Title"
-      },
-      {
-        "type": "select",
-        "id": "position_icons",
-        "label": "Position icons",
-        "options": [
-          {
-            "value": "left",
-            "label": "Left"
-          },
-          {
-            "value": "top",
-            "label": "Top"
-          }
-        ],
-        "default": "left"
       }
     ],
     "max_blocks": 4,
