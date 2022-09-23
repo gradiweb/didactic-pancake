@@ -20,10 +20,9 @@
 
 <div class="flex elements__icons {% if slider_mobile %}slider_mobile{% endif %}">
   {% for block in section.blocks %}
-    <div
-      class="element__icon {% if position_icons == 'left' %}position__left{% else %}position__top{% endif %}"
+  {% if block.settings.row_icon_image != blank %}
+    <div class="element__icon {% if position_icons == 'left' %}position__left{% else %}position__top{% endif %}"
     >
-      {% if block.settings.row_icon_image != blank %}
         {% assign url = block.settings.row_icon_image | append: '.svg' | file_url %}
         {% render "render-image"
           class: "class_image",
@@ -32,7 +31,7 @@
           width: "80",
           height: "80"
         %}
-      {% endif %}
+
 
       {% if block.settings.heading != blank or block.settings.row_icon_description != blank %}
         <div class="element__icon--description">
@@ -43,11 +42,12 @@
           {% endif %}
 
           {% if block.settings.row_icon_description != blank %}
-            {{ block.settings.row_icon_description }}
+            <p>{{ block.settings.row_icon_description }}</p>
           {% endif %}
         </div>
       {% endif %}
     </div>
+    {% endif %}
   {% endfor %}
 </div>
 
@@ -63,7 +63,7 @@
         "label": "Title"
       }
     ],
-    "max_blocks": 4,
+    "max_blocks": 5,
     "blocks": [
       {
         "name": "List items",
@@ -76,10 +76,10 @@
             "default": "Icon"
           },
           {
-            "type": "text",
+            "type": "richtext",
             "id": "row_icon_description",
             "label": "Description",
-            "default": "Lorem ipsum letto"
+            "default": "<p>Lorem ipsum letto</p>"
           },
           {
             "type": "text",
