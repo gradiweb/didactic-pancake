@@ -41,6 +41,7 @@
 
 {% capture review %}
   {% for block in section.blocks %}
+  {% if block.settings.title != blank and  block.settings.author != blank %}
     <div class="swiper-slide reviews__single">
       {% render 'ratings' points: block.settings.points %}
 
@@ -59,13 +60,16 @@
         }}
       </p>
     </div>
+  {% endif %}
+    
   {% endfor %}
 {% endcapture %}
 
 {% render 'slider',
   wrapper: 'string query'
   content: review,
-  arrows: true
+  arrows: true,
+  infinity: true
 %}
 
 {% schema %}

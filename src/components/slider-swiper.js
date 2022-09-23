@@ -4,12 +4,14 @@ import Swiper, { Navigation, Pagination, FreeMode, Autoplay } from "swiper";
 /**
  * Create new slider with arrows
  * @param {String} id - className reference in DOM
+ * @param {Boolean} infiniy - prams option, infinity or no
  */
-const configArrows = (id) => {
+const configArrows = (id, infinity = false) => {
   new Swiper(id, {
     modules: [Navigation, FreeMode],
     slidesPerView: "auto",
     spaceBetween: 25,
+    loop: infinity,
     navigation: {
       nextEl: `.swiper-button-next[data-id="${id.substr(1)}"]`,
       prevEl: `.swiper-button-prev[data-id="${id.substr(1)}"]`,
@@ -72,6 +74,9 @@ export const swiperSmall = new Swiper(".slider_small", {
 export const swiperArrows = (() => {
   $Qll(".slider_arrows").map(slide => {
     configArrows('#' + slide.id)
+  })
+  $Qll(".slider_arrows-infinity").map(slide => {
+    configArrows('#' + slide.id, true)
   })
 })();
 
