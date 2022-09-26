@@ -1,16 +1,23 @@
-.masonry-v2 {
-  margin: .5rem 0;
-  columns: var(--masonry-columns) auto;
-  column-gap: .5rem;
-
-  &__image {
-    display: block;
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: .5rem;
-
-    &-link {
+.masonry {
+  &--title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .masonry-v2 {
+    margin: .5rem 0;
+    columns: var(--masonry-columns) auto;
+    column-gap: .5rem;
+  
+    &__image {
       display: block;
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: .5rem;
+  
+      &-link {
+        display: block;
+      }
     }
   }
 }

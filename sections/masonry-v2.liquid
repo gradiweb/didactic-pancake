@@ -1,22 +1,28 @@
-{% for block in section.blocks %}
-  {% if block.type != 'masonry_image' %}
-    {% continue %}
-  {% endif %}
+<div class="masonry--title">
+  <h2>{{ section.settings.title_masonry }}</h2>
+</div>
+<div class="masonry-v2">
+  {% for block in section.blocks %}
+    {% if block.type != 'masonry_image' %}
+      {% continue %}
+    {% endif %}
 
-  <a 
-    href="{{ block.settings.url }}"
-    class="masonry-v2__image-link"  
-  >
-    {% render "render-image"
-      class: "masonry-v2__image",
-      img: block.settings.image,
-      size: "300 400 600",
-      width: "auto",
-      height: "auto",
-      alt: block.settings.image.alt
-    %}
-  </a>
-{% endfor %}
+    <a 
+      href="{{ block.settings.url }}"
+      class="masonry-v2__image-link"  
+    >
+      {% render "render-image"
+        class: "masonry-v2__image",
+        img: block.settings.image,
+        size: "300 400 600",
+        width: "auto",
+        height: "auto",
+        alt: block.settings.image.alt
+      %}
+    </a>
+  {% endfor %}
+</div>
+
 
 {% style %}
   :root {
@@ -27,9 +33,15 @@
 {% schema %}
   {
     "name": "Masonry V2",
-    "class": "masonry-v2 wrapper",
+    "class": "masonry wrapper",
     "tag": "section",
     "settings": [
+      {
+        "type": "text",
+        "id": "title_masonry",
+        "label": "Title section",
+        "default": "Title default"
+      },
       {
         "type": "range",
         "id": "columns",
