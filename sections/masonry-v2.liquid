@@ -1,4 +1,8 @@
 
+<div class="masonry--title">
+  <h2>{{ section.settings.title_masonry }}</h2>
+</div>
+<div class="masonry-v2">
 <div class="masonry-mobile">
   {% capture image_content %}
   {% for block in section.blocks %}
@@ -48,7 +52,7 @@
   </a>
 {% endfor %}
 </div>
-
+</div>
 
 {% style %}
 
@@ -77,10 +81,16 @@
 {% schema %}
   {
     "name": "Masonry V2",
-    "class": "masonry-v2 wrapper",
+    "class": "masonry wrapper",
     "tag": "section",
     "settings": [
-      {
+    {
+      "type": "text",
+      "id": "title_masonry",
+      "label": "Title section",
+      "default": "Title default"
+    },
+    {
         "type": "range",
         "id": "columns",
         "min": 2,
