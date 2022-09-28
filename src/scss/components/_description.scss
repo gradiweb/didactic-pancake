@@ -5,13 +5,15 @@
   }
 }
 .text--with--icon{
-  display: flex;
   justify-content: center;
   align-items: stretch;
   margin-top: 15px;
   padding: 15px 50px;
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
+  @media screen and (max-width: 749px) {
+    border-top: none;
+  }
     .icon {
       img{
         width: 100%;

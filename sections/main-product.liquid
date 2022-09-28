@@ -19,16 +19,16 @@
     price: price
   %}
 
-  <input 
-    type="hidden" 
-    name="available" 
+  <input
+    type="hidden"
+    name="available"
     value="{{ available }}"
   >
   {% render 'description'
     description: product.description
   %}
-  <form 
-    data-product="{{ product.id }}" 
+  <form
+    data-product="{{ product.id }}"
     action="/cart/add"
   >
 
@@ -44,11 +44,15 @@
     %}
 
   </form>
-  {%- assign iconSVG = section.settings.block_icon | append: '.svg' | file_url -%}
-  {% render 'text-with-icon'
-    icon: iconSVG,
-    description: section.settings.block_text
-  %}
+    <div class="icon-whit-text">
+      {% for block in section.blocks %}
+      {%- assign iconSVG = block.settings.block_icon | append: '.svg' | file_url -%}
+      {% render 'text-with-icon'
+        icon: iconSVG,
+        description: block.settings.block_text
+      %}
+      {% endfor %}
+  </div>
 </div>
 
 {% schema %}
@@ -56,17 +60,24 @@
     "name": "Product page",
     "class": "main-product wrapper product-js",
     "tag": "section",
-    "settings": [
-      {
-        "type": "text",
-        "id": "block_icon",
-        "label": "Icon"
-      },
-      {
-        "type": "richtext",
-        "id": "block_text",
-        "label": "Text"
-      }
-    ]
+    "max_blocks": 4,
+    "blocks": [
+    {
+      "type": "content",
+      "name": "Block icon",
+      "settings": [
+        {
+          "type": "text",
+          "id": "block_icon",
+          "label": "Icon"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
   }
 {% endschema %}
