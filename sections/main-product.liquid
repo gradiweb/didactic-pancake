@@ -47,10 +47,12 @@
     <div class="icon-whit-text">
       {% for block in section.blocks %}
       {%- assign iconSVG = block.settings.block_icon | append: '.svg' | file_url -%}
+      {%- if block.settings.block_text != blank  and block.settings.block_icon != blank -%}
       {% render 'text-with-icon'
         icon: iconSVG,
         description: block.settings.block_text
       %}
+      {%- endif -%}
       {% endfor %}
   </div>
 </div>
