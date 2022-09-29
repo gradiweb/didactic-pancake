@@ -1,28 +1,32 @@
 import api from "../services/api";
 import { $Q } from '../utils/query-selector';
 import { stringToHTML } from '../utils/to-html';
+import { variantOnChange } from "./variants-product";
 
 /**
  * Render recommendation by API with product ID
  * @return void
  */
 async function getRecommendation() {
+  console.log("llama");
   const {
     dataset: {
-      product
-    } 
+      product,
+    },
   } = $Q('#product-recommendations');
 
   const html = await api.recommendationByApi(product, 'product-recommendation');
   const recommendation = $Q('#product-recommendations', stringToHTML(html));
 
-  if(recommendation && recommendation.innerHTML.trim().length) {
+  if (recommendation && recommendation.innerHTML.trim().length) {
     $Q('.shopify-section.recommendation').innerHTML = recommendation.outerHTML;
   }
+  variantOnChange(".variants");
 }
 
 /**
- * Create intersection observer from product page and observe recommendation section
+ * Create intersection observer from product page and
+ * observe recommendation section
  * @return void
  */
 (function () {
