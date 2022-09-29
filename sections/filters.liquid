@@ -1,8 +1,21 @@
 <div class="wrapper">
   <div class="flex collection-filters_controls">
-    <button id="filter-open" class="flex">
-      {% render 'icon-filter' %}
-    </button>
+    <div class="filter-option">
+      <button id="filter-open" class="flex">
+        {% render 'icon-filter' %}
+      </button>
+      <label>
+        <input
+            class="clear-filter-js hidden"
+            type="radio"
+            name="filter"
+        >
+        <div class="filter-design"></div>
+        <span class="filter-label">
+            Clear all
+        </span>
+      </label>
+    </div>
     
     <div>
       <select id="sort-by">

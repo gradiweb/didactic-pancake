@@ -24,6 +24,61 @@
       padding: 10px 5px;
       margin-right: 15px;
     }
+    .filter-option {
+      display: flex;
+      align-items: center;
+      label {
+        background-color: #b1b1b1;
+        border-radius: 118px;
+        bottom: auto;
+        box-sizing: border-box;
+        color: variables.$color-white;
+        cursor: pointer;
+        height: 100%;
+        left: auto;
+        margin-left: 16px;
+        overflow: hidden;
+        padding: 8px 16px;
+        position: relative;
+        right: auto;
+        text-transform: uppercase;
+        top: auto;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      
+        &:last-of-type {
+          margin-right: 0;
+        }
+      
+        .filter-design {
+          background-color: #009ae2;
+          bottom: auto;
+          height: 100%;
+          left: 0;
+          opacity: 0;
+          position: absolute;
+          right: auto;
+          top: 0;
+          transition: opacity 0.5s ease;
+          width: 100%;
+        }
+      
+        .filter-label {
+          position: relative;
+        }
+      
+        input:checked ~ .filter-design {
+          opacity: 1;
+        }
+      
+        input:checked ~ .filter-label {
+          color: variables.$color-white;
+        }
+      }
+    }
+    
   }
 }
 /* filtros de rango */
