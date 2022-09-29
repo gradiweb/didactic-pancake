@@ -27,6 +27,7 @@
     {%- comment -%}Identify the beginning of each line{%- endcomment -%}
     {% assign dataLineStart = dataLine | slice: 0, 1 %}
 
+
     {%- comment -%}Render header information{%- endcomment -%}
     {% if dataLine contains "######" and dataLineStart == '#' %}
       <h6 class="markdown--h6">{{ dataLine | remove: "######" }}</h6>
@@ -83,6 +84,13 @@
         {% render 'markdown-line-code' lineCode: blockData %}
       {% endcapture %}
 
+      {% assign lineItalic = strDataBlock | split: "*" %}
+      {% capture strDataString %}
+        {% render 'markdown-italic' lineItalic: lineItalic %}
+      {% endcapture %}
+
+
+
       {% assign lineStrong = strDataBlock | split: "**" %}
       {% capture strDataBlock %}
         {% render 'markdown-bold' lineStrong: lineStrong %}
@@ -119,11 +127,18 @@
         </ul>
       {% endcapture %}
 
+      {% assign lineItalic = strDataBlock | split: "*" %}
+      {% capture strDataString %}
+        {% render 'markdown-italic' lineItalic: lineItalic %}
+      {% endcapture %}
+
       {%- comment -%}Render information in bold text{%- endcomment -%}
       {% assign lineStrong = strDataBlock | split: "**" %}
       {% capture strDataString %}
         {% render 'markdown-bold' lineStrong: lineStrong %}
       {% endcapture %}
+
+
 
       {%- comment -%}Render code information inline{%- endcomment -%}
       {% assign blockData = strDataString | split: "`" %}
@@ -150,6 +165,23 @@
       <p class="markdown--strong">
         {{ strDataString }}
       </p>
+      {% elsif dataLine contains "*" %}
+      {% assign lineItalic = dataLine | remove: ">" %}
+      {% assign lineItalic = lineItalic | split: "*" %}
+
+      {% capture strDataString %}
+        {% render 'markdown-italic' lineItalic: lineItalic %}
+      {% endcapture %}
+
+      {% assign blockData = strDataString | split: "`" %}
+      {% capture strDataString %}
+        {% render 'markdown-line-code' lineCode: blockData %}
+      {% endcapture %}
+
+      <p class="markdown--italic">
+        {{ strDataString }}
+      </p>
+
 
     {%- comment -%}If no pattern is found, take the information as a paragraph{%- endcomment -%}
     {% else %}
