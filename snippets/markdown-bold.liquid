@@ -20,15 +20,33 @@
     {% assign residue = forloop.index | modulo: 2 %}
 
     {% if residue == 1 %}
-      {{ linebold }}
+      {%- comment -%} validate if contains italic {%- endcomment -%}
+      {% assign isItalic = linebold | split: "*" %}
+
+      {% capture strDataString %}
+        {% render 'markdown-italic' lineItalic: isItalic %}
+      {% endcapture %}
+
+      {{ strDataString }}
+
     {% else %}
-      <strong>{{ linebold }}</strong>
+    <strong>{{ linebold }}</strong>
     {% endif %}
   {% else %}
     {%- comment -%} Linear does not start with bold {%- endcomment -%}
     {% assign residue = forloop.index | modulo: 2 %}
+
     {% if residue == 1 %}
-      {{ linebold }}
+      
+      {%- comment -%} validate if contains italic {%- endcomment -%}
+      {% assign isItalic = linebold | split: "*" %}
+
+      {% capture strDataString %}
+        {% render 'markdown-italic' lineItalic: isItalic %}
+      {% endcapture %}
+
+      {{ strDataString }}
+    
     {% else %}
       <strong>{{ linebold }}</strong>
     {% endif %}

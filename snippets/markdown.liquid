@@ -77,6 +77,7 @@
 
     {%- comment -%}Render comment information{%- endcomment -%}
     {% elsif dataLineStart == ">" %}
+      
       {% assign blockData = dataLine | remove: ">" %}
       {% assign blockData = blockData | split: "`" %}
 
@@ -88,8 +89,6 @@
       {% capture strDataString %}
         {% render 'markdown-italic' lineItalic: lineItalic %}
       {% endcapture %}
-
-
 
       {% assign lineStrong = strDataBlock | split: "**" %}
       {% capture strDataBlock %}
@@ -147,9 +146,29 @@
       {% endcapture %}
 
       {{ strDataString }}
+    
+    {%- comment -%}Render information in bold and italic{%- endcomment -%}
+    {% elsif dataLine contains "***" %}
+      
+      {% assign lineStrong = dataLine | remove: ">" %}
+      {% assign lineStrong = lineStrong | split: "***" %}
+
+      {% capture strDataString %}
+        {% render 'markdown-bold-italic' lineStrong: lineStrong %}
+      {% endcapture %}
+
+      {% assign blockData = strDataString | split: "`" %}
+      {% capture strDataString %}
+        {% render 'markdown-line-code' lineCode: blockData %}
+      {% endcapture %}
+
+      <p class="markdown--strong">
+        {{ strDataString }}
+      </p>
 
     {%- comment -%}Render information in bold{%- endcomment -%}
     {% elsif dataLine contains "**" %}
+      
       {% assign lineStrong = dataLine | remove: ">" %}
       {% assign lineStrong = lineStrong | split: "**" %}
 
@@ -165,7 +184,10 @@
       <p class="markdown--strong">
         {{ strDataString }}
       </p>
-      {% elsif dataLine contains "*" %}
+
+    {%- comment -%}If no pattern is found, take the information as a paragraph{%- endcomment -%}
+    {% elsif dataLine contains "*" %}
+      
       {% assign lineItalic = dataLine | remove: ">" %}
       {% assign lineItalic = lineItalic | split: "*" %}
 
