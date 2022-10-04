@@ -3,7 +3,7 @@
 .collection-filters {
   margin-bottom: variables.$margin-section;
 
-  &_controls {
+  &__controls {
     width: 100%;
     --justify: space-between;
 
@@ -28,41 +28,41 @@
       display: flex;
       align-items: center;
       label {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        display: flex;
+        overflow: hidden;
+        height: 100%;
+        box-sizing: border-box;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        margin-left: 16px;
         background-color: #b1b1b1;
         border-radius: 118px;
-        bottom: auto;
-        box-sizing: border-box;
         color: variables.$color-white;
         cursor: pointer;
-        height: 100%;
-        left: auto;
-        margin-left: 16px;
-        overflow: hidden;
-        padding: 8px 16px;
-        position: relative;
-        right: auto;
         text-transform: uppercase;
-        top: auto;
-        align-items: center;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
       
         &:last-of-type {
           margin-right: 0;
         }
       
         .filter-design {
-          background-color: #009ae2;
-          bottom: auto;
-          height: 100%;
-          left: 0;
-          opacity: 0;
           position: absolute;
-          right: auto;
           top: 0;
-          transition: opacity 0.5s ease;
+          right: auto;
+          bottom: auto;
+          left: 0;
           width: 100%;
+          height: 100%;
+          background-color: #009ae2;
+          opacity: 0;
+          transition: opacity 0.5s ease;
         }
       
         .filter-label {

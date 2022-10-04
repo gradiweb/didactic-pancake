@@ -15,14 +15,14 @@
 
     <link
       rel="preload"
-      href="{{ 'fonts.css' | asset_url }}"
+      href="{{ 'font.css' | asset_url }}"
       as="style"
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript>
       <link
         rel="stylesheet"
-        href="{{ 'fonts.css' | asset_url }}"
+        href="{{ 'font.css' | asset_url }}"
       >
     </noscript>
 
@@ -50,6 +50,13 @@
       <link
         rel="stylesheet"
         href="{{ 'collection.css' | asset_url }}"
+      ></script>
+    {%- endif -%}
+
+    {%- if request.page_type contains 'customers' -%}
+      <link
+        rel="stylesheet"
+        href="{{ 'customer.css' | asset_url }}"
       >
     {%- endif -%}
 
@@ -78,7 +85,7 @@
     {% render 'color-variables' %}
 
     <script>
-      documentClass = document.documentElement.className;
+      let documentClass = document.documentElement.className;
       documentClass = documentClass.replace('no-js', 'js');
     </script>
   </head>
@@ -139,6 +146,19 @@
     {%- if request.page_type == 'collection' -%}
       <script
         src="{{ 'collection.js' | asset_url }}"
+      ></script>
+    {%- endif -%}
+
+    {%- if request.path contains 'contact' -%}
+      <script
+        src="{{ 'contact.js' | asset_url }}"
+        defer="defer"
+      ></script>
+    {%- endif -%}
+
+    {%- if request.page_type contains 'customers' -%}
+      <script
+        src="{{ 'customer.js' | asset_url }}"
         defer="defer"
       ></script>
     {%- endif -%}

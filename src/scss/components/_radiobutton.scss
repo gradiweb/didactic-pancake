@@ -1,5 +1,6 @@
 .variant {
   &__radio-button {
+    cursor: pointer;
     
     input {
       &:checked + .variant__radio-button--design {
