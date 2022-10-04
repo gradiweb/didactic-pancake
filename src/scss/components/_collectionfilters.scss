@@ -3,16 +3,16 @@
 .collection-filters {
   margin-bottom: variables.$margin-section;
 
-  &_controls {
+  &__controls {
     width: 100%;
     --justify: space-between;
 
     button {
       width: 30px;
       height: 30px;
+      border: 1px solid #000;
       background-color: transparent;
       border-radius: 5px;
-      border: 1px solid #000;
       --justify: center;
 
       svg {
@@ -82,99 +82,99 @@
   }
 }
 /* filtros de rango */
-.wrapper-filter{
+.wrapper-filter {
+  padding: 20px 20px 40px 20px;
   background: white;
   border-radius: 10px;
-  padding: 20px 20px 40px 20px;
 }
 
-.label-check{
+.label-check {
   position: relative;
 }
 
 .color {
   .label-check[data-disable="true"] {
     >span::before {
-      content: " ";
-      transform: rotate(45deg);
       position: absolute;
-      left: 16px;
       top: 6px;
+      left: 16px;
       width: 2px;
       height: 69%;
       background: #995555;
-    }   
+      content: " ";
+      transform: rotate(45deg);
+    }
   }
 }
 
 
 .price-in {
-  .field{
-    height: 45px;
-    width: 50%;
+  .field {
     display: flex;
+    width: 50%;
+    height: 45px;
     align-items: center;
     margin-top: 25px;
   }
-  .field:nth-child(1){
+  .field:nth-child(1) {
     float: left;
   }
-  .field:nth-child(2){
+  .field:nth-child(2) {
     display: inline-flex;
   }
 }
-.field{
-  input{
+.field {
+  input {
     width: 42%;
     height: 82%;
-    outline: none;
-    margin-left: 12px;
-    border: 1px solid gray;
-    background: white;
     padding-left: 10px;
+    border: 1px solid gray;
+    margin-left: 12px;
+    background: white;
+    outline: none;
   }
   input[type="number"]::-webkit-inner-spin-button,
-  .field input[type="number"]::-webkit-outer-spin-button{
-  -webkit-appearance: none;
+  .field input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
   }
 }
-.slider-filter{
-  height: 5px;
-  border-radius: 5px;
-  background: gray;
+.slider-filter {
   position: relative;
   top: 15px;
-  .pro{
-    height: 5px;
-    left: 7%;
-    right: 4%;
+  height: 5px;
+  background: gray;
+  border-radius: 5px;
+  .pro {
     position: absolute;
-    border-radius: 5px;
+    right: 4%;
+    left: 7%;
+    height: 5px;
     background: #000000;
+    border-radius: 5px;
   }
 }
-.range-in{
+.range-in {
   position: relative;
-  input{
+  input {
     position: absolute;
     top: 10px;
-    height: 5px;
     width: 100%;
+    height: 5px;
+    -webkit-appearance: none;
     background: none;
     pointer-events: none;
-    -webkit-appearance: none;
   }
-  input[type="range"]::-webkit-slider-thumb{
-    height: 17px;
+  input[type="range"]::-webkit-slider-thumb {
     width: 17px;
-    border-radius: 50px;
-    pointer-events: auto;
+    height: 17px;
+    border: none;
     -webkit-appearance: none;
     background: #000000;
-    border: none;
+    border-radius: 50px;
+    pointer-events: auto;
   }
 }
-.ranges{
+.ranges {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

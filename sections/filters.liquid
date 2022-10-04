@@ -16,23 +16,26 @@
         </span>
       </label>
     </div>
-    
+
     <div>
       <select id="sort-by">
+        <!-- eslint-disable-next-line max-len -->
         {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
         {% for option in collection.sort_options %}
+          <!-- eslint-disable @html-eslint/no-extra-spacing-attrs -->
           <option
             value="{{ option.value }}"
             {% if option.value == sort_by %} selected="selected"{% endif %}
           >
             {{ option.name }}
           </option>
+          <!-- eslint-enable @html-eslint/no-extra-spacing-attrs -->
         {% endfor %}
       </select>
 
       <span>
         {{ 'sections.collection_template.count_products'
-          | t: count: collection.products_count 
+          | t: count: collection.products_count
         }}
       </span>
     </div>
@@ -42,11 +45,11 @@
 {% render 'filtering-store' %}
 
 {% schema %}
-  {
-    "name": "filters",
-    "tag": "section",
-    "class": "collection-filters",
-    "settings": [
-    ]
-  }
+{
+  "name": "filters",
+  "tag": "section",
+  "class": "collection-filters",
+  "settings": [
+  ]
+}
 {% endschema %}
