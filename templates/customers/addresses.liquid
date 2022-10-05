@@ -92,7 +92,7 @@
             name="address[country]"
             autocomplete="country"
             required
-          > 
+          >
             {{ all_country_option_tags }}
           </select>
         </div>
@@ -186,7 +186,7 @@
                 class: "form__textfield",
                 type: "text",
                 name: "address[first_name]",
-                id: "AddressFirstNameNew",
+                id: "AddressFirstName",
                 placeholder: first_name,
                 value: address.first_name
                 required: true,
@@ -196,7 +196,7 @@
                 class: "form__textfield",
                 type: "text",
                 name: "address[last_name]",
-                id: "AddressLastNameNew",
+                id: "AddressLastName",
                 placeholder: last_name,
                 value: address.last_name,
                 required: false
@@ -206,7 +206,7 @@
                 class: "form__textfield address__form-100",
                 type: "text",
                 name: "address[company]",
-                id: "AddressCompanyNew",
+                id: "AddressCompany",
                 placeholder: company,
                 value: address.company,
                 required: false
@@ -216,7 +216,7 @@
                 class: "form__textfield address__form-100",
                 type: "text",
                 name: "address[address1]",
-                id: "AddressAddress1New",
+                id: "AddressAddress1",
                 placeholder: address1,
                 value: address.address1,
                 required: true
@@ -226,7 +226,7 @@
                 class: "form__textfield address__form-100",
                 type: "text",
                 name: "address[address2]",
-                id: "AddressAddress2New",
+                id: "AddressAddress2",
                 placeholder: address2,
                 value: address.address2,
                 required: false
@@ -234,11 +234,11 @@
 
               <div class="form__textfield">
                 <select
-                  id="AddressCountryNew"
+                  id="AddressCountry"
                   name="address[country]"
                   autocomplete="country"
                   required
-                > 
+                >
                   {{ all_country_option_tags }}
                 </select>
               </div>
@@ -247,7 +247,7 @@
                 class: "form__textfield",
                 type: "text",
                 name: "address[city]",
-                id: "AddressCityNew",
+                id: "AddressCity",
                 placeholder: city,
                 value: address.city,
                 required: true
@@ -257,7 +257,7 @@
                 class: "form__textfield",
                 type: "text",
                 name: "address[zip]",
-                id: "AddressZipNew",
+                id: "AddressZip",
                 placeholder: zip,
                 value: address.zip,
                 required: false
@@ -267,7 +267,7 @@
                 class: "form__textfield",
                 type: "text",
                 name: "address[phone]",
-                id: "AddressPhoneNew",
+                id: "AddressPhone",
                 placeholder: phone,
                 value: address.phone,
                 required: false
@@ -314,9 +314,13 @@
               type="hidden"
               name="_method"
               value="delete"
-            >
+            />
             <button
+<<<<<<< HEAD
               class="btn-1 btn_w-100"
+=======
+              class="btn-1 btn__w-100"
+>>>>>>> 9e3892b4aba6cd98b315aa6454aa69708428adf2
               type="button"
             >
               {{ 'customer.addresses.delete' | t }}
