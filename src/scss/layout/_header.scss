@@ -4,55 +4,53 @@
 }
 
 %reset-buttons {
-  background-color: transparent;
-  border-style: none;
   padding: 0;
+  border-style: none;
   margin: 0;
+  background-color: transparent;
 }
 
 .header {
-  padding: 20px 50px 20px;
-  background-color: #FFF;
   z-index: 1;
-  --columns: 2fr 6fr 2fr;
-  --column-gap: 20px;
-  box-shadow: 0px -3px 20px rgba(0, 0, 0, 0.20);
+  padding: 0 50px;
+  border-bottom: 1px solid #c1c1c1;
+  background-color: #FFF;
+  --columns: 2fr 7fr 2fr;
+  --column-gap: 15px;
 
   a {
     color: #000;
+    text-decoration: none
   }
 
-  li:hover {
-    & > a {
-      text-decoration: underline;
-    }
-
-    & > button {
-      text-decoration: underline;
-    }
-  }
-
-  &_logo {
+  &__logo {
     @extend %flex-center;
     position: relative;
     z-index: 1;
 
     a {
       display: block;
-      text-transform: uppercase;
+      font-weight: 600;
       letter-spacing: 3px;
       text-decoration: none;
-      font-weight: 600;
+      text-transform: uppercase;
     }
   }
 
-  nav {
+  & > nav {
+    display: flex;
+    justify-content: center;
+
     .burger-nav {
       display: none;
       @extend %reset-buttons;
 
       svg {
         width: 20px;
+
+        &.icon-close {
+          display: none;
+        }
       }
     }
 
@@ -61,19 +59,31 @@
     }
 
     & > ul {
-      height: 100%;
+      height: auto;
       --justify: center;
       --gap-flex: 30px;
+      --align: stretch;
+      flex-wrap: wrap;
 
       & > li {
+        display: flex;
+        padding: 20px 0;
+        border-bottom: 2px solid transparent;
         text-transform: uppercase;
-        padding: 5px 0;
 
-        a {
+        &:hover {
+          border-bottom: 2px solid #000;
+        }
+
+        & > * {
+          margin: auto 0;
+        }
+
+        & > a {
           text-decoration: none;
         }
         
-        button {
+        & > button {
           @extend %reset-buttons;
           @extend %flex-center;
           text-transform: inherit;
@@ -83,8 +93,8 @@
           }
 
           svg {
-            color: black;
             height: 5px;
+            color: black;
             transition: transform ease .2s;
           }
 
@@ -100,12 +110,12 @@
         }
 
         & > .dropdown {
-          display: none;
           position: absolute;
-          top: 50px;
+          top: 100%;
           left: 0;
-          padding: 50px 50px 50px;
+          display: none;
           width: calc(100% - 100px);
+          padding: 50px 50px 50px;
           background-color: #FFF;
           box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.20);
           
@@ -117,9 +127,9 @@
 
               & > a.child-title {
                 display: block;
+                margin-bottom: 20px;
                 font-weight: 600;
                 text-transform: uppercase;
-                margin-bottom: 20px;
               }
             }
           }
@@ -128,36 +138,51 @@
     }
 
     @media screen and (max-width: 800px) {
-      order: -1;
       display: flex;
       align-items: center;
+      order: -1;
 
       .burger-nav {
         display: block;
       }
 
       & > ul {
-        width: 100%;
-        height: calc(100% - 70px);
+        position: fixed;
         top: 70px;
         left: 0;
-        position: fixed;
+        display: none;
+        width: 100%;
+        height: calc(100% - 70px);
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        overflow-y: auto;
+        animation: slidein .3s ease;
         background-color: #fff;
-        display: none;
+        overflow-y: auto;
 
         &[data-active="true"] {
-          display: flex;
+          display: block;
+
+          ~ button {
+            > svg {
+              &.icon-close {
+                display: block;
+              }
+
+              &.icon-hamburger {
+                display: none;
+              }
+            }
+          }
         }
 
         & > li.nav-item {
-          padding: 0 20px;
-          margin: 0;
+          display: block;
           width: calc(100% - 40px);
+          height: auto;
+          padding: 0 20px;
           border-bottom: 1px solid;
+          margin: 0;
 
           & > * {
             padding: 20px 0;
@@ -168,8 +193,8 @@
           }
 
           & > button {
-            width: 100%;
             display: flex;
+            width: 100%;
             justify-content: space-between;
 
             svg {
@@ -179,8 +204,8 @@
 
           & > .dropdown {
             position: static;
-            padding: 0 0 20px;
             width: 100%;
+            padding: 0 0 20px;
             box-shadow: none;
 
             ul.grid {
@@ -202,11 +227,21 @@
             }
           }
         }
+
+        @keyframes slidein {
+          from {
+            transform: translateX(-100%);
+          }
+        
+          to {
+            transform: translateX(0%);
+          }
+        }
       }
     }
   }
 
-  &_user {
+  &__user {
     position: relative;
     z-index: 1;
 
@@ -222,13 +257,13 @@
         }
 
         svg {
-          color: black;
           width: 20px;
           height: 20px;
+          color: black;
           
           &.icon-cart {
-            height: 40px;
             width: 40px;
+            height: 40px;
           }
         }
 
