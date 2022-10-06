@@ -5,12 +5,12 @@
  - description: {string} Text description
 
   Usage:
-  {% 
+  {%
     title: Product.description,
   %}
 {% endcomment %}
 {%- if description != blank -%}
-  <div class="text--description">
+  <div class="text__description">
     {{ description }}
   </div>
 {%- endif -%}

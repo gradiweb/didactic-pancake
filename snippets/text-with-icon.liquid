@@ -7,14 +7,14 @@
  -resolution: string
 
   Usage:
-  {% 
+  {%
     text: Product.description,
     icon: block.settings.heading,
   %}
 
 {% endcomment %}
 
-<div class="text--with--icon">
+<div class="text__with-icon">
   {% assign url = icon  | img_url %}
   {%- if icon != blank -%}
     {% render "render-image"
