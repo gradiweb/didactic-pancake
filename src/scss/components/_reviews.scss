@@ -1,3 +1,5 @@
+@use '../abstracts/variables';
+
 .reviews {
   margin: 1rem 0;
 
@@ -8,10 +10,14 @@
   &__single {
     display: flex;
     flex-flow: column nowrap;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+    box-sizing: border-box;
+    border: 2px double variables.$color-black;
 
-    &-author, &-description, &-title {
+    & > * {
       margin-bottom: 0.5rem;
     }
   }
@@ -24,10 +30,10 @@
 
     &-ratings-wrapper {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 0.5rem;
-      border-radius: 10px;
+      text-align: center;
+      padding: .5rem;
       background-color: var(--color-btn-bg-3);
       margin-bottom: 0.5rem;
     }
@@ -38,6 +44,16 @@
 
     &-icon {
       margin-bottom: 0.5rem;
+    }
+  }
+
+  .swiper {
+    &-wrapper {
+      align-items: stretch;
+    }
+
+    &-slide {
+      height: auto;
     }
   }
 }

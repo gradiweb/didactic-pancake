@@ -30,6 +30,7 @@
     </div>
   {% endif %}
 
+  <!-- eslint-disable-next-line max-len -->
   {% if section.settings.cta_url != blank and section.settings.cta_text != blank %}
     {% render 'link'
       class: "reviews__header-ratings-link",
@@ -41,27 +42,33 @@
 
 {% capture review %}
   {% for block in section.blocks limit:section.settings.limit %}
-  {% if block.settings.title != blank and  block.settings.author != blank %}
-    <div class="swiper-slide reviews__single">
-      {% render 'ratings' points: block.settings.points %}
+    {% if block.settings.title != blank and  block.settings.author != blank %}
+      <div class="swiper-slide">
+        <div class="reviews__single">
+          {% render 'ratings'
+            points: block.settings.points
+          %}
 
-      <h3 class="reviews__single-title">
-        {{ block.settings.title }}
-      </h3>
+          <h3 class="reviews__single-title">
+            {{ block.settings.title }}
+          </h3>
 
-      <h4 class="reviews__single-author">
-        {{ block.settings.author }}
-      </h4>
+          <h4 class="reviews__single-author">
+            {{ block.settings.author }}
+          </h4>
 
-      <p class="reviews__single-description">
-        {{ block.settings.description
-          | remove: '<p>'
-          | remove: '</p>'
-        }}
-      </p>
-    </div>
-  {% endif %}
-
+          <!-- eslint-disable-next-line @html-eslint/require-closing-tags -->
+          <p
+            class="reviews__single-description"
+          >
+            {{ block.settings.description
+              | remove: '<p>'
+              | remove: '</p>'
+            }}
+          </p>
+        </div>
+      </div>
+    {% endif %}
   {% endfor %}
 {% endcapture %}
 

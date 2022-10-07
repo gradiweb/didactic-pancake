@@ -7,11 +7,15 @@
   Usage:
   {% render "ratings" points: 5 %}
 {% endcomment %}
-{% assign ratings_width = points | times: 20 %}
+
+{% liquid
+  assign ratings_width = points | times: 20
+%}
 
 <div class="ratings">
   <div class="ratings__empty-stars"></div>
-  <div 
+  <!-- eslint-disable-next-line @html-eslint/no-inline-styles -->
+  <div
     class="ratings__full-stars"
     style="width:{{ ratings_width }}%"
   >
