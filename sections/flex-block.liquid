@@ -1,10 +1,11 @@
+<!-- eslint-disable max-len -->
 {% for block in section.blocks %}
   {% if block.type != 'block' or block.settings.content == blank %}
     {% continue %}
   {% endif %}
 
-  {% render 'flex-block' 
-    width: block.settings.width,
+  {% render 'flex-block'
+    width: section.settings.width,
     image: block.settings.image,
     title: block.settings.title,
     title_size: block.settings.title_size,
@@ -19,7 +20,28 @@
   "name": "Flex Block",
   "class": "flex-block wrapper",
   "tag": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "radio",
+      "id": "width",
+      "label": "Block Width",
+      "options": [
+        {
+          "value": "30",
+          "label": "30%"
+        },
+        {
+          "value": "50",
+          "label": "50%"
+        },
+        {
+          "value": "100",
+          "label": "100%"
+        }
+      ],
+      "default": "50"
+    }
+  ],
   "blocks": [
     {
       "type": "block",
@@ -72,34 +94,28 @@
           "type": "url",
           "id": "cta_url",
           "label": "CTA Link"
-        },
-        {
-          "type": "radio",
-          "id": "width",
-          "label": "Block Width",
-          "options": [
-            {
-              "value": "30",
-              "label": "30%"
-            },
-            {
-              "value": "50",
-              "label": "50%"
-            },
-            {
-              "value": "100",
-              "label": "100%"
-            }
-          ],
-          "default": "50"
         }
       ]
     }
   ],
   "presets": [
-     {
-       "name": "Flex Block Section"
-     }
+    {
+      "name": "Flex Block Section",
+      "blocks": [
+        {
+          "type": "block"
+        },
+        {
+          "type": "block"
+        },
+        {
+          "type": "block"
+        },
+        {
+          "type": "block"
+        }
+      ]
+    }
   ]
 }
 {% endschema %}

@@ -1,6 +1,6 @@
 {% comment %}
   This render a flex block
-  
+
   Accepts:
     - width: {Number} Width Block to flex-basis (Required)
     - image: {Object} Object image to header image
@@ -11,7 +11,7 @@
     - cta_url: {String} Call to action URL
 
   Usage:
-  {% render 'flex-block' 
+  {% render 'flex-block'
     width: block.settings.width,
     image: block.settings.image,
     title: block.settings.title,
@@ -21,16 +21,19 @@
   %}
 {% endcomment %}
 
-<div class="flex-block__wrapper flex-block__wrapper--{{ width }}">
+<div
+  class="flex-block__wrapper flex-block__wrapper--{{ width }}"
+>
   {% if image %}
-    {% render "render-image"
-      class: "flex-block__image",
-      img: image,
-      size: "220 300 400 500",
-      alt: image.alt,
-      width: "300",
-      height: "auto"
-    %}
+    <div class="flex-block__image">
+      {% render "render-image"
+        img: image,
+        size: "220 300 400 500",
+        alt: image.alt,
+        width: "300",
+        height: "auto"
+      %}
+    </div>
   {% endif %}
 
   {% if title != blank %}
