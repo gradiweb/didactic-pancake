@@ -7,7 +7,9 @@ import { openAccordion } from "../utils/accordion";
 import { openDropDown } from "../components/header";
 import { toggleDataActive } from "../utils/toggle-dataset";
 import { lazyVideo } from '../components/lazy-videos'
+import { validateRegisterCustomer } from "../components/news-letters";
 
+validateRegisterCustomer();
 variantOnChange(".variants");
 openAccordion();
 openDropDown();

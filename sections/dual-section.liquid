@@ -1,14 +1,26 @@
-<div 
-  class="container__dual-section {% if section.settings.position_image == 'left' %} position__image-left
+<!-- eslint-disable max-len -->
+<!-- eslint-disable @html-eslint/no-inline-styles -->
+<div
+  class="container__dual-section
+  {% if section.settings.position_image == 'left' %}
+    position__image-left
   {%- else -%}
     position__image-right
   {%- endif -%}"
 >
-  <div class="container__media" {% if section.settings.image_brackground == blank and section.settings.color_brackground != blank %}
-    style="background: {{ section.settings.color_brackground }} !important;"
+  <div
+    class="container__media"
+    {% if section.settings.image_brackground == blank
+      and section.settings.color_brackground != blank
+    %}
+      style="background: {{ section.settings.color_brackground }} !important;"
   {%- endif -%}
   >
-    {% if section.settings.image_brackground != blank and section.settings.video_url == blank or section.settings.image_brackground != blank and section.settings.video_url_embed == blank %}
+    {% if section.settings.image_brackground != blank
+      and section.settings.video_url == blank
+      or section.settings.image_brackground != blank
+      and section.settings.video_url_embed == blank
+    %}
       <picture>
         {% assign url = section.settings.image_brackground  | img_url: '500x' %}
         {% render "render-image"
@@ -21,7 +33,9 @@
         %}
       </picture>
     {% endif %}
-    {% if section.settings.video_url != blank or section.settings.video_url_embed != blank %}
+    {% if section.settings.video_url != blank
+      or section.settings.video_url_embed != blank
+    %}
       {% render 'video-media',
         video_url: section.settings.video_url,
         video_url_embed: section.settings.video_url_embed,
@@ -50,11 +64,13 @@
         {{ section.settings.dual_section_description }}
       {% endif %}
 
-      {% if section.settings.dual_section_linkCTA != blank and section.settings.dual_section_titleCTA != blank %}   
+      {% if section.settings.dual_section_linkCTA != blank
+        and section.settings.dual_section_titleCTA != blank
+      %}
         {% render 'link'
           class: "btn-2",
           url:  section.settings.dual_section_linkCTA,
-          content: section.settings.dual_section_titleCTA 
+          content: section.settings.dual_section_titleCTA
         %}
       {% endif %}
     </div>

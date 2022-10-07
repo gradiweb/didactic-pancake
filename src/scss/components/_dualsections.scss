@@ -1,4 +1,4 @@
-.container__dual-section{
+.container__dual-section {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -9,7 +9,7 @@
     align-self: center;
   }
 
-  .container__media{
+  .container__media {
     height: 0;
     overflow: hidden;
     padding-top: 75%;
@@ -94,7 +94,7 @@
     }
   }
 
-  .position__image-right{
+  .position__image-right {
     flex-direction: row-reverse;
     
     .container__description {
@@ -112,7 +112,7 @@
       align-self: center;
     }
 
-    .container__media{
+    .container__media {
       padding-top: 31.57894736%;
     }
   }
