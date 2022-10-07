@@ -1,19 +1,27 @@
-import { $Q, $Qll } from "../utils/query-selector";
+import { $Qll } from "../utils/query-selector";
+
+const applyOrder = (videoSource) => {
+  const videoSourceRef = videoSource;
+  if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+    videoSourceRef.src = videoSource.dataset.src;
+  }
+}
 
 /**
  * Delay video loading when inside the viewport
  */
 export const lazyVideo = () => {
-  let lazyVideos = [].slice.call($Qll("video.lazy"));
+  const lazyVideos = [].slice.call($Qll("video.lazy"));
 
   if ("IntersectionObserver" in window) {
-    let lazyVideoObserver = new IntersectionObserver((entries, observer) => {
+    const lazyVideoObserver = new IntersectionObserver((entries) => {
       entries.forEach((video) => {
         if (video.isIntersecting) {
-          for (let source in video.target.children) {
-            let videoSource = video.target.children[source];
-            if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
-              videoSource.src = videoSource.dataset.src;
+          console.log("aqui", video.target.children);
+          for (const source in video.target.children) {
+            if (video.target.children[source]) {
+              const videoSource = video.target.children[source];
+              applyOrder(videoSource);
             }
           }
 
