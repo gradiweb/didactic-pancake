@@ -1,5 +1,5 @@
 import { $Q, $Qll } from '../utils/query-selector';
-import { dataToggle } from '../utils/toggle-dataset';
+import { dataToggleVideo } from '../utils/toggle-dataset';
 
 /**
  * Reset re-render DOM
@@ -18,7 +18,7 @@ export function resetVideo(modal) {
  */
 export const activeVideoFrame = (control, node) => {
   $Q(control).addEventListener('click', () => {
-    dataToggle($Q(node), true, true)
+    dataToggleVideo($Q(node), true, true)
   });
 };
 

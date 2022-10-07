@@ -2,21 +2,24 @@
   class="wrapper video__background video__background--{{ section.id }}"
 >
   <button
+    type="button"
     data-section="{{ section.id }}"
-    id="play-button-{{ section.id }}-js" 
+    id="play-button-{{ section.id }}-js"
     class="video__button"
   >
     {% render 'icon-play' %}
   </button>
-  
+
   <div class="video__content">
     {% if section.settings.title != blank %}
       <h2>
         {{ section.settings.title | truncatewords: 10, '' }}
       </h2>
     {% endif %}
-  
-    {% if section.settings.link != blank and section.settings.link_text != blank %}
+
+    {% if section.settings.link != blank
+      and section.settings.link_text != blank
+    %}
       {% render 'link'
         url:  section.settings.link,
         content: section.settings.link_text,
