@@ -7,6 +7,7 @@
 
 {%- endcomment -%}
 
+<!-- eslint-disable max-len -->
 {% liquid
   assign position_icons = 'top'
   assign slider_mobile = section.settings.slider_mobile
@@ -17,35 +18,39 @@
   </h2>
 {% endif %}
 
-<div class="flex elements__icons {% if slider_mobile %}slider_mobile{% endif %}">
+<div
+  class="flex row-icons__elements {% if slider_mobile %}slider-mobile{% endif %}"
+>
   {% for block in section.blocks %}
-  {% if block.settings.row_icon_image != blank %}
-    <div class="element__icon {% if position_icons == 'left' %}position__left{% else %}position__top{% endif %}"
-    >
-        {% assign url = block.settings.row_icon_image | append: '.svg' | file_url %}
-        {% render "render-image"
-          class: "class_image",
-          img_src: url,
-          alt: block.settings.row_icon_image,
-          width: "80",
-          height: "80"
-        %}
+    {% if block.settings.row_icon_image != blank %}
+      <div
+        class="row-icons__element {% if position_icons == 'left' %}position__left{% else %}position__top{% endif %}"
+      >
+          {% assign url = block.settings.row_icon_image
+            | append: '.svg'
+            | file_url
+          %}
+          {% render "render-image"
+            img_src: url,
+            alt: block.settings.row_icon_image,
+            width: "80",
+            height: "80"
+          %}
 
+        {% if block.settings.heading != blank or block.settings.row_icon_description != blank %}
+          <div class="row-icons__description">
+            {% if block.settings.heading != blank %}
+              <h3>
+                {{ block.settings.heading }}
+              </h3>
+            {% endif %}
 
-      {% if block.settings.heading != blank or block.settings.row_icon_description != blank %}
-        <div class="element__icon--description">
-          {% if block.settings.heading != blank %}
-            <h3>
-              {{ block.settings.heading }}
-            </h3>
-          {% endif %}
-
-          {% if block.settings.row_icon_description != blank %}
-            <p>{{ block.settings.row_icon_description }}</p>
-          {% endif %}
-        </div>
-      {% endif %}
-    </div>
+            {% if block.settings.row_icon_description != blank %}
+              <p>{{ block.settings.row_icon_description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
     {% endif %}
   {% endfor %}
 </div>
@@ -53,7 +58,7 @@
 {% schema %}
   {
     "name": "Row icons",
-    "class": "row__icons wrapper",
+    "class": "row-icons wrapper",
     "tag": "section",
     "settings": [
       {
@@ -64,7 +69,7 @@
       {
         "type": "checkbox",
         "id": "slider_mobile",
-        "label": "Slider mobile",
+        "label": "Slider mobile ?",
         "default": true,
         "info": "switch the view in mobile between slide and grid"
       }
