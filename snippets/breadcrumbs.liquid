@@ -7,15 +7,15 @@
 
 {% endcomment %}
 
-<nav 
-  class="breadcrumbs" 
-  role="navigation" 
+<nav
+  class="breadcrumbs"
+  role="navigation"
   aria-label="breadcrumbs"
  >
   <ol class="breadcrumbs__list">
     <li class="breadcrumbs__item">
-      <a 
-        class="breadcrumbs__link" 
+      <a
+        class="breadcrumbs__link"
         href="/"
         title="{{ 'accessibility.home' | t }}"
        >
@@ -24,13 +24,13 @@
     </li>
 
     {% if template contains 'product' %}
-    
+
       {%- if product.collections -%}
         {% assign collection = product.collections | first %}
 
         <li class="breadcrumbs__item">
-          <a 
-            class="breadcrumbs__link breadcrumbs__collection" 
+          <a
+            class="breadcrumbs__link breadcrumbs__collection"
             href="{{ collection.url }}"
             title="{{ collection.title }}"
           >
@@ -55,4 +55,4 @@
       </li>
     {% endif %}
   </ol>
-</nav>
+</nav
