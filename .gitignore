@@ -4,5 +4,8 @@ node_modules
 
 # Only apps should have lockfiles
 yarn.lock
+<<<<<<< HEAD
 package-lock.json
+=======
+>>>>>>> 93ed09c2feb4b65f3561347fd7b5769a038a77f2
 .DS_Store

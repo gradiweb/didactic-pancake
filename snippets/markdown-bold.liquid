@@ -37,7 +37,7 @@
     {% assign residue = forloop.index | modulo: 2 %}
 
     {% if residue == 1 %}
-      
+
       {%- comment -%} validate if contains italic {%- endcomment -%}
       {% assign isItalic = linebold | split: "*" %}
 
@@ -46,7 +46,7 @@
       {% endcapture %}
 
       {{ strDataString }}
-    
+
     {% else %}
       <strong>{{ linebold }}</strong>
     {% endif %}

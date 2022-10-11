@@ -50,7 +50,7 @@
     {% assign residue = forloop.index | modulo: 2 %}
 
     {% if residue == 1 %}
-      
+
       {%- comment -%} validate if contains italic or bold {%- endcomment -%}
       {% if linebold contains '**' %}
 
