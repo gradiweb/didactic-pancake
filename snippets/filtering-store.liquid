@@ -21,10 +21,7 @@
     {% capture accordions %}
       {% for filter in collection.filters %}
 
-        {% assign active = 'false' %}
-        {% if forloop.first %}
-          {% assign active = 'true' %}
-        {% endif %}
+    
 
         {% capture items_filter %}
           {% comment %}
