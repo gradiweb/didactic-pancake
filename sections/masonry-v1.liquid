@@ -10,25 +10,28 @@
   {% assign hover_label = '' %}
 {% endif %}
 
-{% if section.settings.image_1 and section.settings.image_2 and section.settings.image_3 %}
-  {% render 'masonry-v1-image' 
-    align: main_image_aligment, 
+{% if section.settings.image_1
+  and section.settings.image_2
+  and section.settings.image_3
+%}
+  {% render 'masonry-v1-image'
+    align: main_image_aligment,
     image: section.settings.image_1,
     url: section.settings.image_1_url,
     hover_label: hover_label,
     label_text: section.settings.image_1_label
   %}
 
-  {% render 'masonry-v1-image' 
-    align: '', 
+  {% render 'masonry-v1-image'
+    align: '',
     image: section.settings.image_2,
     url: section.settings.image_2_url,
     hover_label: hover_label,
     label_text: section.settings.image_2_label
   %}
 
-  {% render 'masonry-v1-image' 
-    align: '', 
+  {% render 'masonry-v1-image'
+    align: '',
     image: section.settings.image_3,
     url: section.settings.image_3_url,
     hover_label: hover_label,
