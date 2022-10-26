@@ -31,8 +31,11 @@
       size: "600",
       width: "medium"
     %}
-    <div class="masonry-v1__image-label {{ hover_label }}">
-      {{ label_text }}
-    </div>
+    {% if label_text != blank %}
+      <div class="masonry-v1__image-label {{ hover_label }}">
+        {{ label_text }}
+      </div>
+    {% endif %}
+
   </a>
 </div>
