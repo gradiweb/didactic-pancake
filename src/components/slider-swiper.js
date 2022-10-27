@@ -17,6 +17,11 @@ const configArrows = (id) => {
     },
     freeMode: true,
     breakpoints: {
+      200: {
+        slidesPerView: 1,
+        spaceBetween: 28,
+        freeMode: false,
+      },
       749: {
         slidesPerView: 3,
         spaceBetween: 28,

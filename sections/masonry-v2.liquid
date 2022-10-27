@@ -1,4 +1,3 @@
-
 <div class="masonry--title">
   <h2>{{ section.settings.title_masonry }}</h2>
 </div>
@@ -55,27 +54,11 @@
 </div>
 
 {% style %}
-
-.masonry-desk{
-  display: none
-}
-.masonry-mobile{
-  display: block
-}
 @media screen and (min-width: 749px) {
   :root {
     --masonry-columns: {{ section.settings.columns }};
   }
-  .masonry-desk{
-    display: block
-  }
-  .masonry-mobile{
-    display: none
-  }
-
 }
-
-
 {% endstyle %}
 
 {% schema %}
