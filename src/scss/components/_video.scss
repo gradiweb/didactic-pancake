@@ -1,6 +1,18 @@
+@use "../abstracts/variables";
+
 .video {
   &__background {
+    padding: 0;
     position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &::before {
+      content: '';
+      display: block;
+      padding-top: 56.25%;
+    }
   }
 
   &__button {
@@ -23,11 +35,15 @@
   }
 
   &__content {
-    padding: 400px 0 50px;
+    position: absolute;
+    padding: 0 50px 50px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
     & > h2 {
       font-weight: 500;
@@ -35,7 +51,12 @@
       strong {
         font-weight: 600;
       }
+
+      a {
+        font-size: variables.$font-size--h2;
+      }
     }
+
 
     & > a.btn-1 {
       display: block;
