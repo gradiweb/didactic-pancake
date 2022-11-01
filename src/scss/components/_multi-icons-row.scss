@@ -8,6 +8,7 @@ $margin-icon: 30px;
 
   &__elements {
     flex-wrap: nowrap;
+    align-items: flex-start;
     --gap-flex: 30px;
     --justify: space-around;
 
@@ -35,6 +36,22 @@ $margin-icon: 30px;
         &::-webkit-scrollbar {
           display: none;
         }
+      }
+    }
+  }
+
+  &__description {
+
+    & > div {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+
+      strong {
+        font-weight: 600;
       }
     }
   }
