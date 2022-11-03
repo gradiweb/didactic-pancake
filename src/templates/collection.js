@@ -5,6 +5,7 @@ import { rangeFilters } from "../components/filters-range";
 import '../components/clear-filter-all';
 
 defultSortBy();
+rangeFilters();
 
 toggleDataActive(
   '#filter-open',
@@ -21,5 +22,3 @@ toggleDataActive(
     overlay: true,
   },
 )
-
-rangeFilters();
