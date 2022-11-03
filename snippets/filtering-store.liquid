@@ -20,9 +20,6 @@
 
     {% capture accordions %}
       {% for filter in collection.filters %}
-
-    
-
         {% capture items_filter %}
           {% comment %}
             Determine the filter type, list, boolean, anymore
@@ -89,49 +86,48 @@
 
             {% comment %} Determine the filter type price{% endcomment %}
             {%- when 'price_range' -%}
-           <div class="ranges">
-            <span class="range1">
-
-              <div>
-                <span>{{ cart.currency.symbol }}</span>
-                {% if  filter.range_min > 0 %}
-                {{ filter.range_min | money_without_currency }}
-                {% else %}
-                  0.00
-                {% endif %}
+              <div class="ranges">
+                <span class="range1">
+                  <div>
+                    {% if  filter.range_min > 0 %}
+                    {{ filter.range_min | money_without_currency | remove: ',00' }}
+                    {% else %}
+                      0,00
+                    {% endif %}
+                    <span>{{ cart.currency.symbol }}</span>
+                  </div>
+                </span>
+                <span class="range2">
+                  <div>
+                    {{ filter.range_max | money_without_currency | remove: ',00' }}
+                    <span>{{ cart.currency.symbol }}</span>
+                  </div>
+                </span>
               </div>
-            </span>
-            <span class="range2">
-              <div>
-                <span>{{ cart.currency.symbol }}</span>
-                {{ filter.range_max | money_without_currency }}
-              </div>
-            </span>
-           </div>
-            <div class="wrapper-filter">
-              <div class="slider-filter">
-                <div class="pro"></div>
-              </div>
-              <div class="range-in">
-                {% render 'filter-field-range'
-                  type_input: "range",
-                  class: "range-min",
-                  range_max: filter.range_max,
-                  value_min_max: filter.min_value.value,
-                  value_default: "0"
-                %}
+              <div class="wrapper-filter">
+                <div class="slider-filter">
+                  <div class="pro"></div>
+                </div>
+                <div class="range-in">
+                  {% render 'filter-field-range'
+                    type_input: "range",
+                    class: "range-min",
+                    range_max: filter.range_max,
+                    value_min_max: filter.min_value.value,
+                    value_default: "0"
+                  %}
 
-                {% render 'filter-field-range'
-                  type_input: "range",
-                  class: "range-max",
-                  range_max: filter.range_max,
-                  value_min_max: filter.max_value.value,
-                  value_default: filter.range_max
-                %}
+                  {% render 'filter-field-range'
+                    type_input: "range",
+                    class: "range-max",
+                    range_max: filter.range_max,
+                    value_min_max: filter.max_value.value,
+                    value_default: filter.range_max
+                  %}
 
-              </div>
+                </div>
 
-              <div class="price-in">
+                <div class="price-in">
                   <div class="field">
                     <span>{{ cart.currency.symbol }}</span>
                     {% render 'filter-field-range'
@@ -140,11 +136,11 @@
                       name_input: filter.min_value.param_name,
                       range_max: filter.range_max,
                       value_min_max: filter.min_value.value,
-                      value_default: "",
+                      value_default: "0,00",
                       paceh_input: "0.00"
                     %}
                   </div>
-                  <!-- <span class="separator">-</span> -->
+                  <span class="separator">-</span>
                   <div class="field">
                     <span>{{ cart.currency.symbol }}</span>
                     {% render 'filter-field-range'
@@ -153,12 +149,12 @@
                       name_input: filter.max_value.param_name,
                       range_max: filter.range_max,
                       value_min_max: filter.max_value.value,
-                      value_default: "",
+                      value_default: filter.range_max,
                       paceh_input: filter.range_max
                     %}
                   </div>
-              </div>
-          </div>
+                </div>
+            </div>
           {%- endcase -%}
 
           <a href="{{ filter.url_to_remove }}">
