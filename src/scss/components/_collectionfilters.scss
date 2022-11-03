@@ -3,6 +3,22 @@
 .collection-filters {
   margin-bottom: variables.$margin-section;
 
+  &__actives {
+    display: flex;
+
+    & > * {
+      margin-right: 15px;
+      background: variables.$color-black;
+      color: variables.$color-white;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    a {
+      color: variables.$color-white;
+    }
+  }
+
   &__controls {
     width: 100%;
     --justify: space-between;
