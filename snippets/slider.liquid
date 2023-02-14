@@ -8,6 +8,7 @@
   - pagination: {Boolean} show pagination
   - perpage: {Number} items per page
   - wrapper: {String} class to style
+  - infinity: {String} slider infinity
 
   NOTE: In <content> use className "swiper-slide" in the first item
 
@@ -28,6 +29,8 @@
   else
     if perpage and perpage == 1
       assign type_slide = 'slider_small'
+    elsif arrows and infinity
+      assign type_slide = 'slider_arrows-infinity'
     elsif pagination
       assign type_slide = 'slider_pagination'
     elsif arrows
