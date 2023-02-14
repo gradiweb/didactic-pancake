@@ -1,0 +1,62 @@
+{% comment %}
+  This render a flex block
+
+  Accepts:
+    - width: {Number} Width Block to flex-basis (Required)
+    - image: {Object} Object image to header image
+    - title: {String} Header title
+    - title_size {String} Size for title (H2, H3, H4)
+    - content: {String} HTML of RichText to content
+    - cta_text: {String} Call to action text in bottom of block
+    - cta_url: {String} Call to action URL
+
+  Usage:
+  {% render 'flex-block'
+    width: block.settings.width,
+    image: block.settings.image,
+    title: block.settings.title,
+    content: block.settings.content,
+    cta_text: block.settings.cta_text,
+    cta_url: block.settings.cta_url
+  %}
+{% endcomment %}
+
+<div
+  class="flex-block__wrapper flex-block__wrapper--{{ width }}"
+>
+  {% if image %}
+    <div class="flex-block__image">
+      {% render "render-image"
+        img: image,
+        size: "220 300 400 500",
+        alt: image.alt,
+        width: "300",
+        height: "auto"
+      %}
+    </div>
+  {% endif %}
+
+  {% if title != blank %}
+
+    {% if title_size == "h2" %}
+      <h2>{{ title }}</h2>
+    {% elsif title_size == "h3" %}
+      <h3>{{ title }}</h3>
+    {% else  %}
+      <h4>{{ title }}</h4>
+    {% endif %}
+
+  {% endif %}
+
+  <div class="flex-block__content">
+    {{ content }}
+  </div>
+
+  {% if cta_text != blank and cta_url != blank %}
+    {% render 'link'
+      class: "btn-1",
+      url: cta_url,
+      content: cta_text
+    %}
+  {% endif %}
+</div>
