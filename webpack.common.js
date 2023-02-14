@@ -10,7 +10,8 @@ const entry = {
   product: './src/templates/product.js',
   password: './src/templates/password.js',
   customer: './src/templates/customer.js',
-  contact: './src/templates/contact.js'
+  contact: './src/templates/contact.js',
+  video: './src/templates/video.js'
 }
 
 const output = {
