@@ -1,11 +1,14 @@
 import { $Qll } from '../utils/query-selector'
-import Swiper, { Navigation, Pagination, FreeMode, Autoplay } from "swiper";
+import { createInterception } from '../utils/swiper-defer';
 
 /**
  * Create new slider with arrows
  * @param {String} id - className reference in DOM
  */
-const configArrows = (id) => {
+const configArrows = async (id) => {
+  const { Swiper, Navigation, FreeMode } = await import('swiper');
+
+  console.log("load arrows");
   // eslint-disable-next-line no-new
   new Swiper(id, {
     modules: [Navigation, FreeMode],
@@ -35,7 +38,11 @@ const configArrows = (id) => {
  * Create new slider with pagination
  * @param {String} id - className reference in DOM
  */
-export const configPagination = (id) => {
+export const configPagination = async (id) => {
+  const { Swiper, FreeMode } = await import('swiper');
+
+  console.log("load pagination");
+
   // eslint-disable-next-line no-new
   new Swiper(id, {
     modules: [Pagination, FreeMode],
@@ -59,7 +66,8 @@ export const configPagination = (id) => {
  * Create new slider - 1 slide per view
  * @param {String} id - className reference in DOM
  */
-export const swiperSmall = new Swiper(".slider_small", {
+// que pasa con este slider. cuando se puede implmeentar, no veo que se llame
+/* export const swiperSmall = new Swiper(".slider_small", {
   modules: [Pagination, Autoplay, FreeMode],
   slidesPerView: 1,
   spaceBetween: 25,
@@ -72,13 +80,18 @@ export const swiperSmall = new Swiper(".slider_small", {
     delay: 3000,
     disableOnInteraction: false,
   },
-});
+}); */
+
 
 /**
  * Iteration to create all sliders with arrows
  */
 export const swiperArrows = (() => {
-  $Qll(".slider_arrows").map((slide) => configArrows(`#${slide.id}`))
+
+  $Qll(".slider_arrows").map((slide) => {
+    // start observing
+    createInterception(slide, configArrows);
+  })
 })();
 
 /**
