@@ -1,4 +1,4 @@
-import { $Qll } from '../utils/query-selector'
+import { $Q, $Qll } from '../utils/query-selector'
 import { createInterception } from '../utils/swiper-defer';
 
 /**
@@ -67,20 +67,23 @@ export const configPagination = async (id) => {
  * @param {String} id - className reference in DOM
  */
 // que pasa con este slider. cuando se puede implmeentar, no veo que se llame
-/* export const swiperSmall = new Swiper(".slider_small", {
-  modules: [Pagination, Autoplay, FreeMode],
-  slidesPerView: 1,
-  spaceBetween: 25,
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  freeMode: true,
-  autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
-  },
-}); */
+export const swiperSmall = async (id) => {
+  const { Swiper, FreeMode, Pagination, Autoplay } = await import('swiper');
+  new Swiper(".slider_small", {
+    modules: [Pagination, Autoplay, FreeMode],
+    slidesPerView: 1,
+    spaceBetween: 25,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    freeMode: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+  })
+};
 
 
 /**
@@ -99,4 +102,13 @@ export const swiperArrows = (() => {
  */
 export const swiperPagination = (() => {
   $Qll(".slider_pagination").map((slide) => configPagination(`#${slide.id}`))
+})();
+
+/**
+ * Render small slider
+ */
+export const renderSmallSlider =  (() => {
+  if (!$Q(".slider_small")) return;
+  console.log("load small slider");
+  createInterception($Q(".slider_small"), swiperSmall);
 })();
