@@ -1,5 +1,5 @@
 import { $Q, $Qll } from '../utils/query-selector'
-import { createInterception } from '../utils/swiper-defer';
+import { createInterception } from '../utils/slider-defer';
 
 /**
  * Create new slider with arrows
