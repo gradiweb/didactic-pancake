@@ -2,7 +2,11 @@ import { $Q } from "../utils/query-selector";
 import { principalConfig, thumbsConfig } from "../utils/slider-configuration";
 import { createInterception } from "../utils/slider-defer";
 
-
+/**
+ * This function would be operated by the slider
+ * @param {} thumbnails - config thumbns slider 
+ * @param {String} principalClass - name class ref slider
+ */
 const executeSliderProduct = async (thumbnails, principalClass) => {
   const { Swiper } = await import("swiper");
 
@@ -12,6 +16,7 @@ const executeSliderProduct = async (thumbnails, principalClass) => {
   )
 }
 
+// evaluation direction slider
 const evalDirection = async (direction) => {
   const { Swiper } = await import("swiper");
 
@@ -34,13 +39,12 @@ const evalDirection = async (direction) => {
   }
 }
 
+// mount slider initial. here start interception observer
 export const mountSlider = async (main) => {
-
   const { dataset: { direction = null } } = main;
 
   if (direction) {
     const { thumbnails, principalClass } = await evalDirection(direction);
-    console.log("edsefsef", {thumbnails, principalClass});
     createInterception(
       $Q(principalClass), () => executeSliderProduct(thumbnails, principalClass),
     );
