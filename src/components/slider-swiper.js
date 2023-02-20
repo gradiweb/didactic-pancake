@@ -8,7 +8,6 @@ import { createInterception } from '../utils/swiper-defer';
 const configArrows = async (id) => {
   const { Swiper, Navigation, FreeMode } = await import('swiper');
 
-  console.log("load arrows");
   // eslint-disable-next-line no-new
   new Swiper(id, {
     modules: [Navigation, FreeMode],
@@ -40,8 +39,6 @@ const configArrows = async (id) => {
  */
 export const configPagination = async (id) => {
   const { Swiper, FreeMode } = await import('swiper');
-
-  console.log("load pagination");
 
   // eslint-disable-next-line no-new
   new Swiper(id, {
@@ -109,6 +106,5 @@ export const swiperPagination = (() => {
  */
 export const renderSmallSlider =  (() => {
   if (!$Q(".slider_small")) return;
-  console.log("load small slider");
   createInterception($Q(".slider_small"), swiperSmall);
 })();

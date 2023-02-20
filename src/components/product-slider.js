@@ -4,7 +4,6 @@ import { principalConfig, thumbsConfig } from "../utils/slider-configuration";
 import { createInterception } from "../utils/swiper-defer";
 
 export function mountSlider(main) {
-  console.log("load slider product", main);
 
   const { dataset: { direction = null } } = main;
 
