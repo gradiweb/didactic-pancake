@@ -8,6 +8,17 @@
     "theme_support_url": "https://github.com/gradiweb/dawn"
   },
   {
+    "name": "Google tag manager",
+    "settings": [
+      {
+        "type": "text",
+        "id": "id_google_tag_manager",
+        "default": "GTM-MFS5CS5",
+        "label": "ID google tag manager"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.colors.name",
     "settings": [
       {
