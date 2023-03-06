@@ -1,0 +1,15 @@
+.recommendation {
+  &__collection {
+    --column-gap: 20px;
+    --row-gap: 20px;
+    --columns: repeat(4, 1fr);
+
+    @media screen and (max-width: 749px) {
+      --columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 350px) {
+      --columns: 1fr
+    }
+  }
+}
