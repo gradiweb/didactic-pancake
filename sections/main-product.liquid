@@ -28,10 +28,10 @@
     name="available"
     value="{{ available }}"
   />
+  {% render 'description'
+    description: product.description
+  %}
 
-  <p>
-    {{ product.description }}
-  </p>
   <form
     class="add-cart-js add-product-cart"
     data-product="{{ product.id }}"
@@ -49,12 +49,47 @@
     %}
 
   </form>
+    <div class="icon-whit-text">
+      {% for block in section.blocks %}
+      {%- assign iconSVG = block.settings.block_icon
+        | append: '.svg'
+        | file_url
+      -%}
+      {%- if block.settings.block_text != blank
+        and block.settings.block_icon != blank
+      -%}
+      {% render 'text-with-icon'
+        icon: iconSVG,
+        description: block.settings.block_text
+      %}
+      {%- endif -%}
+      {% endfor %}
+  </div>
 </div>
 
 {% schema %}
-{
-  "name": "Product page",
-  "class": "main-product wrapper product-js",
-  "tag": "section"
-}
+  {
+    "name": "Product page",
+    "class": "main-product wrapper product-js",
+    "tag": "section",
+    "max_blocks": 4,
+    "blocks": [
+    {
+      "type": "content",
+      "name": "Block icon",
+      "settings": [
+        {
+          "type": "text",
+          "id": "block_icon",
+          "label": "Name icon (.svg)"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text",
+          "label": "Text"
+        }
+      ]
+    }
+    ]
+  }
 {% endschema %}

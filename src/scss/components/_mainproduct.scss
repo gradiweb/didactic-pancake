@@ -66,6 +66,15 @@
         margin-top: 10px;
       }
     }
+    .icon-whit-text {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      @media screen and (max-width: 749px) {
+        display: block;
+      }
+    }
+
   }
 
   @media screen and (max-width: 600px) {
