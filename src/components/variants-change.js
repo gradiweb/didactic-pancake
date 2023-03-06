@@ -1,6 +1,7 @@
 import { $Q } from "../utils/query-selector";
 import api from "../services/api"
 import { stringToHTML } from "../utils/to-html";
+import { initProductQuantity } from "./product-quantity";
 
 /**
  * Captures the HTML section of the product in question and returns data
@@ -76,7 +77,6 @@ function updateButton(available, parent, newText) {
   const {
     value,
     dataset,
-    priceInitQuantity,
   } = $Q('[name="id"]', target.closest('.product-js'));
 
   addcartBtn.disabled = true;
@@ -86,6 +86,7 @@ function updateButton(available, parent, newText) {
     price,
     available,
     button,
+    priceInitQuantity,
   } = await sectionHandle(dataset.variant, value);
 
   updatePrice(price, target.closest('.product-js'));

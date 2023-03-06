@@ -24,14 +24,10 @@ sliderUpsell();
  */
  const addProducts = async (event) => {
 
-  let itemId = 0;
-  const valueCount = $Q("#quantity").value || 1;
-
-  for (const input of event.target) {
-    if (input.name === "id") {
-      itemId = input.value;
-    }
-  }
+  const valueCount = $Q("#quantity") ? $Q("#quantity").value : 1;
+  const itemId = $Q("input[name='id']", event.target).value;
+  console.log({itemId});
+  console.log(event.target);
 
   const cartParams = {
     items: [
@@ -69,12 +65,18 @@ const submitForm = (form) => {
  * Listen if add to cart form is submited
  * if add to cart form is submited add products in cart
  *
+ * if you want to add the event to a single repeated element,
+ * you can use only the form selector for example.
+ * but if you have several events on the same page
+ * that load at different times, you can pass the parent of
+ * the element so that it only loads that event and
+ * not the ones that are loaded.
  * @param {string} formQuery - className reference in form add-to-cart
  *
  * To active this feature - ADD className 'add-cart-js' in form product
  * */
-export const btnAddToCart = (formQuery) => {
-  const addForms = $Qll(formQuery);
+export const btnAddToCart = (formQuery, parent = null) => {
+  const addForms = $Qll(formQuery, parent);
 
   if (addForms != null) {
     addForms.forEach(

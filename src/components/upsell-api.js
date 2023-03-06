@@ -1,6 +1,7 @@
 import api from "../services/api";
-import { $Q } from '../utils/query-selector';
+import { $Q, $Qll } from '../utils/query-selector';
 import { stringToHTML } from '../utils/to-html';
+import { btnAddToCart } from "./cart";
 import { variantOnChange } from "./variants-product";
 
 /**
@@ -8,7 +9,6 @@ import { variantOnChange } from "./variants-product";
  * @return void
  */
 async function getRecommendation() {
-  console.log("llama");
   const {
     dataset: {
       product,
@@ -21,7 +21,10 @@ async function getRecommendation() {
   if (recommendation && recommendation.innerHTML.trim().length) {
     $Q('.shopify-section.recommendation').innerHTML = recommendation.outerHTML;
   }
+
   variantOnChange(".variants");
+  btnAddToCart(".add-product-cart", $Q('#product-recommendations'));
+
 }
 
 /**
@@ -31,7 +34,7 @@ async function getRecommendation() {
  */
 (function () {
   const section = $Q('#product-recommendations');
-  
+
   const handle = (entries, observer) => {
     if (!entries[0].isIntersecting) return;
     observer.unobserve(section);
@@ -41,9 +44,9 @@ async function getRecommendation() {
   const observer = new IntersectionObserver(
     handle, {
       rootMargin: '0px 0px 200px 0px',
-    }
+    },
   );
 
-  section && observer.observe(section);
+  if (section) observer.observe(section);
 
-})();
+}());

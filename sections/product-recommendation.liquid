@@ -1,9 +1,9 @@
 <div
   id="product-recommendations"
-  data-product="{{ product.id }}"  
+  data-product="{{ product.id }}"
 >
   {%- if recommendations.performed and recommendations.products_count > 0 -%}
-    
+
     {%- if section.settings.recommendation_title != blank -%}
       <h2>
         {{ section.settings.recommendation_title }}
