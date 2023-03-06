@@ -1,0 +1,25 @@
+{% comment %}
+
+Quantity selector
+Renders product add quantity buttons
+
+Usage:
+
+{% render 'quantity-selector',
+  price: price
+%}
+
+{% endcomment %}
+<div
+  class="container-quantity"
+  data-price="{{ price | money_without_currency }}"
+  data-compare="{{ compare | money_without_currency }}"
+>
+  <span class="num-minus">-</span>
+  <input
+    name="quantity"
+    id="quantity"
+    value="1"
+    min="1"/>
+  <span class="num-add">+</span>
+</div>

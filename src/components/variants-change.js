@@ -15,11 +15,16 @@ async function sectionHandle(handle, variantId) {
   const variantPrice = $Q(".price-product-js", stringToHTML(htmlResponse));
   const variantAvailable = $Q('[name="available"]', stringToHTML(htmlResponse));
   const button = $Q('.btn-cart-js', stringToHTML(htmlResponse));
+  const priceQuantityInitial = $Q('.container-quantity', stringToHTML(htmlResponse));
 
   return {
     price: variantPrice.outerHTML,
     available: variantAvailable.value,
     button: button.textContent,
+    priceInitQuantity: {
+      price: priceQuantityInitial.dataset.price,
+      compare: priceQuantityInitial.dataset.compare,
+    },
   }
 }
 
@@ -71,6 +76,7 @@ function updateButton(available, parent, newText) {
   const {
     value,
     dataset,
+    priceInitQuantity,
   } = $Q('[name="id"]', target.closest('.product-js'));
 
   addcartBtn.disabled = true;
@@ -84,4 +90,14 @@ function updateButton(available, parent, newText) {
 
   updatePrice(price, target.closest('.product-js'));
   updateButton(available, target.closest('.product-js'), button);
+  updateQuantity(priceInitQuantity);
+}
+
+const updateQuantity = ({ price, compare}) => {
+  const containerQuantity = $Q('.container-quantity');
+  containerQuantity.dataset.price = price;
+  containerQuantity.dataset.compare = compare;
+  $Q('#quantity', containerQuantity).value = 1;
+  // ! quantity in product main
+  initProductQuantity();
 }

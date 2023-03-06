@@ -32,6 +32,11 @@
     description: product.description
   %}
 
+  {% render 'quantity-selector'
+    price: price,
+    compare: compare_at_price
+  %}
+
   <form
     class="add-cart-js add-product-cart"
     data-product="{{ product.id }}"

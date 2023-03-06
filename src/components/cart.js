@@ -25,6 +25,7 @@ sliderUpsell();
  const addProducts = async (event) => {
 
   let itemId = 0;
+  const valueCount = $Q("#quantity").value || 1;
 
   for (const input of event.target) {
     if (input.name === "id") {
@@ -36,7 +37,7 @@ sliderUpsell();
     items: [
       {
         id: itemId,
-        quantity: 1,
+        quantity: valueCount,
       },
     ],
     sections: CART_SECTION,

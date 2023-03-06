@@ -62,7 +62,7 @@
               id="price-{{ item.variant.id }}-{{ forloop.index }}"
               data-quantity="{{ item.quantity }}"
             >
-              {{ item.original_line_price | money }}
+              {{ item.original_line_price | money_with_currency }}
             </span>
 
             <span

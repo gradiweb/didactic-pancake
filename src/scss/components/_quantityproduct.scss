@@ -1,0 +1,16 @@
+
+.container-quantity {
+  width: 40%;
+  margin: 10px 0 10px 0;
+  padding: 5px;
+
+  input {
+    width: 50%;
+  }
+  .num-add,
+  .num-minus {
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
