@@ -9,6 +9,12 @@
     {{ settings.colors_bg_1 }}
   </section>
 
+  {% assign markdown = pages["handle-page"].metafields.custom.markdown %}
+  {% render 'markdown'
+    markdown: markdown,
+    class: 'wrapper'
+  %}
+  
   <section class="wrapper">
     <h2 class="h1">Design System</h2>
     <p class="h2">

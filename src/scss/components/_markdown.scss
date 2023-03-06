@@ -1,0 +1,12 @@
+.markdown {
+  & > * {
+    margin-bottom: 10px;
+  }
+  &--list {
+    padding-left: 20px;
+  }
+
+  &--sub-item {
+    padding-left: 10px;
+  }
+}
