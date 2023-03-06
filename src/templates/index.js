@@ -8,6 +8,7 @@ import { openDropDown } from "../components/header";
 import { toggleDataActive } from "../utils/toggle-dataset";
 import { isRegisteredUser } from "../components/news-letters";
 import { lazyVideo } from '../components/lazy-videos'
+import "../components/video-frame"
 
 isRegisteredUser();
 variantOnChange(".variants");

@@ -89,10 +89,14 @@ export const swiperSmall = async (id) => {
  * Iteration to create all sliders with arrows
  */
 export const swiperArrows = (() => {
-
+  
   $Qll(".slider_arrows").map((slide) => {
     // start observing
     createInterception(slide, configArrows);
+  })
+  $Qll(".slider_arrows-infinity").map((slide) => {
+    // start observing
+    createInterception(slide, () => configArrows(`#${slide.id}`), true);
   })
 })();
 
