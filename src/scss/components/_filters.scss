@@ -1,0 +1,128 @@
+@use '../abstracts/variables';
+
+.filter-group-display {
+  &__list {
+    padding-left: 1px;
+    list-style: none;
+
+    li:not(li:last-of-type) {
+      padding-bottom: .5rem;
+    }
+
+    li {
+      margin-bottom: 15px;
+
+      input[type="checkbox"] {
+
+        &:checked + label {
+          font-weight: 700;
+          text-decoration: underline;
+        }
+
+        &:disabled + label {
+          display: none;
+        }
+      }
+
+      .checkbox__custom {
+        width: 14px;
+        height: 14px;
+        margin-right: .5rem;
+        background-color: variables.$color-white;
+        border-radius: 2px;
+        content: "";
+        cursor: pointer;
+        outline: 1px solid #ddd;
+      }
+
+      .checkbox__input {
+        position: absolute;
+        display: block;
+        width: 1px;
+        height: 1px;
+        margin-right: .5rem;
+        opacity: 0;
+        
+        &:checked+.checkbox__custom {
+          background-color: #009ae2;
+          outline: 1px solid variables.$color-black;
+      
+          &::after {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            color: variables.$color-white;
+            content: 'L';
+            font-size: 12px;
+            transform: rotateZ(45deg) rotateY(180deg) translate(1px, -1.5px);
+          }
+        }
+      }
+        
+      & > span {
+        color: #b1b1b1;
+        font-size: 14px
+      }
+    }
+
+    &-item {
+      label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      input {
+        margin-right: .5rem;
+      }
+    }
+
+    &.color {
+      display: flex;
+      flex-direction: row;
+      /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+
+      li:not(li:last-of-type) {
+        padding-right: calc(.5rem + 4px );
+      }
+
+      input[type="checkbox"] {
+        display: none;
+
+        & + span {
+          display: block;
+          display: flex;
+          width: 32px;
+          height: 32px;
+          box-sizing: content-box;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid transparent;
+          border-radius: 100%;
+          cursor: pointer;
+          font-size: 0;
+          transition: all .3s;
+
+          & > span {
+            width: 24px;
+            height: 24px;
+            border-radius: 100%;
+          }
+        }
+
+        &[value="White"] + span > span {
+          border: 1px solid variables.$color-black;
+        }
+
+        &:checked + span {
+          border: 1px solid variables.$color-black;
+        }
+      }
+    }
+  }
+}

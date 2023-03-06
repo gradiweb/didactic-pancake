@@ -2,3 +2,9 @@
   margin-bottom: 50px;
 
 }
+
+.list-products {
+  &--empty {
+    text-align: center;
+  }
+}

@@ -46,9 +46,8 @@ export function openAccordion() {
         .forEach((item) => {
           item.addEventListener(
             'click',
-            (e) => {
-              e.stopPropagation();
-              accordionAction(e.target, accordion)
+            (event) => {
+              accordionAction(event.target, accordion)
             },
           )
         })

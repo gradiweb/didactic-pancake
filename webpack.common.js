@@ -8,6 +8,7 @@ const JS_DIR = path.resolve(__dirname, './src');
 const entry = {
   theme: './src/templates/index.js',
   product: './src/templates/product.js',
+  collection: './src/templates/collection.js',
   password: './src/templates/password.js',
   customer: './src/templates/customer.js',
   contact: './src/templates/contact.js'

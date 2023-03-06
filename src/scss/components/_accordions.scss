@@ -5,11 +5,12 @@
 }
 
 .accordion-item {
-  cursor: pointer;
 
   &__content {
-    display: none;
+    overflow: hidden;
+    max-height: 0;
     margin-top: 15px;
+    transition: max-height 0.15s ease-out;
   }
 
   &__button {
@@ -19,6 +20,7 @@
     padding: 15px 30px;
     border: 1px solid #000;
     border-radius: 5px;
+    cursor: pointer;
 
     svg {
       width: 20px;
@@ -27,7 +29,8 @@
 
     &[data-active="true"] {
       & ~ div.accordion-item__content {
-        display: block;
+        max-height: 500px;
+        transition: max-height 0.25s ease-in;
       }
 
       svg {

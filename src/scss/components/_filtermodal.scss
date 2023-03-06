@@ -1,0 +1,127 @@
+%flex-center-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: -400px;
+  display: flex;
+  width: 350px;
+  height: 100%;
+  background: #FFF;
+  box-shadow: 1px 3px 15px rgba(0, 0, 0, 0.131);
+  transition: right .3s;
+
+  @media screen and (max-width: 351px) {
+    width: 100%;
+  }
+
+  &[data-active="true"] {
+    right: 0;
+  }
+
+  .accordions {
+    grid-row-gap: 0px;
+    row-gap: 0px;
+
+    .accordion-item {
+      border-bottom: 1px solid #b1b1b1;
+
+      &__button {
+        padding: 20px 0;
+        border: none;
+        font-size: 18px;
+        font-weight: 600;
+
+        svg {
+          width: 15px;
+        }
+      }
+
+      &__content {
+        margin: 0 0 15px;
+
+        & > ul {
+          list-style: none;
+
+          li {
+            @extend %flex-center-between;
+            margin-bottom: 15px;
+
+            & > div {
+              input[type="checkbox"] {
+                margin-right: 10px;
+              }
+            }
+
+            & > span {
+              color: #b1b1b1;
+              font-size: 14px
+            }
+          }
+        }
+
+        .range {
+          @extend %flex-center-between;
+          margin-bottom: 15px;
+
+          &-element {
+            padding: 5px;
+            border: 1px solid;
+            border-radius: 5px;
+
+            input[type="number"] {
+              border-style: none;
+            }
+          }
+
+          & > label {
+            margin: 0 10px;
+          }
+        }
+      }
+
+    }
+  }
+
+  &-form {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0 15px;
+    overflow-y: auto;
+
+    &__name {
+      @extend %flex-center-between;
+      padding: 15px 0;
+
+      svg {
+        cursor: pointer;
+        width: 15px;
+        height: 15px;
+      }
+    }
+
+    &__submit {
+      position: sticky;
+      position: -webkit-sticky;
+      bottom: 0;
+      padding: 15px 0;
+    }
+  }
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #ff4500;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
