@@ -17,7 +17,6 @@ export const lazyVideo = () => {
     const lazyVideoObserver = new IntersectionObserver((entries) => {
       entries.forEach((video) => {
         if (video.isIntersecting) {
-          console.log("aqui", video.target.children);
           for (const source in video.target.children) {
             if (video.target.children[source]) {
               const videoSource = video.target.children[source];

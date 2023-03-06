@@ -1,12 +1,14 @@
-import { $Qll } from '../utils/query-selector'
-import Swiper, { Navigation, Pagination, FreeMode, Autoplay } from "swiper";
+import { $Q, $Qll } from '../utils/query-selector'
+import { createInterception } from '../utils/slider-defer';
 
 /**
  * Create new slider with arrows
  * @param {String} id - className reference in DOM
  * @param {Boolean} infiniy - prams option, infinity or no
  */
-const configArrows = (id, infinity = false) => {
+const configArrows = async (id, infinity = false) => {
+  const { Swiper, Navigation, FreeMode } = await import('swiper');
+
   // eslint-disable-next-line no-new
   new Swiper(id, {
     modules: [Navigation, FreeMode],
@@ -37,7 +39,9 @@ const configArrows = (id, infinity = false) => {
  * Create new slider with pagination
  * @param {String} id - className reference in DOM
  */
-export const configPagination = (id) => {
+export const configPagination = async (id) => {
+  const { Swiper, FreeMode, Pagination } = await import('swiper');
+
   // eslint-disable-next-line no-new
   new Swiper(id, {
     modules: [Pagination, FreeMode],
@@ -61,31 +65,35 @@ export const configPagination = (id) => {
  * Create new slider - 1 slide per view
  * @param {String} id - className reference in DOM
  */
-export const swiperSmall = new Swiper(".slider_small", {
-  modules: [Pagination, Autoplay, FreeMode],
-  slidesPerView: 1,
-  spaceBetween: 25,
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  freeMode: true,
-  autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
-  },
-});
+// que pasa con este slider. cuando se puede implmeentar, no veo que se llame
+export const swiperSmall = async (id) => {
+  const { Swiper, FreeMode, Pagination, Autoplay } = await import('swiper');
+  new Swiper(".slider_small", {
+    modules: [Pagination, Autoplay, FreeMode],
+    slidesPerView: 1,
+    spaceBetween: 25,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    freeMode: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+  })
+};
+
 
 /**
  * Iteration to create all sliders with arrows
  */
 export const swiperArrows = (() => {
-  $Qll(".slider_arrows").map((slide) => (
-    configArrows(`#${slide.id}`)
-  ));
-  $Qll(".slider_arrows-infinity").map((slide) => (
-    configArrows(`#${slide.id}`, true)
-  ));
+
+  $Qll(".slider_arrows").map((slide) => {
+    // start observing
+    createInterception(slide, configArrows);
+  })
 })();
 
 /**
@@ -94,4 +102,12 @@ export const swiperArrows = (() => {
 export const swiperPagination = (() => {
   $Qll(".slider_pagination")
     .map((slide) => configPagination(`#${slide.id}`))
+})();
+
+/**
+ * Render small slider
+ */
+export const renderSmallSlider =  (() => {
+  if (!$Q(".slider_small")) return;
+  createInterception($Q(".slider_small"), swiperSmall);
 })();

@@ -42,12 +42,10 @@
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
-    "@devmobiliza/videojs-vimeo": "^0.6.0",
     "axios": "^0.22.0",
     "confusing-browser-globals": "^1.0.11",
     "core-js": "^3.20.3",
     "swiper": "^7.4.1",
-    "video.js": "^7.20.2",
-    "videojs-youtube": "^2.6.1"
+    "import": "^0.0.6"
   }
 }
