@@ -26,8 +26,6 @@ sliderUpsell();
 
   const valueCount = $Q("#quantity") ? $Q("#quantity").value : 1;
   const itemId = $Q("input[name='id']", event.target).value;
-  console.log({itemId});
-  console.log(event.target);
 
   const cartParams = {
     items: [

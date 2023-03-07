@@ -1,0 +1,111 @@
+<div class="masonry--title">
+  <h2>{{ section.settings.title_masonry }}</h2>
+</div>
+<div class="masonry-v2">
+<div class="masonry-mobile">
+  {% capture image_content %}
+  {% for block in section.blocks %}
+  <div class="swiper-slide">
+    {% if block.type != 'masonry_image' %}
+      {% continue %}
+    {% endif %}
+
+    <a
+      href="{{ block.settings.url }}"
+      class="masonry-v2__image-link"
+    >
+      {% render "render-image"
+        class: "masonry-v2__image",
+        img: block.settings.image,
+        size: "300 400 600",
+        width: "auto",
+        height: "auto",
+        alt: block.settings.image.alt
+      %}
+    </a>
+  </div>
+  {% endfor %}
+  {% endcapture %}
+  {% render 'slider'
+    content: image_content,
+    arrows: true,
+   %}
+</div>
+<div class="masonry-desk">
+{% for block in section.blocks %}
+  {% if block.type != 'masonry_image' %}
+    {% continue %}
+  {% endif %}
+  <a
+    href="{{ block.settings.url }}"
+    class="masonry-v2__image-link"
+  >
+    {% render "render-image"
+      class: "masonry-v2__image",
+      img: block.settings.image,
+      size: "300 400 600",
+      width: "auto",
+      height: "auto",
+      alt: block.settings.image.alt
+    %}
+  </a>
+{% endfor %}
+</div>
+</div>
+
+{% style %}
+@media screen and (min-width: 749px) {
+  :root {
+    --masonry-columns: {{ section.settings.columns }};
+  }
+}
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Masonry V2",
+    "class": "masonry wrapper",
+    "tag": "section",
+    "settings": [
+    {
+      "type": "text",
+      "id": "title_masonry",
+      "label": "Title section",
+      "default": "Title default"
+    },
+    {
+        "type": "range",
+        "id": "columns",
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "label": "Masonry Columns",
+        "default": 4
+      }
+    ],
+    "blocks": [
+      {
+        "type": "masonry_image",
+        "name": "Masonry Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Image Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Masonry V2",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

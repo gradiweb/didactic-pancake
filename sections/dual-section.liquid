@@ -1,0 +1,188 @@
+<!-- eslint-disable max-len -->
+<!-- eslint-disable @html-eslint/no-inline-styles -->
+<div
+  class="container__dual-section
+  {% if section.settings.position_image == 'left' %}
+    position__image-left
+  {%- else -%}
+    position__image-right
+  {%- endif -%}"
+>
+  <div
+    class="container__media"
+    {% if section.settings.image_brackground == blank
+      and section.settings.color_brackground != blank
+    %}
+      style="background: {{ section.settings.color_brackground }} !important;"
+  {%- endif -%}
+  >
+    {% if section.settings.image_brackground != blank
+      and section.settings.video_url == blank
+      or section.settings.image_brackground != blank
+      and section.settings.video_url_embed == blank
+    %}
+      <picture>
+        {% assign url = section.settings.image_brackground  | img_url: '500x' %}
+        {% render "render-image"
+          class: "class_image",
+          img_src: url,
+          alt: section.settings.image_brackground.alt,
+          size: "220 300 400 500",
+          width: "100%",
+          height: "100%"
+        %}
+      </picture>
+    {% endif %}
+    {% if section.settings.video_url != blank
+      or section.settings.video_url_embed != blank
+    %}
+      {% render 'video-media',
+        video_url: section.settings.video_url,
+        video_url_embed: section.settings.video_url_embed,
+        poster: section.settings.video_background,
+        iframe_class: 'dual-section__iframe',
+        video_class: 'dual-section__video'
+      %}
+    {% endif %}
+  </div>
+
+  <div class="container__description">
+    <div>
+      {% if section.settings.dual_section_title != blank  %}
+        {% if section.settings.dual_section_title_size == "h2" %}
+          <h2>{{ section.settings.dual_section_title }}</h2>
+        {% elsif section.settings.dual_section_title_size == "h3" %}
+          <h3>{{ section.settings.dual_section_title }}</h3>
+        {% else  %}
+          <h4>{{ section.settings.dual_section_title }}</h4>
+        {% endif %}
+      {% endif %}
+      {% if section.settings.dual_section_subtitle != blank  %}
+        {{ section.settings.dual_section_subtitle }}
+      {% endif %}
+      {% if section.settings.dual_section_description != blank  %}
+        {{ section.settings.dual_section_description }}
+      {% endif %}
+
+      {% if section.settings.dual_section_linkCTA != blank
+        and section.settings.dual_section_titleCTA != blank
+      %}
+        {% render 'link'
+          class: "btn-2",
+          url:  section.settings.dual_section_linkCTA,
+          content: section.settings.dual_section_titleCTA
+        %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Dual section",
+    "class": "dual--section wrapper",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "dual_section_title",
+        "label": "Title",
+        "default": "Deafult title"
+      },
+      {
+        "type": "select",
+        "id": "dual_section_title_size",
+        "label": "Title Size",
+        "options": [
+          {
+            "value": "h2",
+            "label": "H2"
+          },
+          {
+            "value": "h3",
+            "label": "H3"
+          },
+          {
+            "value": "h4",
+            "label": "H4"
+          }
+        ],
+        "default": "h2"
+      },
+      {
+        "type": "text",
+        "id": "dual_section_titleCTA",
+        "label": "Title CTA",
+        "default": "Go to checkout"
+      },
+      {
+        "type": "url",
+        "id": "dual_section_linkCTA",
+        "label": "Link CTA"
+      },
+      {
+        "type": "select",
+        "id": "position_image",
+        "label": "Position image",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_brackground",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "color_brackground",
+        "label": "Background Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "richtext",
+        "id": "dual_section_subtitle",
+        "label": "Subtitle",
+        "default": "<p>lorem ipsum<\/p>"
+      },
+      {
+        "type": "richtext",
+        "id": "dual_section_description",
+        "label": "Description",
+        "default": "<p><strong>Lorem ipsum dolor sit amet <\/strong><em>consectetur adipiscing<\/em> <a href=\"\/collections\/all\" title=\"All\">elit<\/a><\/p>"
+      },
+      {
+        "type": "video_url",
+        "id": "video_url_embed",
+        "label": "Video url",
+        "accept": [
+          "youtube",
+          "vimeo"
+        ]
+      },
+      {
+        "type": "text",
+        "id": "video_url",
+        "label": "Video name file(.mp4)"
+      },
+      {
+        "type": "image_picker",
+        "id": "video_background",
+        "label": "Background Video"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Dual section"
+      }
+    ]
+  }
+{% endschema %}

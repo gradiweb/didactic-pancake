@@ -1,0 +1,39 @@
+@use "../abstracts/variables";
+
+.ratings {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+
+  &__full-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: variables.$color-text;
+  }
+
+  &__empty-stars:before, &__full-stars:before {
+    content: "\2605\2605\2605\2605\2605";
+    font-size: 1rem;
+  }
+  
+  &__empty-stars:before {
+    -webkit-text-stroke: 1px variables.$color-title;
+    color: transparent;
+  }
+  
+  &__full-stars:before {
+    -webkit-text-stroke: 1px variables.$color-text;
+  }
+  
+  /* Webkit-text-stroke is not supported on firefox or IE */
+  /* Firefox */
+  @-moz-document url-prefix() {
+    &__full-stars {
+      color: variables.$color-text;
+    }
+  }
+}

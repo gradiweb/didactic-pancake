@@ -79,7 +79,8 @@
     "skip_to_product_info": "Passer aux informations produits",
     "total_reviews": "total des critiques",
     "star_reviews_info": "{{ rating_value }} sur {{ rating_max }} étoiles",
-    "home": "Page d'accueil"
+    "home": "Page d'accueil",
+    "reviews_average": "({{ count }}+critiques)"
   },
   "blogs": {
     "article": {
@@ -159,7 +160,7 @@
       "clear_all": "Tout effacer",
       "from": "De",
       "filter_and_sort": "Filtrer et trier",
-      "filter_by_label": "Filtre :",
+      "filter_by_label": "Filtre :",
       "filter_button": "Filtrer",
       "filters_selected": {
         "one": "{{ count }} sélectionné",
