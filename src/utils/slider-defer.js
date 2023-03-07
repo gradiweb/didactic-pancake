@@ -31,7 +31,6 @@ const executeInterception = (
   observer,
   configSlider,
 ) => entries.forEach((entry) => {
-  console.log("render defer");
     if (entry.isIntersecting) {
       const { id } = entry.target;
       configSlider(`#${id}`);
