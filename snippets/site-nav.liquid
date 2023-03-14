@@ -1,25 +1,25 @@
 <ul
   id="nav-list-js"
   data-event="mouseenter"
-  class="flex"
+  class="nav__child flex"
   data-toggle="true"
   data-active="false"
 >
 {% for link in linklists[linklist].links %}
   {% if link.links != blank %}
-    <li class="nav-item nav-item-js">
+    <li class="nav__child-item  nav-item-js">
       <button
         type="button"
-        class="button-dropdown-js"
+        class="nav__child-button-dropdown child-itembutton-dropdown-js"
         data-active="false"
       >
         <span>{{ link.title }}</span>
         {% render 'icon-caret' %}
       </button>
-      <div class="dropdown">
-        <ul class="grid">
+      <div class="nav__child-dropdown">
+        <ul class="nav__child-item--first-level grid">
           {% for childlink in link.links %}
-            <li>
+            <li class="nav__child-item--first-level">
               <a
                 href="{{ childlink.url }}"
                 title="{{ childlink.title }}"
@@ -28,9 +28,9 @@
                 {{ childlink.title }}
               </a>
               {% if childlink.links != blank %}
-                <ul class="child-list">
+                <ul class="nav__child-item--second-level">
                   {% for grandchildlink in childlink.links %}
-                    <li>
+                    <li class="nav__child-item--second-level">
                       <a
                         href="{{ grandchildlink.url }}"
                         title="{{ grandchildlink.title }}"
@@ -47,7 +47,7 @@
       </div>
     </li>
   {% else %}
-    <li class="nav-item">
+    <li class="nav__child-item">
       <a
         href="{{ link.url }}"
         title="{{ link.title }}"
