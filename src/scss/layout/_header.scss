@@ -98,11 +98,13 @@
   }
 
   &__child {
+    display: flex;
     height: auto;
     --justify: center;
     --gap-flex: 30px;
     --align: stretch;
     flex-wrap: wrap;
+    --gap-flex: 30px;
 
     &-item {
       display: flex;
@@ -114,62 +116,63 @@
         border-bottom: 2px solid #000;
       }
 
-      & > * {
+      > * {
         margin: auto 0;
       }
 
-      & > a {
+      > a {
         text-decoration: none;
       }
       
-      & > button {
-        @extend %reset-buttons;
-        @extend %flex-center;
-        text-transform: inherit;
-
-        & > span {
-          margin-right: 5px;
-        }
-
-        svg {
-          height: 5px;
-          color: black;
-          transition: transform ease .2s;
-        }
-
-        &[data-active="true"] {
-          & ~ div.dropdown {
-            display: block;
-          }
+    }
     
-          svg {
-            transform: rotateZ(180deg);
-          }
-        }
+    &-button-dropdown {
+      @extend %reset-buttons;
+      @extend %flex-center;
+      text-transform: inherit;
+
+      > span {
+        margin-right: 5px;
       }
 
-      & > .dropdown {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        display: none;
-        width: calc(100% - 100px);
-        padding: 50px 50px 50px;
-        background-color: #FFF;
-        box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.20);
-        
-        ul {
-          --columns: 1fr 1fr 1fr 1fr;
-          
-          & > li {
-            text-transform: none;
+      svg {
+        height: 5px;
+        color: black;
+        transition: transform ease .2s;
+      }
 
-            & > a.child-title {
-              display: block;
-              margin-bottom: 20px;
-              font-weight: 600;
-              text-transform: uppercase;
-            }
+      &[data-active="true"] {
+        & ~ div.nav__child-item-dropdown {
+          display: block;
+        }
+  
+        svg {
+          transform: rotateZ(180deg);
+        }
+      }
+    }
+    
+    &-item-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      display: none;
+      width: calc(100% - 100px);
+      padding: 50px 50px 50px;
+      background-color: #FFF;
+      box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.20);
+      
+      ul {
+        --columns: 1fr 1fr 1fr 1fr;
+        
+        & > li {
+          text-transform: none;
+
+          & > a.child-title {
+            display: block;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
           }
         }
       }
@@ -177,7 +180,7 @@
   }
 
   @media screen and (max-width: 800px) {
-    display: flex;
+    display: block;
     align-items: center;
     order: -1;
 
@@ -189,7 +192,7 @@
       position: fixed;
       top: 70px;
       left: 0;
-      display: none;
+      
       width: 100%;
       height: calc(100% - 70px);
       flex-direction: column;
@@ -198,7 +201,11 @@
       animation: slidein .3s ease;
       background-color: #fff;
       overflow-y: auto;
+      border: 1px solid red;
 
+      &[data-active="false"] {
+        display: none;
+      }
       &[data-active="true"] {
         display: block;
 
@@ -222,6 +229,8 @@
         padding: 0 20px;
         border-bottom: 1px solid;
         margin: 0;
+        border: 1px solid rgb(0, 10, 206);
+
 
         & > * {
           padding: 20px 0;
@@ -230,23 +239,23 @@
         & > a {
           display: block;
         }
+      }
 
-        &-child-button {
-          display: flex;
-          width: 100%;
-          justify-content: space-between;
+      &-button-dropdown {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
 
-          svg {
-            height: 10px;
-          }
+        svg {
+          height: 10px;
         }
+      }
 
-        &-child-dropdown {
-          position: static;
-          width: 100%;
-          padding: 0 0 20px;
-          box-shadow: none;
-        }
+      &-item-dropdown {
+        position: static;
+        width: 100%;
+        padding: 0 0 20px;
+        box-shadow: none;
       }
 
       @keyframes slidein {
@@ -263,15 +272,15 @@
     .child__first {
       display: block;
 
-      & > li:not(:last-of-type) {
+      > li:not(:last-of-type) {
         margin-bottom: 25px;
       }
 
-      & > li > a.child-title {
+      > li > a.child-title {
         margin-bottom: 0;
       }
 
-      & > li > ul.child-list {
+      > li > ul.child-list {
         li {
           margin: 5px 0;
         }

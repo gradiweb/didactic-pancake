@@ -7,19 +7,19 @@
 >
 {% for link in linklists[linklist].links %}
   {% if link.links != blank %}
-    <li class="nav__child-item  nav-item-js">
+    <li class="nav__child-item nav-item-js">
       <button
         type="button"
-        class="nav__child-button-dropdown child-itembutton-dropdown-js"
+        class="nav__child-button-dropdown button-dropdown-js"
         data-active="false"
       >
         <span>{{ link.title }}</span>
         {% render 'icon-caret' %}
       </button>
-      <div class="nav__child-dropdown">
-        <ul class="nav__child-item--first-level grid">
+      <div class="nav__child-item-dropdown">
+        <ul class="nav__child child__first grid">
           {% for childlink in link.links %}
-            <li class="nav__child-item--first-level">
+            <li class="child__first-level">
               <a
                 href="{{ childlink.url }}"
                 title="{{ childlink.title }}"
@@ -28,9 +28,9 @@
                 {{ childlink.title }}
               </a>
               {% if childlink.links != blank %}
-                <ul class="nav__child-item--second-level">
+                <ul class="nav__child child__second">
                   {% for grandchildlink in childlink.links %}
-                    <li class="nav__child-item--second-level">
+                    <li class="child__second-level">
                       <a
                         href="{{ grandchildlink.url }}"
                         title="{{ grandchildlink.title }}"
