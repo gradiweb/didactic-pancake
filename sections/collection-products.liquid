@@ -1,4 +1,8 @@
 {% paginate collection.products by section.settings.pagination %}
+  {%  if settings.active_breadcrumbs_product %}
+    {% render 'breadcrumbs' %}
+  {% endif %}
+
   <div id="list-products">
     <div class="grid">
       {% for product in collection.products %}
