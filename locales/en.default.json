@@ -75,7 +75,8 @@
     "previous_slide": "Slide left",
     "loading": "Loading...",
     "total_reviews": "total reviews",
-    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars"
+    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
+    "home": "Home"
   },
   "blogs": {
     "article": {

@@ -1,0 +1,60 @@
+{% comment %}
+  Render breadcrumb
+  Only used in collection and product template
+  Usage:
+  {% render 'breadcrumbs' %}
+{% endcomment %}
+<link
+  rel="stylesheet"
+  href="{{ 'breadcrumbs.css' | asset_url }}"
+/>
+
+<nav
+  class="breadcrumbs"
+  role="navigation"
+  aria-label="breadcrumbs"
+ >
+  <ol class="breadcrumbs__list">
+    <li class="breadcrumbs__item">
+      <a
+        class="breadcrumbs__link"
+        href="/"
+        title="{{ 'accessibility.home' | t }}"
+       >
+       {{ 'accessibility.home' | t }}
+      </a>
+    </li>
+
+    {% if template contains 'product' %}
+
+      {%- if product.collections -%}
+        {% assign collection = product.collections | first %}
+
+        <li class="breadcrumbs__item aquiiii {{ template }}">
+          <a
+            class="breadcrumbs__link breadcrumbs__collection"
+            href="{{ collection.url }}"
+            title="{{ collection.title }}"
+          >
+            {{ collection.title }}
+          </a>
+        </li>
+      {%- endif -%}
+
+      <li
+        class="breadcrumbs__item"
+        aria-current="page"
+      >
+        {{ product.title }}
+      </li>
+
+    {% elsif template contains 'collection' %}
+      <li
+        class="breadcrumbs__item"
+        aria-current="page"
+      >
+        {{ collection.title }}
+      </li>
+    {% endif %}
+  </ol>
+</nav>
