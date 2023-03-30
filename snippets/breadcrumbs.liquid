@@ -27,10 +27,10 @@
 
     {% if template contains 'product' %}
 
-      {%- if product.collections -%}
+      {%- if product.collections.size > 0 -%}
         {% assign collection = product.collections | first %}
 
-        <li class="breadcrumbs__item aquiiii {{ template }}">
+        <li class="breadcrumbs__item">
           <a
             class="breadcrumbs__link breadcrumbs__collection"
             href="{{ collection.url }}"
@@ -54,6 +54,40 @@
         aria-current="page"
       >
         {{ collection.title }}
+      </li>
+
+    {% elsif template.name == 'blog' %}
+      <li
+        class="breadcrumbs__item"
+        aria-current="page"
+      >
+        {{ blog.title }}sss
+      </li>
+
+    {% elsif template.name == 'article' %}
+      <li class="breadcrumbs__item">
+        <a
+          class="breadcrumbs__link"
+          href="{{ blog.url }}"
+          title="{{ blog.title }}"
+        >
+          {{ blog.title }}
+        </a>
+      </li>
+
+      <li
+        class="breadcrumbs__item"
+        aria-current="page"
+      >
+        {{ article.title }}
+      </li>
+
+    {% elsif template contains 'page' %}
+      <li
+        class="breadcrumbs__item"
+        aria-current="page"
+      >
+        {{ page.title }}
       </li>
     {% endif %}
   </ol>
