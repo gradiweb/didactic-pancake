@@ -70,7 +70,7 @@
     {% if page_description %}
       <meta
         name="description"
-        content="{{ page_description | escape }}"
+        content="{{ page_description | escape | truncate: 150 }}"
       />
     {% endif %}
 
