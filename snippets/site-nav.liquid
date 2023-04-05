@@ -1,53 +1,48 @@
 <ul
   id="nav-list-js"
   data-event="mouseenter"
-  class="flex"
+  class="nav__child flex"
   data-toggle="true"
   data-active="false"
 >
 {% for link in linklists[linklist].links %}
   {% if link.links != blank %}
-    <li class="nav-item nav-item-js">
-      <button
-        type="button"
-        class="button-dropdown-js"
+    <li class="nav__child-item nav-item-js">
+      <span
+        class="nav__child-button-dropdown button-dropdown-js"
         data-active="false"
       >
-        <span>{{ link.title }}</span>
+        {{ link.title }}
         {% render 'icon-caret' %}
-      </button>
-      <div class="dropdown">
-        <ul class="grid">
-          {% for childlink in link.links %}
-            <li>
-              <a
-                href="{{ childlink.url }}"
-                title="{{ childlink.title }}"
-                class="child-title"
-              >
-                {{ childlink.title }}
-              </a>
-              {% if childlink.links != blank %}
-                <ul class="child-list">
-                  {% for grandchildlink in childlink.links %}
-                    <li>
-                      <a
-                        href="{{ grandchildlink.url }}"
-                        title="{{ grandchildlink.title }}"
-                      >
-                        {{ grandchildlink.title }}
-                      </a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+      </span>
+
+      <ul class="child__level child__level-dropdown">
+        {% for childlink in link.links %}
+          <li class="child__level-first">
+            <a
+              href="{{ childlink.url }}"
+              title="{{ childlink.title }}"
+            >
+              {{ childlink.title }}
+            </a>
+            {% if childlink.links != blank %}
+              {% for grandchildlink in childlink.links %}
+                <span class="child__level-second">
+                  <a
+                    href="{{ grandchildlink.url }}"
+                    title="{{ grandchildlink.title }}"
+                  >
+                    {{ grandchildlink.title }}
+                  </a>
+                </span>
+              {% endfor %}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
     </li>
   {% else %}
-    <li class="nav-item">
+    <li class="nav__child-item">
       <a
         href="{{ link.url }}"
         title="{{ link.title }}"
