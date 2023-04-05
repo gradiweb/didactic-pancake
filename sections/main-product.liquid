@@ -12,7 +12,10 @@
 %}
 
 <div class="main-product__detail">
+
+{%  if settings.active_breadcrumbs_product %}
   {% render 'breadcrumbs' %}
+{% endif %}
 
   <h1>
     {{ product.title }}

@@ -19,6 +19,23 @@
     ]
   },
   {
+    "name": "Active breadcrumbs",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "active_breadcrumbs_product",
+        "default": true,
+        "label": "Active breadcrumbs products - collections"
+      },
+      {
+        "type": "checkbox",
+        "id": "active_breadcrumbs_article",
+        "default": true,
+        "label": "Active breadcrumbs article - blogs"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.colors.name",
     "settings": [
       {

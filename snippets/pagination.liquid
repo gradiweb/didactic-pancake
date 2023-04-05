@@ -16,6 +16,12 @@
 
 {% endcomment %}
 
+{%  render 'link-tag-pagination'
+  prev:  paginate.previous.url ,
+  next:  paginate.next.url,
+  anchor: anchor
+%}
+
 {%- if paginate.parts.size > 0 -%}
   <div class="pagination">
     <nav
@@ -27,7 +33,7 @@
       {%- if paginate.previous -%}
         <li class="caret">
           <a
-            class="caret--prev"
+            class="caret--prev {{ anchor }}"
             title="{{ 'general.pagination.previous' | t }}"
             href="{{ paginate.previous.url }}{{ anchor }}"
             aria-label="{{ 'general.pagination.previous' | t }}">

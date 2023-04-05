@@ -1,0 +1,33 @@
+.breadcrumbs {
+  margin: 50px 0;
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 13.38px;
+  }
+
+  &__item {
+    display: inline-block;
+
+    &:not(:last-child):after {
+      content: "/";
+      display: inline-block;
+      margin: 0 7px;
+      position: relative;
+      width: 0.2em;
+    }
+  }
+
+  &__link {
+    color: black;
+
+    &[aria-current="page"] {
+      color: inherit;
+      font-weight: 400;
+      text-decoration: none;
+    }
+  }
+}

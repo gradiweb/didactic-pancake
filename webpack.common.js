@@ -4,6 +4,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const JS_DIR = path.resolve(__dirname, './src');
+const JS_ASSET = path.resolve(__dirname, './assets');
 
 const entry = {
   theme: './src/templates/index.js',
@@ -11,7 +12,8 @@ const entry = {
   collection: './src/templates/collection.js',
   password: './src/templates/password.js',
   customer: './src/templates/customer.js',
-  contact: './src/templates/contact.js'
+  contact: './src/templates/contact.js',
+  breadcrumbs: './assets/breadcrumbs.module.js',
 }
 
 const output = {
@@ -22,7 +24,7 @@ const output = {
 const rules = [
   {
     test: /\.js$/,
-    include: [JS_DIR],
+    include: [JS_DIR,JS_ASSET],
     exclude: /node_modules/,
     use: 'babel-loader'
   }

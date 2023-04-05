@@ -1,0 +1,14 @@
+{% comment %}
+  This snippet allows us to add the link tags with
+  the previous and next page to the current one,
+  so that google understands that they are published.
+
+  Usage:
+ {%  render 'link-tag-pagination'
+  prev:  paginate.previous.url ,
+  next:  paginate.next.url,
+  anchor: anchor
+%}
+{% endcomment %}
+<link rel="prev" href="{{ prev }}{{ anchor }}"/>
+<link rel="next" href="{{ next }}{{ anchor }}"/>
