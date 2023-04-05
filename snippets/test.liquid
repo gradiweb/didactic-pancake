@@ -1,0 +1,23 @@
+<ul id="nav-list-js" class="nav__list">
+  {% for link in linklists[linklist].links %}
+    {% if link.links != blank %}
+      <li class="nav__item">
+        <a href="{{ link.url }}" title="{{ link.title }}" class="nav__link">{{ link.title }}</a>
+        <button type="button" class="nav__toggle" aria-expanded="false" aria-controls="subnav-{{ forloop.index0 }}">
+          {% render 'icon-caret' %}
+        </button>
+        <ul id="subnav-{{ forloop.index0 }}" class="nav__sublist" hidden>
+          {% for childlink in link.links %}
+            <li class="nav__subitem">
+              <a href="{{ childlink.url }}" title="{{ childlink.title }}" class="nav__sublink">{{ childlink.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% else %}
+      <li class="nav__item">
+        <a href="{{ link.url }}" title="{{ link.title }}" class="nav__link">{{ link.title }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
