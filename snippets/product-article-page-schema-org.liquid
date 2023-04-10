@@ -88,4 +88,54 @@
     "description": "{{ article.excerpt | strip_html }}"
   }
   </script>
-{%- endif -%}
+{%- elsif request.page_type == 'page' and request.path == '/about' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "AboutPage",
+      "name": "{{ page.title }}",
+      "description": "{{ page.body | strip_html }}",
+      "image": "{{ page.image | image_url: width: 900 }}",
+      "url": "{{ page.url }}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ page.url }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ shop.name }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ shop.logo | img_url: 'master' }}",
+          "width": 600,
+          "height": 60
+        }
+      }
+    }
+  </script>
+{%- elsif request.page_type == 'page' and request.path == '/contact' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "ContactPage",
+      "name": "{{ page.title }}",
+      "description": "{{ page.body | strip_html }}",
+      "image": "{{ page.image | image_url: width: 900 }}",
+      "url": "{{ page.url }}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ page.url }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ shop.name }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ shop.logo | img_url: 'master' }}",
+          "width": 600,
+          "height": 60
+        }
+      }
+    }
+  </script>
+{%- endif -%} 
