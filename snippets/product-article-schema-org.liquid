@@ -1,0 +1,91 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "{{ shop.logo | img_url: 'master' }}",
+    "width": "600",
+    "height": "60"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ shop.name }}",
+  "url": "{{ shop.domain }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+{%- if request.page_type == 'product' -%}
+{%-liquid
+  assign price = product.selected_or_first_available_variant.price
+-%}
+{% if product.available %}
+  {% assign isAvailable = "https://schema.org/InStock" %}
+  {% elsif condition %}
+  {% assign isAvailable = "https://schema.org/OutOfStock" %}
+  {% endif %}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "{{ product.title }}",
+    "image": "{{ product.featured_image | image_url: width: 900 }}",
+    "description": "{{ product.description | strip_html }}",
+    "brand": {
+      "@type": "Brand",
+      "name": "{{ shop.name }}"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "{{ price | money_with_currency }}",
+      "priceCurrency": "{{ shop.currency }}",
+      "availability": "{{ isAvailable }}",
+      "seller": {
+        "@type": "Organization",
+        "name": "{{ shop.name }}"
+      }
+    }
+  }
+  </script>
+{% elsif request.page_type == 'article' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ article.url }}"
+    },
+    "headline": "{{ article.title }}",
+    "image": "{{ article.image | image_url: width: 900 }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ article.author }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ shop.name }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ shop.logo | img_url: 'master' }}",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "datePublished": "{{ article.published_at }}",
+    "dateModified": "{{ article.updated_at }}",
+    "description": "{{ article.excerpt | strip_html }}"
+  }
+  </script>
+{%- endif -%}
