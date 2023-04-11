@@ -1,0 +1,32 @@
+{% assign products_array = "" | split: "" %}
+{% capture item_list %}
+{% for block in blocks %}
+  {% assign product = block.settings.product %}
+  {
+    "@type": "Offer",
+    "name": "{{ product.title }}",
+    "description": "{{ product.description | strip_html   }}",
+    "url": "{{ product.url }}",
+    "image": "{{ product.featured_image.src | img_url: '1024x1024' }}",
+    "sku": "{{ product.sku }}",
+    "offers": {
+      "@type": "Offer",
+      "price": "{{ product.price | money_without_currency }}",
+      "priceCurrency": "{{ shop.currency }}"
+    }
+  }
+  {% unless forloop.last %},{% endunless %}
+{% endfor %}
+{% endcapture %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "ItemList",
+  "name": "Carrousel de productos en liquidación",
+  "description": "Aquí encontrarás los mejores productos en oferta",
+  "itemListElement": [
+    {{ item_list }}
+  ]
+}
+</script>
