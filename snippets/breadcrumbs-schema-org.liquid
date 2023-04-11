@@ -1,19 +1,51 @@
 {% assign breadcrumb = "" %}
 {% if template contains 'product' %}
   {%- if product.collections.size > 0 -%}
-    {% assign collection = product.collections | first %}
-    {% assign breadcrumb = breadcrumb | append: collection.title | append: '|' | append: collection.url | append: ',' %}
+    {% assign collection = product.collections
+      | first
+    %}
+    {% assign breadcrumb = breadcrumb
+      | append: collection.title
+      | append: '|'
+      | append: collection.url
+      | append: ','
+    %}
 {%- endif -%}
-  {% assign breadcrumb = breadcrumb | append: product.title | append: '|' | append: product.url %}
+  {% assign breadcrumb = breadcrumb
+    | append: product.title
+    | append: '|'
+    | append: product.url
+  %}
 {% elsif template contains 'collection' %}
-  {% assign breadcrumb = breadcrumb | append: collection.title | append: '|' | append: collection.url %}
+  {% assign breadcrumb = breadcrumb
+    | append: collection.title
+    | append: '|'
+    | append: collection.url
+  %}
 {% elsif template.name == 'blog' %}
-  {% assign breadcrumb = breadcrumb | append: blog.title | append: '|' | append: blog.url %}
+  {% assign breadcrumb = breadcrumb
+    | append: blog.title
+    | append: '|'
+    | append: blog.url
+  %}
 {% elsif template.name == 'article' %}
-  {% assign breadcrumb = breadcrumb | append: blog.title | append: '|' | append: blog.url | append: ',' %}
-  {% assign breadcrumb = breadcrumb | append: article.title | append: '|' | append: article.url %}
+  {% assign breadcrumb = breadcrumb
+    | append: blog.title
+    | append: '|'
+    | append: blog.url
+    | append: ','
+  %}
+  {% assign breadcrumb = breadcrumb
+    | append: article.title
+    | append: '|'
+    | append: article.url
+  %}
 {% elsif template contains 'page' %}
-  {% assign breadcrumb = breadcrumb | append: page.title | append: '|' | append: page.url %}
+  {% assign breadcrumb = breadcrumb
+    | append: page.title
+    | append: '|'
+    | append: page.url
+  %}
 {% endif %}
 
 {% assign breadcrumb_items = breadcrumb | split: ',' %}
