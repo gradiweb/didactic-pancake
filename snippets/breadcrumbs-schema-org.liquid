@@ -1,0 +1,85 @@
+{% assign breadcrumb = "" %}
+{% if template contains 'product' %}
+  {%- if product.collections.size > 0 -%}
+    {% assign collection = product.collections
+      | first
+    %}
+    {% assign breadcrumb = breadcrumb
+      | append: collection.title
+      | append: '|'
+      | append: collection.url
+      | append: ','
+    %}
+{%- endif -%}
+  {% assign breadcrumb = breadcrumb
+    | append: product.title
+    | append: '|'
+    | append: product.url
+  %}
+{% elsif template contains 'collection' %}
+  {% assign breadcrumb = breadcrumb
+    | append: collection.title
+    | append: '|'
+    | append: collection.url
+  %}
+{% elsif template.name == 'blog' %}
+  {% assign breadcrumb = breadcrumb
+    | append: blog.title
+    | append: '|'
+    | append: blog.url
+  %}
+{% elsif template.name == 'article' %}
+  {% assign breadcrumb = breadcrumb
+    | append: blog.title
+    | append: '|'
+    | append: blog.url
+    | append: ','
+  %}
+  {% assign breadcrumb = breadcrumb
+    | append: article.title
+    | append: '|'
+    | append: article.url
+  %}
+{% elsif template contains 'page' %}
+  {% assign breadcrumb = breadcrumb
+    | append: page.title
+    | append: '|'
+    | append: page.url
+  %}
+{% endif %}
+
+{% assign breadcrumb_items = breadcrumb | split: ',' %}
+{% assign breadcrumb_list = "" %}
+{% for item in breadcrumb_items %}
+  {% assign values = item | split: '|' %}
+  {% assign name = values[0] %}
+  {% assign url = values[1] %}
+  {% assign position = forloop.index %}
+  {% capture item_json %}{
+    "@type": "ListItem",
+    "position": {{ position }},
+    "name": "{{ name }}",
+    "item": "{{ shop.url | append: url }}"
+  }
+  {% endcapture %}
+  {% assign breadcrumb_list = breadcrumb_list | append: item_json %}
+  {% unless forloop.last %}
+    {% assign breadcrumb_list = breadcrumb_list | append: ',' %}
+  {% endunless %}
+{% endfor %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ shop.url }}"
+    },
+    {{ breadcrumb_list }}
+  ]
+}
+</script>
