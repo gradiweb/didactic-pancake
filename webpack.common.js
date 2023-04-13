@@ -13,6 +13,7 @@ const entry = {
   customer: './src/templates/customer.js',
   contact: './src/templates/contact.js',
   breadcrumbs: './assets/breadcrumbs.module.js',
+  faq: './assets/faq-section.module.js'
 }
 
 const output = {

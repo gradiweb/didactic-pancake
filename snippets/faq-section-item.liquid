@@ -1,0 +1,28 @@
+{% comment %}
+  Render a faq item for faq-category-content.liquid
+
+  Accepts:
+  - block: {Object} Block object shopify
+
+  Usage:
+  {% render 'faq-item' block: block %}
+{% endcomment %}
+
+{% for i in (1..20) %}
+{% capture title %}title_{{ i }}{% endcapture %}
+{% capture content %}content_{{ i }}{% endcapture %}
+{% if block.settings[title] != blank and block.settings[content] != blank %}
+  <div class="block-container__item">
+    <span> {% render 'icon-mark' %}</span>
+
+    <div class="block-container__content">
+      <h4 class="block-container__title">
+        {{ block.settings[title] }}
+      </h4>
+      <div class="block-container__description">
+        {{ block.settings[content] }}
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% endfor %}
