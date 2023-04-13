@@ -1,3 +1,16 @@
+<!-- eslint-disable @html-eslint/require-closing-tags -->
+{% comment %}
+  Renders schema orh faq
+
+  Accepts:
+  - blocks: {Array} blocks section
+
+  Usage:
+  {% render 'faq-schema-org'
+    blocks: section.blocks
+  %}
+{% endcomment %}
+
 {% assign qa_data = "" %}
 {% for block in blocks %}
   {% for i in (1..20) %}
