@@ -52,6 +52,9 @@
   {% endfor %}
 </div>
 
+{% render 'faq-schema-org'
+  blocks: section.blocks
+%}
 <script
   src="{{ 'faq.js' | asset_url }}"
   defer="defer"

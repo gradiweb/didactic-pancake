@@ -1,0 +1,41 @@
+{% assign qa_data = "" %}
+{% for block in blocks %}
+  {% for i in (1..20) %}
+    {% capture title %}title_{{ i }}{% endcapture %}
+    {% capture content %}content_{{ i }}{% endcapture %}
+    {% if block.settings[title] != blank and block.settings[content] != blank %}
+      {% assign question = block.settings[title] %}
+      {% assign answer = block.settings[content] %}
+      {% if forloop.first %}
+        {% assign comma = "," %}
+      {% else %}
+        {% assign comma = "," %}
+      {% endif %}
+
+      {% capture qa_item %}
+        {
+          "@type": "Question",
+          "name": "{{ question }}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ answer }}"
+            }
+        }
+        {{ comma }}
+      {% endcapture %}
+      {% assign qa_data = qa_data | append:qa_item %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% assign objects = qa_data | remove_last: ',' %}
+
+<script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "QAPage",
+  "mainEntity": [
+    {{ objects }}
+  ]
+}
+</script>
