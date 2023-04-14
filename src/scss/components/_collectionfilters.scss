@@ -8,7 +8,7 @@
     flex-wrap: wrap;
 
     & > * {
-      margin-right: 15px;
+      margin: 0 15px 15px 0;
       background: variables.$color-black;
       color: variables.$color-white;
       padding: 5px;
@@ -23,7 +23,6 @@
   &__controls {
     width: 100%;
     --justify: space-between;
-    align-items: flex-start;
 
     button {
       width: 30px;
@@ -45,8 +44,6 @@
     .filter-option {
       display: flex;
       align-items: center;
-      align-items: flex-start;
-
       label {
         position: relative;
         top: auto;
@@ -71,10 +68,6 @@
         &:last-of-type {
           margin-right: 0;
         }
-      }
-
-      button {
-        margin-right: 15px;
       }
     }
     
