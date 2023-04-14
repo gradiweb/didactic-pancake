@@ -68,7 +68,6 @@ $margin-customer: 50px;
         @media screen and (min-width: $break-customer) {
           display: grid;
           font-weight: 600;
-          margin-bottom: 20px;
         }
       }
   
@@ -83,9 +82,10 @@ $margin-customer: 50px;
           text-align: right;
         }
       }
-  
+      
+      padding: 10px 0 10px;
+      
       &:not(:last-of-type) {
-        padding-bottom: 10px;
         border-bottom: 1px solid;
       }
   

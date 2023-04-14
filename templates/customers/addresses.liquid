@@ -237,9 +237,39 @@
                   id="AddressCountry"
                   name="address[country]"
                   autocomplete="country"
+                  value="{{ address.country }}"
                   required
                 >
-                  {{ all_country_option_tags }}
+                  {% assign option_strings = all_country_option_tags
+                    | split: '</option>'
+                  %}
+                  {% for option_string in option_strings %}
+                    {% if option_string contains '<option' %}
+                      {% assign country_value = option_string
+                        | split: 'value="'
+                        | last
+                        | split: '"'
+                        | first
+                      %}
+
+                      {% assign provinces = option_string
+                        | split:'data-provinces="'
+                        | last
+                        | split:'"'
+                        | first
+                      %}
+
+                      <option
+                        value="{{ country_value }}"
+                        data-provinces="{{ provinces }}"
+                        {% if country_value == address.country %}
+                          selected
+                        {% endif %}
+                      >
+                        {{ country_value }}
+                      </option>
+                    {% endif %}
+                  {% endfor %}
                 </select>
               </div>
 
@@ -265,7 +295,7 @@
 
               {% render 'input'
                 class: "form__textfield",
-                type: "text",
+                type: "tel",
                 name: "address[phone]",
                 id: "AddressPhone",
                 placeholder: phone,
@@ -316,7 +346,6 @@
               value="delete"
             />
             <button
-              class="btn-1 btn_w-100"
               class="btn-1 btn__w-100"
               type="submit"
             >

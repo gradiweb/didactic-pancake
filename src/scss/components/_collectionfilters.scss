@@ -5,6 +5,7 @@
 
   &__actives {
     display: flex;
+    flex-wrap: wrap;
 
     & > * {
       margin-right: 15px;
@@ -22,6 +23,7 @@
   &__controls {
     width: 100%;
     --justify: space-between;
+    align-items: flex-start;
 
     button {
       width: 30px;
@@ -43,6 +45,8 @@
     .filter-option {
       display: flex;
       align-items: center;
+      align-items: flex-start;
+
       label {
         position: relative;
         top: auto;
@@ -67,31 +71,10 @@
         &:last-of-type {
           margin-right: 0;
         }
-      
-        .filter-design {
-          position: absolute;
-          top: 0;
-          right: auto;
-          bottom: auto;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: #009ae2;
-          opacity: 0;
-          transition: opacity 0.5s ease;
-        }
-      
-        .filter-label {
-          position: relative;
-        }
-      
-        input:checked ~ .filter-design {
-          opacity: 1;
-        }
-      
-        input:checked ~ .filter-label {
-          color: variables.$color-white;
-        }
+      }
+
+      button {
+        margin-right: 15px;
       }
     }
     
