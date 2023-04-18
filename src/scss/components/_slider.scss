@@ -5,6 +5,10 @@
   .swiper-wrapper {
     position: relative;
   }
+
+  .swiper-slide {
+    height: auto;
+  }
   
   button.swiper-button {
     position: absolute;

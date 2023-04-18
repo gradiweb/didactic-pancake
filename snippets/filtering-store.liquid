@@ -46,7 +46,8 @@
                     >
                       <!-- eslint-disable max-len -->
                       <!-- eslint-disable @html-eslint/no-extra-spacing-attrs -->
-                      <input type="checkbox"
+                      <input
+                        type="checkbox"
                         name="{{ filter_value.param_name }}"
                         value="{{ filter_value.value }}"
                         id="Filter-{{ filter.param_name }}-{{ forloop.index }}",
@@ -68,7 +69,7 @@
                         <span class="checkbox__custom"></span>
                       {% endif %}
 
-                      <span>
+                    
                         <!-- eslint-disable @html-eslint/no-inline-styles -->
                         <span
                           {% if filter.param_name == 'filter.v.option.color' %}
@@ -77,8 +78,7 @@
                         >
                           {{ filter_value.label }}
                         </span>
-                        <!-- eslint-enable @html-eslint/no-inline-styles -->
-                      </span>
+                
                     </label>
                   </li>
                 {%- endfor -%}

@@ -88,10 +88,10 @@
   .label-check[data-disable="true"] {
     >span::before {
       position: absolute;
-      top: 6px;
-      left: 16px;
+      top: 1px;
+      left: 10px;
       width: 2px;
-      height: 69%;
+      height: 20px;
       background: #995555;
       content: " ";
       transform: rotate(45deg);
