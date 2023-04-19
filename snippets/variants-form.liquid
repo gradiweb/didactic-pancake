@@ -2,8 +2,13 @@
   Options in product form
 
   Accepts:
-  - option_radio: {String} Reference options in radio buttons.
-  To render radio buttons include string with: 'Color'
+  - option_radio: {String} This prop will represent the variant
+  on a radio button, recommended for colors (Color Material etc).
+  - show_variant: {String} Indicates which variants will be rendered.
+  If only "Color" is set, only the color variant will be rendered.
+
+  Note: The variants must be passed as parameters as
+  they are called in the manager.
 
   Usage:
   {% render 'variants-form'
@@ -48,63 +53,63 @@
       %}
 
       <div class="variants--options">
-        <span class="variants--name">
-          {{ option_name }}
-        </span>
-
-        {%- if option_radio contains option_name -%}
-          <div
-            class="variants--radio-container"
-            data-type="{{ option_name }}"
-          >
-            <!-- eslint-disable max-len -->
-            {%- for option_value in product.options_by_name[option_name].values -%}
-              <label
-                class="variant__radio-button"
-                title="{{ option_name }} {{ option_value }}"
-              >
-                <input
-                  class="hidden js-option"
-                  type="radio"
-                  name="{{ option_name }}"
-                  value="{{ option_value }}"
-                  {% if option_value == available_value %}
-                    checked="checked"
-                  {% endif %}
-                />
-                <div
-                  class="variant__radio-button--design option_
-                  {{- option_value | handleize -}}"
-                >
-                </div>
-              </label>
-            {%- endfor -%}
-          </div>
-        {%- else -%}
-
-          <div
-            class="variants--select-container form__textfield"
-            data-type="{{ option_name }}"
-          >
-            <select
-              name="{{ option_name }}"
-              class="variants--select-tag js-option"
+        {% if show_variant contains option_name %}
+          <span class="variants--name">
+            {{ option_name }}
+          </span>
+          {%- if option_radio contains option_name -%}
+            <div
+              class="variants--radio-container"
+              data-type="{{ option_name }}"
             >
+              <!-- eslint-disable max-len -->
               {%- for option_value in product.options_by_name[option_name].values -%}
-                <option
-                  value="{{ option_value }}"
-                  {% if available_value == option_value %}
-                    selected="true"
-                  {% endif %}
+                <label
+                  class="variant__radio-button"
+                  title="{{ option_name }} {{ option_value }}"
                 >
-                  {{ option_value }}
-                </option>
+                  <input
+                    class="hidden js-option"
+                    type="radio"
+                    name="{{ option_name }}"
+                    value="{{ option_value }}"
+                    {% if option_value == available_value %}
+                      checked="checked"
+                    {% endif %}
+                  />
+                  <div
+                    class="variant__radio-button--design option_
+                    {{- option_value | handleize -}}"
+                  >
+                  </div>
+                </label>
               {%- endfor -%}
-              <!-- eslint-enable max-len -->
-            </select>
-          </div>
+            </div>
+          {%- else -%}
+            <div
+              class="variants--select-container form__textfield"
+              data-type="{{ option_name }}"
+            >
+              <select
+                name="{{ option_name }}"
+                class="variants--select-tag js-option"
+              >
+                {%- for option_value in product.options_by_name[option_name].values -%}
+                  <option
+                    value="{{ option_value }}"
+                    {% if available_value == option_value %}
+                      selected="true"
+                    {% endif %}
+                  >
+                    {{ option_value }}
+                  </option>
+                {%- endfor -%}
+                <!-- eslint-enable max-len -->
+              </select>
+            </div>
+          {%- endif -%}
+        {% endif %}
 
-        {%- endif -%}
       </div>
     {%- endfor -%}
   {%- endunless -%}

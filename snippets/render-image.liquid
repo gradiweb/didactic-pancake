@@ -34,13 +34,17 @@
   endif
   if img
     assign default = img | image_url: width: 30
+  else
+    unless img_src
+      assign default = "empty-images" | asset_img_url
+    endunless
   endif
 %}
 
 <img
   class="{{ class }} lazyload blur-up"
   loading="lazy"
-  title="{{ alt | default: 'Image to render' }}"
+  title="{{ alt | default: 'Image to render'}}"
   data-sizes="auto"
   src="{{ default | default: img_src }}"
   data-srcset="

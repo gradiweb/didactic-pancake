@@ -18,6 +18,7 @@
   endif
   assign image_feature = product.featured_image | image_url: width: 400
   assign image_second = product.images[1] | image_url: width: 400
+  assign image_first = product.images[1]
   if current_variant.compare_at_price == current_variant.price
     assign hide_price = 'hidden'
   endif
@@ -30,37 +31,43 @@
     href="{{ product.url }}"
   >
     <div class="product-card--head-images">
+      {% unless product.images[1] %}
+        {% assign image_first = product.featured_image %}
+        {% assign image_second = image_feature %}
+      {% endunless %}
+
       {% render "render-image"
-        class: "productcard_image-2",
+        class: "product-image-2",
         img_src: image_second,
-        img: product.images[1],
+        img: image_first,
         size: "110 150 300 400",
-        alt: "",
+        alt: product.title,
+        title: product.title,
         width: "100",
         height: "100"
       %}
+
       {% render "render-image"
-        class: "productcard_image-1",
+        class: "product-image-1",
         img_src: image_feature,
         img: product.featured_image,
         size: "110 150 300 400",
-        alt: "",
+        alt: product.title,
+        title: product.title,
         width: "100",
         height: "100"
       %}
     </div>
     <div class="product-card--head-info">
-      <span>
+      <strong>
         {{ product.title }}
-      </span>
+      </strong>
 
-      <span>
-        {% render 'price'
-          hide_price: hide_price
-          compare_at_price: current_variant.compare_at_price,
-          price: current_variant.price
-        %}
-      </span>
+      {% render 'price'
+        hide_price: hide_price
+        compare_at_price: current_variant.compare_at_price,
+        price: current_variant.price
+      %}
     </div>
   </a>
   <form
@@ -70,7 +77,8 @@
     <div class="product-card--form-variants">
       {% render 'variants-form'
         product: product
-        option_radio: 'Color'
+        option_radio: 'Color',
+        show_variant: 'Color'
       %}
     </div>
 
