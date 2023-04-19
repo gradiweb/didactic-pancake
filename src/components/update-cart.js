@@ -58,7 +58,7 @@ export const updateCartItems = (str) => {
  * @param {String} id - Variant id item cart
  * @param {String} quantity - Quantity variant by item cart
  */
- const updateQuantity = (id, quantity) => {
+ export const updateQuantity = (id, quantity) => {
   $Qll(`.item-cart-js[id="${id}"]`).forEach(
     (element) => {
       const elementRef = element;
@@ -73,6 +73,8 @@ export const updateCartItems = (str) => {
  * @param {number} id - Product ID
  */
 export const updatePriceItem = (str, id) => {
+
+  console.log({str, id});
 
   const {
     dataset,
