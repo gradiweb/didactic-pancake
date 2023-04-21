@@ -1,5 +1,5 @@
 import api from "../services/api";
-import { $Q, $Qll } from '../utils/query-selector';
+import { $Q } from '../utils/query-selector';
 import { stringToHTML } from '../utils/to-html';
 import { btnAddToCart } from "./cart";
 import { variantOnChange } from "./variants-product";

@@ -53,7 +53,7 @@
       {% for image in product.media %}
         {% assign imgUrl = image | image_url: width: 900 %}
         <div
-          class="swiper-slide img-magnifier-container {{ popup_image_mobil }}"
+          class="swiper-slide img-magnifier-container"
         >
           {% render "render-image"
             class: "myimage",
