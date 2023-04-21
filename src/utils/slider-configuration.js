@@ -6,6 +6,16 @@ export const thumbsConfig = (slidesPerView, vertical) => {
     slidesPerView: slidesPerView,
     watchSlidesProgress: true,
     freeMode: true,
+    breakpoints: {
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 10,
+      },
+      375: {
+        slidesPerView: slidesPerView,
+        spaceBetween: 10,
+      },
+    },
   }
   // eslint-disable-next-line no-unused-expressions
   vertical && (config.direction = "vertical");

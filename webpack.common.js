@@ -14,6 +14,7 @@ const entry = {
   customer: './src/templates/customer.js',
   contact: './src/templates/contact.js',
   breadcrumbs: './assets/breadcrumbs.module.js',
+  pagination: './assets/pagination.module.js',
 }
 
 const output = {

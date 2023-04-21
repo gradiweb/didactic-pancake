@@ -74,8 +74,6 @@ export const updateCartItems = (str) => {
  */
 export const updatePriceItem = (str, id) => {
 
-  console.log({str, id});
-
   const {
     dataset,
     outerText,

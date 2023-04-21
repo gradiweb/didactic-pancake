@@ -40,18 +40,27 @@
               attr: "data-live-item-image",
               img_src: imgUrl,
               img: image,
-              width: "82",
-              height: "110"
+              width: "100",
+              height: "100"
             %}
           </div>
 
-          <div class="cart-items__container--title">
-            <span>
-              {{ item.product.title }}
-            </span>
-            <span>
-              {{ item.variant.title }}
-            </span>
+          <div class="cart-items__container--title flex">
+            <div class="flex">
+              <strong>
+                {{ item.product.title }}
+              </strong>
+              <span>
+                {{ item.variant.title }}
+              </span>
+            </div>
+            <div class="item-quantity">
+            {% render 'input-quantity'
+              id: item.variant.id,
+              cart_item: item,
+              index: forloop.index,
+            %}
+          </div>
           </div>
         </div>
 
@@ -74,13 +83,6 @@
             </span>
           </div>
 
-          <div class="item-quantity">
-            {% render 'input-quantity'
-              id: item.variant.id,
-              cart_item: item,
-              index: forloop.index,
-            %}
-          </div>
         </div>
       </div>
 

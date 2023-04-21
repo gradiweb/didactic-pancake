@@ -1,0 +1,90 @@
+{% comment %}
+  infinitu scroll
+  Accepts:
+  - type_paginate: {String} - type pagination loading more
+  - container: {Elemnt} - class or id element '.container'
+  - item: {Elemnt} - element card item render list '.item'
+  - section_render: {String} - name section rendering
+  - current_url: {Object} - url current page actualy
+  - paginate: {object} - pagination liquid object
+  Usage:
+    {% render 'infinity-scroll'
+      type_paginate: "buttonLoadMore || infinityScroll || default"
+      container: ".item-list",
+      item: ".product-card",
+      section_render: "collection-products",
+      current_url: collection.url,
+      paginate: paginate
+    %}
+{% endcomment %}
+
+{% assign content_btn = 'general.pagination.load_more' | t %}
+{% assign empty_item = 'general.pagination.empty_item' | t %}
+
+<link
+  rel="preload"
+  href="{{ 'pagination.css' | asset_url }}"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+/>
+<noscript>
+  <link
+    rel="stylesheet"
+    href="{{ 'pagination.css' | asset_url }}"
+  />
+</noscript>
+
+{%  render 'link-tag-pagination'
+  prev:  paginate.previous.url ,
+  next:  paginate.next.url,
+  anchor: anchor
+%}
+
+<div class="infinity__scroll">
+  <div id="loading" class="hidden"></div>
+
+  <div id="data-config"
+    data-container="{{ container }}"
+    data-current-page="{{ paginate.current_page }}"
+    data-current-url="{{ current_url }}"
+    data-section="{{ section_render }}"
+    data-item="{{ item }}"
+    data-page-size="{{ paginate.pages }}"
+  ></div>
+
+  {% if type_paginate == 'infinityScroll' %}
+
+    <div
+      id="loading-items"
+      class="infinity__scroll--loading-container hidden"
+    >
+      <strong> {{ 'general.pagination.loading_item' | t }} </strong>
+    </div>
+    <strong class="infinity__scroll--empty-item empty-items-js hidden">
+      {{ empty_item }}
+    </strong>
+
+  {% elsif type_paginate == 'buttonLoadMore' %}
+
+    {% render 'button'
+      class: "btn-load-js",
+      type: 1,
+      action: "button"
+      content: content_btn
+    %}
+    <strong class="infinity__scroll--empty-item empty-items-js hidden">
+      {{ empty_item }}
+    </strong>
+
+  {% else %}
+    {% render 'pagination'
+      paginate: paginate,
+      anchor: '#list-products'
+    %}
+  {% endif %}
+</div>
+
+<script
+  src="{{ 'pagination.js' | asset_url }}"
+  defer="defer"
+></script>

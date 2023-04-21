@@ -33,7 +33,10 @@
       "label": "Pagination",
       "page": "Page {{ number }}",
       "next": "Next page",
-      "previous": "Previous page"
+      "previous": "Previous page",
+      "empty_item": "There are no more items to show",
+      "loading_item": "loading more items...",
+      "load_more": "Load more"
     },
     "search": {
       "search": "Search"

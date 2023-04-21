@@ -26,7 +26,7 @@ import { $Q, $Qll } from "./query-selector";
 export const setQuantity = () => {
 
   $Qll(".quantity-label").forEach(
-    (labelParent) => $Qll('button', labelParent)
+    (labelParent) => $Qll('.button', labelParent)
       .forEach((btn) => {
         btn.addEventListener(
           'click',

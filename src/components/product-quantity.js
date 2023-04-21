@@ -6,8 +6,8 @@ const countEl = document.getElementById("quantity");
 
   const getPriceFormat = () => $Q(".regular");
   const getPriceCompare = () => $Q(".compare ");
-  const priceInitial = () => convertStringToFloat($Q(".container-quantity").dataset.price);
-  const priceCompareInitial = () => convertStringToFloat($Q(".container-quantity").dataset.compare);
+  const priceInitial = () => convertStringToFloat($Q(".quantity-product-js").dataset.price);
+  const priceCompareInitial = () => convertStringToFloat($Q(".quantity-product-js").dataset.compare);
 
   function changeCurrency(price) {
     return concatRegexp(getPriceFormat().textContent, price) ;

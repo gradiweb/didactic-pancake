@@ -51,30 +51,29 @@
         </div>
       {% endfor %}
     </div>
-  </div>
+    <div class="swiper main-product__slider-thumbs {{ thumbs_direction }}">
+      <div class="swiper-wrapper">
+        {% for image in product.media %}
+          {% assign imgUrl = image | image_url: width: 175 %}
 
-  <div class="swiper main-product__slider-thumbs {{ thumbs_direction }}">
-    <div class="swiper-wrapper">
-      {% for image in product.media %}
-        {% assign imgUrl = image | image_url: width: 175 %}
+          <div class="swiper-slide image-elements__image-thumbs">
+            {% render "render-image"
+              class: "",
+              img_src: imgUrl,
+              img: image,
+              width: "120",
+              height: "120"
+            %}
+          </div>
 
-        <div class="swiper-slide image-elements__image-thumbs">
-          {% render "render-image"
-            class: "",
-            img_src: imgUrl,
-            img: image,
-            width: "175",
-            height: "99"
-          %}
-        </div>
-
-      {% endfor %}
-    </div>
-    <div class="swiper-button swiper-button-next">
-      {% render 'icon-arrow' %}
-    </div>
-    <div class="swiper-button swiper-button-prev">
-      {% render 'icon-arrow' %}
+        {% endfor %}
+      </div>
+      <div class="swiper-button swiper-button-next">
+        {% render 'icon-arrow' %}
+      </div>
+      <div class="swiper-button swiper-button-prev">
+        {% render 'icon-arrow' %}
+      </div>
     </div>
   </div>
 </div>

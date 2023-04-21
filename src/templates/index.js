@@ -21,7 +21,6 @@ import { lazyVideo } from '../components/lazy-videos'
 import "../components/video-frame"
 
 isRegisteredUser();
-variantOnChange(".variants");
 
 btnAddToCart(".add-product-cart");
 btnAddToCart(".add-product-cart-upsell");

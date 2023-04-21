@@ -17,13 +17,14 @@
 {% render 'accordions',
   accordions: accordions,
   toggle: section.settings.toggle,
-  class: 'wrapper'
 %}
 
 <!-- eslint-disable max-len -->
 {% schema %}
 {
   "name": "Accordions",
+  "class": "wrapper",
+  "tag": "section",
   "blocks": [
     {
       "type": "content",

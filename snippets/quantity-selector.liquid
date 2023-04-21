@@ -11,15 +11,15 @@ Usage:
 
 {% endcomment %}
 <div
-  class="container-quantity"
+  class="container-quantity container-quantity--left quantity-product-js"
   data-price="{{ price | money_without_currency }}"
   data-compare="{{ compare | money_without_currency }}"
 >
-  <span class="num-minus">-</span>
+  <span class="btn-change num-minus">-</span>
   <input
     name="quantity"
     id="quantity"
     value="1"
     min="1"/>
-  <span class="num-add">+</span>
+  <span class="btn-change num-add">+</span>
 </div>

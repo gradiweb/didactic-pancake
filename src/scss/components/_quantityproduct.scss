@@ -1,14 +1,15 @@
 
 .container-quantity {
-  width: 40%;
-  margin: 10px 0 10px 0;
-  padding: 5px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px 10px 10px 0;
 
   input {
-    width: 50%;
+    width: 38px;
+    height: 28px;
+    text-align: center;
   }
-  .num-add,
-  .num-minus {
+  .btn-change {
     padding: 5px;
     border-radius: 50%;
     cursor: pointer;

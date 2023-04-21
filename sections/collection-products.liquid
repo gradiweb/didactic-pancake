@@ -9,7 +9,7 @@
         {{ 'sections.collection_template.empty' | t }}
       </div>
     {% endif %}
-    <div class="grid">
+    <div class="grid item-list">
       {% for product in collection.products %}
         {% render 'product-card'
           product: product
@@ -17,9 +17,13 @@
       {% endfor %}
     </div>
 
-    {% render 'pagination'
-      paginate: paginate,
-      anchor: '#list-products'
+    {% render 'pagination-scroll'
+      type_paginate: "buttonLoadMore"
+      container: ".item-list",
+      item: ".product-card",
+      section_render: "collection-products",
+      current_url: collection.url,
+      paginate: paginate
     %}
   </div>
 {% endpaginate %}

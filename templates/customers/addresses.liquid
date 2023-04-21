@@ -86,16 +86,11 @@
           required: false
         %}
 
-        <div class="form__textfield">
-          <select
-            id="AddressCountryNew"
-            name="address[country]"
-            autocomplete="country"
-            required
-          >
-            {{ all_country_option_tags }}
-          </select>
-        </div>
+        {% render 'select-option'
+          id:"AddressCountryNew"
+          name: "address[country]",
+          options: all_country_option_tags
+        %}
 
         {% render 'input'
           class: "form__textfield",
@@ -232,15 +227,8 @@
                 required: false
               %}
 
-              <div class="form__textfield">
-                <select
-                  id="AddressCountry"
-                  name="address[country]"
-                  autocomplete="country"
-                  value="{{ address.country }}"
-                  required
-                >
-                  {% assign option_strings = all_country_option_tags
+              {% capture options %}
+                {% assign option_strings = all_country_option_tags
                     | split: '</option>'
                   %}
                   {% for option_string in option_strings %}
@@ -270,8 +258,11 @@
                       </option>
                     {% endif %}
                   {% endfor %}
-                </select>
-              </div>
+              {% endcapture %}
+              {% render 'select-option'
+                name: "address[country]",
+                options: options
+              %}
 
               {% render 'input'
                 class: "form__textfield",

@@ -2,7 +2,6 @@
 
 .wrapper {
   max-width: variables.$max-width--wrapper;
-  margin: 0 auto;
 
   @media screen and (min-width: 750px) {
     padding-right: variables.$paddings-side;
@@ -13,4 +12,8 @@
     padding-right: variables.$paddings-side--movil;
     padding-left: variables.$paddings-side--movil;
   }
+}
+
+section {
+  margin: 30px auto;
 }
