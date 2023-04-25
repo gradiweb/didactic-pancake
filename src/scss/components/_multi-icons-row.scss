@@ -3,9 +3,6 @@
 $margin-icon: 30px;
 
 .row-icons {
-  padding-top: calc(variables.$margin-section - $margin-icon);
-  padding-bottom: calc(variables.$margin-section - $margin-icon);
-
   &__elements {
     flex-wrap: nowrap;
     align-items: flex-start;
@@ -22,11 +19,11 @@ $margin-icon: 30px;
         --justify: flex-start;
         overflow-x: auto;
         flex-wrap: nowrap;
-        margin-left: - variables.$paddings-side--movil;
-        margin-right: - variables.$paddings-side--movil;
+        margin-left: calc(1rem - variables.$paddings-side--movil);
+        margin-right: calc(1rem - variables.$paddings-side--movil);
         padding-left: variables.$paddings-side--movil;
         padding-right: variables.$paddings-side--movil;
-  
+
         .row-icons__element {
           flex-shrink: 0;
           width: auto;
@@ -41,7 +38,6 @@ $margin-icon: 30px;
   }
 
   &__description {
-
     & > div {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -77,10 +73,6 @@ $margin-icon: 30px;
         justify-content: center;
       }
     }
-    
-    img {
-      border-radius: 50%;
-    }
 
     h3 {
       margin: 10px 0;
@@ -88,7 +80,7 @@ $margin-icon: 30px;
 
     &.position__left {
       justify-content: space-around;
-      
+
       img {
         margin-right: $margin-icon;
       }

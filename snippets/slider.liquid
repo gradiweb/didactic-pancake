@@ -73,7 +73,7 @@
         hidden-arrows
       {% endif %}"
     >
-      prev
+      {% render "button-arrow" %}
     </button>
     <button
       type="button"
@@ -83,7 +83,7 @@
         hidden-arrows
       {% endif %}"
     >
-      next
+      {% render "button-arrow", direction: "right" %} 
     </button>
   {% endif %}
 </div>

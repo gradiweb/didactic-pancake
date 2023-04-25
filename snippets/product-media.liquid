@@ -42,7 +42,7 @@
 -%}
 
 {% comment %}  MAIN SLIDER {% endcomment %}
-<div class="main-product__slider {{ swiper_direction }} {{ direction }}">
+<div class="product-media {{ swiper_direction }} {{ direction }}">
   {% comment %}  MAIN SLIDER {% endcomment %}
   <div
     class="swiper main-product__slider-principal
@@ -68,6 +68,7 @@
     </div>
   </div>
   {% comment %}  SIDE SLIDER {% endcomment %}
+  
   <div class="swiper main-product__slider-thumbs {{ thumbs_direction }}">
     <div class="swiper-wrapper">
       {% for image in product.media %}
@@ -84,10 +85,10 @@
       {% endfor %}
     </div>
     <div class="swiper-button swiper-button-next">
-      {% render 'icon-caret' %}
+      {% render "button-arrow" %} 
     </div>
     <div class="swiper-button swiper-button-prev">
-      {% render 'icon-caret' %}
+      {% render "button-arrow", direction: "right" %} 
     </div>
   </div>
 </div>

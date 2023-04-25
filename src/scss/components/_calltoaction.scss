@@ -9,7 +9,6 @@
     z-index: -1;
     width: 100%;
     height: 100%;
-    filter: brightness(0.7);
     object-fit: cover;
     object-position: top;
   }
@@ -27,7 +26,7 @@
       }
     }
   }
-  
+
   &__title {
     flex-basis: 60%;
     color: var(--color-font);
@@ -75,7 +74,8 @@
     }
   }
 
-  &__title, &__buttons-wrapper {
-    margin: .5rem 0;
+  &__title,
+  &__buttons-wrapper {
+    margin: 0.5rem 0;
   }
 }

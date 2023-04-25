@@ -6,6 +6,10 @@
 -%}
 <!-- eslint-enable max-len -->
 
+{% if settings.active_breadcrumbs_product %}
+  {% render 'breadcrumbs' %}
+{% endif %}
+
 {% render 'product-media'
   product: product,
   direction: "vertical-inside",
@@ -13,11 +17,6 @@
 %}
 
 <div class="main-product__detail">
-
-{%  if settings.active_breadcrumbs_product %}
-  {% render 'breadcrumbs' %}
-{% endif %}
-
   <h1>
     {{ product.title }}
   </h1>
@@ -78,12 +77,12 @@
 </div>
 
 {% schema %}
-  {
-    "name": "Product page",
-    "class": "main-product wrapper product-js",
-    "tag": "section",
-    "max_blocks": 4,
-    "blocks": [
+{
+  "name": "Product page",
+  "class": "main-product wrapper product-js",
+  "tag": "section",
+  "max_blocks": 4,
+  "blocks": [
     {
       "type": "content",
       "name": "Block icon",
@@ -100,6 +99,6 @@
         }
       ]
     }
-    ]
-  }
+  ]
+}
 {% endschema %}

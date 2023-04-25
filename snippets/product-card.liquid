@@ -27,10 +27,10 @@
 <card-product class="product-card product-js">
   <a
     title="{{ product.title }}"
-    class="product-card--head"
+    class="product-card__head"
     href="{{ product.url }}"
   >
-    <div class="product-card--head-images">
+    <div class="product-card__head-images">
       {% unless product.images[1] %}
         {% assign image_first = product.featured_image %}
         {% assign image_second = image_feature %}
@@ -58,7 +58,7 @@
         height: "100"
       %}
     </div>
-    <div class="product-card--head-info">
+    <div class="product-card__head-info">
       <strong>
         {{ product.title }}
       </strong>
@@ -71,10 +71,10 @@
     </div>
   </a>
   <form
-    class="product-card--form add-product-cart"
+    class="product-card__form add-product-cart"
     action="/cart/add"
   >
-    <div class="product-card--form-variants">
+    <div class="product-card__form-variants">
       {% render 'variants-form'
         product: product
         option_radio: 'Color',
@@ -87,6 +87,5 @@
       class: 'btn-add-to-cart',
       available: product.selected_or_first_available_variant.available
     %}
-
   </form>
 </card-product>

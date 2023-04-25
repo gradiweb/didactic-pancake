@@ -1,17 +1,21 @@
-
 .container-quantity {
   display: flex;
   justify-content: flex-start;
-  padding: 10px 10px 10px 0;
+  align-items: center;
+  width: fit-content;
+  padding: 10px;
+  border: 1px solid;
 
   input {
-    width: 38px;
-    height: 28px;
+    width: 50px;
+    padding: 0;
     text-align: center;
+    border-style: none;
   }
+
   .btn-change {
-    padding: 5px;
-    border-radius: 50%;
+    line-height: 16px;
+    font-weight: 600;
     cursor: pointer;
   }
 }
