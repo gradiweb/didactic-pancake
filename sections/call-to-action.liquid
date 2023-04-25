@@ -21,7 +21,7 @@
   <div class="cta__buttons-wrapper">
     {% if section.settings.text_button_one != blank and section.settings.url_button_one != blank %}
       {% render 'link'
-        class: "btn-2 cta__button",
+        class: "btn-1 cta__button",
         url: section.settings.url_button_one,
         content: section.settings.text_button_one
       %}
@@ -29,7 +29,7 @@
 
     {% if section.settings.text_button_two != blank and section.settings.url_button_two != blank %}
       {% render 'link'
-        class: "btn-3 cta__button",
+        class: "btn-2 cta__button",
         url: section.settings.url_button_two,
         content: section.settings.text_button_two
       %}
@@ -46,8 +46,8 @@
 
 {% style %}
   :root {
-    --color-background-cta: {{ default_background_color }};
-    --color-font: {{ section.settings.color_title }};
+    --color-background-cta: {{ default_background_color | default: "#f5f5f5" }};
+    --color-font: {{ section.settings.color_title | default: "#000000" }};
   }
 {% endstyle %}
 
@@ -55,6 +55,7 @@
 {
   "name": "Call To Action",
   "class": "cta",
+  "tag": "section",
   "settings": [
     {
       "type": "radio",
@@ -82,13 +83,13 @@
       "type": "color",
       "id": "background_color",
       "label": "Background Color",
-      "default": "#989898"
+      "default": "#f5f5f5"
     },
     {
       "type": "color",
       "id": "color_title",
       "label": "Font Color",
-      "default": "#FFFFFF"
+      "default": "#000000"
     },
     {
       "type": "image_picker",

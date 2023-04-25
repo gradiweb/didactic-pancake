@@ -1,16 +1,21 @@
-
 .container-quantity {
-  width: 40%;
-  margin: 10px 0 10px 0;
-  padding: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: fit-content;
+  padding: 10px;
+  border: 1px solid;
 
   input {
-    width: 50%;
+    width: 50px;
+    padding: 0;
+    text-align: center;
+    border-style: none;
   }
-  .num-add,
-  .num-minus {
-    padding: 5px;
-    border-radius: 50%;
+
+  .btn-change {
+    line-height: 16px;
+    font-weight: 600;
     cursor: pointer;
   }
 }

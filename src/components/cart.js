@@ -8,6 +8,7 @@ import {
   updateUpsell,
   updateCartbutton,
   updatePriceItem,
+  updateQuantity,
 } from "./update-cart";
 
 import { barProgress } from "../utils/bar-progress";
@@ -37,7 +38,12 @@ sliderUpsell();
     sections: CART_SECTION,
   };
 
-  const { sections } = await api.addToCart(cartParams);
+  const { sections, status } = await api.addToCart(cartParams);
+
+  if (status === 422) {
+    cartOutStockAlert();
+    return;
+  }
   if (!sections) return null;
 
   if (event.target.dataset.form !== "upsell") {
@@ -47,6 +53,14 @@ sliderUpsell();
   updateCartbutton(sections["side-cart"]);
   updatetotalPrice(sections["side-cart"]);
   updateUpsell(sections["side-cart"]);
+}
+
+const cartOutStockAlert = () => {
+  const message = $Q("#error-out-stock");
+  message.classList.remove("hidden");
+  setTimeout(() => {
+    message.classList.add("hidden");
+  }, 3000);
 }
 
 const submitForm = (form) => {
@@ -99,6 +113,8 @@ export const btnAddToCart = (formQuery, parent = null) => {
  * @param {number} quantity new quantity
  */
 export const updateCart = async (line, quantity, id) => {
+  const priceBefore = $Q(`#price-${id}`).textContent;
+  const quantityBefore = $Q(`#price-${id}`).dataset.quantity;
   addSpinner(`#price-${id}`);
 
   const cartParams = {
@@ -107,7 +123,14 @@ export const updateCart = async (line, quantity, id) => {
     sections: CART_SECTION,
   }
 
-  const { sections = null } = await api.changeCart(cartParams);
+  const { sections, status } = await api.changeCart(cartParams);
+
+  if (status === 422) {
+    $Q(`#price-${id}`).textContent = priceBefore;
+    updateQuantity(id, quantityBefore);
+    cartOutStockAlert();
+    return;
+  }
 
   if (!sections) return null;
 

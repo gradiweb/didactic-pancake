@@ -1,53 +1,61 @@
-import { $Q } from "../utils/query-selector";
+import Swiper from "swiper";
 import { principalConfig, thumbsConfig } from "../utils/slider-configuration";
-import { createInterception } from "../utils/slider-defer";
 
-/**
- * This function would be operated by the slider
- * @param {} thumbnails - config thumbns slider 
- * @param {String} principalClass - name class ref slider
- */
-const executeSliderProduct = async (thumbnails, principalClass) => {
-  const { Swiper } = await import("swiper");
-
-  return new Swiper(
-    principalClass,
-    principalConfig(thumbnails),
-  )
-}
-
-// evaluation direction slider
-const evalDirection = async (direction) => {
-  const { Swiper } = await import("swiper");
-
+export function mountSlider(main) {
+  const { dataset: { direction = null } } = main;
   let thumbnails;
   let principalClass;
-  if (direction === '1') {
-    //HORIZONTAL SWIPER SLIDER: media product page
 
+  const typeSlider = {
+    "horizontal-outside": () => renderHorizontal(),
+    "vertical-left": () => renderVerticalOutside(),
+    "vertical-right": () => renderVerticalOutside(),
+    "vertical-inside": () => renderVerticalInside(),
+    "horizontal-inside": () => renderHorizontalInside(),
+  }
+
+  const renderHorizontal = () => {
+    /**
+     * HORIZONTAL SWIPER SLIDER: media product page
+     */
     thumbnails = new Swiper(".horizontal-swipper-thumbs", thumbsConfig(3, false));
     principalClass = ".horizontal-swipper-principal";
-  } else {
-    // VERTICAL SWIPER SLIDER: media product page
-    thumbnails = new Swiper(".vertical-swipper-thumbs", thumbsConfig(4, true));
-    principalClass = ".vertical-swipper-principal";
   }
 
-  return {
-    thumbnails,
-    principalClass,
+  const renderVerticalOutside = () => {
+     /**
+      * VERTICAL SWIPER SLIDER LEFT OUTSIDE: media product page
+    */
+     thumbnails = new Swiper(".vertical-outside-swipper-thumbs", thumbsConfig(4, true));
+     principalClass = ".vertical-outside-swipper-principal";
   }
-}
 
-// mount slider initial. here start interception observer
-export const mountSlider = async (main) => {
-  const { dataset: { direction = null } } = main;
-
-  if (direction) {
-    const { thumbnails, principalClass } = await evalDirection(direction);
-    createInterception(
-      $Q(principalClass), () => executeSliderProduct(thumbnails, principalClass),
-    );
+  const renderVerticalInside = () => {
+    /**
+     * VERTICAL SWIPER SLIDER INSIDE: media product page
+     */
+    thumbnails = new Swiper(".vertical-inside-swipper-thumbs", thumbsConfig(4, true));
+    principalClass = ".vertical-inside-swipper-principal";
   }
+
+  const renderHorizontalInside = () => {
+    /**
+     * HORIZONTAL SWIPER SLIDER INSIDE: media product page
+     */
+    thumbnails = new Swiper(".horizontal-inside-swipper-thumbs", thumbsConfig(5, false));
+    principalClass = ".horizontal-inside-swipper-principal";
+  }
+
+  typeSlider[direction]();
+
   // eslint-disable-next-line no-unused-expressions
+  direction && (
+    new Swiper(
+      principalClass,
+      principalConfig(thumbnails),
+    )
+  )
+
+  // eslint-disable-next-line no-unused-expressions
+
 }

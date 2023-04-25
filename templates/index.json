@@ -1,15 +1,231 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-simple"
-    },
-    "cta": {
-      "type": "call-to-action"
-    },
-    "main": {
-      "type": "hello-world",
+      "type": "hero-simple",
       "settings": {
+        "hero_title": "Survivor pack",
+        "hero_description": "<p>Welcome to the survivor pack, enjoy the functionalities it offers you</p>",
+        "title_CTA": "CTA",
+        "link_CTA": "",
+        "background": "shopify://shop_images/laptop-in-empty-room.jpg"
       }
+    },
+    "c4e8f06a-2f8e-4481-a189-9da4765b273f": {
+      "type": "multi-icon-row",
+      "blocks": {
+        "template--15978344546484__c4e8f06a-2f8e-4481-a189-9da4765b273f-16818493522cff988a-0": {
+          "type": "icon",
+          "settings": {
+            "heading": "Fast integration",
+            "row_icon_description": "",
+            "row_icon_image": "integration"
+          }
+        },
+        "template--15978344546484__c4e8f06a-2f8e-4481-a189-9da4765b273f-16818493522cff988a-1": {
+          "type": "icon",
+          "settings": {
+            "heading": "Friendly",
+            "row_icon_description": "",
+            "row_icon_image": "friendly"
+          }
+        },
+        "template--15978344546484__c4e8f06a-2f8e-4481-a189-9da4765b273f-16818493522cff988a-2": {
+          "type": "icon",
+          "settings": {
+            "heading": "Time reduction",
+            "row_icon_description": "",
+            "row_icon_image": "time"
+          }
+        },
+        "template--15978344546484__c4e8f06a-2f8e-4481-a189-9da4765b273f-16818493522cff988a-3": {
+          "type": "icon",
+          "settings": {
+            "heading": "productivity",
+            "row_icon_description": "",
+            "row_icon_image": "producty"
+          }
+        },
+        "bb9d738c-6b54-4e34-86ff-3492ead1ee58": {
+          "type": "icon",
+          "settings": {
+            "heading": "Scalability",
+            "row_icon_description": "",
+            "row_icon_image": "scaling"
+          }
+        }
+      },
+      "block_order": [
+        "template--15978344546484__c4e8f06a-2f8e-4481-a189-9da4765b273f-16818493522cff988a-0",
+        "template--15978344546484__c4e8f06a-2f8e-4481-a189-9da4765b273f-16818493522cff988a-1",
+        "template--15978344546484__c4e8f06a-2f8e-4481-a189-9da4765b273f-16818493522cff988a-2",
+        "template--15978344546484__c4e8f06a-2f8e-4481-a189-9da4765b273f-16818493522cff988a-3",
+        "bb9d738c-6b54-4e34-86ff-3492ead1ee58"
+      ],
+      "settings": {
+        "heading": "Advantages",
+        "slider_mobile": true
+      }
+    },
+    "9ff7a25e-e105-49ba-b268-be58e10ab5ff": {
+      "type": "dual-section",
+      "settings": {
+        "section_margin": false,
+        "dual_section_title": "Dual section",
+        "dual_section_title_size": "h2",
+        "dual_section_titleCTA": "Go to checkout",
+        "dual_section_linkCTA": "",
+        "position_image": "left",
+        "image_brackground": "shopify://shop_images/model-in-neutral-colors-by-window.jpg",
+        "color_brackground": "#ffffff",
+        "dual_section_subtitle": "<p>lorem ipsum</p>",
+        "dual_section_description": "<p><strong>Lorem ipsum dolor sit amet </strong><em>consectetur adipiscing</em> <a href=\"/collections/all\" title=\"All\">elit</a></p>",
+        "video_url_embed": "",
+        "video_url": ""
+      }
+    },
+    "3b3d4f4e-1e12-4439-afc1-e247b2e4905e": {
+      "type": "dual-section",
+      "settings": {
+        "dual_section_title": "Dual section",
+        "dual_section_title_size": "h2",
+        "dual_section_titleCTA": "Go to checkout",
+        "dual_section_linkCTA": "",
+        "position_image": "right",
+        "image_brackground": "shopify://shop_images/peaceful-wallpaper-1920x1200.jpg",
+        "color_brackground": "#ffffff",
+        "dual_section_subtitle": "<p>lorem ipsum</p>",
+        "dual_section_description": "<p><strong>Lorem ipsum dolor sit amet </strong><em>consectetur adipiscing</em> <a href=\"/collections/all\" title=\"All\">elit</a></p>",
+        "video_url_embed": "",
+        "video_url": ""
+      }
+    },
+    "4ffec980-e8ab-422b-94db-60e50771a7cd": {
+      "type": "call-to-action",
+      "settings": {
+        "width_mode": "50",
+        "title": "Call to action",
+        "background_color": "#f5f5f5",
+        "color_title": "#000",
+        "text_button_one": "Collections",
+        "url_button_one": "shopify://collections",
+        "text_button_two": "Discount product",
+        "url_button_two": "shopify://products/damp-glade"
+      }
+    },
+    "ac6e96ac-edff-44b1-83d6-0aa22e35e335": {
+      "type": "masonry-v1",
+      "settings": {
+        "main_image_aligment": "left",
+        "images_show_label": "hover",
+        "image_1": "shopify://shop_images/mens-fashion-watch.jpg",
+        "image_1_label": "In egestas eget ipsum semper varius.",
+        "image_1_url": "",
+        "image_2": "shopify://shop_images/urban-mens-fashion-on-young-adult.jpg",
+        "image_2_label": "Cras dignissim viverra lobortis.",
+        "image_2_url": "",
+        "image_3": "shopify://shop_images/fashion-model-in-pink.jpg",
+        "image_3_label": "Nulla vitae purus et nibh laoreet consequat.",
+        "image_3_url": ""
+      }
+    },
+    "c16f5e1f-6802-4fda-a09f-23a636861ac3": {
+      "type": "flex-block",
+      "disabled": true,
+      "blocks": {
+        "template--15978344546484__c16f5e1f-6802-4fda-a09f-23a636861ac3-1681851905407596ee-0": {
+          "type": "block",
+          "settings": {
+            "title": "Suspendisse tristique lectus non turpis pellentesque",
+            "title_size": "h3",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+            "cta_text": "Etiam auctor",
+            "cta_url": ""
+          }
+        },
+        "template--15978344546484__c16f5e1f-6802-4fda-a09f-23a636861ac3-1681851905407596ee-1": {
+          "type": "block",
+          "settings": {
+            "title": "Suspendisse tristique lectus non turpis pellentesque",
+            "title_size": "h3",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+            "cta_text": "Etiam auctor",
+            "cta_url": ""
+          }
+        },
+        "template--15978344546484__c16f5e1f-6802-4fda-a09f-23a636861ac3-1681851905407596ee-2": {
+          "type": "block",
+          "settings": {
+            "title": "Suspendisse tristique lectus non turpis pellentesque",
+            "title_size": "h3",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+            "cta_text": "Etiam auctor",
+            "cta_url": ""
+          }
+        },
+        "template--15978344546484__c16f5e1f-6802-4fda-a09f-23a636861ac3-1681851905407596ee-3": {
+          "type": "block",
+          "settings": {
+            "title": "Suspendisse tristique lectus non turpis pellentesque",
+            "title_size": "h3",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+            "cta_text": "Etiam auctor",
+            "cta_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--15978344546484__c16f5e1f-6802-4fda-a09f-23a636861ac3-1681851905407596ee-0",
+        "template--15978344546484__c16f5e1f-6802-4fda-a09f-23a636861ac3-1681851905407596ee-1",
+        "template--15978344546484__c16f5e1f-6802-4fda-a09f-23a636861ac3-1681851905407596ee-2",
+        "template--15978344546484__c16f5e1f-6802-4fda-a09f-23a636861ac3-1681851905407596ee-3"
+      ],
+      "settings": {
+        "width": "50"
+      }
+    },
+    "81203b59-e773-4a8f-94f9-ab2785218a6b": {
+      "type": "hero-slider",
+      "blocks": {
+        "template--15978344546484__81203b59-e773-4a8f-94f9-ab2785218a6b-1681852562af62205c-0": {
+          "type": "content",
+          "settings": {
+            "heading": "Heading Title",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "cta_text": "Button text",
+            "cta_link": "#",
+            "image_desktop": "shopify://shop_images/person-stands-on-rocks-poking-out-of-the-ocean-shoreline.jpg",
+            "image_mobile": "shopify://shop_images/person-stands-on-rocks-poking-out-of-the-ocean-shoreline.jpg"
+          }
+        },
+        "template--15978344546484__81203b59-e773-4a8f-94f9-ab2785218a6b-1681852562af62205c-1": {
+          "type": "content",
+          "settings": {
+            "heading": "Heading Title",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "cta_text": "Button text",
+            "cta_link": "#",
+            "image_desktop": "shopify://shop_images/handful-of-acorns.jpg",
+            "image_mobile": "shopify://shop_images/handful-of-acorns.jpg"
+          }
+        },
+        "template--15978344546484__81203b59-e773-4a8f-94f9-ab2785218a6b-1681852562af62205c-2": {
+          "type": "content",
+          "settings": {
+            "heading": "Heading Title",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "cta_text": "Button text",
+            "cta_link": "#",
+            "image_desktop": "shopify://shop_images/welcome-to-my-business.jpg",
+            "image_mobile": "shopify://shop_images/welcome-to-my-business.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "template--15978344546484__81203b59-e773-4a8f-94f9-ab2785218a6b-1681852562af62205c-0",
+        "template--15978344546484__81203b59-e773-4a8f-94f9-ab2785218a6b-1681852562af62205c-1",
+        "template--15978344546484__81203b59-e773-4a8f-94f9-ab2785218a6b-1681852562af62205c-2"
+      ],
+      "settings": {}
     },
     "16479727170648f2b7": {
       "type": "carousel-products",
@@ -17,25 +233,25 @@
         "16479727173cfca19d-0": {
           "type": "product",
           "settings": {
-            "product": "damp-glade"
+            "product": "3d-microphone-ta-1-910754"
           }
         },
         "16479727173cfca19d-1": {
           "type": "product",
           "settings": {
-            "product": ""
+            "product": "ca-3-cable-switch-30004"
           }
         },
         "16479727173cfca19d-2": {
           "type": "product",
           "settings": {
-            "product": ""
+            "product": "lens-cap-tl-2-910764"
           }
         },
         "16479727173cfca19d-3": {
           "type": "product",
           "settings": {
-            "product": ""
+            "product": "3d-microphone-ta-1-910754"
           }
         }
       },
@@ -48,12 +264,125 @@
       "settings": {
         "heading": "Heading carousel"
       }
+    },
+    "548c36c0-79c4-4304-9c0d-27f14100319b": {
+      "type": "reviews",
+      "blocks": {
+        "template--15978344546484__548c36c0-79c4-4304-9c0d-27f14100319b-16818543793f6a805f-0": {
+          "type": "review",
+          "settings": {
+            "points": 5,
+            "title": "Awesome 👌",
+            "author": "Anonymous",
+            "description": "<p>Pellentesque tellus ante, posuere sed diam vel, mattis cursus diam.</p>"
+          }
+        },
+        "template--15978344546484__548c36c0-79c4-4304-9c0d-27f14100319b-16818543793f6a805f-1": {
+          "type": "review",
+          "settings": {
+            "points": 5,
+            "title": "Awesome 👌",
+            "author": "Anonymous",
+            "description": "<p>Pellentesque tellus ante, posuere sed diam vel, mattis cursus diam.</p>"
+          }
+        },
+        "template--15978344546484__548c36c0-79c4-4304-9c0d-27f14100319b-16818543793f6a805f-2": {
+          "type": "review",
+          "settings": {
+            "points": 5,
+            "title": "Awesome 👌",
+            "author": "Anonymous",
+            "description": "<p>Pellentesque tellus ante, posuere sed diam vel, mattis cursus diam.</p>"
+          }
+        },
+        "template--15978344546484__548c36c0-79c4-4304-9c0d-27f14100319b-16818543793f6a805f-3": {
+          "type": "review",
+          "settings": {
+            "points": 5,
+            "title": "Awesome 👌",
+            "author": "Anonymous",
+            "description": "<p>Pellentesque tellus ante, posuere sed diam vel, mattis cursus diam.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--15978344546484__548c36c0-79c4-4304-9c0d-27f14100319b-16818543793f6a805f-0",
+        "template--15978344546484__548c36c0-79c4-4304-9c0d-27f14100319b-16818543793f6a805f-1",
+        "template--15978344546484__548c36c0-79c4-4304-9c0d-27f14100319b-16818543793f6a805f-2",
+        "template--15978344546484__548c36c0-79c4-4304-9c0d-27f14100319b-16818543793f6a805f-3"
+      ],
+      "settings": {
+        "ratings": 5,
+        "title": "Review section",
+        "count": 123,
+        "cta_text": "See more reviews",
+        "cta_url": "",
+        "cta_icon": ""
+      }
+    },
+    "icons": {
+      "type": "multi-icon-row",
+      "blocks": {
+        "icon-1": {
+          "type": "icon",
+          "settings": {
+            "heading": "Fast integration",
+            "row_icon_description": "",
+            "row_icon_image": "integration"
+          }
+        },
+        "icon-2": {
+          "type": "icon",
+          "settings": {
+            "heading": "Friendly",
+            "row_icon_description": "",
+            "row_icon_image": "friendly"
+          }
+        },
+        "icon-3": {
+          "type": "icon",
+          "settings": {
+            "heading": "Time reduction",
+            "row_icon_description": "",
+            "row_icon_image": "time"
+          }
+        },
+        "icon-4": {
+          "type": "icon",
+          "settings": {
+            "heading": "productivity",
+            "row_icon_description": "",
+            "row_icon_image": "producty"
+          }
+        },
+        "icon-5": {
+          "type": "icon",
+          "settings": {
+            "heading": "Scalability",
+            "row_icon_description": "",
+            "row_icon_image": "scaling"
+          }
+        }
+      },
+      "block_order": ["icon-1", "icon-2", "icon-3", "icon-4", "icon-5"],
+      "settings": {
+        "heading": "",
+        "slider_mobile": true,
+        "section_margin": false
+      }
     }
   },
   "order": [
     "hero",
-    "cta",
-    "main",
-    "16479727170648f2b7"
+    "c4e8f06a-2f8e-4481-a189-9da4765b273f",
+    "9ff7a25e-e105-49ba-b268-be58e10ab5ff",
+    "3b3d4f4e-1e12-4439-afc1-e247b2e4905e",
+    "4ffec980-e8ab-422b-94db-60e50771a7cd",
+    "ac6e96ac-edff-44b1-83d6-0aa22e35e335",
+    "c16f5e1f-6802-4fda-a09f-23a636861ac3",
+    "81203b59-e773-4a8f-94f9-ab2785218a6b",
+    "16479727170648f2b7",
+    "548c36c0-79c4-4304-9c0d-27f14100319b",
+    "icons"
   ]
 }

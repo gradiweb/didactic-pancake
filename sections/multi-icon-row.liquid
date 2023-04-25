@@ -19,7 +19,9 @@
 {% endif %}
 
 <div
-  class="flex row-icons__elements {% if slider_mobile %}slider-mobile{% endif %}"
+  class="flex row-icons__elements
+  {% if slider_mobile %} slider-mobile{% endif %}
+  "
 >
   {% for block in section.blocks %}
     {% if block.settings.row_icon_image != blank %}
@@ -33,8 +35,8 @@
           {% render "render-image"
             img_src: url,
             alt: block.settings.row_icon_image,
-            width: "80",
-            height: "80"
+            width: "60",
+            height: "60"
           %}
 
         {% if block.settings.heading != blank or block.settings.row_icon_description != blank %}
@@ -55,11 +57,15 @@
   {% endfor %}
 </div>
 
+{% if section.settings.section_margin %}
+  <div class="margin-section"></div>
+{% endif %}
+
 {% schema %}
   {
     "name": "Row icons",
     "class": "row-icons wrapper",
-    "tag": "section",
+    "tag": "div",
     "settings": [
       {
         "type": "text",
@@ -72,6 +78,12 @@
         "label": "Slider mobile ?",
         "default": true,
         "info": "switch the view in mobile between slide and grid"
+      },
+      {
+        "type": "checkbox",
+        "id": "section_margin",
+        "label": "Margin on section",
+        "default": true
       }
     ],
     "max_blocks": 5,

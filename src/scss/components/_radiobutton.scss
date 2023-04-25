@@ -19,3 +19,16 @@
     }
   }
 }
+
+.variant__radio-button[data-disable="true"] {
+  >span::before {
+    position: absolute;
+    top: 6px;
+    left: 16px;
+    width: 2px;
+    height: 69%;
+    background: #995555;
+    content: " ";
+    transform: rotate(45deg);
+  }
+}

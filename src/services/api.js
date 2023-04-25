@@ -26,7 +26,7 @@ class API {
     }
 
     try {
-      const { data } = await axios({
+      const response = await axios({
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -36,10 +36,13 @@ class API {
         data: JSON.stringify(formData),
       });
 
-      return data;
+      response.data.status = response.status;
+      return response.data;
     } catch (error) {
       // eslint-disable-next-line no-undef
-      console.error(`Error: ${error.message}`);
+      const errorJson = JSON.parse(JSON.stringify(error));
+      errorJson.sections = '';
+      return errorJson;
     }
   }
 
@@ -71,7 +74,7 @@ class API {
     }
 
     try {
-      const { data } = await axios({
+      const response = await axios({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,10 +83,13 @@ class API {
         url: `${routes.cart_update_url}.js`,
         data: JSON.stringify(formData),
       });
-      return data;
+      response.data.status = response.status;
+      return response.data;
     } catch (error) {
       // eslint-disable-next-line no-undef
-      console.error(`Error: ${error.message}`);
+      const errorJson = JSON.parse(JSON.stringify(error));
+      errorJson.sections = '';
+      return errorJson;
     }
   }
 
@@ -114,7 +120,7 @@ class API {
     }
 
     try {
-      const { data } = await axios({
+      const response = await axios({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -123,9 +129,12 @@ class API {
         data: JSON.stringify(formData),
       });
 
-      return data;
+      response.data.status = response.status;
+      return response.data;
     } catch (error) {
-      console.error(`Error: ${error.message}`);
+      // eslint-disable-next-line no-undef
+      const errorJson = JSON.parse(JSON.stringify(error));
+      return errorJson;
     }
   }
 

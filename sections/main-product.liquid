@@ -6,17 +6,17 @@
 -%}
 <!-- eslint-enable max-len -->
 
-{% render 'product-media'
-  product: product,
-  direction: 1
-%}
-
-<div class="main-product__detail">
-
-{%  if settings.active_breadcrumbs_product %}
+{% if settings.active_breadcrumbs_product %}
   {% render 'breadcrumbs' %}
 {% endif %}
 
+{% render 'product-media'
+  product: product,
+  direction: "vertical-inside",
+  showLens: 2,
+%}
+
+<div class="main-product__detail">
   <h1>
     {{ product.title }}
   </h1>
@@ -48,6 +48,7 @@
     {% render 'variants-form'
       product: product,
       option_radio: 'Color'
+      show_variant: 'Color Material Tamaño Services'
     %}
 
     {% render 'button-add-cart'
@@ -76,12 +77,12 @@
 </div>
 
 {% schema %}
-  {
-    "name": "Product page",
-    "class": "main-product wrapper product-js",
-    "tag": "section",
-    "max_blocks": 4,
-    "blocks": [
+{
+  "name": "Product page",
+  "class": "main-product wrapper product-js",
+  "tag": "section",
+  "max_blocks": 4,
+  "blocks": [
     {
       "type": "content",
       "name": "Block icon",
@@ -98,6 +99,6 @@
         }
       ]
     }
-    ]
-  }
+  ]
+}
 {% endschema %}

@@ -2,13 +2,19 @@
   Options in product form
 
   Accepts:
-  - option_radio: {String} Reference options in radio buttons.
-  To render radio buttons include string with: 'Color'
+  - option_radio: {String} This prop will represent the variant
+  on a radio button, recommended for colors (Color Material etc).
+  - show_variant: {String} Indicates which variants will be rendered.
+  If only "Color" is set, only the color variant will be rendered.
+
+  Note: The variants must be passed as parameters as
+  they are called in the manager.
 
   Usage:
   {% render 'variants-form'
     product: product,
     option_radio: 'Color Material'
+    show_variant: 'Color Material'
   %}
 {% endcomment %}
 
@@ -47,11 +53,15 @@
         endif
       %}
 
-      <div class="variants--options">
+      <div
+        class="variants--options
+        {% unless show_variant contains option_name %}
+          hidden
+        {% endunless %}"
+      >
         <span class="variants--name">
           {{ option_name }}
         </span>
-
         {%- if option_radio contains option_name -%}
           <div
             class="variants--radio-container"
@@ -81,30 +91,27 @@
             {%- endfor -%}
           </div>
         {%- else -%}
+          {% capture options %}
+            {%- for option_value in product.options_by_name[option_name].values -%}
+              <option
+                value="{{ option_value }}"
+                {% if available_value == option_value %}
+                  selected="true"
+                {% endif %}
+              >
+                {{ option_value }}
+              </option>
+            {%- endfor -%}
+          {% endcapture %}
 
-          <div
-            class="variants--select-container form__textfield"
-            data-type="{{ option_name }}"
-          >
-            <select
-              name="{{ option_name }}"
-              class="variants--select-tag js-option"
-            >
-              {%- for option_value in product.options_by_name[option_name].values -%}
-                <option
-                  value="{{ option_value }}"
-                  {% if available_value == option_value %}
-                    selected="true"
-                  {% endif %}
-                >
-                  {{ option_value }}
-                </option>
-              {%- endfor -%}
-              <!-- eslint-enable max-len -->
-            </select>
-          </div>
+          {% render 'select-option'
+            name: option_name,
+            class: 'variants--select-container',
+            options: options
+          %}
 
         {%- endif -%}
+
       </div>
     {%- endfor -%}
   {%- endunless -%}

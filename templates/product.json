@@ -1,14 +1,108 @@
 {
   "sections": {
     "main": {
-      "type": "main-product"
+      "type": "main-product",
+      "settings": {}
     },
     "upsell": {
-      "type": "product-recommendation"
+      "type": "product-recommendation",
+      "settings": {
+        "recommendation_title": "You may also like"
+      }
+    },
+    "f26a1f89-ecd1-4f71-b118-9b423040f857": {
+      "type": "accordion",
+      "blocks": {
+        "template--15983827517620__f26a1f89-ecd1-4f71-b118-9b423040f857-16823983302445939e-0": {
+          "type": "content",
+          "settings": {
+            "heading": "Accordion-Tab heading",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          }
+        },
+        "template--15983827517620__f26a1f89-ecd1-4f71-b118-9b423040f857-16823983302445939e-1": {
+          "type": "content",
+          "settings": {
+            "heading": "Accordion-Tab heading",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          }
+        },
+        "template--15983827517620__f26a1f89-ecd1-4f71-b118-9b423040f857-16823983302445939e-2": {
+          "type": "content",
+          "settings": {
+            "heading": "Accordion-Tab heading",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          }
+        },
+        "template--15983827517620__f26a1f89-ecd1-4f71-b118-9b423040f857-16823983302445939e-3": {
+          "type": "content",
+          "settings": {
+            "heading": "Accordion-Tab heading",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          }
+        }
+      },
+      "block_order": [
+        "template--15983827517620__f26a1f89-ecd1-4f71-b118-9b423040f857-16823983302445939e-0",
+        "template--15983827517620__f26a1f89-ecd1-4f71-b118-9b423040f857-16823983302445939e-1",
+        "template--15983827517620__f26a1f89-ecd1-4f71-b118-9b423040f857-16823983302445939e-2",
+        "template--15983827517620__f26a1f89-ecd1-4f71-b118-9b423040f857-16823983302445939e-3"
+      ],
+      "settings": {
+        "toggle": true
+      }
+    },
+    "icons": {
+      "type": "multi-icon-row",
+      "blocks": {
+        "icon-1": {
+          "type": "icon",
+          "settings": {
+            "heading": "Fast integration",
+            "row_icon_description": "",
+            "row_icon_image": "integration"
+          }
+        },
+        "icon-2": {
+          "type": "icon",
+          "settings": {
+            "heading": "Friendly",
+            "row_icon_description": "",
+            "row_icon_image": "friendly"
+          }
+        },
+        "icon-3": {
+          "type": "icon",
+          "settings": {
+            "heading": "Time reduction",
+            "row_icon_description": "",
+            "row_icon_image": "time"
+          }
+        },
+        "icon-4": {
+          "type": "icon",
+          "settings": {
+            "heading": "productivity",
+            "row_icon_description": "",
+            "row_icon_image": "producty"
+          }
+        },
+        "icon-5": {
+          "type": "icon",
+          "settings": {
+            "heading": "Scalability",
+            "row_icon_description": "",
+            "row_icon_image": "scaling"
+          }
+        }
+      },
+      "block_order": ["icon-1", "icon-2", "icon-3", "icon-4", "icon-5"],
+      "settings": {
+        "heading": "",
+        "slider_mobile": true,
+        "section_margin": false
+      }
     }
   },
-  "order": [
-    "main",
-    "upsell"
-  ]
+  "order": ["main", "icons", "upsell", "f26a1f89-ecd1-4f71-b118-9b423040f857"]
 }

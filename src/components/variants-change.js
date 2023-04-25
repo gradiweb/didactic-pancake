@@ -91,11 +91,12 @@ function updateButton(available, parent, newText) {
 
   updatePrice(price, target.closest('.product-js'));
   updateButton(available, target.closest('.product-js'), button);
-  updateQuantity(priceInitQuantity);
+  if (!$Q('.quantity-product-js')) return;
+  updateQuantity(priceInitQuantity, $Q('.container-quantity'));
 }
 
-const updateQuantity = ({ price, compare}) => {
-  const containerQuantity = $Q('.container-quantity');
+const updateQuantity = ({ price, compare}, container) => {
+  const containerQuantity = container;
   containerQuantity.dataset.price = price;
   containerQuantity.dataset.compare = compare;
   $Q('#quantity', containerQuantity).value = 1;

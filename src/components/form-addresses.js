@@ -25,6 +25,8 @@ const addressForm = (form, parentNode, isCancel = false) => {
   const formById = $Q(`.address__edit[data-form="${form}"]`);
   const detailsById = $Q(`.address__detail[data-form="${form}"]`);
 
+  console.log({formById, detailsById});
+
   if (isCancel) {
     const actionsById = $Q(`.address__actions[data-form="${form}"]`);
 

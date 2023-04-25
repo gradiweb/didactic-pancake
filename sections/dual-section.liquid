@@ -1,7 +1,10 @@
 <!-- eslint-disable max-len -->
 <!-- eslint-disable @html-eslint/no-inline-styles -->
 <div
-  class="container__dual-section
+  class="container__dual-section 
+  {% if section.settings.section_margin %}
+    margin-section
+  {% endif %}
   {% if section.settings.position_image == 'left' %}
     position__image-left
   {%- else -%}
@@ -81,8 +84,14 @@
   {
     "name": "Dual section",
     "class": "dual--section wrapper",
-    "tag": "section",
+    "tag": "div",
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "section_margin",
+        "label": "Margin on section",
+        "default": true
+      },
       {
         "type": "text",
         "id": "dual_section_title",

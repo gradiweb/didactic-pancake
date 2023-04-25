@@ -42,9 +42,14 @@
         }
       }
 
-      &__content {
-        margin: 0 0 15px;
+      &__button[data-active="true"] {
+        & + .accordion-item__content {
+          margin: 0 0 15px;
+        }
+      }
 
+      &__content {
+        margin-top: 0;
         & > ul {
           list-style: none;
 
@@ -111,6 +116,7 @@
       position: -webkit-sticky;
       bottom: 0;
       padding: 15px 0;
+      background: #FFF;
     }
   }
 }
