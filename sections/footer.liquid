@@ -1,125 +1,127 @@
-<div class="grid wrapper footer-blocks">
-  {% for block in section.blocks %}
-    {% case block.type %}
+<div class="footer-blocks">
+  <div class="grid wrapper">
+    {% for block in section.blocks %}
+      {% case block.type %}
 
-      {% when "link_list" %}
-        <div class="footer-blocks_linklist">
-          {% if block.settings.heading != blank %}
-            <span class="footer-title">
-              {{ block.settings.heading }}
-            </span>
-          {% endif %}
-          {% if block.settings.menu != blank %}
-            <ul class="footer-list">
-              {% for link in linklists[block.settings.menu].links %}
-                <li>
-                  <a
-                    href="{{ link.url }}"
-                    title="{{ link.title }}">
-                    {{ link.title }}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
+        {% when "link_list" %}
+          <div class="footer-blocks_linklist">
+            {% if block.settings.heading != blank %}
+              <span class="footer-title">
+                {{ block.settings.heading }}
+              </span>
+            {% endif %}
+            {% if block.settings.menu != blank %}
+              <ul class="footer-list">
+                {% for link in linklists[block.settings.menu].links %}
+                  <li>
+                    <a
+                      href="{{ link.url }}"
+                      title="{{ link.title }}">
+                      {{ link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
 
-      {% when "newslatter" %}
-        <div class="footer-blocks_newslatter">
-          {% if block.settings.newsletter_heading != blank %}
-            <span class="footer-title">
-              {{ block.settings.newsletter_heading }}
-            </span>
-          {% endif %}
-          {% if block.settings.newsletter_sub != blank %}
-            <span class="footer-subtitle">
-              {{ block.settings.newsletter_sub }}
-            </span>
-          {% endif %}
-          {%- form 'customer', id: 'ContactFooter', class: "newslatter-form" -%}
-            <input
-              type="hidden"
-              name="contact[tags]"
-              value="newsletter"
-            />
-
-            <div class="form__textfield footer-newslatter">
+        {% when "newslatter" %}
+          <div class="footer-blocks_newslatter">
+            {% if block.settings.newsletter_heading != blank %}
+              <span class="footer-title">
+                {{ block.settings.newsletter_heading }}
+              </span>
+            {% endif %}
+            {% if block.settings.newsletter_sub != blank %}
+              <span class="footer-subtitle">
+                {{ block.settings.newsletter_sub }}
+              </span>
+            {% endif %}
+            {%- form 'customer', id: 'ContactFooter', class: "newslatter-form" -%}
               <input
-                id="NewsletterForm--{{ section.id }}"
-                type="email"
-                name="contact[email]"
-                value="{{ form.email }}"
-                aria-required="true"
-                autocorrect="off"
-                autocapitalize="off"
-                autocomplete="email"
-                {% if form.errors %}
-                  autofocus
-                  aria-invalid="true"
-                  aria-describedby="ContactFooter-error"
-                {% elsif form.posted_successfully? %}
-                  aria-describedby="ContactFooter-success"
-                {% endif %}
-                placeholder="{{ 'newsletter.label' | t }}"
-                required
+                type="hidden"
+                name="contact[tags]"
+                value="newsletter"
               />
-              <label for="NewsletterForm--{{ section.id }}">
-                {{ 'newsletter.label' | t }}
-              </label>
-              <button
-                type="submit"
-                name="commit"
-                id="Subscribe"
-                aria-label="{{ 'newsletter.button_label' | t }}"
-              >
-                {% render 'icon-arrow' %}
-              </button>
-            </div>
 
-            {%- if form.errors -%}
-              <small id="ContactFooter-error">
-                {{ form.errors.translated_fields['email'] | capitalize }}
-                {{ form.errors.messages['email'] }}
-              </small>
-            {%- else -%}
-              <h3
-                id="ContactFooter-success-exist"
-                class="error-js"
-                tabindex="-1"
-                autofocus
-              >
-                ✓ {{ 'newsletter.registered' | t }}
-              </h3>
-            {%- endif -%}
+              <div class="form__textfield footer-newslatter">
+                <input
+                  id="NewsletterForm--{{ section.id }}"
+                  type="email"
+                  name="contact[email]"
+                  value="{{ form.email }}"
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  {% if form.errors %}
+                    autofocus
+                    aria-invalid="true"
+                    aria-describedby="ContactFooter-error"
+                  {% elsif form.posted_successfully? %}
+                    aria-describedby="ContactFooter-success"
+                  {% endif %}
+                  placeholder="{{ 'newsletter.label' | t }}"
+                  required
+                />
+                <label for="NewsletterForm--{{ section.id }}">
+                  {{ 'newsletter.label' | t }}
+                </label>
+                <button
+                  type="submit"
+                  name="commit"
+                  id="Subscribe"
+                  aria-label="{{ 'newsletter.button_label' | t }}"
+                >
+                  {% render 'icon-arrow' %}
+                </button>
+              </div>
 
-            {%- if form.posted_successfully? -%}
-              <h3
-                id="ContactFooter-success"
-                tabindex="-1"
-                autofocus
-              >
-                ✓ {{ 'newsletter.success' | t }}
-              </h3>
-            {%- endif -%}
-          {%- endform -%}
-        </div>
+              {%- if form.errors -%}
+                <small id="ContactFooter-error">
+                  {{ form.errors.translated_fields['email'] | capitalize }}
+                  {{ form.errors.messages['email'] }}
+                </small>
+              {%- else -%}
+                <h3
+                  id="ContactFooter-success-exist"
+                  class="error-js"
+                  tabindex="-1"
+                  autofocus
+                >
+                  ✓ {{ 'newsletter.registered' | t }}
+                </h3>
+              {%- endif -%}
 
-      {% when "info" %}
-        <div class="footer-blocks_info">
-          {% if block.settings.heading %}
-            <h2 class="footer-title">
-              {{ block.settings.heading }}
-            </h2>
-          {% endif %}
-          {% if block.settings.sub %}
-            <p class="footer-subtitle">
-              {{ block.settings.sub }}
-            </p>
-          {% endif %}
-        </div>
+              {%- if form.posted_successfully? -%}
+                <h3
+                  id="ContactFooter-success"
+                  tabindex="-1"
+                  autofocus
+                >
+                  ✓ {{ 'newsletter.success' | t }}
+                </h3>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
 
-    {% endcase %}
-  {% endfor %}
+        {% when "info" %}
+          <div class="footer-blocks_info">
+            {% if block.settings.heading %}
+              <h2 class="footer-title">
+                {{ block.settings.heading }}
+              </h2>
+            {% endif %}
+            {% if block.settings.sub %}
+              <p class="footer-subtitle">
+                {{ block.settings.sub }}
+              </p>
+            {% endif %}
+          </div>
+
+      {% endcase %}
+    {% endfor %}
+  </div>
 </div>
 
 <div>

@@ -1,21 +1,13 @@
 import { Navigation, Thumbs, FreeMode } from "swiper";
+import { breakPoint } from "./sliderBreakPoint";
 
-export const thumbsConfig = (slidesPerView, vertical) => {
+export const thumbsConfig = (slidesPerView, vertical, type) => {
   const config = {
     modules: [FreeMode],
     slidesPerView: slidesPerView,
     watchSlidesProgress: true,
     freeMode: true,
-    breakpoints: {
-      1024: {
-        slidesPerView: 4,
-        spaceBetween: 10,
-      },
-      375: {
-        slidesPerView: slidesPerView,
-        spaceBetween: 10,
-      },
-    },
+    breakpoints: breakPoint(type),
   }
   // eslint-disable-next-line no-unused-expressions
   vertical && (config.direction = "vertical");

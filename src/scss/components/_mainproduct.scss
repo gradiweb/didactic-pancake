@@ -12,6 +12,21 @@
     position: relative;
   }
 
+  &--product-image {
+    position: relative;
+    padding-bottom: 100%;
+    &.product-video {
+      position: relative;
+      padding-bottom: initial;
+
+    }
+
+    img {
+      position: absolute;
+      object-fit: contain;
+    }
+  }
+
   &__detail {
     width: 35%;
 

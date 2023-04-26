@@ -6,6 +6,13 @@
   &__count {
     display: block;
     margin-bottom: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    .breadcrumbs {
+      margin: 0;
+    }
   }
 
   .list-products {

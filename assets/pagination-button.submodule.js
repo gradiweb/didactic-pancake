@@ -10,8 +10,6 @@ import { isLastPage, loadContentItems } from "./pagination.core";
  */
 const loadContent = ({ listItems, container }) => {
 
-  console.log({listItems});
-  console.log({container});
   const thisLastPage = isLastPage();
 
   // ! loading content
