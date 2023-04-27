@@ -1,0 +1,95 @@
+{% comment %}
+  Renders slide component
+
+  Accepts:
+  - section: {Object} **REQUIRED** Section object
+  - content: {Html} **REQUIRED** Internal sliders **init with for (iteration)
+  - arrows: {Boolean} Show arrows
+  - pagination: {Boolean} show pagination
+  - perpage: {Number} items per page
+  - wrapper: {String} class to style
+  - item_max: {Number} Item counter
+  - auto: {boolean} If auto move slider
+  - mobile_grid: {boolean} If need a grid card on mobile
+  - custom_class: {String} I need other slider config
+
+  Use this structure in content prop:
+  {% capture slider_content %}
+    {% for item in collection %}
+      <div class="swiper-slide">
+        slide {{ item.index }}
+      </div>
+    {% endfor %}
+  {% endcapture %}
+
+  Usage:
+  {% render 'slider-component',
+    section: section,
+    content: slider_content,
+    arrows: true,
+    pagination: true,
+    perpage: 3
+  %}
+{% endcomment %}
+
+{% liquid
+  assign mobile_class = ""
+
+  if mobile_grid
+    assign mobile_class = "slider__mobile-grid"
+  endif
+
+  unless custom_class
+    assign init_class = "slider-js"
+    
+    if item_max <= perpage
+      assign init_class = ""
+    endif
+
+  else
+    assign init_class = custom_class
+  endunless
+%}
+
+<div
+  class="{{ wrapper | default: 'slider__wrapper' }}"
+>
+  <swiper-container
+    class="{{ init_class | default: 'slider-js' }}"
+  >
+    {{ content }}
+  </swiper-container>
+</div>
+
+<script>
+  // swiper element
+  const swiperEl = document.querySelector(
+    'swiper-container.{{ init_class | default: 'slider-js' }}'
+  );
+
+  // swiper parameters
+  const swiperParams = {
+    slidesPerView: 1,
+    pagination: {{ pagination | default: false }},
+    navigation: {{ arrows | default: true }},
+    loop: {{ auto | default: false }},
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: {{ perpage | default: 4 }},
+      },
+    },
+    on: {
+      init: function () {
+      console.log('swiper initialized');
+    },
+    }
+  };
+
+  // now we need to assign all parameters to Swiper element
+  Object.assign(swiperEl, swiperParams);
+
+  swiperEl.initialize();
+</script>

@@ -1,7 +1,7 @@
 /* eslint-disable */
 const path = require('path');
-const TerserPlugin = require("terser-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const JS_DIR = path.resolve(__dirname, './src');
 const JS_ASSET = path.resolve(__dirname, './assets');
@@ -15,24 +15,23 @@ const entry = {
   contact: './src/templates/contact.js',
   breadcrumbs: './assets/breadcrumbs.module.js',
   pagination: './assets/pagination.module.js',
-}
+};
 
 const output = {
   filename: '[name].js',
-  path: path.resolve(__dirname, 'assets')
+  path: path.resolve(__dirname, 'assets'),
 };
 
 const rules = [
   {
     test: /\.js$/,
-    include: [JS_DIR,JS_ASSET],
+    include: [JS_DIR, JS_ASSET],
     exclude: /node_modules/,
-    use: 'babel-loader'
-  }
+    use: 'babel-loader',
+  },
 ];
 
 module.exports = {
-
   entry: entry,
 
   output: output,
@@ -43,10 +42,6 @@ module.exports = {
 
   optimization: {
     minimize: true,
-    minimizer: [
-      new TerserPlugin(),
-      new CssMinimizerPlugin(),
-    ]
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
   },
-
-}
+};

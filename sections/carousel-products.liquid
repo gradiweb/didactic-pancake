@@ -5,19 +5,25 @@
 {% capture snippet_content %}
   {% for block in section.blocks %}
     {% assign product = block.settings.product %}
-    <div class="swiper-slide">
+    <swiper-slide>
       {% render 'product-card'
         product: product
       %}
-    </div>
+    </swiper-slide>
   {% endfor %}
 {% endcapture %}
 
-{% render 'slider'
+{% render 'slider-component',
+  section: section,
   content: snippet_content,
-  arrows: true
-  item_max: section.blocks.size
+  arrows: true,
+  pagination: true,
+  perpage: 4
 %}
+
+<script
+  src="{{ 'swiper-element-bundle.min.js' | asset_url }}"
+></script>
 
 {% render 'carousel-schema-org'
   array_elements: section.blocks
