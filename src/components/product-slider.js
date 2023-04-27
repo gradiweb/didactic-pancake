@@ -18,7 +18,7 @@ export function mountSlider(main) {
     /**
      * HORIZONTAL SWIPER SLIDER: media product page
      */
-    thumbnails = new Swiper(".horizontal-swipper-thumbs", thumbsConfig(3, false));
+    thumbnails = new Swiper(".horizontal-swipper-thumbs", thumbsConfig(3, false, "horizontalOutsideBreak"));
     principalClass = ".horizontal-swipper-principal";
   }
 
@@ -26,7 +26,7 @@ export function mountSlider(main) {
      /**
       * VERTICAL SWIPER SLIDER LEFT OUTSIDE: media product page
     */
-     thumbnails = new Swiper(".vertical-outside-swipper-thumbs", thumbsConfig(4, true));
+     thumbnails = new Swiper(".vertical-outside-swipper-thumbs", thumbsConfig(3, true, "verticalOutsideBreak"));
      principalClass = ".vertical-outside-swipper-principal";
   }
 
@@ -34,7 +34,7 @@ export function mountSlider(main) {
     /**
      * VERTICAL SWIPER SLIDER INSIDE: media product page
      */
-    thumbnails = new Swiper(".vertical-inside-swipper-thumbs", thumbsConfig(4, true));
+    thumbnails = new Swiper(".vertical-inside-swipper-thumbs", thumbsConfig(4, true, "verticalInsideBreak"));
     principalClass = ".vertical-inside-swipper-principal";
   }
 
@@ -42,7 +42,7 @@ export function mountSlider(main) {
     /**
      * HORIZONTAL SWIPER SLIDER INSIDE: media product page
      */
-    thumbnails = new Swiper(".horizontal-inside-swipper-thumbs", thumbsConfig(5, false));
+    thumbnails = new Swiper(".horizontal-inside-swipper-thumbs", thumbsConfig(4, false, "horizontalInsideBreak"));
     principalClass = ".horizontal-inside-swipper-principal";
   }
 

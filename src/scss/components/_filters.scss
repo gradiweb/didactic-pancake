@@ -81,12 +81,11 @@
     &.color {
       display: flex;
       flex-direction: row;
-      /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
       flex-wrap: wrap;
-      align-items: center;
+      align-items: flex-start;
       justify-content: flex-start;
 
-      li:not(li:last-of-type) {
+      li {
         padding-right: calc(.5rem + 4px );
       }
 

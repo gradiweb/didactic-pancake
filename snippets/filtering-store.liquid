@@ -78,7 +78,6 @@
                         >
                           {{ filter_value.label }}
                         </span>
-                
                     </label>
                   </li>
                 {%- endfor -%}
@@ -87,21 +86,37 @@
             {% comment %} Determine the filter type price{% endcomment %}
             {%- when 'price_range' -%}
               <div class="ranges">
-                <span class="range1">
+                <span class="range1 flex">
                   <div>
-                    {% if  filter.range_min > 0 %}
-                    {{ filter.range_min | money_without_currency | remove: ',00' }}
+                    {% if filter.min_value.value %}
+                      {{ filter.min_value.value
+                        | money_without_currency
+                        | remove: ',00'
+                      }}
                     {% else %}
-                      0,00
+                      {{ 0
+                        | money_without_currency
+                        | remove: ',00'
+                      }}
                     {% endif %}
-                    <span>{{ cart.currency.symbol }}</span>
                   </div>
+                  <span>{{ cart.currency.symbol }}</span>
                 </span>
-                <span class="range2">
+                <span class="range2 flex">
                   <div>
-                    {{ filter.range_max | money_without_currency | remove: ',00' }}
-                    <span>{{ cart.currency.symbol }}</span>
+                    {% if filter.max_value.value %}
+                      {{ filter.max_value.value
+                        | money_without_currency
+                        | remove: ',00'
+                      }}
+                    {% else %}
+                      {{ filter.range_max
+                        | money_without_currency
+                        | remove: ',00'
+                      }}
+                    {% endif %}
                   </div>
+                  <span>{{ cart.currency.symbol }}</span>
                 </span>
               </div>
                 <div class="wrapper-filter">
@@ -116,7 +131,7 @@
                       value_min_max: filter.min_value.value,
                       value_default: "0"
                     %}
-  
+
                     {% render 'filter-field-range'
                       type_input: "range",
                       class: "range-max",
@@ -124,9 +139,9 @@
                       value_min_max: filter.max_value.value,
                       value_default: filter.range_max
                     %}
-  
+
                   </div>
-  
+
                   <div class="price-in">
                     <div class="field">
                       <span>{{ cart.currency.symbol }}</span>

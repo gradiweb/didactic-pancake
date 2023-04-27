@@ -53,42 +53,51 @@
       {% for image in product.media %}
         {% assign imgUrl = image | image_url: width: 900 %}
         <div
-          class="swiper-slide img-magnifier-container"
+          class="swiper-slide"
         >
-          {% render "render-image"
-            class: "myimage",
-            img_src: imgUrl,
-            img: image,
-            size: "300 400 900",
-            width: "900",
-            height: "506"
-          %}
+          <div class="main-product--product-image">
+            {% render "render-image"
+              class: "myimage",
+              title: product.title,
+              alt: product.title,
+              img_src: imgUrl,
+              img: image,
+              size: "300 400 900",
+              width: "100%",
+              height: "100%"
+            %}
+          </div>
         </div>
       {% endfor %}
     </div>
   </div>
   {% comment %}  SIDE SLIDER {% endcomment %}
-  
   <div class="swiper main-product__slider-thumbs {{ thumbs_direction }}">
-    <div class="swiper-wrapper">
+    <div class="swiper-wrapper image-elements">
       {% for image in product.media %}
         {% assign imgUrl = image | image_url: width: 175 %}
-        <div class="swiper-slide image-elements__image-thumbs">
-          {% render "render-image"
-            class: "swiper-image",
-            img_src: imgUrl,
-            img: image,
-            width: "175",
-            height: "99"
-          %}
+        <div class="image-elements__image-thumbs image-thumbs swiper-slide">
+          <div class="image-thumbs__wrapper">
+            {% render "render-image"
+              class: "swiper-image",
+              title: product.title,
+              alt: product.title,
+              img_src: imgUrl,
+              img: image,
+              width: "115",
+              height: "115"
+            %}
+          </div>
         </div>
       {% endfor %}
     </div>
     <div class="swiper-button swiper-button-next">
-      {% render "button-arrow" %} 
+      {% render "button-arrow" %}
     </div>
     <div class="swiper-button swiper-button-prev">
-      {% render "button-arrow", direction: "right" %} 
+      {% render "button-arrow",
+        direction: "right"
+      %}
     </div>
   </div>
 </div>

@@ -1,0 +1,382 @@
+<link
+  rel="stylesheet"
+  href="{{ 'faq.css' | asset_url }}"
+/>
+<h2 class="categories-content__title mobile">
+  {{ section.settings.menu_title }}
+</h2>
+<div class="categories-menu">
+  {% for block in section.blocks %}
+    {% liquid
+      assign title = block.settings.category_title
+      assign handleTitle = title | handleize
+    %}
+    {% unless title == blank %}
+      <div
+        class="categories-menu__item
+        {% if forloop.first %}
+          isClicked
+        {% endif %}"
+        data-handle="{{ handleTitle }}"
+      >
+        <span class="categories-menu__name">{{ title }}</span>
+      </div>
+    {% endunless %}
+  {% endfor %}
+</div>
+<div class="categories-content">
+  <h2 class="categories-content__title desktop">
+    {{ section.settings.menu_title }}
+  </h2>
+  {% for block in section.blocks %}
+    {% liquid
+      assign title = block.settings.category_title
+      assign handleTitle = title | handleize
+    %}
+    <div
+      class="categories-container
+      {% if forloop.index != 1 %}
+        hide
+      {% endif %}"
+      data-handle="{{ handleTitle }}"
+    >
+      <h3 class="categories-content__subtitle">
+        {{ title }}
+      </h3>
+      <div class="categories-container__blocks">
+        <div class="block-container">
+          {% render 'faq-section-item', block: block %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% render 'faq-schema-org'
+  blocks: section.blocks
+%}
+<script
+  src="{{ 'faq.js' | asset_url }}"
+  defer="defer"
+></script>
+
+{% schema %}
+{
+  "name": "FAQ SECTION",
+  "tag": "section",
+  "class": "faq-category-section wrapper grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "menu_title",
+      "label": "Menú title",
+      "default": "Catégories"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Category",
+      "type": "category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_title",
+          "info": "Put the name you want for the menu item.",
+          "label": "Category title"
+        },
+        {
+          "type": "header",
+          "content": "First Item"
+        },
+        {
+          "type": "text",
+          "id": "title_1",
+          "label": "title",
+          "default": "Lorem ipsum"
+        },
+        {
+          "type": "richtext",
+          "id": "content_1",
+          "label": "content",
+          "default": "<p>Lorem ipsum dolor sit amet. Viverra lorem in.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Second Item"
+        },
+        {
+          "type": "text",
+          "id": "title_2",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_2",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Third Item"
+        },
+        {
+          "type": "text",
+          "id": "title_3",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_3",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Four Item"
+        },
+        {
+          "type": "text",
+          "id": "title_4",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_4",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Five Item"
+        },
+        {
+          "type": "text",
+          "id": "title_5",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_5",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Six Item"
+        },
+        {
+          "type": "text",
+          "id": "title_6",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_6",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Seven Item"
+        },
+        {
+          "type": "text",
+          "id": "title_7",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_7",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Eight Item"
+        },
+        {
+          "type": "text",
+          "id": "title_8",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_8",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Nine Item"
+        },
+        {
+          "type": "text",
+          "id": "title_9",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_9",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Ten Item"
+        },
+        {
+          "type": "text",
+          "id": "title_10",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_10",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Eleven Item"
+        },
+        {
+          "type": "text",
+          "id": "title_11",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_11",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Twelve Item"
+        },
+        {
+          "type": "text",
+          "id": "title_12",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_12",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Thirteen Item"
+        },
+        {
+          "type": "text",
+          "id": "title_13",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_13",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Fourteen Item"
+        },
+        {
+          "type": "text",
+          "id": "title_14",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_14",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Fifteen Item"
+        },
+        {
+          "type": "text",
+          "id": "title_15",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_15",
+          "label": "content"
+        },
+        {
+          "type": "header",
+          "content": "Sixteen Item"
+        },
+        {
+          "type": "text",
+          "id": "title_16",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_16",
+          "label": "content"
+        },
+
+        {
+          "type": "header",
+          "content": "Seventeen Item"
+        },
+        {
+          "type": "text",
+          "id": "title_17",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_17",
+          "label": "content"
+        },
+
+        {
+          "type": "header",
+          "content": "Eighteen Item"
+        },
+        {
+          "type": "text",
+          "id": "title_18",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_18",
+          "label": "content"
+        },
+
+        {
+          "type": "header",
+          "content": "Nineteen Item"
+        },
+        {
+          "type": "text",
+          "id": "title_19",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_19",
+          "label": "content"
+        },
+
+        {
+          "type": "header",
+          "content": "Twenty Item"
+        },
+        {
+          "type": "text",
+          "id": "title_20",
+          "label": "title"
+        },
+        {
+          "type": "richtext",
+          "id": "content_20",
+          "label": "content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ SECTION"
+    }
+  ]
+}
+{% endschema %}

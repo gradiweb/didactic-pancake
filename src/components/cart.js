@@ -25,9 +25,12 @@ sliderUpsell();
  */
  const addProducts = async (event) => {
 
+  const buttonContent = $Q(".btn-cart-js", event.target);
+  const textButton = buttonContent.textContent;
   const valueCount = $Q("#quantity") ? $Q("#quantity").value : 1;
   const itemId = $Q("input[name='id']", event.target).value;
 
+  addSpinner(".btn-cart-js", event.target);
   const cartParams = {
     items: [
       {
@@ -46,6 +49,7 @@ sliderUpsell();
   }
   if (!sections) return null;
 
+  buttonContent.textContent = textButton;
   if (event.target.dataset.form !== "upsell") {
     dataToggle($Q("#shopify-section-side-cart"), true);
   }
@@ -103,8 +107,8 @@ export const btnAddToCart = (formQuery, parent = null) => {
  * Replace en element with a spinner
  * @param {String} element
  */
- const addSpinner = (element) => {
-  $Q(element).innerHTML = '<div class="loading"></div>';
+ const addSpinner = (element, parent) => {
+  $Q(element, parent).innerHTML = '<div class="loading"></div>';
 }
 
 /**
