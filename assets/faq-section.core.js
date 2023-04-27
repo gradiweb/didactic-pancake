@@ -80,7 +80,6 @@ const showContentClicked = (data) => {
  * and toggles the display of the full answer.
  * @returns {void}
  */
-
 const showMoreFAQ = () => {
   const readMoreText = 'VOIR PLUS';
   const readLessText = 'VOIR MOINS';
@@ -105,21 +104,18 @@ const showMoreFAQ = () => {
 };
 
 /**
-
 Splits the content of an FAQ answer if it contains a "read more" link.
 @param {string} content - The HTML content of an FAQ answer.
 @returns {string[]} An array with two strings:
 the first part of the content and
 the second part that will be hidden by the "read more" link (if it exists).
 */
-
 const splitContent = (content) => {
     const [content1, content2] = content.split('<p>...</p>');
     return [content1, content2];
 };
 
 /**
-
 Updates the HTML of an FAQ answer to include the "read more" link.
 @param {HTMLElement} item - The FAQ item container element.
 @param {string} content1 - The first part of the answer content.
@@ -127,7 +123,6 @@ Updates the HTML of an FAQ answer to include the "read more" link.
 @param {string} readMoreText - The text to display in the "read more" link.
 @returns {void}
 */
-
 const updateContent = (item, content1, content2, readMoreText) => {
   const description = item.querySelector('.block-container__description');
   description.innerHTML = `
@@ -138,13 +133,11 @@ const updateContent = (item, content1, content2, readMoreText) => {
 };
 
 /**
-
 Toggles the display of the full FAQ answer when the "read more" link is clicked.
 @param {HTMLElement} dot - The "read more" link element.
 @param {string} readLessText - The text to display in the "read less" link.
 @returns {void}
 */
-
 const handleDotsClick = (dot, readLessText, readMoreText ) => {
   const parentContent = dot.closest('.block-container__description');
   const more = parentContent.querySelector('.show');
