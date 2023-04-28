@@ -8,32 +8,35 @@ import { $Q, $Qll } from "../utils/query-selector";
  *
  */
 export function rangeFilters() {
-  const rangein = $Qll(".range-in input");
-  const pricein = $Qll(".price-in input");
+  const rangeIn = $Qll(".range-in input");
+  const priceIn = $Qll(".price-in input");
   const progress = $Q('.slider-filter .pro');
   const priceGap = 0;
 
-  rangein.forEach(input => {
-    if (pricein[0].value) {
-      progress.style.left = (pricein[0].value / rangein[0].max) * 10000 + "%";
-      progress.style.right = 100 - (pricein[1].value / rangein[1].max) * 10000 + "%";
+  rangeIn.forEach((input) => {
+    if (priceIn[0].value) {
+      progress.style.left = `${(priceIn[0].value / rangeIn[0].max) * 10000 }%`;
+      progress.style.right = `${100 - (priceIn[1].value / rangeIn[1].max) * 10000 }%`;
     }
 
     input.addEventListener("input", (e) => {
-      const minVal = Number(rangein[0].value);
-      const maxVal = Number(rangein[1].value);
-      
-      if(maxVal - minVal < priceGap){
-        if(e.target.className === "range-min") {
-          rangein[0].value = cents(maxVal - priceGap);
+      const minVal = Number(rangeIn[0].value);
+      const maxVal = Number(rangeIn[1].value);
+      console.log("min", minVal);
+
+      if (maxVal - minVal < priceGap) {
+        if (e.target.className === "range-min") {
+          rangeIn[0].value = cents(maxVal - priceGap);
         } else {
-          rangein[1].value = cents(minVal + priceGap);
+          rangeIn[1].value = cents(minVal + priceGap);
         }
       } else {
-        pricein[0].value = cents(minVal, true);
-        pricein[1].value = cents(maxVal, true);
-        progress.style.left = (minVal / rangein[0].max) * 100 + "%";
-        progress.style.right = 100 - (maxVal / rangein[1].max) * 100 + "%";
+        priceIn[0].value = cents(minVal, true);
+        $Q(".range1 div").textContent = cents(minVal, true);
+        priceIn[1].value = cents(maxVal, true);
+        $Q(".range2 div").textContent = cents(maxVal, true);
+        progress.style.left = `${(minVal / rangeIn[0].max) * 100 }%`;
+        progress.style.right = `${100 - (maxVal / rangeIn[1].max) * 100 }%`;
       }
     });
   });
@@ -49,6 +52,6 @@ function cents(str, fixed) {
   $Qll('.price-in input').forEach(
     (item) => {
       item.value = cents(item.value, true)
-    }
+    },
   )
-})();
+}());

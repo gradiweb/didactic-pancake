@@ -1,0 +1,211 @@
+@use './global';
+
+
+.faq-page {
+  > .section-title-page {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
+}
+.faq-category-section {
+  --columns: 1fr;
+  margin-bottom: global.$margin-section;
+  gap: 30px;
+  @media screen and (min-width: 768px) {
+    --columns: 2fr 5fr;
+  }
+
+  .categories-menu {
+
+    @media screen and (min-width: 992px) {
+      padding-top: 30%;
+    }
+
+    @media screen and (max-width: 767px) {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
+    @media screen and (max-width: 396px) {
+      justify-content: center;
+
+      &__item {
+        width: 80%;
+      }
+    }
+
+    &__item {
+      padding: 1rem 3rem;
+      border: 1px solid global.$color-black;
+      color: #8E8D97;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: all ease .4s;
+      max-width: 320px;
+
+      @media screen and (max-width: 767px) {
+        padding: 0.5rem;
+        width: 160px;
+        max-height: 36px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      @media screen and (max-width: 396px) {
+        width: 80%;
+      }
+
+      &.isClicked,
+      &:hover {
+        color: global.$color-white;
+        background: global.$color-black;
+      }
+    }
+
+    &__name {
+      text-transform: uppercase;
+      @include global.font(
+        global.$font-family--general,
+        global.$font-size--general,
+        20px,
+        true
+      );
+      @media screen and (max-width: 767px) {
+        font-size: global.$font-size--general;
+      }
+    }
+  }
+
+  .categories-content {
+
+    &__title {
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #C6CAD6;
+      @include global.font(
+        global.$font-family--title,
+        global.$font-size--h2,
+        60px
+      );
+      &.desktop {
+        @media screen and (max-width: 767px) {
+          display: none;
+        }
+      }
+      &.mobile {
+        text-align: center;
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        @media screen and (min-width:768px) {
+          display: none;
+        }
+      }
+    }
+
+    &__subtitle {
+      text-transform: uppercase;
+      @include global.font(
+        global.$font-family--title,
+        global.$font-size--h3,
+        48px
+      );
+      @media screen and (max-width: 767px) {
+        text-align: center;
+      }
+    }
+  }
+
+  .categories-container {
+    transition: opacity ease .6s;
+    &.hide {
+      display: none;
+      opacity: 0;
+      transition: opacity ease .6s;
+    }
+    &.show {
+      display: block;
+      opacity: 1;
+      transition: opacity ease .6s;
+    }
+
+    .block-container {
+      &::after {
+        display: table;
+        content: "";
+        clear: both;
+      }
+
+      &__item {
+        display: flex;
+        float: left;
+        width: 50%;
+        justify-content: flex-start;
+        margin-bottom: 2rem;
+        @media screen and (max-width: 767px) {
+          width: 100%;
+        }
+
+        span {
+          width: 14px;
+          height: 14px;
+        }
+      }
+
+
+      &__content {
+        margin-left: 1rem;
+
+        p {
+          color: #606470;
+          @include global.font(
+            global.$font-family--general,
+            20px,
+            true
+          );
+        }
+
+        .show {
+          display: none;
+          &-less {
+            display: inline;
+          }
+        }
+
+      }
+
+      &__title {
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        @include global.font(
+          global.$font-family--general,
+          global.$font-size--general,
+          20px,
+          true
+        );
+      }
+
+      &__description {
+
+        .dots {
+          cursor: pointer;
+          text-transform: uppercase;
+          text-decoration: underline;
+          @include global.font(
+            global.$font-family--general,
+            global.$font-size--general,
+            20px,
+            true
+          );
+        }
+      }
+    }
+  }
+}

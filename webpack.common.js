@@ -15,7 +15,8 @@ const entry = {
   contact: './src/templates/contact.js',
   breadcrumbs: './assets/breadcrumbs.module.js',
   pagination: './assets/pagination.module.js',
-};
+  faq: './assets/faq-section.module.js'
+}
 
 const output = {
   filename: '[name].js',

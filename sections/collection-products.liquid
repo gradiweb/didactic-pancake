@@ -1,4 +1,7 @@
 <span class="collection__count">
+  {%  if settings.active_breadcrumbs_product %}
+    {% render 'breadcrumbs' %}
+  {% endif %}
   {{ 'sections.collection_template.count_products'
     | t: count: collection.products_count
   }}
@@ -14,7 +17,7 @@
         {{ 'sections.collection_template.empty' | t }}
       </div>
     {% endif %}
-    
+
     <div class="grid item-list">
       {% for product in collection.products %}
         {% render 'product-card'
