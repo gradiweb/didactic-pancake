@@ -62,12 +62,10 @@
 </div>
 
 <script>
-  // swiper element
   const swiperEl = document.querySelector(
     'swiper-container.{{ init_class | default: 'slider-js' }}'
   );
 
-  // swiper parameters
   const swiperParams = {
     slidesPerView: 1,
     pagination: {{ pagination | default: false }},
@@ -88,7 +86,6 @@
     }
   };
 
-  // now we need to assign all parameters to Swiper element
   Object.assign(swiperEl, swiperParams);
 
   swiperEl.initialize();
