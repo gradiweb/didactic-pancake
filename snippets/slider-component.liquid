@@ -16,9 +16,9 @@
   Use this structure in content prop:
   {% capture slider_content %}
     {% for item in collection %}
-      <div class="swiper-slide">
+      <swiper-slide>
         slide {{ item.index }}
-      </div>
+      </swiper-slide>
     {% endfor %}
   {% endcapture %}
 
@@ -49,28 +49,46 @@
   else
     assign init_class = custom_class
   endunless
+
+  
+%}
+
+{% assign id_slider = section.id 
+  | split: '__'
+  | last
+  | remove: '-'
+  | prepend: 'swiperEl'
 %}
 
 <div
   class="{{ wrapper | default: 'slider__wrapper' }}"
 >
   <swiper-container
-    class="{{ init_class | default: 'slider-js' }}"
+    init="false"
+    class="{{ init_class | default: 'slider-js' }} {{ id_slider }}"
+    data-pagination
+    data-arrows
+    data-auto
+    data-slides
+    data-slides-mobile
+    data-spacing
   >
     {{ content }}
   </swiper-container>
 </div>
 
 <script>
-  const swiperEl = document.querySelector(
-    'swiper-container.{{ init_class | default: 'slider-js' }}'
+  const {{ id_slider }} = document.querySelector(
+    'swiper-container.{{ init_class | default: 'slider-js' }}.{{ id_slider }}'
   );
 
-  const swiperParams = {
-    slidesPerView: 1,
+  const swiperParams{{ id_slider }} = {
+    slidesPerView: {{ perpage_mobile | default: 1 }},
     pagination: {{ pagination | default: false }},
+    spaceBetween: 25,
     navigation: {{ arrows | default: true }},
     loop: {{ auto | default: false }},
+
     breakpoints: {
       640: {
         slidesPerView: 2,
@@ -86,7 +104,7 @@
     }
   };
 
-  Object.assign(swiperEl, swiperParams);
+  Object.assign({{ id_slider }}, swiperParams{{ id_slider }});
 
-  swiperEl.initialize();
+  {{ id_slider }}.initialize();
 </script>

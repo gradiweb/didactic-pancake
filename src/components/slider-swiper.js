@@ -106,7 +106,6 @@ export const swiperSmall = async (id) => {
   })
 };
 
-
 /**
  * Iteration to create all sliders with arrows
  */
@@ -134,6 +133,7 @@ export const sliderUpsell = () => {
   if (!$Q('.slider_upsell')) return;
   createInterception($Q('.slider_upsell'), configSwiperUpsell);
 };
+
 /**
  * Render small slider
  */

@@ -3,7 +3,7 @@ import { $Q, $Qll } from '../utils/query-selector';
 import { setQuantity } from "../utils/input-quantity";
 import { btnAddToCart, deleteItem, onChangeItemCart } from "./cart";
 import { barProgress } from '../utils/bar-progress';
-import { sliderUpsell } from './slider-swiper';
+/* import { sliderUpsell } from './slider-swiper'; */
 
 /**
  * Update cart items section in sidecart
@@ -122,5 +122,5 @@ export const updatePriceItem = (str, id) => {
   ).outerHTML;
 
   btnAddToCart(".add-product-cart-upsell");
-  sliderUpsell();
+  /* sliderUpsell(); */
 }

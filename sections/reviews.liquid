@@ -48,7 +48,7 @@
 {% capture review %}
   {% for block in section.blocks limit: number_review_show %}
     {% if block.settings.title != blank and  block.settings.author != blank %}
-      <div class="swiper-slide">
+      <swiper-slide>
         <div class="reviews__single">
           {% render 'ratings'
             points: block.settings.points
@@ -72,16 +72,18 @@
             }}
           </p>
         </div>
-      </div>
+      </swiper-slide>
     {% endif %}
   {% endfor %}
 {% endcapture %}
 
-{% render 'slider',
-  wrapper: 'string query'
+{% render 'slider-component',
+  section: section,
   content: review,
   arrows: true,
-  infinity: true
+  pagination: false,
+  perpage: 3,
+  perpage_mobile: 2
 %}
 
 {% schema %}

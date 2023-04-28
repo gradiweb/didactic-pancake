@@ -2,6 +2,12 @@
   <h2>{{ section.settings.heading }}</h2>
 {%- endif -%}
 
+<script
+  id="load-element-swiper"
+  data-src="{{ 'swiper-element-bundle.min.js' | asset_url }}"
+  src="{{ 'swiper-element-bundle.min.js' | asset_url }}"
+></script>
+
 {% capture snippet_content %}
   {% for block in section.blocks %}
     {% assign product = block.settings.product %}
@@ -20,10 +26,6 @@
   pagination: true,
   perpage: 4
 %}
-
-<script
-  src="{{ 'swiper-element-bundle.min.js' | asset_url }}"
-></script>
 
 {% render 'carousel-schema-org'
   array_elements: section.blocks

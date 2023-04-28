@@ -33,6 +33,7 @@ const executeInterception = (
 ) => entries.forEach((entry) => {
     if (entry.isIntersecting) {
       const { id } = entry.target;
+      console.log(entry.target);
       configSlider(`#${id}`);
 
       observer.disconnect();
