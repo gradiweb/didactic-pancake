@@ -7,7 +7,7 @@
 
 {% capture snippet_content %}
   {% for block in section.blocks %}
-    <div class="swiper-slide">
+    <swiper-slide>
       {% render 'hero-slide',
         index: forloop.index
         title: block.settings.heading,
@@ -17,16 +17,18 @@
         imagedesktop: block.settings.image_desktop,
         imagemobile: block.settings.image_mobile
       %}
-    </div>
+    </swiper-slide>
   {% endfor %}
 {% endcapture %}
 
-{% render 'slider'
-  wrapper: 'hero--slider'
+{% render 'slider-component',
+  section: section,
   content: snippet_content,
   arrows: false,
-  pagination: showPagination,
-  perpage: 1
+  pagination: true,
+  perpage: 1,
+  auto: true,
+  speed: 1000
 %}
 <!-- eslint-disable max-len -->
 {% schema %}

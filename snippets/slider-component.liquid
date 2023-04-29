@@ -8,10 +8,8 @@
   - pagination: {Boolean} show pagination
   - perpage: {Number} items per page
   - wrapper: {String} class to style
-  - item_max: {Number} Item counter
   - auto: {boolean} If auto move slider
   - mobile_grid: {boolean} If need a grid card on mobile
-  - custom_class: {String} I need other slider config
 
   Use this structure in content prop:
   {% capture slider_content %}
@@ -33,27 +31,10 @@
 {% endcomment %}
 
 {% liquid
-  assign mobile_class = ""
 
-  if mobile_grid
-    assign mobile_class = "slider__mobile-grid"
-  endif
-
-  unless custom_class
-    assign init_class = "slider-js"
-    
-    if item_max <= perpage
-      assign init_class = ""
-    endif
-
-  else
-    assign init_class = custom_class
-  endunless
-
-  
 %}
 
-{% assign id_slider = section.id 
+{% assign id_slider = section.id
   | split: '__'
   | last
   | remove: '-'
@@ -61,7 +42,8 @@
 %}
 
 <div
-  class="{{ wrapper | default: 'slider__wrapper' }}"
+  class="data-slider-js {{ wrapper | default: 'slider__wrapper' }}"
+  data-config='{"idSection": "{{ section.id }}", "classContainer": "swiper-container.{{ init_class | default: 'slider-js' }}.{{ id_slider }}", "perViewMobil": {{ perpage_mobile | default: 1 }}, "perViewDesk": {{ perpage | default: 4 }}, "pagination": {{ pagination | default: false }}, "spaceBetween": 25, "arrows": {{ arrows | default: false }}, "loop": {{ auto | default: false }}, "speed": {{ speed | default: 3000 }}, "script": "{{ 'swiper-element-bundle.min.js' | asset_url }}"}'
 >
   <swiper-container
     init="false"
@@ -76,35 +58,3 @@
     {{ content }}
   </swiper-container>
 </div>
-
-<script>
-  const {{ id_slider }} = document.querySelector(
-    'swiper-container.{{ init_class | default: 'slider-js' }}.{{ id_slider }}'
-  );
-
-  const swiperParams{{ id_slider }} = {
-    slidesPerView: {{ perpage_mobile | default: 1 }},
-    pagination: {{ pagination | default: false }},
-    spaceBetween: 25,
-    navigation: {{ arrows | default: true }},
-    loop: {{ auto | default: false }},
-
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: {{ perpage | default: 4 }},
-      },
-    },
-    on: {
-      init: function () {
-      console.log('swiper initialized');
-    },
-    }
-  };
-
-  Object.assign({{ id_slider }}, swiperParams{{ id_slider }});
-
-  {{ id_slider }}.initialize();
-</script>
