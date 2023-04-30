@@ -43,7 +43,7 @@
 
 <div
   class="data-slider-js {{ wrapper | default: 'slider__wrapper' }}"
-  data-config='{"idSection": "{{ section.id }}", "classContainer": "swiper-container.{{ init_class | default: 'slider-js' }}.{{ id_slider }}", "perViewMobil": {{ perpage_mobile | default: 1 }}, "perViewDesk": {{ perpage | default: 4 }}, "pagination": {{ pagination | default: false }}, "spaceBetween": 25, "arrows": {{ arrows | default: false }}, "loop": {{ auto | default: false }}, "speed": {{ speed | default: 3000 }}, "script": "{{ 'swiper-element-bundle.min.js' | asset_url }}"}'
+  data-config='{"idSection": "{{ section.id }}", "classContainer": "swiper-container.{{ init_class | default: 'slider-js' }}.{{ id_slider }}", "perViewMobil": {{ perpage_mobile | default: 1 }}, "perViewDesk": {{ perpage | default: 4 }}, "pagination": {{ pagination | default: false }}, "spaceBetween": {{ spaceBetween | default: 25 }}, "arrows": {{ arrows | default: false }}, "loop": {{ auto | default: false }}, "speed": {{ speed | default: false }}, "script": "{{ 'swiper-element-bundle.min.js' | asset_url }}"}'
 >
   <swiper-container
     init="false"

@@ -19,9 +19,8 @@
       src="{{ img_src }}"
       height="100"
       width="100"
-      title="{{ section.settings.background.alt }}"
-      alt="{{ section.settings.background.alt }}"
-      loading="lazy"
+      title="{{ section.settings.hero_title | default: 'hero' }}"
+      alt="{{ section.settings.hero_title | default: 'hero' }}"
     />
   </picture>
 </div>

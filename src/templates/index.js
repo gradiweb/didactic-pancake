@@ -16,7 +16,7 @@ import { toggleDataActive } from "../utils/toggle-dataset";
 import { isRegisteredUser } from "../components/news-letters";
 import { lazyVideo } from '../components/lazy-videos'
 import "../components/video-frame"
-import { initialComponentSlider } from "../components/slider-component";
+import { loadSlider } from "../components/slider-component";
 
 isRegisteredUser();
 
@@ -33,4 +33,4 @@ openDropDown();
 toggleDataActive("#burger-nav-js", "#nav-list-js");
 lazyVideo();
 
-initialComponentSlider();
+loadSlider();
