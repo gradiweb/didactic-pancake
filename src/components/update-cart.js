@@ -122,5 +122,4 @@ export const updatePriceItem = (str, id) => {
   ).outerHTML;
 
   btnAddToCart(".add-product-cart-upsell");
-  /* sliderUpsell(); */
 }

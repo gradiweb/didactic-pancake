@@ -1,7 +1,6 @@
 import api from "../services/api";
 import { $Q, $Qll } from "../utils/query-selector";
 import { dataToggle, toggleDataActive } from "../utils/toggle-dataset";
-import { sliderUpsell } from "./slider-swiper";
 import {
   updateCartItems,
   updatetotalPrice,
@@ -16,7 +15,6 @@ import { barProgress } from "../utils/bar-progress";
 const CART_SECTION = "side-cart,cart-page";
 
 barProgress($Q('#progress-bar-data'));
-sliderUpsell();
 
 /**
  * Add products in cart

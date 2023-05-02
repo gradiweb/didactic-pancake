@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { $Q, $Qll } from '../utils/query-selector';
 import { createInterception } from '../utils/slider-defer';
 
@@ -13,74 +14,81 @@ const addTagScript = (script) => {
   scriptTag.type = 'text/javascript';
   scriptTag.src = script;
   scriptTag.setAttribute("class", "swiper-script");
-  document.body.appendChild(scriptTag);
+  const theme = $Q("#MainContent")
+  theme.insertAdjacentElement('beforebegin', scriptTag);
 }
 
 /**
-A function that creates a slider using the Swiper library.
-@param {Object} dataConfig - An object containing
-  configuration data for the slider.
-@param {string} dataConfig.classContainer - The CSS class selector for
-  the container element of the slider.
-@param {number} dataConfig.perViewMobil - The number of slides per
-  view on mobile devices.
-@param {number} dataConfig.perViewDesk - The number of slides per
-  view on desktop devices.
-@param {boolean} dataConfig.pagination - Whether to display
-  pagination for the slider.
-@param {boolean} dataConfig.arrows - Whether to display
-  navigation arrows for the slider.
-@param {boolean} dataConfig.loop - Whether to enable loop mode for the slider.
-@param {number} dataConfig.speed - The delay time in milliseconds for autoplay.
-@param {string} dataConfig.script - The source URL of the Swiper library script.
-@param {number} dataConfig.spaceBetween - The space between slides in pixels.
-@returns {void}
-*/
-const createSlider = (dataConfig) => {
+ * Creates a slider using the Swiper library.
+ * @param {Object} parent - An object containing the data necessary to build the slider.
+ * @param {string} parent.container - The ID of the HTML element that will contain the slider.
+ * @param {string} parent.slidesMobile - The number of slides to show on mobile devices.
+ * @param {string} parent.slides - The number of slides to show on larger screens.
+ * @param {string} parent.pagination - Whether or not to show pagination dots.
+ * @param {string} parent.auto - Whether or not to automatically advance the slides.
+ * @param {string} parent.speed - The time in milliseconds between automatic slide transitions.
+ * @param {string} parent.script - The URL of an external script to load.
+ * @param {string} parent.spacing - The amount of space between slides, in pixels.
+ */
+const createSlider = (parent) => {
   const PAGE_ONE = 1;
   const {
-    classContainer,
-    perViewMobil,
-    perViewDesk,
+    container,
+    slidesMobile,
+    slides,
     pagination,
-    arrows,
-    loop,
+    auto,
     speed,
     script,
-    spaceBetween,
-  } = dataConfig;
+    spacing,
+  } = parent.dataset;
 
   addTagScript(script);
 
-  const idSlider = $Q(classContainer);
+  const idSlider = $Q(container);
 
   const swiperParams = {
-    slidesPerView: perViewMobil,
-    pagination: pagination,
-    spaceBetween: spaceBetween,
-    navigation: arrows,
-    loop: loop,
+    slidesPerView: Number(slidesMobile),
+    pagination: pagination === "true",
+    spaceBetween: Number(spacing),
+    loop: auto === "true",
     ...((speed > 0) && {
       autoplay: {
-        delay: speed,
+        delay: Number(speed),
         disableOnInteraction: false,
       },
     }),
     breakpoints: {
       640: {
-        slidesPerView: perViewDesk === PAGE_ONE ? perViewDesk : 2,
+        slidesPerView: Number(slides) === PAGE_ONE ? Number(slides) : Number(slidesMobile) + 1,
       },
       1024: {
-        slidesPerView: perViewDesk,
+        slidesPerView: Number(slides),
       },
     },
   };
 
+  loadArrows(idSlider);
+
   Object.assign(idSlider, swiperParams);
 
-  setTimeout(() => {
-    idSlider.initialize();
-  }, 500)
+  idSlider.initialize();
+
+}
+
+const loadArrows = (idSlider) => {
+  if (!$Q(".swiper-button", idSlider.parentNode)) return;
+
+  const buttonNext = $Q('.swiper-button-next', idSlider.parentNode);
+  const buttonPrev = $Q('.swiper-button-prev', idSlider.parentNode);
+
+  buttonNext.addEventListener('click', () => {
+    idSlider.swiper.slideNext();
+  });
+
+  buttonPrev.addEventListener('click', () => {
+    idSlider.swiper.slidePrev();
+  });
 }
 
 /**
@@ -91,10 +99,10 @@ creating an intersection observer for each slider container element.
 export const loadSlider = () => {
   const dataSliders = $Qll('.data-slider-js');
   dataSliders.forEach((data) => {
-    const dataConfig = JSON.parse(data.dataset.config);
 
-    createInterception($Q(dataConfig.classContainer),
-      () => createSlider(dataConfig),
-    );
+    const selectorSlider = data.dataset.section;
+
+    createInterception($Q(`.${selectorSlider}`),
+      () => createSlider($Q(`.${selectorSlider}`)))
   })
 }

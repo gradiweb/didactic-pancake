@@ -1,0 +1,67 @@
+.cart-upsell {
+
+  &__title {
+    padding-bottom: 10px;
+    display: block;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__card-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-left: 6px;
+    width: 100%;
+  }
+
+  .card-description {
+    width: 100%;
+
+    span {
+      margin-bottom: 6px;
+      display: block;
+    }
+    &__title {
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      max-height: 35px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 6px;
+    }
+  }
+
+  img {
+    object-fit: contain;
+    object-position: top;
+  }
+
+  .swiper-button {
+    .btn-arrow {
+      background: none;
+    }
+    &-prev {
+      left: -25px;
+    }
+
+    &-next {
+      right: -25px;
+    }
+
+    @media screen and (max-width: 749px) {
+      display: block;
+    }
+  }
+
+  .loading {
+    border: 3px solid #fff;
+    border-top: 3px solid #2c2c2c;
+  }
+}

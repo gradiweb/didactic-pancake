@@ -1,5 +1,6 @@
 import { Navigation, Thumbs, FreeMode } from "swiper";
 import { breakPoint } from "./sliderBreakPoint";
+import { $Q } from "graditify-utils";
 
 export const thumbsConfig = (slidesPerView, vertical, type) => {
   const config = {
@@ -15,7 +16,7 @@ export const thumbsConfig = (slidesPerView, vertical, type) => {
   return config;
 }
 
-export const principalConfig = (thumbnails, vertical) => {
+export const principalConfig = (thumbnails, slider) => {
   const config = {
     modules: [Navigation, Thumbs],
     spaceBetween: 10,
@@ -23,12 +24,10 @@ export const principalConfig = (thumbnails, vertical) => {
       swiper: thumbnails,
     },
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
+      nextEl: `.swiper-button-next${slider}`,
+      prevEl: `.swiper-button-prev${slider}`,
     },
   }
-  // eslint-disable-next-line no-unused-expressions
-  vertical && (config.direction = "vertical");
 
   return config;
 }

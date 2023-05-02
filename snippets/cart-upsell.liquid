@@ -16,7 +16,7 @@
 <div
   class="cart-upsell cart-margins__inline"
 >
-  <span class="cart-upsell-title">
+  <span class="cart-upsell__title">
     {{ title }}
   </span>
 
@@ -32,18 +32,22 @@
       {% if upsell_product.id == in_cart %}
         {% continue %}
       {% elsif upsell_product.available %}
-        {% render 'cart-upsell-product'
-          product: upsell_product
-        %}
+        <swiper-slide>
+          {% render 'cart-upsell-product'
+            product: upsell_product
+          %}
+        </swiper-slide>
       {% endif %}
     {% endfor %}
   {% endcapture %}
 
-  <div id="upsell-js">
-    <div id="cart-upsell-slider">
-      {% render 'slider-upsell'
-        content: snippet_content,
-      %}
-    </div>
-  </div>
+  {% render 'slider-component',
+    section: section,
+    content: snippet_content,
+    arrows: true,
+    pagination: false,
+    perpage: 1,
+    auto: false,
+    spaceBetween: 5
+  %}
 </div>

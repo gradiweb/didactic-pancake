@@ -1,50 +1,11 @@
-.wrapper__slider {
+.slider__wrapper {
   position: relative;
-  z-index: 0;
-
-  .swiper-wrapper {
-    position: relative;
-    padding-bottom: 10px;
-  }
-
-  .swiper-slide {
-    height: auto;
-  }
-
-  button.swiper-button {
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    border-style: none;
-    transform: translateY(-50%);
-    background-color: transparent;
-
-    &.swiper-button {
-      &-prev {
-        left: -60px;
-      }
-
-      &-next {
-        right: -60px;
-      }
-
-      &.hidden-arrows {
-        display: none;
-      }
-
-      @media screen and (max-width: 750px) {
-        display: none;
-      }
-
-      @media screen and (max-width: 780px) {
-        &.hidden-arrows {
-          display: block;
-        }
-      }
-    }
-  }
 }
 
+.btn-arrow::after {
+  display: none;
+  border: 1px solid red;
+}
 .btn-arrow {
   display: block;
   position: relative;
@@ -59,5 +20,32 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+.swiper-button {
+  background-color: transparent;
+  border-style: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: initial;
+  height: initial;
+
+  &-prev {
+    left: -60px;
+  }
+
+  &-next {
+    right: -60px;
+  }
+
+  &::after {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    display: none;
   }
 }

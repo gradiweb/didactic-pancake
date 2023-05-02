@@ -52,7 +52,7 @@ export function mountSlider(main) {
   direction && (
     new Swiper(
       principalClass,
-      principalConfig(thumbnails),
+      principalConfig(thumbnails, principalClass),
     )
   )
 

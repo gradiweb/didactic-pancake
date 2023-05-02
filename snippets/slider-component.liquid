@@ -43,18 +43,41 @@
 
 <div
   class="data-slider-js {{ wrapper | default: 'slider__wrapper' }}"
-  data-config='{"idSection": "{{ section.id }}", "classContainer": "swiper-container.{{ init_class | default: 'slider-js' }}.{{ id_slider }}", "perViewMobil": {{ perpage_mobile | default: 1 }}, "perViewDesk": {{ perpage | default: 4 }}, "pagination": {{ pagination | default: false }}, "spaceBetween": {{ spaceBetween | default: 25 }}, "arrows": {{ arrows | default: false }}, "loop": {{ auto | default: false }}, "speed": {{ speed | default: false }}, "script": "{{ 'swiper-element-bundle.min.js' | asset_url }}"}'
->
+  data-section="{{ id_slider }}"
+  >
   <swiper-container
     init="false"
     class="{{ init_class | default: 'slider-js' }} {{ id_slider }}"
-    data-pagination
-    data-arrows
-    data-auto
-    data-slides
-    data-slides-mobile
-    data-spacing
+    data-container="swiper-container.{{ init_class | default: 'slider-js' }}.{{ id_slider }}"
+    data-pagination={{ pagination | default: false }}
+    data-auto={{ auto | default: false }}
+    data-speed={{ speed | default: false }}
+    data-script="{{ 'swiper-element-bundle.min.js' | asset_url }}"
+    data-slides={{ perpage | default: 4 }}
+    data-slides-mobile={{ perpage_mobile | default: 1 }}
+    data-spacing={{ spaceBetween | default: 25 }}
   >
     {{ content }}
   </swiper-container>
+
+  {% if arrows %}
+    <button
+      type="button"
+      class="swiper-button swiper-button-prev {{ id_slider }}
+      {% if item_max < 4 %}
+        hidden-arrows
+      {% endif %}"
+      >
+        {% render "button-arrow" %}
+      </button>
+      <button
+        type="button"
+        class="swiper-button swiper-button-next {{ id_slider }}
+        {% if item_max < 4 %}
+          hidden-arrows
+        {% endif %}"
+      >
+        {% render "button-arrow", direction: "right" %}
+      </button>
+    {% endif %}
 </div>

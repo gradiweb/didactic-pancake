@@ -22,7 +22,6 @@ export function rangeFilters() {
     input.addEventListener("input", (e) => {
       const minVal = Number(rangeIn[0].value);
       const maxVal = Number(rangeIn[1].value);
-      console.log("min", minVal);
 
       if (maxVal - minVal < priceGap) {
         if (e.target.className === "range-min") {

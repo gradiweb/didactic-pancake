@@ -17,9 +17,9 @@
   assign available = product.selected_or_first_available_variant.available
 -%}
 
-<div class="cart-upsell-container-product swiper-slide">
+<div class="cart-upsell__card">
 
-  <div class="cart-upsell-container-product__image">
+  <div class="cart-upsell__card-image">
     {% render "render-image"
       img_src: img_url,
       img: image,
@@ -30,36 +30,31 @@
     %}
   </div>
 
-  <div class="cart-upsell-container-product__mobile-gropup">
-    <div class="cart-upsell-container-product__info">
-      <span class="cart-upsell-container-product__info-title">
+  <div class="cart-upsell__card-description">
+    <div class="card-description">
+      <strong class="card-description__title">
         {{ product.title }}
-      </span>
-      <span class="cart-upsell-container-product__info-price">
+      </strong>
+      <span class="card-description__price">
         {{ product.price | money }}
       </span>
     </div>
 
-    <div class="cart-upsell-container-product__btn">
-
-      <form
-        data-product="{{ product.id }}"
-        class="add-product-cart-upsell"
-        data-form="upsell"
-      >
-
-        <input
-          type="hidden"
-          name="id"
-          value="{{ first_variant.id }}"
-        />
-
-        {% render 'button-add-cart'
-          btn_type: 'btn-3 upsell-btn',
-          class: 'btn-add-to-cart',
-          available: available
-        %}
-      </form>
-    </div>
+    <form
+      data-product="{{ product.id }}"
+      class="add-product-cart-upsell"
+      data-form="upsell"
+    >
+      <input
+        type="hidden"
+        name="id"
+        value="{{ first_variant.id }}"
+      />
+      {% render 'button-add-cart'
+        btn_type: 'btn-3 upsell-btn',
+        class: 'btn-add-to-cart',
+        available: available
+      %}
+    </form>
   </div>
 </div>

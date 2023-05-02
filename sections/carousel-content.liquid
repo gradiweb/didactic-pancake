@@ -15,10 +15,15 @@
   {% endfor %}
 {% endcapture %}
 
-{% render 'slider'
-  content: snippet_content,
-  arrows: true
-%}
+{% render 'slider-component',
+    section: section,
+    content: snippet_content,
+    arrows: true,
+    pagination: false,
+    perpage: 3,
+    auto: false,
+    spaceBetween: 55
+  %}
 
 <!-- eslint-disable max-len -->
 {% schema %}
