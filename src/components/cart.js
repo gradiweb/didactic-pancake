@@ -205,4 +205,5 @@ export const openCloseCart = () => {
     "#shopify-section-side-cart",
     { overlay: true },
   )
+
 }

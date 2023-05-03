@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { $Q, $Qll } from '../utils/query-selector';
-import { createInterception } from '../utils/slider-defer';
+import { createInterception } from '../utils/script-defer';
 
 /**
 A function that adds a script tag to the document body.

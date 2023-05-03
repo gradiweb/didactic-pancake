@@ -1,10 +1,10 @@
 /**
  * Creates the interceptor for the node
  * indicated in the parameter indicated as slide
- * @param {Node} slide - element container slider
- * @param {Function} configSlider - callback init slider
+ * @param {Node} element - element container slider
+ * @param {Function} callback - callback init slider
  */
-export const createInterception = (slide, configSlider) => {
+export const createInterception = (element, callback) => {
   const options = {
     root: null,
     rootMargin: "0px",
@@ -13,9 +13,9 @@ export const createInterception = (slide, configSlider) => {
   const intersectionObserver = new
     IntersectionObserver(
       (entries, observer) => executeInterception(
-        entries, observer, configSlider), options);
+        entries, observer, callback), options);
 
-  intersectionObserver.observe(slide);
+  intersectionObserver.observe(element);
 }
 
 /**
@@ -24,17 +24,15 @@ export const createInterception = (slide, configSlider) => {
  * to load it, and then disconnects the observer for the corresponding element.
  * @param {Node} entries - element node html, container slider
  * @param {Event} observer - observer event
- * @param {Function} configSlider - function callback start slider
+ * @param {Function} callback - function callback start slider
  */
 const executeInterception = (
   entries,
   observer,
-  configSlider,
+  callback,
 ) => entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      const { id } = entry.target;
-      configSlider(`#${id}`);
-
+      callback();
       observer.disconnect();
     }
 })

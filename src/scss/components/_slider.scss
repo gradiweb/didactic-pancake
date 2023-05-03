@@ -4,8 +4,12 @@
 
 .btn-arrow::after {
   display: none;
-  border: 1px solid red;
 }
+
+swiper-slide {
+  height: auto;
+}
+
 .btn-arrow {
   display: block;
   position: relative;

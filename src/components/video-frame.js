@@ -25,7 +25,7 @@ export const activeVideoFrame = (control, node) => {
 /**
  * Init video section by id
  */
-(function initVideoFrame() {
+export const initVideoFrame = () => {
   $Qll('.video__button').forEach((button) => {
     const { dataset: { section } } = button;
 
@@ -34,4 +34,4 @@ export const activeVideoFrame = (control, node) => {
       `#modal-video-${section}-js`,
     );
   })
-}())
+}

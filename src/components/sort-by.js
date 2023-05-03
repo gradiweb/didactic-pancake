@@ -6,7 +6,7 @@ Shopify.queryParams = {};
 /**
  * Update sort_by query parameter on select change
  */
-export const defultSortBy = () => {
+export const defaultSortBy = () => {
   $Q('#sort-by')
   .addEventListener(
     'change',
