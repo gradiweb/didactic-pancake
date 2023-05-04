@@ -13,6 +13,7 @@
     title: section.settings.upsell_title
   %}
 {% endcomment %}
+
 <div
   class="cart-upsell cart-margins__inline"
 >
@@ -41,13 +42,15 @@
     {% endfor %}
   {% endcapture %}
 
-  {% render 'slider-component',
-    section: section,
-    content: snippet_content,
-    arrows: true,
-    pagination: false,
-    perpage: 1,
-    auto: false,
-    spaceBetween: 5
-  %}
+  <div id="upsell-js">
+    <div id="cart-upsell-slider">
+      {% render 'slider-component',
+        section: section,
+        content: snippet_content,
+        navigation: true,
+        perpage: 1,
+        spaceBetween: 5
+      %}
+    </div>
+  </div>
 </div>

@@ -1,13 +1,7 @@
+@use "../abstracts/variables";
+
 .slider__wrapper {
   position: relative;
-}
-
-.btn-arrow::after {
-  display: none;
-}
-
-swiper-slide {
-  height: auto;
 }
 
 .btn-arrow {
@@ -46,10 +40,22 @@ swiper-slide {
   }
 
   &::after {
-    display: none !important;
+    display: none;
   }
 
   @media screen and (max-width: 749px) {
-    display: none;
+    &-prev {
+      left: 0px;
+    }
+  
+    &-next {
+      right: 0px;
+    }
+  }
+}
+
+.swiper-pagination {
+  &-bullet-active {
+    background: variables.$color-principal;
   }
 }

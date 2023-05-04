@@ -3,6 +3,7 @@ import { $Q, $Qll } from '../utils/query-selector';
 import { setQuantity } from "../utils/input-quantity";
 import { btnAddToCart, deleteItem, onChangeItemCart } from "./cart";
 import { barProgress } from '../utils/bar-progress';
+import { createSlider } from './slider-component';
 /* import { sliderUpsell } from './slider-swiper'; */
 
 /**
@@ -119,7 +120,8 @@ export const updatePriceItem = (str, id) => {
   $Q('#upsell-js').innerHTML = $Q(
     '#cart-upsell-slider',
     stringToHTML(str),
-  ).outerHTML;
+    ).outerHTML;
 
+  createSlider($Q(".slider-js.swiperElsidecart"));
   btnAddToCart(".add-product-cart-upsell");
 }

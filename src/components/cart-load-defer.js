@@ -2,6 +2,7 @@ import { setQuantity } from "../utils/input-quantity";
 import { $Q } from "../utils/query-selector"
 import { createInterception } from "../utils/script-defer";
 import { btnAddToCart, deleteItem, onChangeItemCart, openCloseCart } from "./cart";
+import { loadSliderByEvent } from "./slider-component";
 
 export const cartLoadDefer = () => {
 
@@ -9,17 +10,18 @@ export const cartLoadDefer = () => {
 
   const formAddProduct = $Q(".add-product-cart");
   const formAddFormUpsell = $Q(".add-product-cart-upsell");
-  const itemCart = $Q('.item-cart-js');
+  const cart = $Q('.cart-close');
 
   if (formAddProduct) createInterception(formAddProduct, () => btnAddToCart(".add-product-cart"));
 
   if (formAddFormUpsell) createInterception(formAddFormUpsell, () => btnAddToCart(".add-product-cart-upsell"));
 
-  if (itemCart) createInterception(itemCart, () => loadChangeCart());
+  if (cart) createInterception(cart, () => loadChangeCart());
 
 }
 
 const loadChangeCart = () => {
+  if ($Q(".slider-js.swiperElsidecart")) loadSliderByEvent($Q(".slider-js.swiperElsidecart"));
   deleteItem();
   onChangeItemCart();
   setQuantity();

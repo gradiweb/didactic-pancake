@@ -1,6 +1,5 @@
 import { Navigation, Thumbs, FreeMode } from "swiper";
 import { breakPoint } from "./sliderBreakPoint";
-import { $Q } from "graditify-utils";
 
 export const thumbsConfig = (slidesPerView, vertical, type) => {
   const config = {

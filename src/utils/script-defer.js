@@ -7,7 +7,7 @@
 export const createInterception = (element, callback) => {
   const options = {
     root: null,
-    rootMargin: "0px",
+    rootMargin: "120px",
   };
 
   const intersectionObserver = new
@@ -33,6 +33,6 @@ const executeInterception = (
 ) => entries.forEach((entry) => {
     if (entry.isIntersecting) {
       callback();
-      observer.disconnect();
+      observer.unobserve(entry.target);
     }
 })
