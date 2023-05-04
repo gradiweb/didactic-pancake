@@ -7,7 +7,7 @@
 export const createInterception = (slide, configSlider) => {
   const options = {
     root: null,
-    rootMargin: "0px",
+    rootMargin: "120px",
   };
 
   const intersectionObserver = new
@@ -32,9 +32,7 @@ const executeInterception = (
   configSlider,
 ) => entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      const { id } = entry.target;
-      configSlider(`#${id}`);
-
-      observer.disconnect();
+      configSlider();
+      observer.unobserve(entry.target);
     }
 })

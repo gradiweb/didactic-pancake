@@ -8,20 +8,35 @@ A function that adds a script tag to the document body.
 @returns {void}
 */
 const addTagScript = (script) => {
-  if ($Q(".swiper-script")) return;
+  if (window.sliderScript) {
+  return new Promise((resolve) => {
+      resolve(true);
+    })
+  }
 
-  const scriptTag = document.createElement('script');
-  scriptTag.type = 'text/javascript';
-  scriptTag.src = script;
-  scriptTag.setAttribute("class", "swiper-script");
-  const theme = $Q("#MainContent")
-  theme.insertAdjacentElement('beforebegin', scriptTag);
+  return new Promise((resolve, reject) => {
+    const scriptTag = document.createElement('script');
+    scriptTag.src = script;
+    scriptTag.setAttribute("id", "swiper-script");
+
+    scriptTag.onload = () => {
+      window.sliderScript = true;
+      resolve(true);
+    };
+
+    scriptTag.onerror = () => {
+      reject(new Error(`Failed to load script ${src}`));
+    };
+
+    const theme = $Q("#MainContent");
+    theme.insertAdjacentElement('beforebegin', scriptTag);
+  })
+
 }
 
 /**
  * Creates a slider using the Swiper library.
  * @param {Object} parent - An object containing the data necessary to build the slider.
- * @param {string} parent.container - The ID of the HTML element that will contain the slider.
  * @param {string} parent.slidesMobile - The number of slides to show on mobile devices.
  * @param {string} parent.slides - The number of slides to show on larger screens.
  * @param {string} parent.pagination - Whether or not to show pagination dots.
@@ -30,26 +45,25 @@ const addTagScript = (script) => {
  * @param {string} parent.script - The URL of an external script to load.
  * @param {string} parent.spacing - The amount of space between slides, in pixels.
  */
-const createSlider = (parent) => {
+export const createSlider = (parent) => {
   const PAGE_ONE = 1;
   const {
-    container,
     slidesMobile,
     slides,
     pagination,
+    navigation,
+    customArrows,
     auto,
     speed,
-    script,
     spacing,
   } = parent.dataset;
 
-  addTagScript(script);
-
-  const idSlider = $Q(container);
+  const idSlider = parent;
 
   const swiperParams = {
     slidesPerView: Number(slidesMobile),
     pagination: pagination === "true",
+    navigation: navigation === "true",
     spaceBetween: Number(spacing),
     loop: auto === "true",
     ...((speed > 0) && {
@@ -68,12 +82,13 @@ const createSlider = (parent) => {
     },
   };
 
-  loadArrows(idSlider);
+  if (customArrows) {
+    loadArrows(idSlider);
+  }
 
   Object.assign(idSlider, swiperParams);
 
-  idSlider.initialize();
-
+  return idSlider.initialize();
 }
 
 const loadArrows = (idSlider) => {
@@ -97,12 +112,17 @@ creating an intersection observer for each slider container element.
 @returns {void}
 */
 export const loadSlider = () => {
-  const dataSliders = $Qll('.data-slider-js');
-  dataSliders.forEach((data) => {
+  const dataSliders = $Qll('.slider-js');
 
-    const selectorSlider = data.dataset.section;
+  dataSliders.forEach((slider) => {
+    createInterception(slider,
+      async () => {
+        const loadScript = await addTagScript(slider.dataset.script);
 
-    createInterception($Q(`.${selectorSlider}`),
-      () => createSlider($Q(`.${selectorSlider}`)))
+        if (loadScript) {
+          createSlider(slider);
+        }
+      },
+    )
   })
 }

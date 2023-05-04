@@ -2,10 +2,6 @@
   position: relative;
 }
 
-.btn-arrow::after {
-  display: none;
-  border: 1px solid red;
-}
 .btn-arrow {
   display: block;
   position: relative;
@@ -42,10 +38,16 @@
   }
 
   &::after {
-    display: none !important;
+    display: none;
   }
 
   @media screen and (max-width: 749px) {
-    display: none;
+    &-prev {
+      left: 0px;
+    }
+  
+    &-next {
+      right: 0px;
+    }
   }
 }
