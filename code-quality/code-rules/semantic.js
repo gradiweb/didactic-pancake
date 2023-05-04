@@ -222,7 +222,7 @@ module.exports = {
 
     // Prefer use of an object spread over Object.assign
     // https://eslint.org/docs/rules/prefer-object-spread
-    'prefer-object-spread': 'error',
+    //'prefer-object-spread': 'error',
 
     // require or disallow space before blocks
     // https://eslint.org/docs/rules/space-before-blocks

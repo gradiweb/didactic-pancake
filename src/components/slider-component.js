@@ -45,25 +45,20 @@ const addTagScript = (script) => {
  * @param {string} parent.script - The URL of an external script to load.
  * @param {string} parent.spacing - The amount of space between slides, in pixels.
  */
-export const createSlider = (parent) => {
+export const createSlider = (container) => {
   const PAGE_ONE = 1;
   const {
     slidesMobile,
     slides,
     pagination,
     navigation,
-    customArrows,
     auto,
     speed,
     spacing,
-  } = parent.dataset;
+  } = container.dataset;
 
-  const idSlider = parent;
-
-  const swiperParams = {
+  let swiperParams = {
     slidesPerView: Number(slidesMobile),
-    pagination: pagination === "true",
-    navigation: navigation === "true",
     spaceBetween: Number(spacing),
     loop: auto === "true",
     ...((speed > 0) && {
@@ -82,28 +77,45 @@ export const createSlider = (parent) => {
     },
   };
 
-  if (customArrows) {
-    loadArrows(idSlider);
+  if (navigation === "true") {
+    swiperParams = loadNavigation(container, swiperParams);
   }
 
-  Object.assign(idSlider, swiperParams);
+  if (pagination === "true") {
+    swiperParams = loadPagination(container, swiperParams);
+  }
 
-  return idSlider.initialize();
+  Object.assign(container, swiperParams);
+  return container.initialize();
 }
 
-const loadArrows = (idSlider) => {
-  if (!$Q(".swiper-button", idSlider.parentNode)) return;
+const loadPagination = (slider, params) => {
+  const paginationContainer = $Q('.swiper-pagination', slider.parentNode);
+  if (!paginationContainer || !params) return;
 
-  const buttonNext = $Q('.swiper-button-next', idSlider.parentNode);
-  const buttonPrev = $Q('.swiper-button-prev', idSlider.parentNode);
+  const mutationParams = Object.assign({}, params)
 
-  buttonNext.addEventListener('click', () => {
-    idSlider.swiper.slideNext();
-  });
+  mutationParams["pagination"] = {
+    el: paginationContainer,
+  };
 
-  buttonPrev.addEventListener('click', () => {
-    idSlider.swiper.slidePrev();
-  });
+  return mutationParams;
+}
+
+const loadNavigation = (slider, params) => {
+  const parent = slider.parentNode;
+  if ($Qll(".swiper-button", parent).length < 2 || !params) return;
+  const mutationParams = Object.assign({}, params)
+
+  const buttonNext = $Q('.swiper-button-next', parent);
+  const buttonPrev = $Q('.swiper-button-prev', parent);
+
+  mutationParams["navigation"] = {
+    nextEl: buttonNext,
+    prevEl: buttonPrev,
+  }
+
+  return mutationParams;
 }
 
 /**

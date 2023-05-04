@@ -6,9 +6,8 @@
   - content: {Html} **REQUIRED** Internal sliders **init with for (iteration)
   - pagination: {Boolean} show default pagination
   - navigation: {Boolean} show default navigation
-  - custom_arrows: {Boolean} Show custom arrows. If use custom arrows, the default navigation must be false
   - perpage: {Number} items per page
-  - wrapper: {String} class to style
+  - wrapper: {String} parent className - You specific your styles sheets
   - auto: {boolean} If auto move slider
   - mobile_grid: {boolean} If need a grid card on mobile
   - perpage_mobile: 
@@ -33,12 +32,6 @@
   %}
 {% endcomment %}
 
-{% liquid
-  unless custom_arrows or navigation == false
-    assign navigation = true
-  endunless
-%}
-
 {% assign id_slider = section.id
   | split: '__'
   | last
@@ -55,7 +48,6 @@
     class="slider-js {{ id_slider }}"
     data-pagination={{ pagination | default: false }}
     data-navigation={{ navigation | default: false }}
-    data-custom-arrows={{ custom_arrows | default: false }}
     data-auto={{ auto | default: false }}
     data-speed={{ speed | default: false }}
     data-slides={{ perpage | default: 4 }}
@@ -65,7 +57,14 @@
     {{ content }}
   </swiper-container>
 
-  {% if custom_arrows %}
+  {% if pagination %}
+    <div 
+      class="swiper-pagination swiper-pagination-bullets {{ id_slider }}"
+    >
+    </div>
+  {% endif %}
+
+  {% if navigation %}
     <button
       type="button"
       class="swiper-button swiper-button-prev {{ id_slider }}"

@@ -1,3 +1,5 @@
+@use "../abstracts/variables";
+
 .slider__wrapper {
   position: relative;
 }
@@ -49,5 +51,11 @@
     &-next {
       right: 0px;
     }
+  }
+}
+
+.swiper-pagination {
+  &-bullet-active {
+    background: variables.$color-principal;
   }
 }
