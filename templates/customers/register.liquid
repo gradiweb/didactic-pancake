@@ -6,9 +6,9 @@
   {%- form 'create_customer', novalidate: 'novalidate' -%}
     {%- if form.errors -%}
       <h2
+        role="alert" aria-live="polite"
         class="h2 form__message form__message--error"
         tabindex="-1"
-        autofocus
       >
         {% render 'icon-error' %}
         {{ 'templates.contact.form.error_heading' | t }}
@@ -78,6 +78,7 @@
     </div>
     {%- if form.errors contains 'email' -%}
       <span
+        role="alert" aria-live="polite"
         id="RegisterForm-email-error"
         class="form__message form__message--error"
       >
@@ -104,6 +105,7 @@
     </div>
     {%- if form.errors contains 'password' -%}
       <span
+        role="alert" aria-live="polite"
         id="RegisterForm-password-error"
         class="form__message form__message--error"
       >

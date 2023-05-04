@@ -63,9 +63,9 @@
     <div>
       {%- if recover_success == true -%}
         <h3
+          role="status" aria-live="polite"
           class="form__message form__message--success"
           tabindex="-1"
-          autofocus
         >
           {% render 'icon-check' %}
           {{ 'customer.recover_password.success' | t }}
@@ -73,6 +73,7 @@
       {%- endif -%}
       {% if errors %}
       <small
+        role="status" aria-live="polite"
         id="RecoverEmail-email-error"
         class="form__message form__message--error"
       >
@@ -83,9 +84,9 @@
       {%- form 'customer_login', novalidate: 'novalidate' -%}
         {%- if form.errors -%}
           <h2
+            role="status" aria-live="polite"
             class="form__message form__message--error"
             tabindex="-1"
-            autofocus
           >
             {% render 'icon-error' %}
             {{ 'templates.contact.form.error_heading' | t }}

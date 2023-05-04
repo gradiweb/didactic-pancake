@@ -10,8 +10,9 @@
 
   {%- if form.posted_successfully? -%}
     <div
+      aria-live="polite"
+      role="alert"
       tabindex="-1"
-      autofocus
       class="form__message form__message--success "
     >
       <!-- eslint-disable max-len -->
@@ -21,9 +22,9 @@
   {%- elsif form.errors -%}
     <div>
       <span
+        aria-live="polite"
         role="alert"
         tabindex="-1"
-        autofocus
         class="form__message form__message--error"
       >
         <!-- eslint-disable max-len -->
@@ -43,9 +44,9 @@
     </ul>
   {%- endif -%}
   <span
+    aria-live="polite"
     role="alert"
     tabindex="-1"
-    autofocus
     class="form__message form__message--error error-user-exist"
   >
     {% render 'icon-error' %}
@@ -196,9 +197,9 @@
   %}
 
   <span
+    aria-live="polite"
     role="alert"
     tabindex="-1"
-    autofocus
     class="form__message form__message--error error-check-js"
   >
     {% render 'icon-error' %} {{ 'templates.contact.form.error_required' | t }}

@@ -78,16 +78,16 @@
               </div>
 
               {%- if form.errors -%}
-                <small id="ContactFooter-error">
+                <small role="alert" aria-live="polite" id="ContactFooter-error">
                   {{ form.errors.translated_fields['email'] | capitalize }}
                   {{ form.errors.messages['email'] }}
                 </small>
               {%- else -%}
                 <h3
+                  role="alert" aria-live="polite"
                   id="ContactFooter-success-exist"
                   class="error-js"
                   tabindex="-1"
-                  autofocus
                 >
                   ✓ {{ 'newsletter.registered' | t }}
                 </h3>
@@ -95,9 +95,9 @@
 
               {%- if form.posted_successfully? -%}
                 <h3
+                  role="alert" aria-live="polite"
                   id="ContactFooter-success"
                   tabindex="-1"
-                  autofocus
                 >
                   ✓ {{ 'newsletter.success' | t }}
                 </h3>
