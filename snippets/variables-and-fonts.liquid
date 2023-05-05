@@ -1,5 +1,14 @@
 <!-- eslint-disable max-len -->
 {% style %}
+
+  @font-face {
+    font-family: system;
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+  }
+
   :root {
     --color-base-principal: rgba({{ settings.colors_brand.red }}, {{ settings.colors_brand.green }}, {{ settings.colors_brand.blue }});
     --color-base-text: {{ settings.colors_txt }};
