@@ -1,8 +1,3 @@
-@import "base/reset";
-
-@import "theme/theme";
-@import "layout/header";
-
 @import "layout/forms";
 @import "layout/footer";
 @import "layout/grid";
@@ -38,7 +33,7 @@
 @import "components/video";
 @import "components/calltoaction";
 @import "components/markdown";
-@import "components/hero";
+
 @import "components/page404";
 @import "components/barprogress";
 @import "components/flexblock";

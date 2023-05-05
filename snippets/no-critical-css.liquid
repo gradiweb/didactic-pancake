@@ -1,0 +1,16 @@
+<link
+  rel="stylesheet"
+  href="{{ 'theme.css' | asset_url }}"
+>
+
+{%- if request.page_type == 'product' -%}
+  {% render 'preload-css', asset: 'product.css' %}
+{%- endif -%}
+
+{%- if request.page_type == 'collection' -%}
+  {% render 'preload-css', asset: 'collection.css' %}
+{%- endif -%}
+
+{%- if request.page_type contains 'customers' -%}
+  {% render 'preload-css', asset: 'customer.css' %}
+{%- endif -%}
