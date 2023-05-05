@@ -10,11 +10,7 @@ import {
   updateQuantity,
 } from "./update-cart";
 
-import { barProgress } from "../utils/bar-progress";
-
 const CART_SECTION = "side-cart,cart-page";
-
-barProgress($Q('#progress-bar-data'));
 
 /**
  * Add products in cart
@@ -43,6 +39,7 @@ barProgress($Q('#progress-bar-data'));
 
   if (status === 422) {
     cartOutStockAlert();
+    buttonContent.textContent = textButton;
     return;
   }
   if (!sections) return null;
@@ -195,15 +192,12 @@ export const openCloseCart = () => {
   cartContainer.setAttribute("data-active", "false");
 
   toggleDataActive(
-    ".cart-close",
-    "#shopify-section-side-cart",
-    { overlay: true },
-  )
-
-  toggleDataActive(
     ".button-cart",
     "#shopify-section-side-cart",
-    { overlay: true },
+    {
+      overlay: true,
+      closeSelector: ".cart-close",
+    },
   )
 
 }

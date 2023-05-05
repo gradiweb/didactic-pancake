@@ -19,10 +19,9 @@ $margin-icon: 30px;
         --justify: flex-start;
         overflow-x: auto;
         flex-wrap: nowrap;
-        margin-left: calc(1rem - variables.$paddings-side--movil);
-        margin-right: calc(1rem - variables.$paddings-side--movil);
-        padding-left: variables.$paddings-side--movil;
-        padding-right: variables.$paddings-side--movil;
+        margin-left: -1rem;
+        margin-right: -1rem;
+
 
         .row-icons__element {
           flex-shrink: 0;

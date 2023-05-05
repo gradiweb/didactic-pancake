@@ -5,9 +5,17 @@
   {% render 'breadcrumbs' %}
 {% endcomment %}
 <link
-  rel="stylesheet"
+  rel="preload"
   href="{{ 'breadcrumbs.css' | asset_url }}"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
 />
+<noscript>
+  <link
+    rel="stylesheet"
+    href="{{ 'breadcrumbs.css' | asset_url }}"
+  />
+</noscript>
 
 <nav
   class="breadcrumbs"

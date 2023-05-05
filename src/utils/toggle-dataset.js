@@ -1,4 +1,3 @@
-import { resetVideo } from "../components/video-frame";
 import { $Q } from "./query-selector"
 
 /**
@@ -70,54 +69,4 @@ export function dataToggle(node, overlay) {
       () => dataToggle($Q(node), overlay),
     )
   }
-}
-
-/**
- *
- * @param {String} id - ID from node manipulate
- * @param {Boolean} active - If modal active
- * @param {HTMLElement} node - Node to manipulate
- */
- const overlayActionsVideo = (id, node, { active, video }) => {
-  const idOverlay = `overlay--${id}`;
-  const parent = node.parentNode;
-
-  if (!active) {
-    const overlay = document.createElement("div");
-
-    overlay.setAttribute("id", idOverlay);
-    overlay.classList.add("overlay");
-
-    parent.insertBefore(overlay, node);
-    toggleDataActive(`#${idOverlay}`, `#${id}`, { overlay: true, video });
-  } else {
-    parent.removeChild($Q(`#${idOverlay}`));
-
-    if (video) {
-      resetVideo(node);
-    }
-  }
-}
-
-/**
-* Data Toggle
-*
-* @param {HTMLElement} node - Node to manipulate
-* @param {Boolean} overlay - if used to a overlay
-*/
-export function dataToggleVideo(node, overlay, video) {
-
-  const { dataset, id } = node;
-  const active = isActive(dataset);
-
-  if (active) {
-    dataset.active = "false";
-  } else {
-    dataset.active = "true";
-  }
-
-  if (overlay) {
-    overlayActionsVideo(id, node, { active, video })
-  }
-
 }

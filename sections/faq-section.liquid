@@ -1,7 +1,16 @@
 <link
-  rel="stylesheet"
+  rel="preload"
   href="{{ 'faq.css' | asset_url }}"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
 />
+<noscript>
+  <link
+    rel="stylesheet"
+    href="{{ 'faq.css' | asset_url }}"
+  />
+</noscript>
+
 <h2 class="categories-content__title mobile">
   {{ section.settings.menu_title }}
 </h2>
@@ -55,6 +64,7 @@
 {% render 'faq-schema-org'
   blocks: section.blocks
 %}
+
 <script
   src="{{ 'faq.js' | asset_url }}"
   defer="defer"

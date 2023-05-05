@@ -1,3 +1,4 @@
+import { barProgress } from "../utils/bar-progress";
 import { setQuantity } from "../utils/input-quantity";
 import { $Q } from "../utils/query-selector"
 import { createInterception } from "../utils/script-defer";
@@ -25,4 +26,6 @@ const loadChangeCart = () => {
   deleteItem();
   onChangeItemCart();
   setQuantity();
+  barProgress($Q('#progress-bar-data'));
+
 }

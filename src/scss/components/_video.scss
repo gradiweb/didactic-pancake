@@ -64,6 +64,15 @@
     }
   }
 
+  &__close {
+    display: none;
+    position: fixed;
+    top: 0px;
+    right: 0;
+    z-index: 3;
+    cursor: pointer;
+  }
+
   &__modal {
     z-index: 2;
     display: none;
@@ -75,6 +84,9 @@
 
     &[data-active=true] {
       display: block;
+      + .video__close {
+        display: block;
+      }
     }
 
     &-wrapper {

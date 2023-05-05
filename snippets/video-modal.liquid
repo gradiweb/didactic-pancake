@@ -1,4 +1,4 @@
-<div
+<dialog
   id="modal-video-{{ section.id }}-js"
   class="video__modal"
 >
@@ -21,4 +21,7 @@
       ></iframe>
     {%- endif -%}
   </div>
-</div>
+</dialog>
+<span class="video__close">
+  {% render 'icon-close' %}
+</span>

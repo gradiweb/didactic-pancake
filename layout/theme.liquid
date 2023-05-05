@@ -154,6 +154,7 @@
     {%- if request.page_type == 'collection' -%}
       <script
         src="{{ 'collection.js' | asset_url }}"
+        defer="defer"
       ></script>
     {%- endif -%}
 
