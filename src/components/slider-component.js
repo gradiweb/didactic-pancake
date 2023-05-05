@@ -10,15 +10,15 @@ A function that adds a script tag to the document body.
 */
 const addTagScript = (script) => {
   if (window.sliderScript) {
-  return new Promise((resolve) => {
+    return new Promise((resolve) => {
       resolve(true);
-    })
+    });
   }
 
   return new Promise((resolve, reject) => {
     const scriptTag = document.createElement('script');
     scriptTag.src = script;
-    scriptTag.setAttribute("id", "swiper-script");
+    scriptTag.setAttribute('id', 'swiper-script');
 
     scriptTag.onload = () => {
       window.sliderScript = true;
@@ -29,11 +29,10 @@ const addTagScript = (script) => {
       reject(new Error(`Failed to load script ${src}`));
     };
 
-    const theme = $Q("#MainContent");
+    const theme = $Q('#MainContent');
     theme.insertAdjacentElement('beforebegin', scriptTag);
-  })
-
-}
+  });
+};
 
 /**
  * Creates a slider using the Swiper library.
@@ -47,23 +46,15 @@ const addTagScript = (script) => {
  * @param {string} parent.spacing - The amount of space between slides, in pixels.
  */
 export const createSlider = (container) => {
-  console.log("load slider");
   const PAGE_ONE = 1;
-  const {
-    slidesMobile,
-    slides,
-    pagination,
-    navigation,
-    auto,
-    speed,
-    spacing,
-  } = container.dataset;
+  const { slidesMobile, slides, pagination, navigation, auto, speed, spacing } =
+    container.dataset;
 
   let swiperParams = {
     slidesPerView: Number(slidesMobile),
     spaceBetween: Number(spacing),
-    loop: auto === "true",
-    ...((speed > 0) && {
+    loop: auto === 'true',
+    ...(speed > 0 && {
       autoplay: {
         delay: Number(speed),
         disableOnInteraction: false,
@@ -71,7 +62,10 @@ export const createSlider = (container) => {
     }),
     breakpoints: {
       640: {
-        slidesPerView: Number(slides) === PAGE_ONE ? Number(slides) : Number(slidesMobile) + 1,
+        slidesPerView:
+          Number(slides) === PAGE_ONE
+            ? Number(slides)
+            : Number(slidesMobile) + 1,
       },
       1024: {
         slidesPerView: Number(slides),
@@ -79,46 +73,46 @@ export const createSlider = (container) => {
     },
   };
 
-  if (navigation === "true") {
+  if (navigation === 'true') {
     swiperParams = loadNavigation(container, swiperParams);
   }
 
-  if (pagination === "true") {
+  if (pagination === 'true') {
     swiperParams = loadPagination(container, swiperParams);
   }
 
   Object.assign(container, swiperParams);
   return container.initialize();
-}
+};
 
 const loadPagination = (slider, params) => {
   const paginationContainer = $Q('.swiper-pagination', slider.parentNode);
   if (!paginationContainer || !params) return;
 
-  const mutationParams = Object.assign({}, params)
+  const mutationParams = Object.assign({}, params);
 
-  mutationParams["pagination"] = {
+  mutationParams['pagination'] = {
     el: paginationContainer,
   };
 
   return mutationParams;
-}
+};
 
 const loadNavigation = (slider, params) => {
   const parent = slider.parentNode;
-  if ($Qll(".swiper-button", parent).length < 2 || !params) return;
-  const mutationParams = Object.assign({}, params)
+  if ($Qll('.swiper-button', parent).length < 2 || !params) return;
+  const mutationParams = Object.assign({}, params);
 
   const buttonNext = $Q('.swiper-button-next', parent);
   const buttonPrev = $Q('.swiper-button-prev', parent);
 
-  mutationParams["navigation"] = {
+  mutationParams['navigation'] = {
     nextEl: buttonNext,
     prevEl: buttonPrev,
-  }
+  };
 
   return mutationParams;
-}
+};
 
 /**
 A function that loads sliders on a page by
@@ -131,30 +125,26 @@ export const loadSlider = () => {
   dataSliders.forEach((slider) => {
     if (blackListSlider(slider)) return;
 
-    createInterception(slider,
-      async () => {
-        const loadScript = await addTagScript(slider.dataset.script);
+    createInterception(slider, async () => {
+      const loadScript = await addTagScript(slider.dataset.script);
 
-        if (loadScript) {
-          createSlider(slider);
-        }
-      },
-    )
-  })
-}
+      if (loadScript) {
+        createSlider(slider);
+      }
+    });
+  });
+};
 
 /**
  * this script only select one slider predefine. example at doing click button
  * @param {Node} slider - node slider
  */
 export const loadSliderByEvent = (slider) => {
-    createInterception(slider,
-      async () => {
-        const loadScript = await addTagScript(slider.dataset.script);
+  createInterception(slider, async () => {
+    const loadScript = await addTagScript(slider.dataset.script);
 
-        if (loadScript) {
-          createSlider(slider);
-        }
-      },
-    )
-}
+    if (loadScript) {
+      createSlider(slider);
+    }
+  });
+};
