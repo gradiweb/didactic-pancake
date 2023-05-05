@@ -34,7 +34,7 @@ export function mountSlider(main) {
     /**
      * VERTICAL SWIPER SLIDER INSIDE: media product page
      */
-    thumbnails = new Swiper(".vertical-inside-swipper-thumbs", thumbsConfig(4, true, "verticalInsideBreak"));
+    thumbnails = new Swiper(".vertical-inside-swipper-thumbs", thumbsConfig(3, true, "verticalInsideBreak"));
     principalClass = ".vertical-inside-swipper-principal";
   }
 

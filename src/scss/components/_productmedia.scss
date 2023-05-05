@@ -25,7 +25,6 @@
     margin: auto;
     display: flex;
 
-
     &-next {
       right: 0;
       transform: rotate(179deg);
@@ -82,14 +81,18 @@
       display: flex;
 
       &-next {
-        right: -3px;
+        right: -2px;
         transform: rotate(179deg);
       }
 
       &-prev {
-        left: 4px;
+        left: 1px;
         transform: rotateZ(179deg);
       }
+    }
+
+    @media screen and (max-width: 472px) {
+      display: none;
     }
   }
 
@@ -113,7 +116,7 @@
   &-thumbs {
     height: 300px;
     width: 67.5px;
-    padding: 3px 20px 30px;
+    padding: 3px 20px;
     position: absolute;
     left: 0;
     top: 0;
@@ -143,29 +146,22 @@
 
 
       &-next {
-        top: 307px;
+        top: 282px;
       }
 
       &-prev {
-        top: -3px;
+        top: -13px;
       }
     }
 
-    @media screen and (max-width: 1024px) {
-      height: 220px;
-      .swiper-button {
-
-        &-next {
-          bottom: -22px;
-        }
-      }
+    @media screen and (max-width: 472px) {
+      display: none;
     }
   }
 
   .image-elements {
     &__image-thumbs {
       cursor: pointer;
-      margin: 4px 0;
     }
   }
 

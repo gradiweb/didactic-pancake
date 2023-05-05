@@ -21,6 +21,13 @@
 {% endcomment %}
 <!-- eslint-enable @html-eslint/require-closing-tags -->
 
+{% comment %} - no support
+  elsif direction == "vertical-left" or direction == "vertical-right"
+    assign slide_direction = "vertical-outside-swipper-principal"
+    assign thumbs_direction = "vertical-outside-swipper-thumbs"
+    assign swiper_direction = "vertical-outside-swipper"
+{% endcomment %}
+
 {%- liquid
   if direction == "vertical-inside"
     assign slide_direction = "vertical-inside-swipper-principal"
@@ -34,10 +41,6 @@
     assign slide_direction = "horizontal-swipper-principal"
     assign thumbs_direction = "horizontal-swipper-thumbs"
     assign swiper_direction = "horizontal-swipper"
-  elsif direction == "vertical-left" or direction == "vertical-right"
-    assign slide_direction = "vertical-outside-swipper-principal"
-    assign thumbs_direction = "vertical-outside-swipper-thumbs"
-    assign swiper_direction = "vertical-outside-swipper"
   endif
 -%}
 

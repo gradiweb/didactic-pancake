@@ -1,12 +1,8 @@
-import { Navigation, Thumbs, FreeMode } from "swiper";
+import { Navigation, Thumbs, FreeMode, Pagination } from "swiper";
 import { breakPoint } from "./sliderBreakPoint";
 
 export const thumbsConfig = (slidesPerView, vertical, type) => {
   const config = {
-    modules: [FreeMode],
-    slidesPerView: slidesPerView,
-    watchSlidesProgress: true,
-    freeMode: true,
     breakpoints: breakPoint(type),
   }
   // eslint-disable-next-line no-unused-expressions
@@ -17,10 +13,13 @@ export const thumbsConfig = (slidesPerView, vertical, type) => {
 
 export const principalConfig = (thumbnails, slider) => {
   const config = {
-    modules: [Navigation, Thumbs],
-    spaceBetween: 10,
+    modules: [Navigation, Thumbs, Pagination],
     thumbs: {
       swiper: thumbnails,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
     },
     navigation: {
       nextEl: `.swiper-button-next${slider}`,
