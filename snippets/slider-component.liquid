@@ -10,9 +10,9 @@
   - wrapper: {String} parent className - You specific your styles sheets
   - auto: {boolean} If auto move slider
   - mobile_grid: {boolean} If need a grid card on mobile
-  - perpage_mobile: 
+  - perpage_mobile:
   - space_between:
-  - speed: 
+  - speed:
 
   Use this structure in content prop:
   {% capture slider_content %}
@@ -68,12 +68,14 @@
     <button
       type="button"
       class="swiper-button swiper-button-prev {{ id_slider }}"
+      aria-label="Arrow slider{{ id_slider }} prev"
     >
       {% render "button-arrow" %}
     </button>
     <button
       type="button"
       class="swiper-button swiper-button-next {{ id_slider }}"
+      aria-label="Arrow slider{{ id_slider }} next"
     >
       {% render "button-arrow", direction: "right" %}
     </button>
