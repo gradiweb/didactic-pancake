@@ -47,7 +47,6 @@ const addTagScript = (script) => {
  * @param {string} parent.spacing - The amount of space between slides, in pixels.
  */
 export const createSlider = (container) => {
-  console.log("load slider");
   const PAGE_ONE = 1;
   const {
     slidesMobile,

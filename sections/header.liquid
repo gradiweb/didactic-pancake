@@ -18,7 +18,7 @@
     {% endif %}
   </a>
 </div>
-<nav class="nav">
+<nav class="nav" aria-label="Main Navigation">
   {% render 'site-nav'
     linklist: section.settings.menu
   %}
@@ -30,7 +30,7 @@
 {% schema %}
 {
   "name": "t:sections.header.name",
-  "tag": "div",
+  "tag": "header",
   "class": "header sticky grid",
   "settings": [
     {

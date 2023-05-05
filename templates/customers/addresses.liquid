@@ -87,7 +87,7 @@
         %}
 
         {% render 'select-option'
-          id:"AddressCountryNew"
+          id: "AddressCountryNew"
           name: "address[country]",
           options: all_country_option_tags
         %}
@@ -241,9 +241,9 @@
                       %}
 
                       {% assign provinces = option_string
-                        | split:'data-provinces="'
+                        | split: 'data-provinces="'
                         | last
-                        | split:'"'
+                        | split: '"'
                         | first
                       %}
 

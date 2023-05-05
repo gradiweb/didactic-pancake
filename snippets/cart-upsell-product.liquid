@@ -11,9 +11,8 @@
 {% endcomment %}
 {%- liquid
   assign first_variant = product.selected_or_first_available_variant
-  assign img_url = product.featured_media | img_url: '133x133'
+  assign img_url = product.featured_media | image_url: width: 133, height: 133
   assign image = product.featured_image
-  assign btn_text = 'products.product.add_to_cart' | t
   assign available = product.selected_or_first_available_variant.available
 -%}
 
@@ -24,7 +23,7 @@
       img_src: img_url,
       img: image,
       alt: image.alt,
-      size: "50 116"
+      size: "50 133"
       width: "133",
       height: "133"
     %}

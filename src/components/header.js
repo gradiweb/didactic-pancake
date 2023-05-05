@@ -1,6 +1,20 @@
 import { closeAll } from "../utils/accordion";
 import { $Q, $Qll } from "../utils/query-selector"
-import { dataToggle } from "../utils/toggle-dataset";
+import { isActive } from "../utils/toggle-dataset";
+
+function dataToggleMenu(node) {
+
+  const { dataset } = node;
+  const active = isActive(dataset);
+
+  if (active) {
+    dataset.active = "false";
+    node.setAttribute("aria-expanded", "false");
+  } else {
+    dataset.active = "true";
+    node.setAttribute("aria-expanded", "true");
+  }
+}
 
 /**
  * DropDown Action - if is not data active true
@@ -11,7 +25,7 @@ import { dataToggle } from "../utils/toggle-dataset";
   element.dataset.active !== 'true'
     && closeAll('.nav-item-js', $Q('#nav-list-js'));
 
-  dataToggle(element);
+  dataToggleMenu(element);
 }
 
 /**

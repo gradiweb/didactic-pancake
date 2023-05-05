@@ -28,7 +28,7 @@
           {% assign in_cart = line_item.product.id %}
           {% break %}
         {% endif %}
-      {%  endfor %}
+      {% endfor %}
 
       {% if upsell_product.id == in_cart %}
         {% continue %}
