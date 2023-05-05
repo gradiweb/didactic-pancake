@@ -13,6 +13,7 @@ const entry = {
   password: './src/templates/password.js',
   customer: './src/templates/customer.js',
   contact: './src/templates/contact.js',
+  critical: './src/templates/critical.js',
   breadcrumbs: './assets/breadcrumbs.module.js',
   pagination: './assets/pagination.module.js',
   faq: './assets/faq-section.module.js'
