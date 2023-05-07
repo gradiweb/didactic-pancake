@@ -113,7 +113,6 @@ export const btnAddToCart = (formQuery, parent = null) => {
  */
 export const updateCart = async (line, quantity, id) => {
   const priceBefore = $Q(`#price-${id}`).textContent;
-  const quantityBefore = $Q(`#price-${id}`).dataset.quantity;
   addSpinner(`#price-${id}`);
 
   const cartParams = {
@@ -126,7 +125,7 @@ export const updateCart = async (line, quantity, id) => {
 
   if (status === 422) {
     $Q(`#price-${id}`).textContent = priceBefore;
-    updateQuantity(id, quantityBefore);
+    updateQuantity(id, quantity - 1);
     cartOutStockAlert();
     return;
   }
