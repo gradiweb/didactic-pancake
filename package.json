@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rm assets/theme.js",
     "build": "webpack --config webpack.prod.js --mode production --progress",
-    "dev": "webpack --config webpack.dev.js --watch --mode development --progress",
+    "dev": "node cleanCompilation.js && webpack --config webpack.dev.js --watch --mode development --progress",
     "build:criticalcss": "webpack --config webpack.prod.js --mode production --progress && node criticalcss.js",
     "install:codeqa": "cd code-quality && npm prune && npm install",
     "lint": "stylelint **/*.scss & (cd code-quality && eslint --quiet ../)"
