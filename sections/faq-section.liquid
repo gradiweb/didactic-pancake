@@ -12,12 +12,12 @@
 </noscript>
 
 <h2 class="categories-content__title mobile">
-  {{ section.settings.menu_title }}
+  {{ section.settings.heading }}
 </h2>
 <div class="categories-menu">
   {% for block in section.blocks %}
     {% liquid
-      assign title = block.settings.category_title
+      assign title = block.settings.heading
       assign handleTitle = title | handleize
     %}
     {% unless title == blank %}
@@ -35,11 +35,11 @@
 </div>
 <div class="categories-content">
   <h2 class="categories-content__title desktop">
-    {{ section.settings.menu_title }}
+    {{ section.settings.heading }}
   </h2>
   {% for block in section.blocks %}
     {% liquid
-      assign title = block.settings.category_title
+      assign title = block.settings.heading
       assign handleTitle = title | handleize
     %}
     <div
@@ -72,15 +72,15 @@
 
 {% schema %}
 {
-  "name": "FAQ SECTION",
+  "name": "Questions and responses",
   "tag": "section",
   "class": "faq-category-section wrapper grid",
   "settings": [
     {
       "type": "text",
-      "id": "menu_title",
-      "label": "Menú title",
-      "default": "Catégories"
+      "id": "heading",
+      "label": "Title",
+      "default": "Categories"
     }
   ],
   "blocks": [
@@ -90,7 +90,7 @@
       "settings": [
         {
           "type": "text",
-          "id": "category_title",
+          "id": "heading",
           "info": "Put the name you want for the menu item.",
           "label": "Category title"
         },
@@ -385,7 +385,7 @@
   ],
   "presets": [
     {
-      "name": "FAQ SECTION"
+      "name": "Questions and responses"
     }
   ]
 }
