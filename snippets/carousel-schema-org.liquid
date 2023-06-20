@@ -11,44 +11,43 @@
   %}
 {% endcomment %}
 
-{% assign products_array = "" | split: "" %}
 {% capture item_list %}
-{% if array_elements contains 'handle' %}
-  {% for block in array_elements %}
-    {% assign product = block.settings.product %}
-    {
-      "@type": "Offer",
-      "name": "{{ product.title }}",
-      "description": "{{ product.description | strip_html   }}",
-      "url": "{{ product.url }}",
-      "image": "{{ product.featured_image.src | img_url: '1024x1024' }}",
-      "sku": "{{ product.sku }}",
-      "offers": {
+  {% if array_elements contains 'handle' %}
+    {% for block in array_elements %}
+      {% assign product = block.settings.product %}
+      {
         "@type": "Offer",
-        "price": "{{ product.price | money_without_currency }}",
-        "priceCurrency": "{{ shop.currency }}"
+        "name": "{{ product.title }}",
+        "description": "{{ product.description | strip_html }}",
+        "url": "{{ product.url }}",
+        "image": "{{ product.featured_image.src | image_url: width: 1024, height: 1024 }}",
+        "sku": "{{ product.sku }}",
+        "offers": {
+          "@type": "Offer",
+          "price": "{{ product.price | money_without_currency }}",
+          "priceCurrency": "{{ shop.currency }}"
+        }
       }
-    }
-    {% unless forloop.last %},{% endunless %}
-  {% endfor %}
-{% else %}
-  {% for product in array_elements %}
-    {
-      "@type": "Offer",
-      "name": "{{ product.title }}",
-      "description": "{{ product.description | strip_html   }}",
-      "url": "{{ product.url }}",
-      "image": "{{ product.featured_image.src | img_url: '1024x1024' }}",
-      "sku": "{{ product.sku }}",
-      "offers": {
+      {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  {% else %}
+    {% for product in array_elements %}
+      {
         "@type": "Offer",
-        "price": "{{ product.price | money_without_currency }}",
-        "priceCurrency": "{{ shop.currency }}"
+        "name": "{{ product.title }}",
+        "description": "{{ product.description | strip_html }}",
+        "url": "{{ product.url }}",
+        "image": "{{ product.featured_image.src | img_url: '1024x1024' }}",
+        "sku": "{{ product.sku }}",
+        "offers": {
+          "@type": "Offer",
+          "price": "{{ product.price | money_without_currency }}",
+          "priceCurrency": "{{ shop.currency }}"
+        }
       }
-    }
-    {% unless forloop.last %},{% endunless %}
-  {% endfor %}
-{% endif %}
+      {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  {% endif %}
 {% endcapture %}
 
 <script type="application/ld+json">

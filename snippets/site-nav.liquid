@@ -1,63 +1,68 @@
 <ul
   id="nav-list-js"
-  data-event="mouseenter"
   class="nav__child flex"
+  data-event="mouseenter"
   data-toggle="true"
   data-active="false"
+  role="navigation"
 >
-{% for link in linklists[linklist].links %}
-  {% if link.links != blank %}
-    <li class="nav__child-item nav-item-js">
-      <span
-        class="nav__child-button-dropdown button-dropdown-js"
-        data-active="false"
+  {% for link in linklists[linklist].links %}
+    {% if link.links != blank %}
+      <li
+        class="nav__child-item nav-item-js"
+        aria-haspopup="true"
       >
-        {{ link.title }}
-        {% render 'icon-caret' %}
-      </span>
-
-      <ul class="child__level child__level-dropdown">
-        {% for childlink in link.links %}
-          <li class="child__level-first">
-            <a
-              href="{{ childlink.url }}"
-              title="{{ childlink.title }}"
-            >
-              {{ childlink.title }}
-            </a>
-            {% if childlink.links != blank %}
-              {% for grandchildlink in childlink.links %}
-                <span class="child__level-second">
-                  <a
-                    href="{{ grandchildlink.url }}"
-                    title="{{ grandchildlink.title }}"
-                  >
-                    {{ grandchildlink.title }}
-                  </a>
-                </span>
-              {% endfor %}
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    </li>
-  {% else %}
-    <li class="nav__child-item">
-      <a
-        href="{{ link.url }}"
-        title="{{ link.title }}"
-      >
-        {{ link.title }}
-      </a>
-    </li>
-  {% endif %}
-{% endfor %}
-</ul>
-<button
-  class="burger-nav"
-  id="burger-nav-js"
-  type="button"
->
-  {% render 'icon-hamburger' %}
-  {% render 'icon-close' %}
-</button>
+        <button
+          type="button"
+          class="nav__child-button-dropdown button-dropdown-js"
+          data-active="false" aria-expanded="false"
+        >
+          {{ link.title }}
+          {% render 'icon-caret' %}
+        </button>
+          <ul class="child__level child__level-dropdown">
+            {% for childlink in link.links %}
+              <li class="child__level-first">
+                <a
+                  href="{{ childlink.url }}"
+                  title="{{ childlink.title }}"
+                >
+                  {{ childlink.title }}
+                </a>
+                {% if childlink.links != blank %}
+                  {% for grandchildlink in childlink.links %}
+                    <span class="child__level-second">
+                      <a
+                        href="{{ grandchildlink.url }}"
+                        title="{{ grandchildlink.title }}"
+                      >
+                        {{ grandchildlink.title }}
+                      </a>
+                    </span>
+                  {% endfor %}
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% else %}
+        <li class="nav__child-item">
+          <a
+            href="{{ link.url }}"
+            title="{{ link.title }}"
+          >
+            {{ link.title }}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  <button
+    class="burger-nav"
+    id="burger-nav-js"
+    type="button"
+    aria-label="Toggle Navigation"
+  >
+    {% render 'icon-hamburger' %}
+    {% render 'icon-close' %}
+  </button>

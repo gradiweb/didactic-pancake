@@ -124,7 +124,7 @@
     {% elsif dataLineStart == "-" %}
       {% capture strDataBlock %}
         <ul class="markdown--list">
-          {% assign dataList = dataLine | split: "-"  %}
+          {% assign dataList = dataLine | split: "-" %}
           {% for item in dataList %}
             {%- if item != blank -%}
               {% if item contains "__ " %}
@@ -135,10 +135,10 @@
                 {%- endif -%}
                 {% assign isSubitem = true %}
                   <li>{{ item | remove: "__" }}</li>
-                {% unless  hasItemFuture contains "__" %}
+                {% unless hasItemFuture contains "__" %}
                     </ul>
                   {% assign isSubitem = false %}
-                {%- endunless  -%}
+                {%- endunless -%}
               {% else %}
                 <li>{{ item }}</li>
               {% endif %}
@@ -233,7 +233,7 @@
       {%- comment -%}
         Validate if the paragraph has any inline code
       {%- endcomment -%}
-      {% assign paragraph = dataLine | split: "`"  %}
+      {% assign paragraph = dataLine | split: "`" %}
       {% if paragraph.size > 1 %}
         <p class="markdown--p-code">
           {% render 'markdown-line-code' lineCode: paragraph %}

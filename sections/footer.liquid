@@ -4,26 +4,29 @@
       {% case block.type %}
 
         {% when "link_list" %}
-          <div class="footer-blocks_linklist">
+          <nav
+            class="footer-blocks_linklist"
+            role="navigation"
+            aria-label="Footer"
+            aria-labelledby="footer-title"
+          >
             {% if block.settings.heading != blank %}
-              <span class="footer-title">
+              <h2 class="footer-title">
                 {{ block.settings.heading }}
-              </span>
+              </h2>
             {% endif %}
             {% if block.settings.menu != blank %}
               <ul class="footer-list">
                 {% for link in linklists[block.settings.menu].links %}
                   <li>
-                    <a
-                      href="{{ link.url }}"
-                      title="{{ link.title }}">
+                    <a href="{{ link.url }}" title="{{ link.title }}">
                       {{ link.title }}
                     </a>
                   </li>
                 {% endfor %}
               </ul>
             {% endif %}
-          </div>
+          </nav>
 
         {% when "newslatter" %}
           <div class="footer-blocks_newslatter">

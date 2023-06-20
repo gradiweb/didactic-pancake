@@ -3,15 +3,7 @@ export const breakPoint = (type) => {
 
   const objectData = {
     verticalInsideBreak: {
-      1024: {
-        slidesPerView: 4,
-        spaceBetween: 10,
-      },
-      372: {
-        slidesPerView: 3,
-        spaceBetween: 10,
-      },
-      200: {
+      472: {
         slidesPerView: 4,
         spaceBetween: 10,
       },
@@ -33,12 +25,8 @@ export const breakPoint = (type) => {
     },
 
     horizontalInsideBreak: {
-      1024: {
+      472: {
         slidesPerView: 4,
-        spaceBetween: 10,
-      },
-      375: {
-        slidesPerView: 3,
         spaceBetween: 10,
       },
     },
@@ -48,7 +36,7 @@ export const breakPoint = (type) => {
         slidesPerView: 5,
         spaceBetween: 10,
       },
-      375: {
+      200: {
         slidesPerView: 3,
         spaceBetween: 10,
       },

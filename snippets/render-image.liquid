@@ -44,13 +44,12 @@
 <img
   class="{{ class }} lazyload blur-up"
   loading="lazy"
-  title="{{ alt | default: 'Image to render'}}"
+  title="{{ alt | default: 'Image to render' }}"
   data-sizes="auto"
   src="{{ default | default: img_src }}"
   data-srcset="
   {%- if img -%}
     {%- for img_size in size_split -%}
-      {%- assign sizex = img_size | append: 'x' -%}
       {%- assign sizew = img_size | append: 'w' -%}
       {%- assign imge_url = img | image_url: height: img_size -%}
       {{ imge_url }} {{ sizew }},

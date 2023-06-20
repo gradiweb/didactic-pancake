@@ -19,13 +19,9 @@
       style="background: {{ section.settings.color_brackground }} !important;"
   {%- endif -%}
   >
-    {% if section.settings.image_brackground != blank
-      and section.settings.video_url == blank
-      or section.settings.image_brackground != blank
-      and section.settings.video_url_embed == blank
-    %}
+    {% if section.settings.image_brackground != blank %}
       <picture>
-        {% assign url = section.settings.image_brackground  | img_url: '500x' %}
+        {% assign url = section.settings.image_brackground | image_url: width: 500 %}
         {% render "render-image"
           class: "class_image",
           img_src: url,
@@ -40,7 +36,7 @@
 
   <div class="container__description">
     <div>
-      {% if section.settings.dual_section_title != blank  %}
+      {% if section.settings.dual_section_title != blank %}
         {% if section.settings.dual_section_title_size == "h2" %}
           <h2>{{ section.settings.dual_section_title }}</h2>
         {% elsif section.settings.dual_section_title_size == "h3" %}
@@ -49,10 +45,10 @@
           <h4>{{ section.settings.dual_section_title }}</h4>
         {% endif %}
       {% endif %}
-      {% if section.settings.dual_section_subtitle != blank  %}
+      {% if section.settings.dual_section_subtitle != blank %}
         {{ section.settings.dual_section_subtitle }}
       {% endif %}
-      {% if section.settings.dual_section_description != blank  %}
+      {% if section.settings.dual_section_description != blank %}
         {{ section.settings.dual_section_description }}
       {% endif %}
 
@@ -61,7 +57,7 @@
       %}
         {% render 'link'
           class: "btn-2",
-          url:  section.settings.dual_section_linkCTA,
+          url: section.settings.dual_section_linkCTA,
           content: section.settings.dual_section_titleCTA
         %}
       {% endif %}

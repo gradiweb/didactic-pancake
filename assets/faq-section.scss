@@ -1,83 +1,110 @@
-@use './global';
+/* == Margins and Paddings == */
+$paddings-side: 5rem;
+$paddings-side--movil: 1rem;
 
+$margin-section: 50px;
 
-.faq-page {
-  > .section-title-page {
-    margin-top: 1rem;
-    margin-bottom: 3rem;
-  }
+/* ====== Font ====== */
+
+$font-family--general: 'system', sans-serif;
+$font-size--general: 16px;
+
+$font-family--title: 'system', sans-serif;
+$font-size--h2: 25px;
+$font-size--h3: 22px;
+
+/* ====== Colors ====== */
+
+$color-base: #000000;
+$color-oppositive: #FFFFFF;
+
+/* ====== complements ====== */
+
+@mixin font(
+  $ff: $font-family--general,
+  $fz: $font-size--general,
+  $lh: $font-size--general
+) {
+  font-family: $ff;
+  font-size: $fz;
+  line-height:$lh;
 }
+
+/* ====== INIT ====== */
+
 .faq-category-section {
   --columns: 1fr;
-  margin-bottom: global.$margin-section;
-  gap: 30px;
+  --column-gap: 35px;
+  margin-bottom: $margin-section;
+
   @media screen and (min-width: 768px) {
     --columns: 2fr 5fr;
+    margin-top: $margin-section;
   }
 
   .categories-menu {
-
-    @media screen and (min-width: 992px) {
-      padding-top: 30%;
-    }
 
     @media screen and (max-width: 767px) {
       display: flex;
       width: 100%;
       flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 10px;
+      justify-content: flex-start;      
     }
 
     @media screen and (max-width: 396px) {
       justify-content: center;
-
-      &__item {
-        width: 80%;
-      }
     }
 
     &__item {
-      padding: 1rem 3rem;
-      border: 1px solid global.$color-black;
+      padding: 1rem 2rem;
+      border: 1px solid $color-base;
       color: #8E8D97;
       cursor: pointer;
       margin-bottom: 1rem;
       transition: all ease .4s;
       max-width: 320px;
-
+    
       @media screen and (max-width: 767px) {
-        padding: 0.5rem;
-        width: 160px;
-        max-height: 36px;
+        padding: 1rem;
+        width: calc(50% - 10px);
+        max-width: initial;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         overflow: hidden;
         text-overflow: ellipsis;
+        box-sizing: border-box;
+        text-align: center;
+
+        &:not(:nth-child(2n)) {
+          margin-right: 20px;
+        }
       }
 
       @media screen and (max-width: 396px) {
         width: 80%;
+
+        &:not(:nth-child(2n)) {
+          margin-right: 0;
+        }
       }
 
       &.isClicked,
       &:hover {
-        color: global.$color-white;
-        background: global.$color-black;
+        color: $color-oppositive;
+        background: $color-base;
       }
     }
 
     &__name {
       text-transform: uppercase;
-      @include global.font(
-        global.$font-family--general,
-        global.$font-size--general,
-        20px,
-        true
+      @include font(
+        $font-family--general,
+        $font-size--general,
+        20px
       );
       @media screen and (max-width: 767px) {
-        font-size: global.$font-size--general;
+        font-size: $font-size--general;
       }
     }
   }
@@ -89,16 +116,18 @@
       margin-bottom: 2rem;
       padding-bottom: 0.5rem;
       border-bottom: 1px solid #C6CAD6;
-      @include global.font(
-        global.$font-family--title,
-        global.$font-size--h2,
+      @include font(
+        $font-family--title,
+        $font-size--h2,
         60px
       );
+
       &.desktop {
         @media screen and (max-width: 767px) {
           display: none;
         }
       }
+
       &.mobile {
         text-align: center;
         border-bottom: none;
@@ -112,11 +141,12 @@
 
     &__subtitle {
       text-transform: uppercase;
-      @include global.font(
-        global.$font-family--title,
-        global.$font-size--h3,
+      @include font(
+        $font-family--title,
+        $font-size--h3,
         48px
       );
+
       @media screen and (max-width: 767px) {
         text-align: center;
       }
@@ -165,10 +195,9 @@
 
         p {
           color: #606470;
-          @include global.font(
-            global.$font-family--general,
-            20px,
-            true
+          @include font(
+            $font-family--general,
+            20px
           );
         }
 
@@ -184,11 +213,10 @@
       &__title {
         text-transform: uppercase;
         margin-bottom: 0.5rem;
-        @include global.font(
-          global.$font-family--general,
-          global.$font-size--general,
-          20px,
-          true
+        @include font(
+          $font-family--general,
+          $font-size--general,
+          20px
         );
       }
 
@@ -198,11 +226,11 @@
           cursor: pointer;
           text-transform: uppercase;
           text-decoration: underline;
-          @include global.font(
-            global.$font-family--general,
-            global.$font-size--general,
-            20px,
-            true
+          
+          @include font(
+            $font-family--general,
+            $font-size--general,
+            20px
           );
         }
       }
