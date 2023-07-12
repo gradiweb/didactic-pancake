@@ -1,16 +1,17 @@
 {% comment %}
-  Price product
+  Quantity selector
+  Renders product add quantity buttons
 
   Accepts:
   - product {Object} Required - Product object
   - compare_at_price {Number} Optional - Compare price of a product variant
   - price {Number} Optional - Final price shipping of a product variant
-
+  
   Usage:
-  {% render 'price'
+  {% render 'product-quantity'
     product: product,
-    compare_at_price: compare_at_price,
-    price: price
+    price: price,
+    compare: compare_at_price
   %}
 {% endcomment %}
 
@@ -22,13 +23,16 @@
   endunless
 -%}
 
-<div class="product price price-product-js">
-  {% if price < compare_at_price %}
-    <span role="status" aria-live="polite" class="compare {{ hide_price }}">
-      {{ compare_at_price | money_with_currency -}}
-    </span>
-  {% endif %}
-  <span role="status" aria-live="polite" class="regular">
-    {{ price | money_with_currency -}}
-  </span>
+<div
+  class="container-quantity container-quantity--left quantity-product-js"
+  data-price="{{ price | money_without_currency }}"
+  data-compare="{{ compare_at_price | money_without_currency }}"
+>
+  <span class="btn-change num-minus">-</span>
+  <input
+    name="quantity"
+    id="quantity"
+    value="1"
+    min="1"/>
+  <span class="btn-change num-add">+</span>
 </div>

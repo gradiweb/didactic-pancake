@@ -1,38 +1,8 @@
 /* eslint-disable max-len */
+import { addSwiperScript } from '../utils/add-script-tag';
 import { blackListSlider } from '../utils/blackListSlider';
 import { $Q, $Qll } from '../utils/query-selector';
 import { createInterception } from '../utils/script-defer';
-
-/**
-A function that adds a script tag to the document body.
-@param {string} script - The source URL of the script.
-@returns {void}
-*/
-const addTagScript = (script) => {
-  if (window.sliderScript) {
-    return new Promise((resolve) => {
-      resolve(true);
-    });
-  }
-
-  return new Promise((resolve, reject) => {
-    const scriptTag = document.createElement('script');
-    scriptTag.src = script;
-    scriptTag.setAttribute('id', 'swiper-script');
-
-    scriptTag.onload = () => {
-      window.sliderScript = true;
-      resolve(true);
-    };
-
-    scriptTag.onerror = () => {
-      reject(new Error(`Failed to load script ${src}`));
-    };
-
-    const theme = $Q('#MainContent');
-    theme.insertAdjacentElement('beforebegin', scriptTag);
-  });
-};
 
 /**
  * Creates a slider using the Swiper library.
@@ -98,7 +68,7 @@ const loadPagination = (slider, params) => {
   return mutationParams;
 };
 
-const loadNavigation = (slider, params) => {
+export const loadNavigation = (slider, params) => {
   const parent = slider.parentNode;
   if ($Qll('.swiper-button', parent).length < 2 || !params) return;
   const mutationParams = Object.assign({}, params);
@@ -121,16 +91,18 @@ creating an intersection observer for each slider container element.
 */
 export const loadSlider = () => {
   const dataSliders = $Qll('.slider-js');
+  let loadingScript = false;
 
   dataSliders.forEach((slider) => {
     if (blackListSlider(slider)) return;
 
     createInterception(slider, async () => {
-      const loadScript = await addTagScript(slider.dataset.script);
-
-      if (loadScript) {
-        createSlider(slider);
+      if (!loadingScript) {
+        loadingScript = true;
+        await addSwiperScript();
       }
+
+      return createSlider(slider);
     });
   });
 };
@@ -141,7 +113,7 @@ export const loadSlider = () => {
  */
 export const loadSliderByEvent = (slider) => {
   createInterception(slider, async () => {
-    const loadScript = await addTagScript(slider.dataset.script);
+    const loadScript = await addSwiperScript();
 
     if (loadScript) {
       createSlider(slider);

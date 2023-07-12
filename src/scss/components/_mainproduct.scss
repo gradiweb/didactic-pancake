@@ -1,58 +1,49 @@
+@use '../abstracts/variables';
+
 .main-product {
   display: flex;
+  align-items: flex-start;
   flex-wrap: wrap;
+  position: relative;
 
-  & > .breadcrumbs {
-    width: 100%;
+  @media screen and (max-width: variables.$break-point-product) {
+    flex-direction: column;
   }
 
   & > .product-media {
-    width: calc(65% - 50px);
-    margin-right: 50px;
-    position: relative;
-  }
+    width: 100%;
 
-  &--product-image {
-    position: relative;
-    padding-bottom: 100%;
-    &.product-video {
+    @media screen and (min-width: variables.$break-point-product) {
+      width: calc(65% - 50px);
+      margin-right: 50px;
       position: relative;
-      padding-bottom: initial;
 
-    }
-
-    img {
-      position: absolute;
-      object-fit: contain;
+      &--thumbs {
+        position: sticky;
+        top: 100px;
+      }
     }
   }
 
   &__detail {
-    width: 35%;
+    width: 100%;
+    
+    @media screen and (min-width: variables.$break-point-product) {
+      width: 35%;
+      position: sticky;
+      top: 100px;
+    }
 
     form {
       button {
         width: 100%;
         margin-top: 10px;
-
-        .loading {
-          border: 3px solid #fff;
-          border-top: 3px solid #2c2c2c;
-        }
       }
     }
   }
 
-  @media screen and (max-width: 600px) {
-    flex-direction: column;
-
-    & > .product-media {
-      width: 100%;
-    }
-
-    &__detail {
-      width: 100%;
-    }
+  & > .breadcrumbs {
+    width: 100%;
   }
 
   .breadcrumbs,

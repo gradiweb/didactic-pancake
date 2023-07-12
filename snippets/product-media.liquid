@@ -1,106 +1,97 @@
-<!-- eslint-disable @html-eslint/require-closing-tags -->
 {% comment %}
-  Renders product slider component
+  Renders product media
 
   Accepts:
-  - Product: {object} Product object element
-  - Direction: {string}
-    'horizontal-outside': for horizontal direction
-    'vertical-inside': for vertical direction inside image
-    'vertical-left': for vertical outside image direction left
-    'vertical-right': for vertical outside image direction right
-    'horizontal-inside': for horizontal inside image
-
-  NOTE: In <content> use className "swiper-slide" in the first item
+  - product: {Object} Required - Product object element
+  - thumbs: {Boolean} Optional - Have a thumbs media. Default is false
 
   Usage:
   {% render 'product-media'
     product: product,
-    direction: horizontal-outside
+    thumbs: true
   %}
 {% endcomment %}
-<!-- eslint-enable @html-eslint/require-closing-tags -->
 
-{% comment %} - no support
-  elsif direction == "vertical-left" or direction == "vertical-right"
-    assign slide_direction = "vertical-outside-swipper-principal"
-    assign thumbs_direction = "vertical-outside-swipper-thumbs"
-    assign swiper_direction = "vertical-outside-swipper"
-{% endcomment %}
-
-{%- liquid
-  if direction == "vertical-inside"
-    assign slide_direction = "vertical-inside-swipper-principal"
-    assign thumbs_direction = "vertical-inside-swipper-thumbs"
-    assign swiper_direction = "vertical-inside-swipper"
-  elsif direction == "horizontal-inside"
-    assign slide_direction = "horizontal-inside-swipper-principal"
-    assign thumbs_direction = "horizontal-inside-swipper-thumbs"
-    assign swiper_direction = "horizontal-inside-swipper"
-  elsif direction == "horizontal-outside"
-    assign slide_direction = "horizontal-swipper-principal"
-    assign thumbs_direction = "horizontal-swipper-thumbs"
-    assign swiper_direction = "horizontal-swipper"
+{% liquid
+  if thumbs and product.media.size > 4
+    assign navigation = true
   endif
--%}
+%}
 
-{% comment %}  MAIN SLIDER {% endcomment %}
-<div class="product-media {{ swiper_direction }} {{ direction }}">
-  {% comment %}  MAIN SLIDER {% endcomment %}
-  <div
-    class="swiper main-product__slider-principal
-    {{ slide_direction }}"
-    data-direction="{{ direction }}"
+<div class="product-media {% if thumbs %}product-media--thumbs{% endif %}">
+  <swiper-container
+    id="product-media-js"
+    init="false"
+    class="product-media__principal"
   >
-    <div class="swiper-wrapper ">
-      {% for image in product.media %}
-        {% assign imgUrl = image | image_url: width: 900 %}
-        <div
-          class="swiper-slide"
-        >
-          <div class="main-product--product-image">
-            {% render "render-image"
-              class: "myimage",
-              title: product.title,
-              alt: product.title,
-              img_src: imgUrl,
-              img: image,
-              size: "300 400 900",
-              width: "100%",
-              height: "100%"
-            %}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-  {% comment %}  SIDE SLIDER {% endcomment %}
-  <div class="swiper main-product__slider-thumbs {{ thumbs_direction }}">
-    <div class="swiper-wrapper image-elements">
-      {% for image in product.media %}
-        {% assign imgUrl = image | image_url: width: 175 %}
-        <div class="image-elements__image-thumbs image-thumbs swiper-slide">
-          <div class="image-thumbs__wrapper">
+    {% for image in product.media %}
+      {% assign imgUrl = image | image_url: width: 900 %}
+      <swiper-slide
+        id="product-image-{{ forloop.index }}"
+        class="product-image-js"
+      >
+        {% render "render-image"
+          class: "",
+          title: product.title,
+          alt: product.title,
+          img_src: imgUrl,
+          img: image,
+          size: "300 400 900",
+          width: "100%",
+          height: "100%"
+        %}
+      </swiper-slide>
+    {% endfor %}
+  </swiper-container>
+  
+  {% if thumbs %}
+    <div class="product-media__thumbs">
+      <swiper-container
+        init="false"
+        id="product-media-thumbs-js"
+      >
+        {% for image in product.media %}
+          {% assign imgUrl = image | image_url: width: 60 %}
+          <swiper-slide>
             {% render "render-image"
               class: "swiper-image",
               title: product.title,
               alt: product.title,
               img_src: imgUrl,
               img: image,
-              width: "115",
-              height: "115"
-            %}
-          </div>
-        </div>
-      {% endfor %}
+              width: "60",
+              height: "60"
+            %}    
+          </swiper-slide>
+        {% endfor %}
+      </swiper-container>
+      
+      {% if navigation %}
+        <button
+          type="button"
+          class="swiper-button swiper-button-prev {{ id_slider }}"
+          aria-label="Arrow slider{{ id_slider }} prev"
+        >
+          {% render "button-arrow" %}
+        </button>
+        <button
+          type="button"
+          class="swiper-button swiper-button-next {{ id_slider }}"
+          aria-label="Arrow slider{{ id_slider }} next"
+        >
+          {% render "button-arrow", direction: "right" %}
+        </button>
+      {% endif %}
     </div>
-    <div class="swiper-button swiper-button-next {{ slide_direction }}">
-      {% render "button-arrow" %}
-    </div>
-    <div class="swiper-button swiper-button-prev {{ slide_direction }}">
-      {% render "button-arrow",
-        direction: "right"
-      %}
-    </div>
+  {% endif %}
+
+  <div class="product-media__pagination">
+    {% for image in product.media %}
+      <div
+        data-id="product-image-{{ forloop.index }}"
+        class="product-bullet-js product-media__bullet {% if forloop.first %} visible{% endif %}"
+      >
+      </div>
+    {% endfor %}
   </div>
 </div>

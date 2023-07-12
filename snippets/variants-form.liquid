@@ -6,6 +6,7 @@
   on a radio button, recommended for colors (Color Material etc).
   - show_variant: {String} Indicates which variants will be rendered.
   If only "Color" is set, only the color variant will be rendered.
+  - available: {Boolean} Available selected or first available variant
 
   Note: The variants must be passed as parameters as
   they are called in the manager.
@@ -15,6 +16,7 @@
     product: product,
     option_radio: 'Color Material'
     show_variant: 'Color Material'
+    available: available
   %}
 {% endcomment %}
 
@@ -23,6 +25,11 @@
 -%}
 
 <div class="variants">
+  <input
+    type="hidden"
+    name="available"
+    value="{{ available }}"
+  />
   <input
     type="hidden"
     id="variants"

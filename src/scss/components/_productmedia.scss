@@ -1,244 +1,117 @@
+@use '../abstracts/variables';
+
 .product-media {
-  height: 100%;
+  position: relative;
 
-  .image-elements {
-    img {
-      object-fit: contain;
-    }
-  }
-
-  .btn-arrow {
-    background: none;
-  }
-}
-
-/*HORIZONTAL OUTSIDE SLIDER */
-
-.horizontal-swipper-thumbs {
-  .swiper-button {
-    position: absolute;
-    width: 20px;
-    height: fit-content;
-    z-index: 1;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+  &__principal {
     display: flex;
+    flex-direction: column;
 
-    &-next {
-      right: 0;
-      transform: rotate(179deg);
-    }
-
-    &-prev {
-      left: 4px;
-      transform: rotateZ(179deg);
-    }
-  }
-}
-
-/* horizontal inside slider */
-.horizontal-inside-swipper {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  &-principal {
-    flex: 2;
-    width: 100%;
-  }
-
-  &-thumbs {
-    width: 300px;
-    height: 67.5px;
-    position: absolute;
-    padding: 10px 3px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-
-    .swiper-slide-thumb-active {
-      border: 1px solid black;
-      border-radius: 50%;
-    }
-
-    .swiper-image {
-      border-radius: 50%;
-      border: 1px solid #ededed;
-      background-color: white;
-      width: 98%;
-    }
-
-    .swiper-button {
-      position: absolute;
-      width: 20px;
-      height: fit-content;
-      z-index: 1;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      display: flex;
-
-      &-next {
-        right: -2px;
-        transform: rotate(179deg);
-      }
-
-      &-prev {
-        left: 1px;
-        transform: rotateZ(179deg);
-      }
-    }
-
-    @media screen and (max-width: 472px) {
-      display: none;
-    }
-  }
-
-  .image-thumbs {
-    &__wrapper, img {
-      height: -webkit-fill-available;
-    }
-  }
-}
-
-/* VERTICAL INSIDE SLIDER */
-.vertical-inside-swipper {
-  flex-direction: row-reverse;
-  position: relative;
-
-  &-principal {
-    flex: 2;
-    width: 100%;
-  }
-
-  &-thumbs {
-    height: 300px;
-    width: 67.5px;
-    padding: 3px 20px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-
-    .swiper-slide-thumb-active {
-      border: 1px solid black;
-      border-radius: 50%;
-    }
-
-    .swiper-image {
-      border-radius: 50%;
-      border: 1px solid #ededed;
-      background-color: white;
-    }
-
-    .swiper-button {
-      position: absolute;
-      width: 20px;
-      right: 0;
-      left: 0;
-      margin: auto;
-      z-index: 1;
-      transform: rotate(270deg);
-      display: flex;
-
-
-      &-next {
-        top: 282px;
-      }
-
-      &-prev {
-        top: -13px;
-      }
-    }
-
-    @media screen and (max-width: 472px) {
-      display: none;
-    }
-  }
-
-  .image-elements {
-    &__image-thumbs {
-      cursor: pointer;
-    }
-  }
-
-  .image-thumbs {
+    @media screen and (max-width: variables.$break-point-product) {
+      flex-direction: row;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
     
-    &__wrapper {
-      height: 100%;
-      img {
-        height: -webkit-fill-available;
-        width: -webkit-fill-available;
-      }
-      
-    }
-  }
-}
-
-/* SLIDER VERTICAL LEFT OR RIGHT OUTSIDE IMAGE */
-.vertical-outside-swipper {
-  display: flex;
-  &.vertical-left {
-    flex-direction: row-reverse;
-  }
-  &.vertical-right {
-    flex-direction: row;
-  }
-  &-principal {
-    flex: 2;
-  }
-  &-thumbs {
-    max-height: 644px;
-    width: 110px;
-
-    .swiper-button {
-      width: 20px;
-      z-index: 1;
-      position: absolute;
-      transform: rotate(270deg);
-      display: flex;
-
-      &-next {
-        right: 0;
-        left: 0;
-        top: 618px;
-        margin: auto;
-      }
-
-      &-prev {
-        top: 0;
-        right: 0;
-        left: 0;
-        margin: auto;
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
 
-    @media screen and (max-width: 930px) {
-      width: 90px;
-      height: 370px;
-      .swiper-button {
-
-        &-next {
-          right: 0;
-          left: 0;
-          top: 355px;
-          margin: auto;
-        }
-      }
-    }
-  }
-
-  .image-thumbs {
-    &__wrapper {
-      position: relative;
+    & > * {
+      width: 100%;
       padding-bottom: 100%;
-      img {
+      position: relative;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+
+      & > img {
         position: absolute;
         width: 100%;
         height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__thumbs {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    left: 15px;
+    height: 300px;
+
+    swiper-container {
+      height: 100%;
+    }
+
+    swiper-slide {
+      & > img {
+        border: 1px solid transparent;
+      }
+
+      &.swiper-slide-thumb-active {
+        & > img {
+          border-color: variables.$color-black;
+        }
+      }
+    }
+
+    & > .swiper-button {
+      left: 50%;
+      top: auto;
+      right: auto;
+      margin: 0;
+      padding: 0;
+
+      & .btn-arrow {
+        width: 25px;
+        height: 25px;
+
+        & > svg {
+          width: 7px;
+          height: auto;
+        }
+      }
+
+      &-prev {
+        top: -35px;
+        transform: translateX(-50%) rotate(90deg);
+      }
+
+      &-next {
+        bottom: -35px;
+        transform: translateX(-50%) rotate(90deg);
+      }
+    }
+
+    @media screen and (max-width: variables.$break-point-product) {
+      display: none;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    @media screen and (min-width: variables.$break-point-product) {
+      display: none;
+    }
+  }
+
+  &__bullet {
+    @media screen and (max-width: variables.$break-point-product) {
+      width: 12px;
+      height: 12px;
+      margin: 6px;
+      border: 1px solid variables.$color-black;
+  
+      &.visible {
+        background-color: variables.$color-black;
       }
     }
   }
