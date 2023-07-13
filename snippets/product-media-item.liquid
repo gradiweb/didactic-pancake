@@ -1,0 +1,55 @@
+{% comment %}
+  Renders product media item: Only images
+
+  Accepts:
+  - media: {Object} Required - Media object
+  - is_first: {Boolean} Required - Usefull to define if first element
+  - width: {Number} Optional - Define media render width. Default is 200
+  - height: {Number} Optional - Define media render height. Default is 200
+  - sizes: {String} Optional - Sizes render diferents devices. Default is '300 400 600 700'
+  - custom_attr: {String} Optional - Define atributtes in parent node HTML. Default is nil
+
+  Usage:
+  {% render 'product-media-item'
+    media: media,
+    is_first: is_first,
+    width: 300,
+    height: 300,
+    sizes: "(min-width: 750px) calc(100vw - 22rem), 1100px"
+    custom_attr: custom_attr
+  %}
+{% endcomment %}
+
+{% if media.media_type == 'image' %}  
+  {% liquid
+    assign width = width | default: 200
+    assign height = height | default: 200
+    assign img_url = media | image_url: width: width
+    assign default_text = "Media"  | append: forloop.index
+    assign alt = media.alt | escape | default: default_text
+  %}
+
+  <swiper-slide {{ custom_attr }}>
+    {% if is_first %}
+      <img 
+        src="{{ img_url }}"
+        title="{{ alt }}"
+        alt="{{ alt }}"
+        width="{{ width }}"
+        height="{{ height }}"
+      />
+    {% else %}
+      {% render "render-image"
+        title: alt,
+        alt: alt,
+        img_src: img_url,
+        img: media,
+        size: size,
+        width: width,
+        height: height
+      %}
+    {% endif %}
+  </swiper-slide>
+{% else %}
+  {% break %}
+{% endif %}

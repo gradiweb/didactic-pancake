@@ -1,28 +1,35 @@
 {% liquid
-  assign logo = section.settings.logo | append: '.svg' | file_url
+  assign logo = section.settings.logo | image_url: width: 150
   assign alt_logo = 'Logo ' | append: shop.name
 %}
 
+{% capture content_logo %}
+  {% if section.settings.logo != blank %}
+    <img
+      src="{{ logo }}"
+      alt="{{ alt_logo }}"
+      width="150"
+      height="35"
+    />
+  {% else %}
+    {{ shop.name }}
+  {% endif %}
+{% endcapture %}
+
 <div class="header__logo">
-  <a href="{{ routes.root_url }}">
-    {% if section.settings.logo != blank %}
-      {% render "render-image"
-        class: "",
-        img_src: logo,
-        alt: alt_logo,
-        width: "100",
-        height: "100"
-      %}
-    {% else %}
-      {{ shop.name }}
-    {% endif %}
-  </a>
+  {% render 'link'
+    url: routes.root_url,
+    content: content_logo,
+    title: alt_logo
+  %}
 </div>
+
 <nav class="nav" aria-label="Main Navigation">
   {% render 'site-nav'
     linklist: section.settings.menu
   %}
 </nav>
+
 <div class="header__user">
   {% render 'user-nav' %}
 </div>
@@ -34,7 +41,7 @@
   "class": "header sticky grid",
   "settings": [
     {
-      "type": "text",
+      "type": "image_picker",
       "id": "logo",
       "label": "t:sections.header.settings.logo.label"
     },

@@ -2,24 +2,27 @@
   Link
 
   Accepts:
-  - class: {String} className in img tag (optional)
-  - url: {Object} url object liquid tag
-  - content: {String} text in button
-  - target: {String} target values (optional)
+  - url: {Object} Required - Url object liquid tag
+  - title: {String} Required - Is mandatory, to improve SEO score
+  - content: {HTML} Required - Text in button
+  - class: {String} Optional - ClassName in img tag
+  - target: {String} Target values
 
   Usage:
   {% render 'link'
     class: "btn type-1 pdn-35",
     url: section.settings.url,
     content: section.settings.content
-    target: "_blank"
+    target: "_blank",
+    title: alt
   %}
 {% endcomment %}
 
 <a
   class="{{ class }}"
   href="{{ url }}"
-  title="{{ content | default: 'Link other' }}"
+  title="{{ title | default: 'Link other' }}"
+  aria_label="{{ title | default: 'Link other' }}"
   target="{{ target | default: '_self' }}"
   rel="noreferrer"
 >

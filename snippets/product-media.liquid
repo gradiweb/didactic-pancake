@@ -13,6 +13,7 @@
 {% endcomment %}
 
 {% liquid
+  assign is_first = true
   if thumbs and product.media.size > 4
     assign navigation = true
   endif
@@ -24,23 +25,19 @@
     init="false"
     class="product-media__principal"
   >
-    {% for image in product.media %}
-      {% assign imgUrl = image | image_url: width: 900 %}
-      <swiper-slide
-        id="product-image-{{ forloop.index }}"
-        class="product-image-js"
-      >
-        {% render "render-image"
-          class: "",
-          title: product.title,
-          alt: product.title,
-          img_src: imgUrl,
-          img: image,
-          size: "300 400 900",
-          width: "100%",
-          height: "100%"
-        %}
-      </swiper-slide>
+    {% for media in product.media %}
+      {% capture custom_attr %}id="product-image-{{ forloop.index }}" class="product-image-js"{% endcapture %}
+      {% render 'product-media-item'
+        media: media,
+        is_first: is_first,
+        width: 700,
+        height: 700,
+        sizes: "(min-width: 750px) calc(100vw - 22rem), 1100px"
+        custom_attr: custom_attr
+      %}
+      {% if media.media_type == 'image' %}
+        {% assign is_first = false %}
+      {% endif %}
     {% endfor %}
   </swiper-container>
   
@@ -50,19 +47,14 @@
         init="false"
         id="product-media-thumbs-js"
       >
-        {% for image in product.media %}
-          {% assign imgUrl = image | image_url: width: 60 %}
-          <swiper-slide>
-            {% render "render-image"
-              class: "swiper-image",
-              title: product.title,
-              alt: product.title,
-              img_src: imgUrl,
-              img: image,
-              width: "60",
-              height: "60"
-            %}    
-          </swiper-slide>
+        {% for media in product.media %}
+          {% render 'product-media-item'
+            media: media,
+            forloop: forloop,
+            width: 60,
+            height: 60,
+            sizes: "10 60"
+          %}
         {% endfor %}
       </swiper-container>
       
@@ -86,12 +78,14 @@
   {% endif %}
 
   <div class="product-media__pagination">
-    {% for image in product.media %}
-      <div
-        data-id="product-image-{{ forloop.index }}"
-        class="product-bullet-js product-media__bullet {% if forloop.first %} visible{% endif %}"
-      >
-      </div>
+    {% for media in product.media %}
+      {% if media.media_type == 'image' %}
+        <div
+          data-id="product-image-{{ forloop.index }}"
+          class="product-bullet-js product-media__bullet {% if forloop.first %} visible{% endif %}"
+        >
+        </div>
+      {% endif %}
     {% endfor %}
   </div>
 </div>

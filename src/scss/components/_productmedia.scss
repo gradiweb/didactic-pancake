@@ -44,12 +44,19 @@
     left: 15px;
     height: 300px;
 
+    @media screen and (max-width: variables.$break-point-product) {
+      display: none;
+    }
+
     swiper-container {
       height: 100%;
     }
 
     swiper-slide {
+      cursor: pointer;
+      
       & > img {
+        object-fit: cover;
         border: 1px solid transparent;
       }
 
@@ -87,10 +94,6 @@
         transform: translateX(-50%) rotate(90deg);
       }
     }
-
-    @media screen and (max-width: variables.$break-point-product) {
-      display: none;
-    }
   }
 
   &__pagination {
@@ -104,6 +107,8 @@
   }
 
   &__bullet {
+    cursor: pointer;
+    
     @media screen and (max-width: variables.$break-point-product) {
       width: 12px;
       height: 12px;
