@@ -1,41 +1,27 @@
 .masonry {
-  &--title {
+  &__title {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  &-desk {
-    display: none
-  }
-  &-mobile {
-    display: block
-  }
 
   .masonry-v2 {
-    margin: .5rem 0;
     columns: var(--masonry-columns) auto;
     column-gap: .5rem;
+
+    @media screen and (max-width: 768px) {
+      columns: 2 auto;
+    }
   
     &__image {
       display: block;
       width: 100%;
       border-radius: 10px;
       margin-bottom: .5rem;
-  
-      &-link {
-        display: block;
-      }
     }
-  }
 
-  @media screen and (min-width: 749px) {
-
-    &-desk {
-      display: block
+    &__item {
+      display: block;
     }
-    &-mobile {
-      display: none
-    }
-  
   }
 }

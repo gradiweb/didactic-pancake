@@ -1,11 +1,19 @@
 .masonry-v1 {
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 50% 50%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(2, minmax(150px, 300px));
+  grid-column-gap: 16px;
+  column-gap: 16px;
+  grid-row-gap: 16px;
+  row-gap: 16px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
 
   &__image {
     position: relative;
-    margin: 8px;
 
     &-background {
       width: 100%;
@@ -21,7 +29,6 @@
       bottom: 0;
       width: 100%;
       background-color: var(--color-base-bg);
-      color: black;
       padding: 16px;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;

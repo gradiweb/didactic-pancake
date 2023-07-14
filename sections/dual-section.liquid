@@ -11,14 +11,7 @@
     position__image-right
   {%- endif -%}"
 >
-  <div
-    class="container__media"
-    {% if section.settings.image_brackground == blank
-      and section.settings.color_brackground != blank
-    %}
-      style="background: {{ section.settings.color_brackground }} !important;"
-  {%- endif -%}
-  >
+  <div class="container__media">
     {% if section.settings.image_brackground != blank %}
       <picture>
         {% assign url = section.settings.image_brackground | image_url: width: 500 %}
@@ -134,12 +127,6 @@
         "type": "image_picker",
         "id": "image_brackground",
         "label": "Background Image"
-      },
-      {
-        "type": "color",
-        "id": "color_brackground",
-        "label": "Background Color",
-        "default": "#FFFFFF"
       },
       {
         "type": "richtext",

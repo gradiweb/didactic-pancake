@@ -31,6 +31,7 @@
     & > svg {
       height: 70px;
       width: 80px;
+      color: variables.$color-white;
     }
   }
 
@@ -110,7 +111,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: #000;
+    background-color: variables.$color-black;
     opacity: 0.5;
   }
 }
