@@ -1,0 +1,56 @@
+{% comment %}
+  Window item: ONLY USE WITH WINDOW SCOPE
+  
+  Accepts:
+  - item: {String} Title in item list
+  - item_content: {HTML} Subitem list have a toggle active
+  - secondary_action: {HTML} If the 'item_content' prop no exist. Use this prop.
+  - item_id: {String} Id reference.
+
+  Usage:
+  {% render 'window-item',
+    item: item.title,
+    item_content: item_content,
+    secondary_action: secondary_action
+  %}
+{% endcomment %}
+
+{% liquid
+  if item_content != blank and secondary_action == blank
+    assign sub_window_layer = true
+    assign class_control = 'window-item-js'
+  endif
+%}
+
+<div class="window__item">
+  <span
+    class="window__button window__control {{ class_control }}"
+    data-active="false"
+    {% if item_id %}
+      data-window-id="{{ item_id }}" 
+    {% endif %}
+    {% if secondary_action %}
+      onclick="location.href='{{ secondary_action }}'"
+    {% endif %}
+  >
+    <span class="truncate-1-line">{{ item }}</span>
+    {% if sub_window_layer %}
+      {% render 'window-icon-arrow' %}
+    {% endif %}
+  </span>
+
+  {% if sub_window_layer %}
+    <div class="window__layer window-layer-js">
+      <div class="window__header window__header--item">
+        <span class="window__button window-layer-close-js">
+          {% render 'window-icon-arrow' %}
+        </span>
+        <span class="truncate-1-line">{{ item }}</span>
+      </div>
+
+      <div class="window__content {{ content_class }}">
+        {{ item_content }}
+      </div>
+    </div>
+  {% endif %}
+</div>

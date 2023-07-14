@@ -1,78 +1,68 @@
+@use '../abstracts/variables';
+
 %flex-center {
   display: flex;
   align-items: center;
 }
 
-%reset-buttons {
-  padding: 0;
-  border-style: none;
-  margin: 0;
-  background-color: transparent;
-}
-
 .header {
+  display: grid;
   z-index: 2;
   padding: 0 50px;
-  border-bottom: 1px solid #c1c1c1;
-  background-color: #FFF;
-  --columns: 2fr 7fr 2fr;
-  --column-gap: 15px;
+  border-bottom: 1px solid variables.$color-principal;
+  background-color: variables.$color-white;
+  grid-template-columns: 2fr 7fr 2fr;
+  grid-column-gap: 15px;
+  column-gap: 15px;
+
+  @media screen and (max-width: variables.$break-point-header) {
+    padding: 10px 20px;
+    grid-template-columns: auto 6fr auto;
+  }
 
   a {
-    color: #000;
+    color: variables.$color-black;
     text-decoration: none
   }
 
   &__logo {
     @extend %flex-center;
-    position: relative;
-    z-index: 1;
 
-    a {
+    & > a {
       display: block;
       font-weight: 600;
       letter-spacing: 3px;
       text-decoration: none;
       text-transform: uppercase;
-    }
-  }
 
-  &__user {
-    position: relative;
-    z-index: 1;
-
-    ul {
-      height: 100%;
-      list-style: none;
-      --justify: flex-end;
-      --gap-flex: 15px;
-
-      li {
-        a {
-          display: block;
-        }
-
-        svg {
-          width: 20px;
-          height: 20px;
-          color: black;
-          
-          &.icon-cart {
-            width: 40px;
-            height: 40px;
-          }
-        }
-
-        button {
-          @extend %reset-buttons
-        }
+      img {
+        width: auto;
       }
     }
   }
 
-  @media screen and (max-width: 800px) {
-    padding: 20px;
-    --columns: auto 6fr 2fr;
+  &__user {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    & > * {
+      display: block;
+      cursor: pointer;
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+
+    svg {
+      width: auto;
+      height: 25px;
+      
+      &.icon-cart {
+        height: 29px;
+      }
+    }
   }
 }
 
@@ -80,192 +70,109 @@
   display: flex;
   justify-content: center;
 
-  .burger-nav {
-    display: none;
-    @extend %reset-buttons;
+  @media screen and (max-width: variables.$break-point-header) {
+    order: -1;
+  }
+
+  &__list {
+    display: flex;
+    height: auto;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    
+    & > *:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    @media screen and (max-width: variables.$break-point-header) {
+      display: none;
+    }
+  }
+
+  &__button {
+    padding: 0;
+    border-style: none;
+    margin: 0;
+    background-color: transparent;
+    text-transform: inherit;
+    @extend %flex-center;
 
     svg {
-      width: 20px;
+      height: 5px;
+      transition: transform ease .2s;
+      padding: 3px;
+    }
+  }
 
-      &.icon-close {
-        display: none;
+  &__dropdown {
+    width: 150px;
+    max-height: 70vh;
+    padding: 10px 20px 20px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    display: none;
+    background-color: variables.$color-white;
+    overflow-y: auto;
+
+    a {
+      display: block;
+      text-transform: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-first {
+      display: flex;
+      flex-direction: column;
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+
+      & > *:not(:last-child) {
+        margin-bottom: 5px;
+      }
+
+      & > a {
+        font-weight: 600;
       }
     }
   }
 
   &__child {
+    padding: 20px 0;
     display: flex;
-    height: auto;
-    --justify: center;
-    --gap-flex: 30px;
-    --align: stretch;
-    flex-wrap: wrap;
-    --gap-flex: 30px;
+    position: relative;
+    text-transform: uppercase;
 
-    &-item {
-      display: flex;
-      padding: 20px 0;
-      border-bottom: 2px solid transparent;
-      text-transform: uppercase;
-
-      &:hover {
-        border-bottom: 2px solid #000;
+    &:hover {
+      & > button.nav__button > svg {
+        transform: rotateZ(180deg);
       }
 
-      > * {
-        margin: auto 0;
-      }
-    }
-    
-    &-button-dropdown {
-      @extend %reset-buttons;
-      @extend %flex-center;
-      text-transform: inherit;
-
-      svg {
-        height: 5px;
-        color: black;
-        transition: transform ease .2s;
-        padding: 3px;
-      }
-
-      &[data-active="true"] {
-        & ~ .child__level-dropdown {
-          display: grid;
-          grid-column-gap: var(--column-gap,10px);
-          grid-row-gap: var(--row-gap,10px);
-          column-gap: var(--column-gap,10px);
-          grid-template-columns: var(--columns,repeat(3,1fr));
-          grid-template-rows: var(--rows,1fr);
-          row-gap: var(--row-gap,10px);
-        }
-  
-        svg {
-          transform: rotateZ(180deg);
-        }
-      }
-    }
-    
-    .child__level-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      display: none;
-      width: calc(100% - 100px);
-      padding: 50px 50px 50px;
-      background-color: #FFF;
-      box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.20);
-      
-      --columns: 1fr 1fr 1fr 1fr;
-    }
-
-    .child__level {
-      &-first {
-        display: flex;
-        flex-direction: column;
-        > a {
-          margin-bottom: 10px;
-          display: block;
-          font-weight: 600;
-          text-transform: uppercase;
-        }
-      }
-      
-      &-second {
-        text-transform: initial;
-
-        &:last-of-type {
-          margin-bottom: 25px;
-        }
+      & > ul.nav__dropdown {
+        display: block;
       }
     }
   }
 
-  @media screen and (max-width: 800px) {
-    display: flex;
-    align-items: center;
-    order: -1;
+  &__burguer {
+    display: none;
 
-    .burger-nav {
-      display: block;
-    }
-
-    &__child {
-      position: fixed;
-      top: 70px;
-      left: 0;
-      width: 100%;
-      height: calc(100% - 70px);
+    @media screen and (max-width: variables.$break-point-header) {
+      display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      animation: slidein .3s ease;
-      background-color: #fff;
-      overflow-y: auto;
-
-      &[data-active="false"] {
-        display: none;
-      }
-      &[data-active="true"] {
-        display: block;
-      }
-
-      &-item {
-        display: block;
-        width: calc(100% - 40px);
-        height: auto;
-        padding: 0 20px;
-        border-bottom: 1px solid;
-        margin: 0;
-
-        & > * {
-          padding: 20px 0;
-        }
-
-        & > a {
-          display: block;
-        }
-      }
-
-      &-button-dropdown {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-
-        svg {
-          height: 10px;
-        }
-
-        &[data-active="true"] {
-          & ~ .child__level-dropdown {
-            display: block;
-          }
-    
-          svg {
-            transform: rotateZ(180deg);
-          }
-        }
-      }
-
-      .child__level-dropdown {
-        position: static;
-        width: 100%;
-        padding: 0 0 20px;
-        box-shadow: none;
-        display: none;
-      }
-      
-
-      @keyframes slidein {
-        from {
-          transform: translateX(-100%);
-        }
-      
-        to {
-          transform: translateX(0%);
-        }
-      }
+      justify-content: center;
     }
 
+    & > svg {
+      width: auto;
+      height: 33px;
+    }
   }
 }

@@ -1,0 +1,78 @@
+{% comment %}
+  Renders menu mobile
+  
+  Accepts:
+  - linklistsAll: Array menu current
+
+  Usage:
+  {% render 'site-nav-mobile'
+    linklistsAll: linklists[linklist]
+  %}
+
+{% endcomment %}
+
+{% capture header_window %}
+  <span onclick="location.href='{{ routes.account_url }}'" class="truncate-1-line">
+    {{ 'customer.account.title' | t }}
+  </span>
+{% endcapture %}
+
+{% capture link_list_window %}
+  {% for link in linklistsAll.links %}
+    {% assign title = link.title %}
+    {% if link.links != blank %}  
+      {% capture content_item %}
+        {% for childlink in link.links %}
+          {% assign title_child = childlink.title %}
+
+          {% if childlink.links != blank %}
+            {% capture child_content %}
+              {% for grandchildlink in childlink.links %}
+                {%- assign title_granchild = grandchildlink.title -%}
+
+                {% render 'window-item',
+                  item: title_granchild,
+                  secondary_action: grandchildlink.url
+                %}
+              {% endfor %}
+            {% endcapture %}
+
+            {% assign grandchild_id = forloop.index | prepend: 'grandchild_' %}
+
+            {% render 'window-item',
+              item: title_child,
+              item_content: child_content,
+              item_id: grandchild_id
+            %}
+          {% else %}
+            {% render 'window-item',
+              item: title_child,
+              secondary_action: childlink.url
+            %}
+          {% endif %}
+        {% endfor %} 
+      {% endcapture %}
+
+      {% assign child_id = forloop.index | prepend: 'child_' %} 
+      {% render 'window-item',
+        item: title,
+        item_content: content_item,
+        content_class: content_class,
+        item_id: child_id
+      %}
+    {% else %}
+      {% render 'window-item',
+        item: title,
+        secondary_action: link.url
+      %}
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
+{% render 'window',
+  header: header_window,
+  content: link_list_window,
+  footer: footer_window,
+  id: 'nav-list-movil-js',
+  class: 'menu-mobile'
+%}

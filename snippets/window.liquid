@@ -1,0 +1,64 @@
+{% comment %}
+  Renders windows system modals
+  
+  Accepts:
+  - header: {HTML} Content for header: 1st level
+  - content: {HTML} Item list for content. **View dev notes
+  - id: {String} Id parent node
+  - class: {String} ClassName parent node
+
+  Dev notes:
+  For correct usage, you must to add in content a 'window-item' snippet.
+    Ex:
+    {% capture content %}
+      {% for item in collection %}
+        {% capture item_content %}
+          ...
+        {% endcapture %}
+
+        {% render 'window-item',
+          item: item.title,
+          item_content: item_content
+        %}
+      {% endfor %}
+    {% endcapture %}
+
+  Usage:
+  {% render 'window',
+    header: header_window,
+    content: link_list_window,
+    id: 'nav-list-movil-js',
+    class: 'menu-mobile'
+  %}
+{% endcomment %}
+
+<div
+  id="{{ id }}"
+  class="window {{ class }}"
+  data-active="false"
+>
+  {% capture button_close %}
+    {% render 'icon-close' %}
+  {% endcapture %}
+
+  <div>
+    {% render 'button',
+      class: "window__close window-close-js",
+      content: button_close,
+      action: "button",
+      title: 'Close windows'
+    %}
+    
+    <div class="window__header">
+      {{ header }}
+    </div>
+    
+    <div class="window__content">
+      {{ content }}
+    </div>
+
+    <div class="window__footer">
+      {{ footer }}
+    </div>
+  </div>
+</div>

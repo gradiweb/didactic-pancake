@@ -191,7 +191,7 @@ export const openCloseCart = () => {
   cartContainer.setAttribute("data-active", "false");
 
   toggleDataActive(
-    ".button-cart",
+    ".button-cart-js",
     "#shopify-section-side-cart",
     {
       overlay: true,

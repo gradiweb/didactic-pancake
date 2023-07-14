@@ -1,28 +1,26 @@
-<ul
-  id="nav-list-js"
-  class="nav__child flex"
-  data-event="mouseenter"
-  data-toggle="true"
-  data-active="false"
-  role="navigation"
->
-  {% for link in linklists[linklist].links %}
-    {% if link.links != blank %}
-      <li
-        class="nav__child-item nav-item-js"
-        aria-haspopup="true"
-      >
-        <button
-          type="button"
-          class="nav__child-button-dropdown button-dropdown-js"
-          data-active="false" aria-expanded="false"
+<nav class="nav" aria-label="Main Navigation">
+  <ul
+    id="nav-list-js"
+    class="nav__list"
+    role="navigation"
+  >
+    {% for link in linklists[linklist].links %}
+      {% if link.links != blank %}
+        <li
+          class="nav__child"
+          aria-haspopup="true"
         >
-          {{ link.title }}
-          {% render 'icon-caret' %}
-        </button>
-          <ul class="child__level child__level-dropdown">
+          <button
+            type="button"
+            class="nav__button"
+            aria-expanded="false"
+          >
+            {{ link.title }}
+            {% render 'icon-caret' %}
+          </button>
+          <ul class="nav__dropdown">
             {% for childlink in link.links %}
-              <li class="child__level-first">
+              <li class="nav__dropdown-first">
                 <a
                   href="{{ childlink.url }}"
                   title="{{ childlink.title }}"
@@ -31,7 +29,7 @@
                 </a>
                 {% if childlink.links != blank %}
                   {% for grandchildlink in childlink.links %}
-                    <span class="child__level-second">
+                    <span class="nav__dropdown-second">
                       <a
                         href="{{ grandchildlink.url }}"
                         title="{{ grandchildlink.title }}"
@@ -46,7 +44,7 @@
           </ul>
         </li>
       {% else %}
-        <li class="nav__child-item">
+        <li class="nav__child">
           <a
             href="{{ link.url }}"
             title="{{ link.title }}"
@@ -57,12 +55,10 @@
       {% endif %}
     {% endfor %}
   </ul>
-  <button
-    class="burger-nav"
+  <span
+    class="nav__burguer"
     id="burger-nav-js"
-    type="button"
-    aria-label="Toggle Navigation"
   >
     {% render 'icon-hamburger' %}
-    {% render 'icon-close' %}
-  </button>
+  </span>
+</nav>
