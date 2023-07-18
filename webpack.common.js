@@ -16,7 +16,8 @@ const entry = {
   critical: './src/templates/critical.js',
   breadcrumbs: './assets/breadcrumbs.module.js',
   pagination: './assets/pagination.module.js',
-  faq: './assets/faq-section.module.js'
+  faq: './assets/faq-section.module.js',
+  productcard: './assets/component-card-product.module.js',
 }
 
 const output = {

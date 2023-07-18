@@ -17,7 +17,7 @@ const CART_SECTION = "side-cart,cart-page";
  * @param {event} event -Event submit from add to cart form
  * @param {event} event -Event submit from add to cart form
  */
- const addProducts = async (event) => {
+export const addProducts = async (event) => {
 
   const buttonContent = $Q(".btn-cart-js", event.target);
   const textButton = buttonContent.textContent;
@@ -62,7 +62,7 @@ const cartOutStockAlert = () => {
   }, 3000);
 }
 
-const submitForm = (form) => {
+export const submitForm = (form) => {
   form.addEventListener(
     "submit",
     (e) => {

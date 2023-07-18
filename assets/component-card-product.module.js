@@ -1,4 +1,6 @@
 import { queryVariants, selectVariant } from "./component-card-product-variant.submodule";
+import { addProducts } from "../src/components/cart";
+import { $Q } from "graditify-utils";
 
 /**
  * web component for card product.
@@ -10,24 +12,23 @@ class CardProduct extends HTMLElement {
     super()
   }
 
-  /**
-   * detect child elements within the web component.
-   */
   connectedCallback() {
+    const form = $Q("form", this);
 
-    // ? delegation of events
-    this.addEventListener("click", (event) => {
-
-      // ! event variants
+    this.addEventListener("change", (event) => {
       if (event.target.classList.contains("js-option")) {
         selectVariant(this);
         queryVariants(event);
       }
     })
+    
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      addProducts(event);
+    })
   }
 }
 
 window.customElements.define("card-product", CardProduct);
-
 
 export default CardProduct;

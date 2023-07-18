@@ -83,8 +83,8 @@ function selectVariant(parent) {
  * all input-selector (variant selection) groups by product
  * @returns Iterator function on each input-selector
  */
- export const variantOnChange = (component) => {
-  const parents = $Qll(component);
+ export const variantOnChange = (component, scope = null) => {
+  const parents = $Qll(component, scope);
 
   if (parents.length > 1) {
     return parents.forEach(

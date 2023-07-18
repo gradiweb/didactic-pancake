@@ -1,8 +1,6 @@
 import api from "../services/api";
 import { $Q } from '../utils/query-selector';
 import { stringToHTML } from '../utils/to-html';
-import { btnAddToCart } from "./cart";
-import { variantOnChange } from "./variants-product";
 
 /**
  * Render recommendation by API with product ID
@@ -21,10 +19,6 @@ async function getRecommendation() {
   if (recommendation && recommendation.innerHTML.trim().length) {
     $Q('.shopify-section.recommendation').innerHTML = recommendation.outerHTML;
   }
-
-  variantOnChange(".variants");
-  btnAddToCart(".add-product-cart", $Q('#product-recommendations'));
-
 }
 
 /**

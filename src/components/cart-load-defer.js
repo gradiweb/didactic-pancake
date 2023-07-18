@@ -6,17 +6,12 @@ import { btnAddToCart, deleteItem, onChangeItemCart, openCloseCart } from "./car
 import { loadSliderByEvent } from "./slider-component";
 
 export const cartLoadDefer = () => {
-
   openCloseCart();
 
-  const formAddProduct = $Q(".add-product-cart");
   const formAddFormUpsell = $Q(".add-product-cart-upsell");
   const cart = $Q('.cart-close');
 
-  if (formAddProduct) createInterception(formAddProduct, () => btnAddToCart(".add-product-cart"));
-
   if (formAddFormUpsell) createInterception(formAddFormUpsell, () => btnAddToCart(".add-product-cart-upsell"));
-
   if (cart) createInterception(cart, () => loadChangeCart());
 
 }
@@ -27,5 +22,4 @@ const loadChangeCart = () => {
   onChangeItemCart();
   setQuantity();
   barProgress($Q('#progress-bar-data'));
-
 }

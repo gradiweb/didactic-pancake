@@ -16,7 +16,7 @@
   column-gap: 15px;
 
   @media screen and (max-width: variables.$break-point-header) {
-    padding: 10px 20px;
+    padding: 1rem;
     grid-template-columns: auto 6fr auto;
   }
 
