@@ -5,18 +5,18 @@
 
         {% when "link_list" %}
           <nav
-            class="footer-blocks_linklist"
+            class="footer-blocks__linklist"
             role="navigation"
             aria-label="Footer"
             aria-labelledby="footer-title"
           >
             {% if block.settings.heading != blank %}
-              <h2 class="footer-title">
+              <h2 class="footer-blocks__title">
                 {{ block.settings.heading }}
               </h2>
             {% endif %}
             {% if block.settings.menu != blank %}
-              <ul class="footer-list">
+              <ul class="footer-blocks__list">
                 {% for link in linklists[block.settings.menu].links %}
                   <li>
                     <a href="{{ link.url }}" title="{{ link.title }}">
@@ -29,14 +29,14 @@
           </nav>
 
         {% when "newslatter" %}
-          <div class="footer-blocks_newslatter">
+          <div class="footer-blocks_newsletter">
             {% if block.settings.newsletter_heading != blank %}
-              <span class="footer-title">
+              <span class="footer-blocks__title">
                 {{ block.settings.newsletter_heading }}
               </span>
             {% endif %}
             {% if block.settings.newsletter_sub != blank %}
-              <span class="footer-subtitle">
+              <span class="footer-blocks__subtitle">
                 {{ block.settings.newsletter_sub }}
               </span>
             {% endif %}
@@ -47,7 +47,7 @@
                 value="newsletter"
               />
 
-              <div class="form__textfield footer-newslatter">
+              <div class="form__textfield footer-blocks__newslatter">
                 <input
                   id="NewsletterForm--{{ section.id }}"
                   type="email"
@@ -109,14 +109,14 @@
           </div>
 
         {% when "info" %}
-          <div class="footer-blocks_info">
+          <div class="footer-blocks__info">
             {% if block.settings.heading %}
-              <h2 class="footer-title">
+              <h2 class="footer-blocks__title">
                 {{ block.settings.heading }}
               </h2>
             {% endif %}
             {% if block.settings.sub %}
-              <p class="footer-subtitle">
+              <p class="footer-blocks__subtitle">
                 {{ block.settings.sub }}
               </p>
             {% endif %}
