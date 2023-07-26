@@ -23,9 +23,8 @@ import { $Q, $Qll } from "./query-selector";
   * Execute updateCart function
 * @author Cristian Velasco
 */
-export const setQuantity = () => {
-
-  $Qll(".quantity-label").forEach(
+export const setQuantity = (scope = null) => {
+  $Qll(".quantity-label", scope).forEach(
     (labelParent) => $Qll('.button', labelParent)
       .forEach((btn) => {
         btn.addEventListener(

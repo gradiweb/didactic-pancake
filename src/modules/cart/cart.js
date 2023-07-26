@@ -1,6 +1,6 @@
-import api from "../services/api";
-import { $Q, $Qll } from "../utils/query-selector";
-import { dataToggle, toggleDataActive } from "../utils/toggle-dataset";
+import api from "../../services/api";
+import { $Q, $Qll } from "../../utils/query-selector";
+import { dataToggle, toggleDataActive } from "../../utils/toggle-dataset";
 import {
   updateCartItems,
   updatetotalPrice,
@@ -18,7 +18,6 @@ const CART_SECTION = "side-cart,cart-page";
  * @param {event} event -Event submit from add to cart form
  */
 export const addProducts = async (event) => {
-
   const buttonContent = $Q(".btn-cart-js", event.target);
   const textButton = buttonContent.textContent;
   const valueCount = $Q("#quantity") ? $Q("#quantity").value : 1;
@@ -45,9 +44,11 @@ export const addProducts = async (event) => {
   if (!sections) return null;
 
   buttonContent.textContent = textButton;
+
   if (event.target.dataset.form !== "upsell") {
     dataToggle($Q("#shopify-section-side-cart"), true);
   }
+
   updateCartItems(sections["side-cart"]);
   updateCartbutton(sections["side-cart"]);
   updatetotalPrice(sections["side-cart"]);
@@ -86,8 +87,8 @@ export const submitForm = (form) => {
  *
  * To active this feature - ADD className 'add-cart-js' in form product
  * */
-export const btnAddToCart = (formQuery, parent = null) => {
-  const addForms = $Qll(formQuery, parent);
+export const btnAddToCart = (formQuery, scope = null) => {
+  const addForms = $Qll(formQuery, scope);
 
   if (addForms != null) {
     addForms.forEach(
@@ -102,7 +103,7 @@ export const btnAddToCart = (formQuery, parent = null) => {
  * Replace en element with a spinner
  * @param {String} element
  */
- const addSpinner = (element, parent) => {
+const addSpinner = (element, parent) => {
   $Q(element, parent).innerHTML = '<div class="loading"></div>';
 }
 
@@ -147,16 +148,12 @@ export const updateCart = async (line, quantity, id) => {
 /**
  * Event onChange in the cart item
  */
-export const onChangeItemCart = () => {
-  $Qll('.item-cart-js').forEach(
-    (input) => {
-      input.addEventListener(
-        'change',
-        function () {
-          updateCart(this.dataset.index, this.value, this.id);
-        },
-      )
-    },
+export const onChangeItemCart = (scope = null) => {
+  const input = $Q('.item-cart-js', scope);
+
+  input.addEventListener(
+    'change',
+    () => updateCart(input.dataset.index, input.value, input.id),
   )
 }
 
@@ -165,22 +162,15 @@ export const onChangeItemCart = () => {
  * listen if delete button is clicked
  * if is clicked, update cart with quantity 0
  */
-export const deleteItem = () => {
-  const deleteIcon = $Qll(".item-delete");
+export const deleteItem = (scope = null) => {
+  const element = $Q(".item-delete", scope);
+  if (!element) return;
 
-  if (deleteIcon) {
-    deleteIcon.forEach(
-      (element) => {
-        const { dataset: { id, index } } = element;
-        element.addEventListener(
-          "click",
-          () => {
-            updateCart(index, 0, `${id}-${index}`)
-          },
-        )
-      },
-    );
-  }
+  const { dataset: { id, index } } = element;
+  element.addEventListener(
+    "click",
+    () => updateCart(index, 0, `${id}-${index}`),
+  )
 }
 
 /**
@@ -188,6 +178,9 @@ export const deleteItem = () => {
 */
 export const openCloseCart = () => {
   const cartContainer = $Q(".cart");
+  const btnCart = $Q(".button-cart-js");
+  if (!cartContainer || !btnCart) return;
+
   cartContainer.setAttribute("data-active", "false");
 
   toggleDataActive(
@@ -198,5 +191,4 @@ export const openCloseCart = () => {
       closeSelector: ".cart-close",
     },
   )
-
 }

@@ -24,7 +24,7 @@
     {% else %}
     {% for item in cart.items %}
 
-      <div
+      <item-cart
         class="cart-items__container"
         data-live-item-key="{{ item.key }}"
       >
@@ -84,7 +84,7 @@
           </div>
 
         </div>
-      </div>
+      </item-cart>
 
     {% endfor %}
     {% endif %}

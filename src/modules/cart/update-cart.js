@@ -1,9 +1,8 @@
-import { stringToHTML } from '../utils/to-html';
-import { $Q, $Qll } from '../utils/query-selector';
-import { setQuantity } from "../utils/input-quantity";
-import { btnAddToCart, deleteItem, onChangeItemCart } from "./cart";
-import { barProgress } from '../utils/bar-progress';
-import { createSlider } from './slider-component';
+import { stringToHTML } from '../../utils/to-html';
+import { $Q, $Qll } from '../../utils/query-selector';
+import { btnAddToCart } from "./cart";
+import { barProgress } from '../../utils/bar-progress';
+import { createSlider } from '../../components/slider-component';
 
 /**
  * Update cart items section in sidecart
@@ -20,10 +19,6 @@ export const updateCartItems = (str) => {
         ).outerHTML;
       },
     )
-
-  setQuantity();
-  deleteItem();
-  onChangeItemCart();
 }
 
 /**

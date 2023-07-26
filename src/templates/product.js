@@ -4,7 +4,7 @@ import '../components/upsell-api';
 import productMedia from '../components/product-media';
 import { initProductQuantity } from '../components/product-quantity';
 import { variantOnChange } from '../components/variants-product';
-import { submitForm } from '../components/cart';
+import { submitForm } from '../modules/cart';
 import { createInterception } from '../utils/script-defer';
 import { $Q } from '../utils/query-selector';
 
