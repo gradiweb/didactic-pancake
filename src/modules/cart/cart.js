@@ -1,6 +1,7 @@
 import api from "../../services/api";
 import { $Q, $Qll } from "../../utils/query-selector";
 import { dataToggle, toggleDataActive } from "../../utils/toggle-dataset";
+import { addSpinner, cartAlert, debounce } from "./cart-utils";
 import {
   updateCartItems,
   updatetotalPrice,
@@ -34,13 +35,14 @@ export const addProducts = async (event) => {
     sections: CART_SECTION,
   };
 
-  const { sections, status } = await api.addToCart(cartParams);
+  const { sections, ...response } = await api.addToCart(cartParams);
 
-  if (status === 422) {
-    cartOutStockAlert();
+  if (response.status === 422) {
+    cartAlert(response);
     buttonContent.textContent = textButton;
     return;
   }
+
   if (!sections) return null;
 
   buttonContent.textContent = textButton;
@@ -55,14 +57,11 @@ export const addProducts = async (event) => {
   updateUpsell(sections["side-cart"]);
 }
 
-const cartOutStockAlert = () => {
-  const message = $Q("#error-out-stock");
-  message.classList.remove("hidden");
-  setTimeout(() => {
-    message.classList.add("hidden");
-  }, 3000);
-}
-
+/**
+ * Event listener on submit form
+ * and prevent default behavior
+ * @param {ElementHTML} form - Element node to add product. Its HTML form
+ */
 export const submitForm = (form) => {
   form.addEventListener(
     "submit",
@@ -100,21 +99,14 @@ export const btnAddToCart = (formQuery, scope = null) => {
 }
 
 /**
- * Replace en element with a spinner
- * @param {String} element
- */
-const addSpinner = (element, parent) => {
-  $Q(element, parent).innerHTML = '<div class="loading"></div>';
-}
-
-/**
  * Update quantity for each item in cart
  * @param {number} id Product ID
  * @param {number} quantity new quantity
  */
 export const updateCart = async (line, quantity, id) => {
-  const priceBefore = $Q(`#price-${id}`).textContent;
-  addSpinner(`#price-${id}`);
+  const priceNode = $Q(`#price-${id}`);
+  const priceBefore = priceNode.textContent;
+  const quantityBefore = $Q(`.item-cart-js[data-index="${line}"]`).dataset.quantity;
 
   const cartParams = {
     line,
@@ -122,16 +114,18 @@ export const updateCart = async (line, quantity, id) => {
     sections: CART_SECTION,
   }
 
-  const { sections, status } = await api.changeCart(cartParams);
+  addSpinner(`#price-${id}`);
+  const { sections, ...response } = await api.changeCart(cartParams);
 
-  if (status === 422) {
-    $Q(`#price-${id}`).textContent = priceBefore;
-    updateQuantity(id, quantity - 1);
-    cartOutStockAlert();
-    return;
+  if (response.status === 422) {
+    priceNode.textContent = priceBefore;
+    updateQuantity(id, quantityBefore);
+    cartAlert(response);
+
+    return false;
   }
 
-  if (!sections) return null;
+  if (!sections) return false;
 
   if (Number(quantity) === 0) {
     updateCartItems(sections["side-cart"]);
@@ -143,17 +137,27 @@ export const updateCart = async (line, quantity, id) => {
     updateCartbutton(sections["side-cart"]);
     updatetotalPrice(sections["side-cart"]);
   }
+
+  return true;
 }
 
 /**
  * Event onChange in the cart item
  */
-export const onChangeItemCart = (scope = null) => {
+export const changeItem = (scope = null) => {
   const input = $Q('.item-cart-js', scope);
 
   input.addEventListener(
     'change',
-    () => updateCart(input.dataset.index, input.value, input.id),
+    debounce(async () => {
+      const udpate = await updateCart(
+        input.dataset.index, input.value, input.id,
+      );
+
+      if (udpate) {
+        input.setAttribute('data-quantity', input.value)
+      }
+    }, 500).bind(this),
   )
 }
 

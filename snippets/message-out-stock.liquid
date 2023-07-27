@@ -2,7 +2,10 @@
   role="status" aria-live="polite"
   id="error-out-stock"
   class="cart__message-error form__message form__message--error hidden"
+  data-message="{{ 'products.product.out_stock' | t }}"
 >
   {% render 'icon-error' %}
-  {{ 'products.product.out_stock' | t }}
+  <span>
+    {{ 'products.product.out_stock' | t }}
+  </span>
 </small>
