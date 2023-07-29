@@ -1,7 +1,11 @@
+@use './cart-variables' as variables;
+
 .cart-upsell {
+  background-color: variables.$background-secondary;
 
   &__title {
     padding-bottom: 10px;
+    font-weight: 600;
     display: block;
   }
 
@@ -27,6 +31,7 @@
       margin-bottom: 6px;
       display: block;
     }
+
     &__title {
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
@@ -45,18 +50,30 @@
 
   .swiper-button {
     .btn-arrow {
+      width: 20px;
+      height: 20px;
       background: none;
     }
+
     &-prev {
-      left: -25px;
+      left: 0;
     }
 
     &-next {
-      right: -25px;
+      right: 0;
     }
 
     @media screen and (max-width: 749px) {
       display: block;
+    }
+  }
+
+  .upsell-btn {
+    padding: 10px 15px;
+
+    & > svg  {
+      width: 20px;
+      height: 20px;
     }
   }
 

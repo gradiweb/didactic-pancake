@@ -181,7 +181,7 @@ export const deleteItem = (scope = null) => {
 * Open and close side cart with various buttons
 */
 export const openCloseCart = () => {
-  const cartContainer = $Q(".cart");
+  const cartContainer = $Q(".side-cart");
   const btnCart = $Q(".button-cart-js");
   if (!cartContainer || !btnCart) return;
 
@@ -189,10 +189,10 @@ export const openCloseCart = () => {
 
   toggleDataActive(
     ".button-cart-js",
-    "#shopify-section-side-cart",
+    ".side-cart",
     {
       overlay: true,
-      closeSelector: ".cart-close",
+      closeSelector: ".cart-close-js",
     },
   )
 }

@@ -1,7 +1,7 @@
 import { stringToHTML } from '../../utils/to-html';
 import { $Q, $Qll } from '../../utils/query-selector';
 import { btnAddToCart } from "./cart";
-import { barProgress } from '../../utils/bar-progress';
+import { barProgress } from './cart-bar-progress';
 import { createSlider } from '../../components/slider-component';
 
 /**
@@ -27,15 +27,15 @@ export const updateCartItems = (str) => {
  */
 export const updateCartbutton = (str) => {
   const inputBarProgress = $Q('#progress-bar-data', stringToHTML(str));
-  const btnContainer = $Q('.cart-footer', stringToHTML(str));
+  const checkoutBtnAPI = $Q('#cart-checkout-js', stringToHTML(str));
   const domBtnContainer = $Qll('#container-footer-js');
 
   barProgress(inputBarProgress);
 
-  if (btnContainer) {
+  if (checkoutBtnAPI) {
     domBtnContainer.forEach((element) => {
       const elementRef = element;
-      elementRef.innerHTML = btnContainer.outerHTML;
+      elementRef.innerHTML = checkoutBtnAPI.outerHTML;
     })
 
     return;

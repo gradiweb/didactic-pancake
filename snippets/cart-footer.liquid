@@ -13,34 +13,40 @@
     checkout_button: section.settings.checkout_button
   %}
 {% endcomment %}
-<div class="cart-footer" id="container-footer-js">
-  {% if cart.item_count > 0 %}
-    <div class="cart-footer cart-margins__inline">
-      <div class="cart-footer__shipping">
-        <span>{{ shipping_info }}</span>
-      </div>
 
+{% capture content_button %}
+  {{ "sections.cart.checkout" | t }} - 
+  <span id="total-price">
+    {{ cart.total_price | money }}
+  </span>
+{% endcapture %}
+
+<div
+  class="side-cart__footer side-cart__margins"
+>
+  {% render 'cart-progress-bar'
+    title: title,
+    total_price: total_price,
+    limit_price: limit_price,
+    text_free_shipping: text_free_shipping
+  %}
+
+  <div
+    id="container-footer-js"
+  >
+    {% if cart.item_count > 0 %}
       <div
-        class="cart-footer__button"
-        id="cart-footer__button"
+        class="side-cart__button"
+        id="cart-checkout-js"
       >
-        {% capture content_button %}
-          {{ "sections.cart.checkout" | t }}
-          <span id="total-price">
-            {{ cart.total_price | money }}
-          </span>
-        {% endcapture %}
-
-        <a href="/checkout">
-          {% render 'button'
-            class: "cart-footer__button--btn",
-            content: content_button,
-            type: 1
-            size: 1
-            action: "button"
-          %}
-        </a>
+        <button
+          class="btn-1"
+          type="button"
+          onclick="location.href='/checkout'"
+        >
+          {{ content_button }}
+        </button>
       </div>
-    </div>
-  {% endif %}
+    {% endif %}
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { barProgress } from "../../utils/bar-progress";
+import { barProgress } from "./cart-bar-progress";
 import { $Q } from "../../utils/query-selector"
 import { createInterception } from "../../utils/script-defer";
 import { btnAddToCart, openCloseCart } from "./cart";
