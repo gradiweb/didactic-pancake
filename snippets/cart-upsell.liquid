@@ -14,33 +14,33 @@
   %}
 {% endcomment %}
 
+{% capture snippet_content %}
+  {% for upsell_product in collection.products %}
+    {% for line_item in cart.items %}
+      {% if upsell_product.id == line_item.product.id %}
+        {% assign in_cart = line_item.product.id %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if upsell_product.id == in_cart %}
+      {% continue %}
+    {% elsif upsell_product.available %}
+      <swiper-slide>
+        {% render 'cart-upsell-product'
+          product: upsell_product
+        %}
+      </swiper-slide>
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
 <div
-  class="cart-upsell cart-margins__inline"
+  class="cart-upsell side-cart__margins"
 >
   <span class="cart-upsell__title">
     {{ title }}
   </span>
-
-  {% capture snippet_content %}
-    {% for upsell_product in collection.products %}
-      {% for line_item in cart.items %}
-        {% if upsell_product.id == line_item.product.id %}
-          {% assign in_cart = line_item.product.id %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
-
-      {% if upsell_product.id == in_cart %}
-        {% continue %}
-      {% elsif upsell_product.available %}
-        <swiper-slide>
-          {% render 'cart-upsell-product'
-            product: upsell_product
-          %}
-        </swiper-slide>
-      {% endif %}
-    {% endfor %}
-  {% endcapture %}
 
   <div id="upsell-js">
     <div id="cart-upsell-slider">

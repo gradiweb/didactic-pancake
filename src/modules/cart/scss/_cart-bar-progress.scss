@@ -1,23 +1,21 @@
+@use './cart-variables' as variables;
+
 .bar {
   background: transparent;
-  border: 1px solid var(--color-base-text);
-  border-radius: 50px;
+  border: 1px solid variables.$background-dark;
   height: 12px;
-  margin-top: 10px;
+  margin: 10px 0;
   overflow: hidden;
   width: 100%;
 
   &-progress {
-    background: var(--color-base-bg);
+    background: variables.$background-dark;
     height: 100%;
     transition: width .3s ease-in-out;
     width: 0;
   }
 }
 
-.progress-text-js, .shipping-free {
-  padding-top: 15px;
-}
 .shipping-free {
   display: none;
 }
