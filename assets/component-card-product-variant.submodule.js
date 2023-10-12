@@ -73,7 +73,7 @@ export async function queryVariants({ target }) {
   } = $Q('[name="id"]', target.closest('.product-js'));
 
   addCartBtn.disabled = true;
-  addCartBtn.innerHTML = '<div id="loading"></div>';
+  addCartBtn.innerHTML = '<div class="loading"></div>';
 
   const {
     price,

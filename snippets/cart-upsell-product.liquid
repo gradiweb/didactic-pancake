@@ -9,6 +9,7 @@
     product: upsell_product
   %}
 {% endcomment %}
+
 {%- liquid
   assign first_variant = product.selected_or_first_available_variant
   assign img_url = product.featured_media | image_url: width: 133, height: 133
@@ -49,11 +50,13 @@
         name="id"
         value="{{ first_variant.id }}"
       />
-      {% render 'button-add-cart'
-        btn_type: 'btn-3 upsell-btn',
-        class: 'btn-add-to-cart',
-        available: available
-      %}
+
+      <button
+        class="btn-1 upsell-btn btn-add-to-cart btn-cart-js"
+        type="submit"
+      >
+        {% render 'icon-cart' %}
+      </button>
     </form>
   </div>
 </div>

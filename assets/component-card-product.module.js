@@ -1,5 +1,5 @@
 import { queryVariants, selectVariant } from "./component-card-product-variant.submodule";
-import { addProducts } from "../src/components/cart";
+import { addProducts } from "../src/modules/cart";
 import { $Q } from "graditify-utils";
 
 /**

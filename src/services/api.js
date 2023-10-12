@@ -31,7 +31,6 @@ class API {
         headers: {
           'Content-Type': 'application/json',
         },
-        // eslint-disable-next-line no-undef
         url: `${routes.cart_add_url}.js`,
         data: JSON.stringify(formData),
       });
@@ -39,10 +38,10 @@ class API {
       response.data.status = response.status;
       return response.data;
     } catch (error) {
-      // eslint-disable-next-line no-undef
-      const errorJson = JSON.parse(JSON.stringify(error));
-      errorJson.sections = '';
-      return errorJson;
+      return {
+        ...error.response,
+        sections: '',
+      };
     }
   }
 
@@ -79,17 +78,16 @@ class API {
         headers: {
           "Content-Type": "application/json",
         },
-        // eslint-disable-next-line no-undef
         url: `${routes.cart_update_url}.js`,
         data: JSON.stringify(formData),
       });
       response.data.status = response.status;
       return response.data;
     } catch (error) {
-      // eslint-disable-next-line no-undef
-      const errorJson = JSON.parse(JSON.stringify(error));
-      errorJson.sections = '';
-      return errorJson;
+      return {
+        ...error.response,
+        sections: '',
+      };
     }
   }
 
@@ -132,9 +130,10 @@ class API {
       response.data.status = response.status;
       return response.data;
     } catch (error) {
-      // eslint-disable-next-line no-undef
-      const errorJson = JSON.parse(JSON.stringify(error));
-      return errorJson;
+      return {
+        ...error.response,
+        sections: '',
+      };
     }
   }
 
@@ -171,7 +170,7 @@ class API {
   async recommendationByApi(productId, sectionId) {
     try {
       const {
-        data: html
+        data: html,
       } = await axios.get(`${routes.recommendation}?product_id=${productId}&limit=4&section_id=${sectionId}`);
       return html;
     } catch (error) {
@@ -187,7 +186,6 @@ class API {
    *
    * @author Andres Briñez
    */
-
    async shopifyVariantByUrl(base, variantID) {
     try {
       const {

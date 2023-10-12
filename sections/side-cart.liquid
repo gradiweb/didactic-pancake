@@ -1,37 +1,36 @@
 {% assign cart_title = "sections.cart.title" | t %}
 
-<div class="cart-wrapper">
-  {% render 'cart-header'
-    cart: cart,
-    title: cart_title,
-    limit_price: section.settings.limit_price,
-    progressbar_title: section.settings.progressbar_title,
-    text_free_shipping: section.settings.free_shipping
-  %}
+{% render 'cart-header'
+  cart: cart,
+  title: cart_title
+%}
 
+<div class="side-cart__items side-cart__margins">
   {% render 'cart-items'
     cart: cart
   %}
-
-  {% if section.settings.upsell_collection != blank %}
-    {% render 'cart-upsell'
-      cart: cart,
-      collection: section.settings.upsell_collection
-      title: section.settings.upsell_title
-    %}
-  {% endif %}
-
-  {% render 'cart-footer'
-    cart: cart,
-    shipping_info: section.settings.shipping_info
-  %}
-
 </div>
+
+{% if section.settings.upsell_collection != blank %}
+  {% render 'cart-upsell'
+    cart: cart,
+    collection: section.settings.upsell_collection,
+    title: section.settings.upsell_title
+  %}
+{% endif %}
+
+{% render 'cart-footer'
+  cart: cart,
+  title: section.settings.progressbar_title,
+  total_price: cart.original_total_price,
+  limit_price: section.settings.limit_price,
+  text_free_shipping: section.settings.free_shipping
+%}
 
 {% schema %}
 {
   "name": "Cart",
-  "class": "cart",
+  "class": "side-cart",
   "settings": [
     {
       "type": "collection",
@@ -70,12 +69,6 @@
       "id": "upsell_title",
       "label": "Upsell title",
       "default": "Vous aimerez aussi.."
-    },
-    {
-      "type": "text",
-      "id": "shipping_info",
-      "label": "Shipping inf",
-      "default": " Le livraison estimé : J+2/3"
     }
   ]
 }

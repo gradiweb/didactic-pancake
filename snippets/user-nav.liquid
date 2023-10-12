@@ -2,7 +2,7 @@
   <span onclick="location.href='{{ routes.account_url }}'">
     {% render 'icon-account' %}
   </span>
-  <span class="button-cart-js">
+  <span {% unless request.page_type == 'cart' %}class="button-cart-js"{% endunless %}>
     {% render 'icon-cart' %}
   </span>
 </div>

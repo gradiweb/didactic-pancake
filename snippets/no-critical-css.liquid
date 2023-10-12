@@ -3,6 +3,8 @@
   href="{{ 'theme.css' | asset_url }}"
 >
 
+{% render 'preload-css', asset: 'cart.css' %}
+
 {%- if request.page_type == 'product' -%}
   {% render 'preload-css', asset: 'product.css' %}
 {%- endif -%}

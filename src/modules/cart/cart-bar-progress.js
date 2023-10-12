@@ -1,4 +1,4 @@
-import { $Q } from './query-selector'
+import { $Q } from '../../utils/query-selector'
 
 /**
  * Update the width of bar progress
@@ -13,7 +13,7 @@ export const barProgress = (input) => {
   const textProgress = $Q('.progress-text-js');
   const textFreeShipping = $Q('.shipping-free');
 
-  const barWidth = totalPrice / limitPrice * 100;
+  const barWidth = (totalPrice / limitPrice) * 100;
   const residuaryPrice = limitPrice - totalPrice;
 
   if (barWidth > 100) {
