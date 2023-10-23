@@ -180,6 +180,19 @@
         "info": "Enter the colour information as in the example. Ex: Black:#000",
         "default": "Black:#000;<br />Green:#14D66F;<br />Gray:#C4C4C4;",
         "placeholder": "Colour:#hex<Linefeed>\n\nExample:\nWhite:#fff\nBlack:#000\n..."
+      },
+      {
+        "id": "variant_images",
+        "type": "textarea",
+        "label": "Variant Textures",
+        "info": "Enter the texture information as in the example.\nEx: texture1:Juste Le Marine Rayé",
+        "default": "texture_name1:texture1\ntexture_name2:texture2\ntexture_name3:texture3\n",
+        "placeholder": "Texture1..n:Alt names of images in product files<Linefeed>\n\nExample:\ntexture_name1:texture1\ntexture_name2:texture2\n..."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_texture_option",
+        "label": "Enable textures option"
       }
     ]
   },

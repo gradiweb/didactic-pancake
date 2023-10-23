@@ -68,6 +68,7 @@
       >
         <span class="variants--name">
           {{ option_name }}
+          {{ product.options_by_name[option_name].selected_value }}
         </span>
         {%- if option_radio contains option_name -%}
           <div
