@@ -30,6 +30,25 @@ async function sectionHandle(handle, variantId) {
 }
 
 /**
+ * Inject new title variant node to the section
+ *
+ * @param {HTMLElement} parent - Parent node to closest
+ * @return null - stop called
+ */
+function updateTitleVariant(parent) {
+  const radioSelected = $Q('input[type="radio"]:checked.js-option', parent);
+
+  if (!radioSelected) return
+
+  const variantName = radioSelected.parentElement.title;
+  const sectionPrice = $Q(".variants--name", parent);
+
+  if (!sectionPrice) return
+
+  sectionPrice.innerHTML = variantName;
+}
+
+/**
  * Inject new price node to the section
  *
  * @param {HTMLCollection} variantPrice - Object with the price value
@@ -81,6 +100,7 @@ function updateButton(available, parent, newText) {
 
   addcartBtn.disabled = true;
   addcartBtn.innerHTML = '<div id="loading"></div>';
+  updateTitleVariant(target.closest('.product-js'))
 
   const {
     price,
