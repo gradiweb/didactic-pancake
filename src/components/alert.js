@@ -1,5 +1,5 @@
 import { $Q, $Qll } from "../utils/query-selector";
-
+import {sum} from "../utils/sum";
 /**
  *
  * we control the price range filter in order to avoid that the minimum
@@ -8,23 +8,23 @@ import { $Q, $Qll } from "../utils/query-selector";
  *
  */
 
-// Get first number
-let numberOne = prompt("Insert the first number:");
+export function alertBoxGradi() {
+  // Get first number
+  let numberOne = prompt("Insert the first number:");
 
-// Get second number
-let numberTwo = prompt("Insert the second number:");
+  // Get second number
+  let numberTwo = prompt("Insert the second number:");
 
-// Convertir los valores ingresados a números
-numberOne = parseFloat(numberOne);
-numberTwo = parseFloat(numberTwo);
+  // Convertir los valores ingresados a números
+  numberOne = parseFloat(numberOne);
+  numberTwo = parseFloat(numberTwo);
 
-// Verificar si la conversión fue exitosa y realizar la suma
-if (!isNaN(numberOne) && !isNaN(numberTwo)) {
-    const result = numberOne + numberTwo;
+  const result = sum(numberOne, numberTwo);
 
-    // Mostrar el resultado en un alert
-    alert("The sum is: " + numberOne + " y " + numberTwo + " es: " + result);
-} else {
-    // Mostrar un mensaje de error si no se ingresaron números válidos
-    alert("Please insert valid numbers.");
+  if (!isNaN(result)) {
+      alert("The sum is: " + numberOne + " y " + numberTwo + " es: " + result);
+  } else {
+      alert("Please insert valid numbers.");
+  }
+
 }
